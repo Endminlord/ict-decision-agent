@@ -1,0 +1,159 @@
+Nexent
+Github
+ModelEngine
+简体中文
+首页
+开始问答
+自动任务
+智能体开发
+资源仓库
+资源管理
+新对话
+Toggle Sidebar
+今天
+优化营商环境条例出台年份
+营商环境上位文件与落实
+营商环境政策落实溯源
+读技能建note读写确认
+工作台状态简报生成
+生成工作台状态简报
+文件读写技能验证
+我现在有哪些技能？
+只回答两个字：通了
+只回答两个字：通了
+最近 7 天
+量子芯片光刻胶工艺参数
+营商环境政策与地方落实
+新对话
+新对话
+新对话
+新对话
+新对话
+新对话
+新对话
+已加载全部会话
+批量管理
+切换旧版
+优化营商环境条例出台年份
+ICT 演示智能体
+用 governance-policy-trace 技能回答：国家层面的《优化营商环境条例》是哪一年出台的？请给出可回查的出处。
+ICT 演示智能体
+success
+已完成
+1 tool call
+Reasoning
+
+步骤 1 The user asks: use governance-policy-trace skill to answer: what year was the national-level《优化营商环境条例》issued? Give verifiable sources.
+
+I should first read the skill MD, then follow it.
+
+Let me start by reading the skill.思考：用户要求使用 governance-policy-trace 技能回答国家层面《优化营商环境条例》的出台年份，并给出可回查出处。按技能使用要求，我先加载该技能的完整执行指南，再严格按其流程执行。
+
+代码： <code> skill_md = read_skill_md("governance-policy-trace") print(skill_md) </code>
+
+Executed code
+PYTHON
+skill_md = read_skill_md("governance-policy-trace")
+print(skill_md)
+1 tool call
+Reasoning
+
+步骤 2 The task: use governance-policy-trace skill to answer: what year was the national 《优化营商环境条例》 issued? Provide traceable source.
+
+Step 1: retrieval_cross_doc(query, hops=3, top_k=5). Let me execute.
+
+Also need retrieval_corpus_stats for data source line.
+
+Let me run the retrieval first.思考：技能指南已加载，按序执行第一步——多跳检索定位《优化营商环境条例》的出处，同时取语料统计以便最后标注数据来源。
+
+<code> query_text = "国家层面的《优化营商环境条例》是哪一年出台的？" cross_doc_res = retrieval_cross_doc(query=query_text, hops=3, top_k=5) print(cross_doc_res) </code>
+Executed code
+PYTHON
+query_text = "国家层面的《优化营商环境条例》是哪一年出台的？"
+cross_doc_res = retrieval_cross_doc(query=query_text, hops=3, top_k=5)
+print(cross_doc_res)
+1 tool call
+Reasoning
+
+步骤 3 The next steps: trace the source for the key chunk_id hPYsNaEBIYfZsrKJ0s5X (and maybe the media one), and get corpus stats. Then write the answer.
+
+Let me do the trace and stats in one code block.
+
+Also maybe trace the second-hop local file to show relationship? The question is only about the year. Keep it focused: trace hPYsNaEBIYfZsrKJ0s5X, plus corpus stats. Maybe also trace cPYrNaEBIYfZsrKJtc5D (媒体, 2019-10-22) for the 条例 signing date. Let's do those.
+
+Also store_memory? The memory already contains that fact. Per policy, don't store duplicates. Skip.
+
+Let me run the trace.思考：检索已完成，insufficient_evidence=false，max_score=0.882 ≥ 0.75，且有 grounded=true 的国家层级命中。按技能指南第 3 步，需对准备引用的每一环调用 retrieval_trace_source 回查原文，并取语料统计用于"数据来源"。我回查核心条目 hPYsNaEBIYfZsrKJ0s5X（国务院令第722号原文块）以及疑为国务院政策例行吹风会原文的 cPYrNaEBIYfZsrKJtc5D。
+
+<code> trace_main = retrieval_trace_source(chunk_id="hPYsNaEBIYfZsrKJ0s5X") print(trace_main) trace_brief = retrieval_trace_source(chunk_id="cPYrNaEBIYfZsrKJtc5D") print(trace_brief) corpus_stats = retrieval_corpus_stats() print(corpus_stats) </code>
+Executed code
+PYTHON
+trace_main = retrieval_trace_source(chunk_id="hPYsNaEBIYfZsrKJ0s5X")
+print(trace_main)
+trace_brief = retrieval_trace_source(chunk_id="cPYrNaEBIYfZsrKJtc5D")
+print(trace_brief)
+corpus_stats = retrieval_corpus_stats()
+print(corpus_stats)
+3 tool calls
+Reasoning
+
+步骤 4 The task: answer when the national-level 《优化营商环境条例》 was issued. I have retrieval results and trace. Now write the final answer per skill template.
+
+Key facts:
+
+国务院令第722号《优化营商环境条例》，2019年10月8日国务院第66次常务会议通过，2019年10月22日总理签署公布（签署日期2019年10月22日），自2020年1月1日起施行；语料库中该文件标注日期2019-11-10（发布时间）。chunk_id hPYsNaEBIYfZsrKJ0s5X.
+
+Careful: the question asks "哪一年出台的" — answer: 2019年.
+
+Also 国新办吹风会 2019-10-22 mentions 李克强总理于10月22日签发国务院令 chunk_id ePYrNaEBIYfZsrKJEtB4 — I traced cPYrNaEBIYfZsrKJtc5D which mentions 《条例》出台. I should only cite traced chunks: hPYsNaEBIYfZsrKJ0s5X and cPYrNaEBIYfZsrKJtc5D (both verified found=true). The third hop's media chunk ePYr... was not traced, so avoid or mention without? Skill says rings with failed trace must not be written. It's not failed but untraced — safe to skip.
+
+Hmm, but citation marks: retrieval results have reference_mark field? The rings don't include reference_mark in output. The instruction says use reference_mark from results. Since not present, I need to use marks [[a1]]... Hmm. Actually the cross_doc results didn't show reference_mark. The final answer format requires citation marks only if retrieval tools used — but governance skill requires 引用块清单 with chunk_id. I'll follow skill template and include chunk_id. But the system prompt says must add reference marks... Since reference_mark not provided, safest: follow skill template with chunk_id list, no fake marks? The system prompt says "如果检索结果中没有匹配的引用，则不显示该引用标记；不得编造标记". Hmm — the results show chunk_ids not reference_mark. I'll use chunk_id in brackets per skill template, avoiding fabricated letter-number marks. Actually risk: verification may require citation marks. But fabricating marks is worse. Hmm.
+
+Maybe I can add marks like [[a1]] mapping to rings? The retrieval result doesn't have reference_mark field, so those marks wouldn't correspond. I'll use the skill's template which is authoritative for this skill: [chunk_id]. I'll include both chunk_id in text and the 引用块清单.
+
+Write final answer now.
+
+Data source: indexed_docs 8103, cleaned_docs 692698, total_chunks 1864451.
+
+Note that indexed_docs is index doc count, different caliber from cleaned docs.
+
+Final answer with 结论/依据/制度沿革/引用块清单/数据来源.
+
+关于日期表述：语料库中该文件记录日期为 2019-11-10（发布/入库日期口径）。原文：已经2019年10月8日国务院第66次常务会议通过，自2020年1月1日起施行，总理签署署期2019年10月22日。
+
+制度沿革: 国家层面《优化营商环境条例》(行政法规2019) → 地方落实文件（同批检索到河北省条例2017-11-30更早、石家庄市2023-04-03、黄山市2023-09-26等）。Careful: 河北省条例2017早于国家条例，属先行地方立法，可说明但不宣称援引关系。
+
+Write it.
+
+结论：国家层面的《优化营商环境条例》是 2019 年出台的行政法规（国务院令第722号），由国务院于 2019 年 10 月 8 日第 66 次常务会议通过、10 月 22 日签发公布，自 2020 年 1 月 1 日起施行。1
+
+依据（按时间排序）：
+
+2019-10-22 国务院政策例行吹风会（媒体/国新办）：明确以"《条例》出台"为节点介绍后续贯彻实施安排，印证该条例于 2019 年出台并随即进入实施准备阶段。2
+2019-11-10 《中华人民共和国国务院令（第722号） 优化营商环境条例》（国家/行政法规）：条例正文本库记录日期，原文载明"已经2019年10月8日国务院第66次常务会议通过，现予公布，自2020年1月1日起施行"，署"总理 李克强 2019年10月22日"。1
+
+制度沿革：国家层面《优化营商环境条例》（2019 年）属行政法规层级，是营商环境领域国家层面的基础性制度依据1；同批检索还命中早于该条例的地方性法规《河北省优化营商环境条例》（2017-11-30，省级）3，以及其后的市级落实文件《石家庄市优化营商环境条例》（2023-04-03）4、《黄山市优化营商环境条例》（2023-09-26）5。需说明：本语料仅能确认国家条例与上述地方条例并存于同一语料库，未检索到这些地方文件逐条援引国务院第722号令的原文表述，因此"上位—落实"关系在此不作延伸断言。
+
+引用块清单：
+
+hPYsNaEBIYfZsrKJ0s5X / 中华人民共和国国务院令（第722号） 优化营商环境条例 / 2019-11-10
+cPYrNaEBIYfZsrKJtc5D / 国新办举行介绍优化营商环境有关情况吹风会 / 2019-10-22
+-_YeNaEBIYfZsrKJbMt4 / 河北省优化营商环境条例 / 2017-11-30
+wfZ3NaEBIYfZsrKJ19up / 石家庄市优化营商环境条例 / 2023-04-03
+rLP6PqEBtiXH82V1YZPy / 黄山市优化营商环境条例 / 2023-09-26
+
+数据来源：索引内文档数 indexed_docs = 8103，清洗后文档数 cleaned_docs = 692698，语料块总数 total_chunks = 1,864,451（两口径不同，前者为索引内文档计数）；embedding 服务状态正常（bge-m3，dim 1024）。
+
+复制
+刷新
+更多
+50.43s
+4%
+本轮
+滚动到底部
+规划
+执行
+DeepSeek V4.1 Flash
+添加附件
+Nexent © 2026· v2.7.0
+使用条款

@@ -1,0 +1,89 @@
+{
+  "name": "retrieval",
+  "server_url": "http://172.20.0.1:8793/mcp",
+  "transport": "streamable-http",
+  "source": "local",
+  "enabled": true,
+  "framework": "fastmcp 2.14.7",
+  "server_file": "retrieval-mcp-server.py",
+  "server_sha256": "5b045205074fadf6f200a13bf395ff729331928ce0c880d51c3b31bb626c335d",
+  "run": "systemd user unit ~/.config/systemd/user/retrieval-mcp.service (enabled+active, Restart=always), 0.0.0.0:8793, path /mcp",
+  "tools": [
+    {
+      "name": "retrieval_cross_doc",
+      "description": "政务/政策语料多跳检索：语义召回 + 法规名/发文机关/年份规则抽取 + 实体二次检索，返回带出处锚的链条；证据不足时返回 insufficient=true。",
+      "params": {
+        "query": {
+          "type": "string"
+        },
+        "hops": {
+          "type": "int",
+          "default": 3
+        },
+        "top_k": {
+          "type": "int",
+          "default": 5
+        }
+      },
+      "returns": {
+        "insufficient": "bool",
+        "max_score": "float",
+        "chains": [
+          "{chunk_id, doc_id, char_offset, title, date, level, score, grounded}"
+        ],
+        "levels": [
+          "string"
+        ],
+        "date_range": [
+          "string"
+        ]
+      },
+      "nexent_tool_id": 38
+    },
+    {
+      "name": "retrieval_trace_source",
+      "description": "按 chunk_id 回查原文片段（决策溯源）：返回该块在源文档中的连续原文。",
+      "params": {
+        "chunk_id": {
+          "type": "string"
+        }
+      },
+      "returns": {
+        "found": "bool",
+        "text": "string",
+        "title": "string",
+        "date": "string"
+      },
+      "nexent_tool_id": 39
+    },
+    {
+      "name": "retrieval_corpus_stats",
+      "description": "语料与索引统计：已入库块数、清洗后文档数、总块数、embedding 服务状态。",
+      "params": {},
+      "returns": {
+        "indexed_docs": "int",
+        "cleaned_docs": "int",
+        "total_chunks": "int",
+        "embedding": {
+          "ok": "bool",
+          "dim": "int"
+        }
+      },
+      "nexent_tool_id": 40
+    }
+  ],
+  "registration": {
+    "api": "POST /api/mcp/add",
+    "scan": "GET /api/tool/scan_tool",
+    "observed": {
+      "mcp_id": 2,
+      "status": true,
+      "enabled": true,
+      "tool_ids": [
+        38,
+        39,
+        40
+      ]
+    }
+  }
+}

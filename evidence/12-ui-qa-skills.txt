@@ -1,0 +1,77 @@
+Nexent
+Github
+ModelEngine
+简体中文
+首页
+开始问答
+自动任务
+智能体开发
+资源仓库
+资源管理
+新对话
+Toggle Sidebar
+今天
+我现在有哪些技能？
+只回答两个字：通了
+只回答两个字：通了
+最近 7 天
+量子芯片光刻胶工艺参数
+营商环境政策与地方落实
+新对话
+新对话
+新对话
+新对话
+新对话
+新对话
+新对话
+已加载全部会话
+批量管理
+切换旧版
+我现在有哪些技能？
+ICT 演示智能体
+我现在有哪些技能？
+ICT 演示智能体
+success
+已完成
+1 tool call
+Reasoning
+
+步骤 1 The user asks what skills they have. This is a simple request — list the available skills. No need for tools, no clarification needed. I should answer directly with the list of skills.
+
+I should present them clearly with names and descriptions. No citation markers needed since no retrieval tool used.
+
+Keep it concise and readable, in Chinese.
+
+你当前可用的技能共 6 个，按用途分类如下：
+
+📋 文件读取与内容分析
+技能名称	用途说明
+read-file	读取指定路径的文件内容（工作区相对路径，如 documents/file.txt），支持自定义编码，默认 UTF-8，返回文件内容与元数据
+analyze-text-file	从文本文件中提取内容，并调用大语言模型进行分析；支持来自 S3 URL（s3://bucket/key 或 /bucket/key）、HTTP 与 HTTPS URL 的文件
+🔍 政务法规与溯源工作流
+技能名称	用途说明
+governance-policy-trace	面向政务/政策法规语料的「检索—推理—溯源」工作流：先多跳检索定位相关文件，再按出处锚回查原文，逐条核对后才成文；证据不足时明确拒答，不用模型记忆补答。适用于制度沿革梳理、政策依据查找、跨层级文件关系梳理
+🛠️ 工程与开发类
+技能名称	用途说明
+workbench-status-report	生成「个人 AI 工作台」状态简报：调用工作台 MCP 工具取真实数据（任务计划对账计数、最近提交、离线演示链健康度），交叉校验数字与原始输出一致后再输出
+mcp-builder	创建高质量 MCP（Model Context Protocol）服务端的指南，用于接入外部 API 或服务，支持 Python（FastMCP）与 Node/TypeScript（MCP SDK）两种实现
+skill-creator	创建新技能、修改与优化已有技能、测评技能表现：包括从零创建、编辑优化、运行评测、基准测试与方差分析、优化技能描述以提升触发准确率
+💡 使用提示
+这些技能通常不需要你手动指定——当你的请求与某个技能的描述匹配时，我会自动加载并按其指南执行。例如提到"梳理某项政策的制度沿革"，会触发 governance-policy-trace；提到"工作台进展怎么样"，会触发 workbench-status-report。
+如果你想主动调用某个技能，直接说明意图即可，比如"用 skill-creator 帮我做一个新技能"。
+
+需要我演示其中某个技能的效果，或者说明某个技能的具体执行步骤吗？
+
+复制
+刷新
+更多
+4.96s
+1%
+本轮
+滚动到底部
+规划
+执行
+DeepSeek V4.1 Flash
+添加附件
+Nexent © 2026· v2.7.0
+使用条款

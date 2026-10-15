@@ -1,0 +1,513 @@
+Nexent
+Github
+ModelEngine
+简体中文
+首页
+开始问答
+自动任务
+智能体开发
+资源仓库
+资源管理
+新对话
+Toggle Sidebar
+今天
+营商环境上位文件与落实
+营商环境政策落实溯源
+读技能建note读写确认
+工作台状态简报生成
+生成工作台状态简报
+文件读写技能验证
+我现在有哪些技能？
+只回答两个字：通了
+只回答两个字：通了
+最近 7 天
+量子芯片光刻胶工艺参数
+营商环境政策与地方落实
+新对话
+新对话
+新对话
+新对话
+新对话
+新对话
+新对话
+已加载全部会话
+批量管理
+切换旧版
+营商环境上位文件与落实
+ICT 演示智能体
+营商环境优化方面，国家有哪些上位文件？地方是怎么落实的？请给出可回查的出处。
+ICT 演示智能体
+success
+已完成
+1 tool call
+Reasoning
+
+步骤 1 The user asks about national upper-level documents for business environment optimization and how localities implemented them. There's a matching skill: governance-policy-trace. I should load it first.
+
+Let me read the skill.思考：用户的问题属于政务法规分析，且与 governance-policy-trace 技能的场景匹配（制度沿革梳理、跨层级文件关系）。我先加载该技能的执行指南。
+
+<code> skill_md = read_skill_md("governance-policy-trace") print(skill_md) </code>
+Executed code
+PYTHON
+skill_md = read_skill_md("governance-policy-trace")
+print(skill_md)
+1 tool call
+Reasoning
+
+步骤 2 I need to continue: run retrieval_cross_doc, then trace sources, then produce answer.
+
+Let me call retrieval_cross_doc with query about 营商环境优化 国家上位文件 地方落实.
+
+Also maybe get corpus stats.
+
+Let's do first step: retrieval.思考：已加载治理政策溯源技能指南。接下来按步骤执行：先调用 retrieval_cross_doc 做多跳检索，并取语料统计作为「数据来源」。
+
+<code> query = "营商环境优化方面国家层面的上位文件有哪些，地方是如何落实的" chain = retrieval_cross_doc(query=query, hops=3, top_k=5) print(chain) stats = retrieval_corpus_stats() print(stats) </code>
+Executed code
+PYTHON
+query = "营商环境优化方面国家层面的上位文件有哪些，地方是如何落实的"
+chain = retrieval_cross_doc(query=query, hops=3, top_k=5)
+print(chain)
+stats = retrieval_corpus_stats()
+print(stats)
+2 tool calls
+Reasoning
+
+步骤 3 I need to continue: I have retrieval results. Now I should trace source for the key chunks I plan to cite. The workflow says: for each ring I plan to cite, call retrieval_trace_source.
+
+Also I should probably search for the 优化营商环境条例 (国务院令第722号) and 国发〔2021〕24号, 国办发〔2022〕35号 — but memory says those exist. However memory isn't a tool result in this session... Actually the memory context is provided. But the rule: 只依据检索结果作答. The retrieval results here include 国办函〔2018〕46号, 国办函〔2019〕89号, 河北省条例, 马鞍山市条例, 连云港市办法, plus media. To fully answer about 条例 and 地方落实, I might do additional retrieval for 《优化营商环境条例》 and 国发〔2021〕24号 / 国办发〔2022〕35号.
+
+Let me do one round: parallel trace_source for key chunk_ids, plus a second cross_doc query for 优化营商环境条例 国务院令722号 and 地方复制推广落实.
+
+Actually keep it manageable. Round:
+
+retrieval_trace_source for: pvYhNaEBIYfZsrKJ5czY (国办函46号), Z_YrNaEBIYfZsrKJtc5D (国办函89号), _PYeNaEBIYfZsrKJbMt4 (河北), 3faFNaEBIYfZsrKJJt0J (马鞍山), vfZENaEBIYfZsrKJRtKK (连云港).
+retrieval_cross_doc for "优化营商环境条例 国务院令第722号 地方性法规 援引" hops=2.
+
+Let me use parallel_executor? Trace calls are independent. But simpler: write code loop calling them. Loops allowed? The guidance says avoid if/for in examples, but general. I'll just call them sequentially in one code block - fine.
+
+Let me do it.思考：检索已完成，max_score=0.8571 且存在 grounded 命中，证据充分。下一步对准备引用的每一环回查原文，并补检索国务院《优化营商环境条例》与地方承接关系，确保结论可溯源。
+
+<code> chunk_ids = [ "pvYhNaEBIYfZsrKJ5czY", "Z_YrNaEBIYfZsrKJtc5D", "_PYeNaEBIYfZsrKJbMt4", "3faFNaEBIYfZsrKJJt0J", "vfZENaEBIYfZsrKJRtKK", ] traced = {} for cid in chunk_ids: traced[cid] = retrieval_trace_source(chunk_id=cid) print(cid, "=>", traced[cid]) </code>
+Executed code
+PYTHON
+chunk_ids = [
+    "pvYhNaEBIYfZsrKJ5czY",
+    "Z_YrNaEBIYfZsrKJtc5D",
+    "_PYeNaEBIYfZsrKJbMt4",
+    "3faFNaEBIYfZsrKJJt0J",
+    "vfZENaEBIYfZsrKJRtKK",
+]
+traced = {}
+for cid in chunk_ids:
+    traced[cid] = retrieval_trace_source(chunk_id=cid)
+    print(cid, "=>", traced[cid])
+5 tool calls
+Reasoning
+
+步骤 4 I need to continue. I've done retrieval and tracing. Now I should probably trace a few more key sources: the 国务院令第722号《优化营商环境条例》(2019-11-10) and 国发〔2021〕24号, 国办发〔2022〕35号, and 芜湖市/宣城市条例. Memory says these exist. But per rules, I should only cite what I've traced. Let me do one more retrieval round to get the 条例 and the 2021/2022 national documents plus city-level ones with chunk_ids, then trace.
+
+Let me do a second cross-doc query focused on the timeline: "优化营商环境条例 国务院令第722号 施行时间" and "国发〔2021〕24号 营商环境创新试点 国办发〔2022〕35号 复制推广".
+
+Then trace those chunk_ids and also 芜湖市/宣城市 chunk ids from memory (ofZfNaEBIYfZsrKJ7df5, 8PaGNaEBIYfZsrKJQt3n) — but I should verify via retrieval, not memory. Better to run retrieval then trace.
+
+Let's do it in one code block: two retrieval calls + traces. Actually traces depend on results, so maybe do retrieval first, print, then trace in next round. But I can do retrieval and print, then trace known ones in the same block? Parallel calls are fine; I can call retrieval_cross_doc for the 条例 and trace memory chunk ids at the same time since they're independent. Risk: chunk ids from memory may be wrong. Trace will tell.
+
+Let me do: query2 = retrieval_cross_doc("《优化营商环境条例》国务院令第722号 公布与施行时间", hops=2, top_k=5); query3 = retrieval_cross_doc("国发〔2021〕24号 营商环境创新试点 国办发〔2022〕35号 复制推广", hops=2, top_k=5); plus trace of ofZfNaEBIYfZsrKJ7df5 and 8PaGNaEBIYfZsrKJQt3n.
+
+That's 4 calls, fine.
+
+Also store_memory? Maybe later. Not necessary.
+
+Let me run.思考：我已完成了第一轮检索与 5 个出处的回查。为了让「制度沿革」链条完整（国家上位法规 + 2021/2022 国家文件 + 更多地方落实文件），我需要再补一轮定向检索，并回查新增的出处锚。
+
+<code> q2 = retrieval_cross_doc(query="《优化营商环境条例》国务院令第722号 公布时间与施行时间", hops=2, top_k=5) print(q2) q3 = retrieval_cross_doc(query="国发〔2021〕24号 营商环境创新试点 与 国办发〔2022〕35号 复制推广", hops=2, top_k=5) print(q3) t1 = retrieval_trace_source(chunk_id="ofZfNaEBIYfZsrKJ7df5") print(t1) t2 = retrieval_trace_source(chunk_id="8PaGNaEBIYfZsrKJQt3n") print(t2) </code>
+Executed code
+PYTHON
+q2 = retrieval_cross_doc(query="《优化营商环境条例》国务院令第722号 公布时间与施行时间", hops=2, top_k=5)
+print(q2)
+q3 = retrieval_cross_doc(query="国发〔2021〕24号 营商环境创新试点 与 国办发〔2022〕35号 复制推广", hops=2, top_k=5)
+print(q3)
+t1 = retrieval_trace_source(chunk_id="ofZfNaEBIYfZsrKJ7df5")
+print(t1)
+t2 = retrieval_trace_source(chunk_id="8PaGNaEBIYfZsrKJQt3n")
+print(t2)
+4 tool calls
+Reasoning
+
+步骤 5 Let me review what I have. I've retrieved the national upstream documents chain and local implementation documents. I need to trace a few more sources to verify: the 优化营商环境条例 chunk (hPYsNaEBIYfZsrKJ0s5X), the 国发〔2021〕24号 (jPZDNaEBIYfZsrKJLdIu), 国办发〔2022〕35号 (ZfZTNaEBIYfZsrKJydU9), and maybe 河北省 optimization条例 first article, 马鞍山市 first article. Also the 连云港市 one. Let me trace the remaining key chunks to have full text and then write the final answer.
+
+Also memory says 马鞍山市优化营商环境条例2023-06-01第一条援引国务院条例. Let me trace a chunk containing 第一条 of 马鞍山市. Let me search for that. Actually I could do a targeted retrieval. But careful about budget. Let me trace hPYsNaEBIYfZsrKJ0s5X, jPZDNaEBIYfZsrKJLdIu, ZfZTNaEBIYfZsrKJydU9.
+
+For the 马鞍山市 first article, chunk 3faFNaEBIYfZsrKJJt0J starts at 第六条. I need 第一条. Let me do a retrieval to find it. Perhaps a trace of another chunk. Let me query retrieval_cross_doc with query about 马鞍山市优化营商环境条例 第一条 为了优化营商环境 根据国务院优化营商环境条例.
+
+Let me do these traces in one code block.思考：国家级链条与地方文件多数已回查成功。还需回查《优化营商环境条例》本体、国发〔2021〕24号、国办发〔2022〕35号的原文块，并尝试找到地方条例"第一条援引上位法"的原文（马鞍山市条例第一条不在已取块内），以便建立地方—国家对应关系。
+
+代码：
+
+<code> remaining = ["hPYsNaEBIYfZsrKJ0s5X", "jPZDNaEBIYfZsrKJLdIu", "ZfZTNaEBIYfZsrKJydU9"] for cid in remaining: print(cid, "=>", retrieval_trace_source(chunk_id=cid))
+
+q_first = retrieval_cross_doc(query="马鞍山市优化营商环境条例 第一条 为了优化营商环境 根据国务院优化营商环境条例 制定", hops=2, top_k=5) print(q_first) </code>
+
+Executed code
+PYTHON
+remaining = ["hPYsNaEBIYfZsrKJ0s5X", "jPZDNaEBIYfZsrKJLdIu", "ZfZTNaEBIYfZsrKJydU9"]
+for cid in remaining:
+    print(cid, "=>", retrieval_trace_source(chunk_id=cid))
+
+q_first = retrieval_cross_doc(query="马鞍山市优化营商环境条例 第一条 为了优化营商环境 根据国务院优化营商环境条例 制定", hops=2, top_k=5)
+print(q_first)
+4 tool calls
+Reasoning
+
+步骤 6 Let me continue. I need to trace the 马鞍山市优化营商环境条例 第一条 chunk to confirm the explicit reference to 国务院《优化营商环境条例》, and also the 河北省 chunk with the date (2017-11-30 published, passed 2017-12-01... note the chunk said "已经...2017年12月1日通过，现予公布，自2018年1月1日起施行" but title date 2017-11-30). Hmm, that's a discrepancy but I should report as the trace gives.
+
+Let me trace 3PaFNaEBIYfZsrKJJt0J (马鞍山市 第一条).
+
+Then compose the answer.
+
+Recall memory [3]: 未检索到地方文件逐条援引国办函〔2018〕46号、〔2019〕89号、〔2022〕35号具体条款的原文；地方—国家对应目前仅经《优化营商环境条例》建立。
+
+So I should do one more trace and then answer.
+
+Let me do the trace of 3PaFNaEBIYfZsrKJJt0J and also 石家庄 (wfZ3NaEBIYfZsrKJ19up) maybe not needed. Keep focused.
+
+Also trace安庆? Not necessary.
+
+Let me just trace 马鞍山第一条 chunk.<code> t = retrieval_trace_source(chunk_id="3PaFNaEBIYfZsrKJJt0J") print(t) </code>
+
+Executed code
+PYTHON
+t = retrieval_trace_source(chunk_id="3PaFNaEBIYfZsrKJJt0J")
+print(t)
+1 tool call
+Reasoning
+
+步骤 7 The task: answer about national upper-level documents for business environment optimization and how localities implemented them, with traceable sources. I've completed retrieval. I have all the evidence traced. Now I should write the final answer.
+
+All key chunks traced:
+
+国办函〔2018〕46号, 2018-08-20, chunk pvYhNaEBIYfZsrKJ5czY ✓
+国办函〔2019〕89号, 2019-10-10, chunk Z_YrNaEBIYfZsrKJtc5D ✓
+国务院令722号《优化营商环境条例》, 2019-11-10, chunk hPYsNaEBIYfZsrKJ0s5X ✓
+国发〔2021〕24号, 2021-12-10, chunk jPZDNaEBIYfZsrKJLdIu ✓
+国办发〔2022〕35号, 2022-11-10, chunk ZfZTNaEBIYfZsrKJydU9 ✓
+河北省优化营商环境条例, 2017-11-30, chunk _PYeNaEBIYfZsrKJbMt4 ✓ (also -_YeNaEBIYfZsrKJbMt4 for the 公告)
+马鞍山市优化营商环境条例, 2023-06-01, chunk 3PaFNaEBIYfZsrKJJt0J ✓ (第一条明确指出根据国务院《优化营商环境条例》制定)
+芜湖市优化营商环境条例, 2023-01-03, chunk ofZfNaEBIYfZsrKJ7df5 ✓
+宣城市优化营商环境条例, 2023-06-05, chunk 8PaGNaEBIYfZsrKJQt3n ✓
+连云港市优化营商环境办法, 2021-12-30, chunk vfZENaEBIYfZsrKJRtKK ✓
+
+Now I need reference marks. The retrieval results in the records don't show reference_mark fields explicitly. Hmm. The instructions say to use reference_mark from results. The recorded results don't include reference_mark. But the memory notes say chunk_ids. I need to assign reference marks. Since the tool output as recorded doesn't show reference_mark, I should probably use the chunk IDs. But the citation format must be [[a1]] style. Hmm.
+
+The problem: the completed actions printed only certain fields (the results include "chunk_id", "title", "score", etc. but no reference_mark visible). Wait, the print was of the whole dict — actually the prints show dicts without reference_mark keys. Hmm, but perhaps the tool output has more fields that were truncated in the record. In the log, the ring dicts have keys: hop, chunk_id, score, title, date, level, source, path_or_url, excerpt, grounded. No reference_mark. So reference_mark isn't provided.
+
+Given the instruction "请直接使用结果中 reference_mark 字段提供的标记，原样复制" — but there is none. Then "如果检索结果中没有匹配的引用，则不显示该引用标记；不得编造标记." Hmm, but we do have chunk_ids. The user explicitly asks 可回查的出处. So best: provide chunk_id-based citations. I could use a mapping like [[a1]] etc. But that would be fabricating marks... Actually the marks are defined by the tool; since not shown, safer approach: cite with explicit chunk_id and title/date inline, which satisfies "可回查的出处", and add the 引用块清单 with chunk_id + title + date as required by the persona rules.
+
+Hmm, but the persona rules say chunk_id + 标题 + 日期 in the reference block. And the reference mark instruction applies "仅在使用了检索工具时". Since no reference_mark available, I could still use [[a1]]-style marks but they must correspond to the results one-to-one. I think a reasonable approach given evidence: use marks a1..a11 mapped to chunks, and also provide the chunk_id list. Risk: the mark isn't from the tool. Alternatively skip marks and use chunk_id inline like [chunk_id: pvYhNaEBIYfZsrKJ5czY]. That's more honest and verifiable.
+
+Hmm. Which is better? The verification system may check that citations match reference_mark. Since I can't see reference_mark, maybe I should re-run one retrieval to check whether reference_mark exists? The instruction says don't repeat completed actions. But re-calling the tool with a slightly different query would reveal whether reference_mark exists. Actually the question is whether the tool returns reference_mark at all. The recorded full dict doesn't include it. That's evidence the tool doesn't return reference_mark, or the record truncated it.
+
+Actually, it's possible the record only shows what it shows. Hmm. Let me consider re-running retrieval once (a new query variant, not a repeat) to inspect the full JSON structure for a reference_mark field. That seems justified and low cost. But "Do not repeat any completed action" — a new query would be new. I think it's worth checking to get correct citation marks. Let me do one call and print keys, e.g., json.dumps of chain with keys.
+
+Actually, a cheaper approach: print the keys of the rings from a fresh call. Let's do: chain2 = retrieval_cross_doc(query="优化营商环境条例 地方 落实 条例 制定 依据", hops=1, top_k=3); then print list of keys.
+
+That's a new query, not a repeat. It gives me the structure. Reasonable.
+
+Then finalize.
+
+Let me do that.思考：证据链已回查完毕，但需要确认检索结果中是否带有可用的 reference_mark 字段，以便按规范标注引用标记。我用一个新查询（非重复）查看返回结构的完整键名。
+
+<code> probe = retrieval_cross_doc(query="地方优化营商环境条例 制定依据 国务院优化营商环境条例", hops=1, top_k=3) print(type(probe)) print(probe if not isinstance(probe, dict) else list(probe.keys())) if isinstance(probe, dict): rings = probe.get("rings") or [] for r in rings: print(list(r.keys())) print(r.get("reference_mark"), "|", r.get("chunk_id")) </code>
+Executed code
+PYTHON
+probe = retrieval_cross_doc(query="地方优化营商环境条例 制定依据 国务院优化营商环境条例", hops=1, top_k=3)
+print(type(probe))
+print(probe if not isinstance(probe, dict) else list(probe.keys()))
+if isinstance(probe, dict):
+    rings = probe.get("rings") or []
+    for r in rings:
+        print(list(r.keys()))
+        print(r.get("reference_mark"), "|", r.get("chunk_id"))
+1 tool call
+Reasoning
+
+步骤 8 The retrieval returns a string rather than a dict — the rings don't have reference_mark field apparently. Let me check: printed r.get("reference_mark") — the output was cut? Actually the log shows no lines for reference_mark printed... It printed keys but keys line not visible? Actually the output shows types and rings' content but no key listing lines. Hmm, the printed output shows only {"query": ...} and <class 'str'>. Wait the order: print(type(probe)) → <class 'str'>, print(probe...) → the JSON. Then if isinstance(probe, dict) is False since it's a str, so no further prints. That means the result is a JSON string, not a dict. So no reference_mark field available.
+
+The citation rules require using reference_mark from results. Since the tool returns a JSON string without reference_mark, I need to... Hmm. The retrieval_cross_doc returns a JSON string. There's no reference_mark. But the system prompt says "请直接使用结果中 reference_mark 字段提供的标记". If not present, we might need to construct marks ourselves? Rule says "如果检索结果中没有匹配的引用，则不显示该引用标记；不得编造标记。" Hmm, tricky. But maybe there's a mapping convention: perhaps reference marks like [a1], [b2] correspond to rings in order. But we shouldn't fabricate.
+
+Let me re-check: maybe the tool returns a dict when called via MCP directly. Earlier calls printed as JSON — print of a dict would show single quotes. The output showed double quotes → it's a JSON string. So reference_mark absent.
+
+Perhaps I should parse the JSON string and check keys of a ring to see whether reference_mark exists.
+
+Let me do one final action: parse the JSON string, check ring keys.
+
+Actually the previous action already tried. Let me just do a parse and print keys directly, then generate final answer. Also maybe do one more retrieval to confirm the "national" chain and whether local documents cite national 国办函 documents (memory says not found).
+
+Let me plan the final answer:
+
+国家上位文件链（按时间）：
+
+2018-08-20 国办函〔2018〕46号《国务院办公厅关于部分地方优化营商环境典型做法的通报》— 通报28项典型做法 [[chunk pvYhNaEBIYfZsrKJ5czY]]
+2019-10-10 国办函〔2019〕89号《国务院办公厅关于做好优化营商环境改革举措复制推广借鉴工作的通知》— 京沪13项全国复制推广 [[Z_YrNaEBIYfZsrKJtc5D]]
+2019-11-10 国务院令第722号《优化营商环境条例》，2019年10月8日国务院第66次常务会议通过，自2020年1月1日起施行 [[hPYsNaEBIYfZsrKJ0s5X]]
+2021-12-10 国发〔2021〕24号《国务院关于开展营商环境创新试点工作的意见》— 首批6城市 北京、上海、重庆、杭州、广州、深圳 [[jPZDNaEBIYfZsrKJLdIu]]
+2022-11-10 国办发〔2022〕35号《国务院办公厅关于复制推广营商环境创新试点改革举措的通知》[[ZfZTNaEBIYfZsrKJydU9]]
+
+地方落实：
+
+省级地方性法规先行：2017-11-30《河北省优化营商环境条例》(河北省第十二届人大常委会第三十三次会议2017年12月1日通过 — 注意 chunk -_Ye 是 2017-11-30 标题日期，内容提到 2017年12月1日通过，自2018年1月1日起施行) [[_PYeNaEBIYfZsrKJbMt4]] 及 [[-_YeNaEBIYfZsrKJbMt4]]
+市级条例明确援引国务院条例：马鞍山市优化营商环境条例 2023-06-01 第一条 "根据国务院《优化营商环境条例》和有关法律、行政法规，结合本市实际，制定本条例" [[3PaFNaEBIYfZsrKJJt0J]]
+南京市优化营商环境办法（2021-01-28）第一条 根据《优化营商环境条例》《江苏省优化...》[[wPY5NaEBIYfZsrKJEtB4]]
+连云港市优化营商环境办法 2021-12-30 第一条 根据... [[vPZENaEBIYfZsrKJRtKK]] — note the excerpt is truncated "根据" ; the full text chunk vfZE... doesn't include 第一条. The hop1 excerpt of vPZENaEBIYfZsrKJRtKK says "第一条 为打造一流营商环境...根据" — truncated. So I can mention 连云港市办法依据上位法制定 but the citing clause is truncated. Better cite the chunk that shows it. Hmm, we traced vfZENaEBIYfZsrKJRtKK which starts at 第六条. The 第一条 chunk is vPZENaEBIYfZsrKJRtKK (hop1 excerpt). We haven't traced it. Maybe trace it for accuracy. But careful about not repeating completed actions — new traces are fine.
+
+Also 芜湖市 (2023-01-03) chunk ofZfNaEBIYfZsrKJ7df5 traced — content starts at 第五条, doesn't show 第一条. Memory said 芜湖市 chunk ofZf... 2023-01-03.
+
+Also 宣城市 2023-06-05, 安庆市 2022-12-26, 石家庄市 2023-04-03, 合肥市 2021-10-21, 杭州市优化营商环境条例 2023-07-01 实施, 黄山市 2023-09-26.
+
+Also memory: 未检索到地方文件逐条援引国办函文件具体条款。
+
+Also note the caveat: 地方与国家对应主要通过《优化营商环境条例》建立。
+
+Additional traces worth doing: vPZENaEBIYfZsrKJRtKK (连云港第一条) and wPY5NaEBIYfZsrKJEtB4 (南京第一条), OvZdNaEBIYfZsrKJtddp (安庆第一条?), pvZ3NaEBIYfZsrKJ19uo (杭州立法新闻). Let me do a final code step to trace those and to inspect reference_mark once more via json parse.
+
+Then final answer with citation marks. Problem: no reference_mark fields. I must produce citations. Rule: use reference_mark from results. If missing, I could assign marks myself? The rule says don't fabricate marks. But the assistant's citation guidance strongly expects marks. Given the tool returns no reference_mark, a reasonable approach: assign marks based on retrieval result order? That risks violating "不得编造标记". Hmm.
+
+Let me check one more time whether the JSON contains "reference_mark" inside ring dicts by parsing. Previous attempt failed because it's a str. Let me parse json and print keys.
+
+I'll do that in the final code step and then, depending on outcome, produce final answer. Since code execution requires another round anyway, let's do it.
+
+Actually I can combine: trace the extra chunks + parse JSON to check reference_mark keys.
+
+Let me write the code.
+
+Then final answer.
+
+Regarding citations: if reference_mark absent, I'll use a consistent scheme? Better: I could do retrieval again and check. If truly absent, I'll cite chunk_id directly in the 引用块清单 and use marks only if available. The system prompt says引用失败则不加，但引用块清单是 must。Hmm — 核心职责 says 回答末尾附上引用块清单（chunk_id + 标题 + 日期）。That satisfies traceability. For inline marks, I could use [a1] style mapped to rings... risky. I think best: since retrieval results lack reference_mark, provide inline chunk_id references? The format spec says marks must be [[letter+digits]]. Hmm.
+
+Alternative: Maybe the interface would add reference_mark if I pass differently. Let me just parse and check.
+
+I'll do the final code action now.<code> import json
+
+补查尚未回查的关键出处锚（地方第一条制定依据）
+
+extra_ids = [ "vPZENaEBIYfZsrKJRtKK", # 连云港市优化营商环境办法（第一条制定依据） "wPY5NaEBIYfZsrKJEtB4", # 南京市优化营商环境办法（第一条制定依据） "OvZdNaEBIYfZsrKJtddp", # 安庆市优化营商环境条例 "pvZ3NaEBIYfZsrKJ19uo", # 杭州市优化营商环境条例（媒体） ] for cid in extra_ids: print(cid, "=>", retrieval_trace_source(chunk_id=cid))
+
+确认检索结果中是否提供 reference_mark 字段
+
+raw = retrieval_cross_doc(query="营商环境 国家上位文件 地方落实", hops=1, top_k=2) obj = json.loads(raw) if isinstance(raw, str) else raw print("tops_keys:", list(obj.keys())) first_ring = obj["rings"][0] print("ring_keys:", list(first_ring.keys())) print("reference_mark:", first_ring.get("reference_mark")) </code>
+
+Executed code
+PYTHON
+import json
+
+# 补查尚未回查的关键出处锚（地方第一条制定依据）
+extra_ids = [
+    "vPZENaEBIYfZsrKJRtKK",   # 连云港市优化营商环境办法（第一条制定依据）
+    "wPY5NaEBIYfZsrKJEtB4",   # 南京市优化营商环境办法（第一条制定依据）
+    "OvZdNaEBIYfZsrKJtddp",   # 安庆市优化营商环境条例
+    "pvZ3NaEBIYfZsrKJ19uo",   # 杭州市优化营商环境条例（媒体）
+]
+for cid in extra_ids:
+    print(cid, "=>", retrieval_trace_source(chunk_id=cid))
+
+# 确认检索结果中是否提供 reference_mark 字段
+raw = retrieval_cross_doc(query="营商环境 国家上位文件 地方落实", hops=1, top_k=2)
+obj = json.loads(raw) if isinstance(raw, str) else raw
+print("tops_keys:", list(obj.keys()))
+first_ring = obj["rings"][0]
+print("ring_keys:", list(first_ring.keys()))
+print("reference_mark:", first_ring.get("reference_mark"))
+5 tool calls
+Reasoning
+
+步骤 9 The retrieval results don't include a reference_mark field. So I need to decide how to handle citations. The instructions say to use reference_mark from results; if none exists, I shouldn't fabricate marks. But the format requires 1 style. Hmm. The rule: "如果检索结果中没有匹配的引用，则不显示该引用标记；不得编造标记". Since the tool returns no reference_mark, I could assign my own consistent marks mapping to chunk_ids — but that'd be "编造". However, the tool doesn't provide them, so the pragmatic approach used commonly: create marks corresponding to results and list chunk_id + title + date in the citation block list. Actually the system prompt says "请直接使用结果中 reference_mark 字段提供的标记，原样复制". Since absent, safest is to not fabricate... but the task explicitly asks for 可回查的出处, and my role requires 引用块清单 (chunk_id + 标题 + 日期). I'll provide the citation block list with chunk_ids and use reference marks assigned by me mapping explicitly to a legend so they're not fabricated but self-declared. Hmm, risk of verification feedback saying fabricated marks.
+
+Let me think: many of these Nexent setups do accept self-assigned marks if the tool doesn't provide them. I'll use marks like [[a1]]...[[a9]] and include a mapping table (mark → chunk_id → title → date) in the 引用块清单. That satisfies 可回查. I'll be careful: since reference_mark is absent, I'll declare "本回答引用标记与 chunk_id 的对应关系见文末引用块清单".
+
+Alternatively, avoid marks entirely and just cite chunk_ids inline. But rule 2 says use marks format. I'll do both: mark inline + chunk_id in the list.
+
+Actually to minimize fabrication risk, maybe better to inline cite with the mark format and include chunk_id in the block list — that's what the governance-policy-trace skill template requires: [chunk_id] inline plus 引用块清单. The skill template says use [chunk_id] inline. Hmm, the skill template uses [chunk_id] in template text, and the system prompt requires 1 marks. Conflict. Resolve: use 1 marks inline AND include chunk_id in the reference block list mapping. That satisfies both.
+
+Now let me organize the evidence.
+
+National upper-level documents (国家上位文件), by date:
+
+国办函〔2018〕46号《国务院办公厅关于部分地方优化营商环境典型做法的通报》2018-08-20 — 通报28项典型做法 (chunk pvYhNaEBIYfZsrKJ5czY). Content confirms 28项 categories.
+国办函〔2019〕89号《国务院办公厅关于做好优化营商环境改革举措复制推广借鉴工作的通知》2019-10-10 — 京沪经验，13项全国复制推广 + 借鉴 (chunk Z_YrNaEBIYfZsrKJtc5D). Content: "13项改革举措" yes.
+国务院令第722号《优化营商环境条例》2019-11-10公布（2019-10-22总理签署，2019年10月8日国务院第66次常务会议通过），2020-01-01施行 (chunk hPYsNaEBIYfZsrKJ0s5X).
+国发〔2021〕24号《国务院关于开展营商环境创新试点工作的意见》2021-12-10 — 首批6城市（北京、上海、重庆、杭州、广州、深圳）(chunk jPZDNaEBIYfZsrKJLdIu).
+国办发〔2022〕35号《国务院办公厅关于复制推广营商环境创新试点改革举措的通知》2022-11-10 (chunk ZfZTNaEBIYfZsrKJydU9). Also 国务院令第755号《促进个体工商户发展条例》2022-10-30 — appeared in retrieval but not central; may skip or mention? It's not in the chain; better skip to stay focused. Also 媒体: 国新办吹风会 (media level) — I could mention as 媒体 but not needed. Maybe mention 《优化营商环境条例》实施情况第三方评估吹风会 2021-01-13 as media. Keep minimal.
+
+Also note the 2019-10-24 吹风会 mentions 李克强总理10月22日签发国务院令公布《优化营商环境条例》 — media corroboration. Could cite as media-level corroboration. I'll include one media snippet maybe. Keep it moderate.
+
+地方落实 (地方文件):
+
+河北省优化营商环境条例 2017-11-30（省级地方性法规；公告：2017年12月1日通过，自2018年1月1日起施行）— 早于国务院条例，属地方先行 (chunk _PYeNaEBIYfZsrKJbMt4 条文；-_YeNaEBIYfZsrKJbMt4 含公告信息）。Hmm, the 公告 info is in chunk "-_YeNaEBIYfZsrKJbMt4" which was traced? In action 8, no. It was listed in retrieval results (hop2 ring with excerpt stating 2017年12月1日通过，2018年1月1日施行). I have the excerpt from the retrieved ring, not traced. The skill says 回查失败/未回查的环不得写进结论. I traced _PYeNaEBIYfZsrKJbMt4 which contains 条文 but not the 公告/施行日期. To be safe, I'll only state 河北省条例 条目内容 (奖励、举报投诉、政务环境) and its date 2017-11-30 as given by metadata. Actually date metadata is from the traced result itself (date: 2017-11-30), so it's fine.
+
+Wait — careful: 河北省条例 dated 2017-11-30 but 公告 says 通过 2017年12月1日？That's the untraced excerpt. I'll just use 2017-11-30 as the corpus date and not claim 施行日期.
+
+南京市优化营商环境办法（2021）2021-01-28 — 第一条明确"根据《优化营商环境条例》《江苏省优化营商环境条例》等法律、法规"制定 (chunk wPY5NaEBIYfZsrKJEtB4).
+连云港市优化营商环境办法 2021-12-30 — 第一条"根据国务院《优化营商环境条例》《江苏省优化营商环境条例》等法律法规" (chunk vPZENaEBIYfZsrKJRtKK).
+合肥市优化营商环境若干规定 2021-10-21 — from retrieval ring, untraced. Skip or mention without details? Skill: untraced rings must not be written into conclusions. So skip, or trace now. I could do one more tracing round. But instruction says don't repeat completed actions; new tracing of new chunks is fine. However, is it needed? The answer is already substantial. Maybe one final round to trace remaining useful chunks: 石家庄市 (2023-04-03), 黄山市 (2023-09-26), 杭州市条例官方 text? Hmm. Current time budget: it's fine to do one more round to strengthen 地方落实 with 安徽/河北 market-level examples, and 安庆 (already traced 2022-12-26, 第一条 根据国务院《优化营商环境条例》). Yes 安庆 traced.
+
+Traced local documents so far:
+
+河北省优化营商环境条例 2017-11-30 (_PYeNaEBIYfZsrKJbMt4)
+马鞍山市优化营商环境条例 2023-06-01 (3PaFNaEBIYfZsrKJJt0J — 第一条依据; 3faFNaEBIYfZsrKJJt0J — 第六~十二条)
+芜湖市优化营商环境条例 2023-01-03 (ofZfNaEBIYfZsrKJ7df5, oPZfNaEBIYfZsrKJ7df5 untraced meta ring)
+宣城市优化营商环境条例 2023-06-05 (8PaGNaEBIYfZsrKJQt3n)
+安庆市优化营商环境条例 2022-12-26 (OvZdNaEBIYfZsrKJtddp — 第一条依据)
+连云港市优化营商环境办法 2021-12-30 (vPZENaEBIYfZsrKJRtKK)
+南京市优化营商环境办法 2021-01-28 (wPY5NaEBIYfZsrKJEtB4)
+杭州立法（媒体）2023-03-31 (pvZ3NaEBIYfZsrKJ19uo)
+
+Good enough. I think no more tool calls are strictly required. But should I do one more to check whether there's a 省级 file for 安徽/江苏 (江苏省优化营商环境条例) to describe 省级衔接? That would strengthen. The 南京市办法 references《江苏省优化营商环境条例》. Tracing that would give chunk_id. Could run retrieval_cross_doc for "江苏省优化营商环境条例" hops=1 top_k=3 and trace. That's a new action, allowed. It adds value: 省级地方性法规 as intermediate layer. Also 河北省 is 省级.
+
+Let me do one combined action: retrieve 江苏省优化营商环境条例 + 安徽省 (or 上海市优化营商环境条例) and trace top hits. Hmm, keep it to one round: query "江苏省优化营商环境条例" and "安徽省优化营商环境条例" — 2 cross_doc calls + trace of top 2 rings each (choose those with matching titles). But I need titles before tracing; I can trace by reading rings in code — but conditional logic (if) is discouraged... Actually the guidance says avoid if/for in the example code; but it's not forbidden absolutely. To be safe and deterministic, I'll do retrieval first and print, then trace next round. That's 2 more rounds. Acceptable? The task must be completed. Let's do it: one round for retrieval of 省级 files, then one round tracing.
+
+Actually, maybe simpler: is it necessary? The question asks "地方是怎么落实的" — I already have省级(河北) + 市级. Adding 江苏/安徽省级 would show the 省—市 chain explicitly (南京/连云港 cite 江苏省条例). That's a meaningful improvement for 制度沿革 layering. Let's do it.
+
+Let me run the retrieval.
+
+Then final answer with marks. Marks assignment (I'll define):
+
+a1: 国办函〔2018〕46号 (pvYhNaEBIYfZsrKJ5czY)
+a2: 国办函〔2019〕89号 (Z_YrNaEBIYfZsrKJtc5D)
+a3: 国务院令722号 (hPYsNaEBIYfZsrKJ0s5X)
+a4: 国发〔2021〕24号 (jPZDNaEBIYfZsrKJLdIu)
+a5: 国办发〔2022〕35号 (ZfZTNaEBIYfZsrKJydU9)
+b1: 河北省条例 (_PYeNaEBIYfZsrKJbMt4)
+b2: 南京市办法 (wPY5NaEBIYfZsrKJEtB4)
+b3: 连云港市办法 (vPZENaEBIYfZsrKJRtKK)
+b4: 安庆市条例 (OvZdNaEBIYfZsrKJtddp)
+b5: 芜湖市条例 (ofZfNaEBIYfZsrKJ7df5)
+b6: 马鞍山市条例(第一条) (3PaFNaEBIYfZsrKJJt0J)
+b7: 马鞍山市条例(条文) (3faFNaEBIYfZsrKJJt0J)
+b8: 宣城市条例 (8PaGNaEBIYfZsrKJQt3n)
+c1: 杭州立法媒体 (pvZ3NaEBIYfZsrKJ19uo)
+c2: 国新办吹风会 2019-10-24 (d_YrNaEBIYfZsrKJtc5D) — untraced! ePYrNaEBIYfZsrKJtc5D also untraced. So don't cite media about 国务院令 unless traced. I traced pvZ3NaEBIYfZsrKJ19uo (杭州媒体). I'll only use that one. And skip untraced media.
+
+Also 国办发〔2022〕35号 second chunk bPZTNaEBIYfZsrKJydU9 untraced — fine.
+
+Now the 江苏省/安徽省 retrievals — if found and traced, marks b9 etc.
+
+Let's proceed with the retrieval round.<code> q_js = retrieval_cross_doc(query="江苏省优化营商环境条例 省级地方性法规", hops=1, top_k=4) print(q_js) q_ah = retrieval_cross_doc(query="安徽省优化营商环境条例 省级地方性法规", hops=1, top_k=4) print(q_ah) </code>
+
+Executed code
+PYTHON
+q_js = retrieval_cross_doc(query="江苏省优化营商环境条例 省级地方性法规", hops=1, top_k=4)
+print(q_js)
+q_ah = retrieval_cross_doc(query="安徽省优化营商环境条例 省级地方性法规", hops=1, top_k=4)
+print(q_ah)
+2 tool calls
+Reasoning
+
+步骤 10 The retrieval work is essentially done. Let me review what evidence I have and check whether any gaps remain. Key evidence collected:
+
+National-level (国家):
+
+国办函〔2018〕46号 《国务院办公厅关于部分地方优化营商环境典型做法的通报》2018-08-20, chunk pvYhNaEBIYfZsrKJ5czY ✓ traced
+国办函〔2019〕89号 《国务院办公厅关于做好优化营商环境改革举措复制推广借鉴工作的通知》2019-10-10, chunk Z_YrNaEBIYfZsrKJtc5D ✓ traced
+国务院令第722号《优化营商环境条例》2019-11-10（公布，2020-01-01施行，2019年10月8日国务院第66次常务会议通过；总理签署日期2019年10月22日）chunk hPYsNaEBIYfZsrKJ0s5X ✓ traced
+国发〔2021〕24号《国务院关于开展营商环境创新试点工作的意见》2021-12-10, chunk jPZDNaEBIYfZsrKJLdIu ✓ traced（首批6城市：北京、上海、重庆、杭州、广州、深圳）
+国办发〔2022〕35号《国务院办公厅关于复制推广营商环境创新试点改革举措的通知》2022-11-10, chunk ZfZTNaEBIYfZsrKJydU9 ✓ traced
+
+地方（省级/市级）:
+
+《河北省优化营商环境条例》2017-11-30 (chunk _PYeNaEBIYfZsrKJbMt4 已回查；另一块 -_YeNaEBIYfZsrKJbMt4 显示2017年12月1日通过，2018年1月1日起施行 — 注意日期差异：搜索结果标题日期2017-11-30，而原文公告说"2017年12月1日通过"…实际是"2017年12月1日通过"？ 原文："《河北省优化营商环境条例》已经河北省第十二届人民代表大会常务委员会第三十三次会议于2017年12月1日通过，现予公布，自2018年1月1日起施行" — 但标题日期标注为2017-11-30。我应该谨慎表述：标题日期2017-11-30，公告载明2017年12月1日通过、2018年1月1日施行。为避免矛盾，可以写"2017-11-30（标题日期）"，或直接引用公告内容。我应有原文引用。Hmm, 需要注意 -_YeNaEBIYfZsrKJbMt4 这块我并未直接调用 retrieval_trace_source，只是从检索结果 excerpt 中看到。excerpt显示"2017年12月1日通过…自2018年1月1日起"。这是检索结果里 grounded=true 的 excerpt。按技能指南，准备引用的每一环应回查。我已回查了 _PYeNaEBIYfZsrKJbMt4。是否要回查 -_YeNaEBIYfZsrKJbMt4？为稳妥，可以再回查一次获取完整公告信息。但已有 _PYeNaEBIYfZsrKJbMt4 回查内容（第六~十条）。
+
+《马鞍山市优化营商环境条例》2023-06-01，第一条明确"根据国务院《优化营商环境条例》…制定" chunk 3PaFNaEBIYfZsrKJJt0J ✓ traced（完整第一条）
+
+《芜湖市优化营商环境条例》2023-01-03 chunk ofZfNaEBIYfZsrKJ7df5 ✓ traced (第二条-第十条内容)
+
+《宣城市优化营商环境条例》2023-06-05 chunk 8PaGNaEBIYfZsrKJQt3n ✓ traced
+
+《安庆市优化营商环境条例》2022-12-26 chunk OvZdNaEBIYfZsrKJtddp ✓ traced，第一条"根据国务院《优化营商环境条例》和有关法律、行政法规，结合本市实际，制定本条例"
+
+《连云港市优化营商环境办法》2021-12-30 chunk vPZENaEBIYfZsrKJRtKK ✓ traced，第一条"根据国务院《优化营商环境条例》《江苏省优化营商环境条例》等法律法规"
+
+《南京市优化营商环境办法（2021）》2021-01-28 chunk wPY5NaEBIYfZsrKJEtB4 ✓ traced，第一条"根据《优化营商环境条例》《江苏省优化营商环境条例》等法律、法规"
+
+《杭州市优化营商环境条例》2023-03-31批准、2023-07-01施行（媒体：新华网）chunk pvZ3NaEBIYfZsrKJ19uo ✓ traced
+
+《苏州市优化营商环境条例》2021-12-09 chunk hvZDNaEBIYfZsrKJLdIu — 未回查原文（仅检索 excerpt）
+
+《合肥市优化营商环境若干规定》2021-10-21 chunk GvZANaEBIYfZsrKJ9dIP — 未回查
+
+《石家庄市优化营商环境条例》2023-04-03 chunk wfZ3NaEBIYfZsrKJ19up — 未回查
+
+《黄山市优化营商环境条例》2023-09-26 chunk rLP6PqEBtiXH82V1YZPy — 未回查
+
+Also note: 省级地方性法规的原文（江苏省优化营商环境条例、安徽省优化营商环境条例本身）没有直接检索到独立条目，只在市级文件第一条中被援引。这点值得说明：检索结果中未找到《江苏省优化营商环境条例》《安徽省优化营商环境条例》本身的条文块，仅有市级文件援引其作为制定依据。这是重要的事实说明。
+
+reference_mark: 检索结果中没有 reference_mark 字段（已确认 ring 无 reference_mark，返回 None）。因此按规则"如果检索结果中没有匹配的引用，则不显示该引用标记；不得编造标记"。所以我不能使用 [[a1]] 之类标记。但结尾要附引用块清单（chunk_id + 标题 + 日期）——这是系统提示要求的。技能模板也要求引用块清单。
+
+所以最终回答：不用行内引用标记（因为工具未提供 reference_mark），但末尾附引用块清单（chunk_id + 标题 + 日期），并在正文中以 chunk_id 标注出处，符合规则1"每条结论必须标注来源文件标题与日期"和技能模板的 [chunk_id]。
+
+关于日期冲突：河北省优化营商环境条例，标题日期2017-11-30 但公告说2017年12月1日通过。Wait — excerpt: "《河北省优化营商环境条例》已经河北省第十二届人民代表大会常务委员会第三十三次会议于2017年12月1日通过，现予公布，自2018年1月1日起施行"。Hmm 但记忆说2017-11-30。可能公告日期/标题日期不同。我需要谨慎：我可以写"《河北省优化营商环境条例》（标题日期 2017-11-30；公告载明 2017 年 12 月 1 日通过、2018 年 1 月 1 日起施行）"。为确保准确，最好回查 -_YeNaEBIYfZsrKJbMt4 获取原文全文以准确引用。这算一个未完成的必要步骤吗？它属于"准备引用的环"，值得回查。
+
+Maybe do one final small code step: trace -_YeNaEBIYfZsrKJbMt4 and a couple others (苏州、合肥、黄山、石家庄) to complete the citation list accuracy. Then final answer.
+
+Actually, to keep it manageable, let me trace:
+
+-_YeNaEBIYfZsrKJbMt4 (河北公告)
+hvZDNaEBIYfZsrKJLdIu (苏州)
+GvZANaEBIYfZsrKJ9dIP (合肥)
+rLP6PqEBtiXH82V1YZPy (黄山)
+wfZ3NaEBIYfZsrKJ19up (石家庄)
+
+Then produce final answer. Also maybe store memory? The memory policy: store short-term memory in intermediate steps. Prior memories already cover much. Could add one about 江苏/安徽省级条例本身未入库，仅市级援引 — this is a useful new progress insight. Yes, I can store one concise memory entry in the intermediate step. But careful about duplicates — memory [3] says "未检索到地方文件逐条援引国办函…具体条款". My new insight: 语料库中未收录《江苏省优化营商环境条例》《安徽省优化营商环境条例》本身条文，仅见南京市、连云港市、苏州市等市级文件在第一条援引其为制定依据。That's new and different. I'll store it.
+
+Let me do the trace + store_memory in one code block.
+
+Then final answer.
+
+Let's write the code.
+
+Note: store_memory results — it's fine to call in intermediate step.
+
+Then final answer structure:
+
+结论: 语料库检索到 5 份国家级上位文件构成"典型做法通报—复制推广—专门行政法规—创新试点—试点经验全国推广"链条；地方以省级/市级条例、办法两类形式落实，其中多部市级条例第一条明确以国务院《优化营商环境条例》为制定依据，可回查。
+
+一、国家层面上位文件（按时间） 表格: 日期 | 文件 | 文号 | 作用 | chunk_id
+
+二、地方落实
+
+省级地方性法规先行：河北省优化营商环境条例 2017-11-30 (其后2018-01-01施行？careful)
+市级条例/办法承接并援引国务院条例：马鞍山、安庆、芜湖、宣城、连云港、南京、杭州（媒体）、苏州、合肥、黄山、石家庄
+说明：语料库中未见江苏省、安徽省省级条例本身的条文块（仅被市级文件援引）
+
+三、制度沿革关系 四、未获取到的部分（限制说明） 引用块清单
+
+Now write.
+
+For chunk_id of 河北省: _PYeNaEBIYfZsrKJbMt4 (原文第六条起) and -_YeNaEBIYfZsrKJbMt4 (公告＋第一条?). I'll see trace result.
+
+Let's run the code.<code> for cid in ["-_YeNaEBIYfZsrKJbMt4", "hvZDNaEBIYfZsrKJLdIu", "GvZANaEBIYfZsrKJ9dIP", "rLP6PqEBtiXH82V1YZPy", "wfZ3NaEBIYfZsrKJ19up"]: print(cid, "=>", retrieval_trace_source(chunk_id=cid))
+
+mem = store_memory(content="营商环境语料库检索发现：库中未见《江苏省优化营商环境条例》《安徽省优化营商环境条例》本身条文块，仅见南京市优化营商环境办法(2021-01-28)、连云港市优化营商环境办法(2021-12-30)第一条援引国务院《优化营商环境条例》+省级条例作为制定依据，马鞍山市优化营商环境条例(2023-06-01)、安庆市优化营商环境条例(2022-12-26)第一条仅援引国务院条例。") print(mem) </code>
+
+Executed code
+PYTHON
+for cid in ["-_YeNaEBIYfZsrKJbMt4", "hvZDNaEBIYfZsrKJLdIu", "GvZANaEBIYfZsrKJ9dIP", "rLP6PqEBtiXH82V1YZPy", "wfZ3NaEBIYfZsrKJ19up"]:
+    print(cid, "=>", retrieval_trace_source(chunk_id=cid))
+
+mem = store_memory(content="营商环境语料库检索发现：库中未见《江苏省优化营商环境条例》《安徽省优化营商环境条例》本身条文块，仅见南京市优化营商环境办法(2021-01-28)、连云港市优化营商环境办法(2021-12-30)第一条援引国务院《优化营商环境条例》+省级条例作为制定依据，马鞍山市优化营商环境条例(2023-06-01)、安庆市优化营商环境条例(2022-12-26)第一条仅援引国务院条例。")
+print(mem)
+6 tool calls
+模型连续返回空响应，请稍后重试。
+复制
+刷新
+更多
+112.42s
+18%
+本轮
+滚动到底部
+规划
+执行
+DeepSeek V4.1 Flash
+添加附件
+Nexent © 2026· v2.7.0
+使用条款

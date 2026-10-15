@@ -1,0 +1,38 @@
+{
+  "src": "triples-governance.jsonl",
+  "subject_judge": {
+    "path": "judged-subject-full.jsonl",
+    "judged": 14058,
+    "docs": 1762
+  },
+  "object_judge": {
+    "path": "judge-cache-object.jsonl",
+    "judged": 32490,
+    "docs": 6942
+  },
+  "stages": {
+    "orig": {
+      "edges": 202553,
+      "nodes": 119258
+    },
+    "obj_clean": {
+      "edges": 24495,
+      "nodes": 11492
+    },
+    "subj_clean": {
+      "edges": 65199,
+      "nodes": 33738
+    },
+    "both_clean": {
+      "edges": 15870,
+      "nodes": 8532
+    }
+  },
+  "doc2doc_predicates": {
+    "cites": 11706,
+    "implements": 2659,
+    "amends": 986,
+    "repeals": 519
+  },
+  "out": "triples-doc2doc.jsonl"
+}

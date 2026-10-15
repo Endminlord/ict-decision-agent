@@ -1,0 +1,36 @@
+{
+  "version": "1.0",
+  "note": "行业无关的类型系统。换行业时本文件不得修改（判据 K2）；行业差异全部落在 terms.*.json。",
+  "entity_types": [
+    {"id": "Document", "desc": "规范性文本：法规、标准、政策、手册、规程等"},
+    {"id": "Organization", "desc": "发布、署名或制定主体"},
+    {"id": "Region", "desc": "行政区划或适用地域"},
+    {"id": "TimePoint", "desc": "时间点：发布、施行、修订、废止"},
+    {"id": "Concept", "desc": "主题概念或术语"}
+  ],
+  "relation_types": [
+    {"id": "cites", "from": "Document", "to": "Document", "desc": "引用或依据（通常指向上位文件）", "symmetric": false, "transitive": true},
+    {"id": "implements", "from": "Document", "to": "Document", "desc": "落实或细化（通常指向下位文件）", "symmetric": false, "transitive": true},
+    {"id": "amends", "from": "Document", "to": "Document", "desc": "修订或修正", "symmetric": false, "transitive": false},
+    {"id": "repeals", "from": "Document", "to": "Document", "desc": "废止或停止执行", "symmetric": false, "transitive": false},
+    {"id": "issued_by", "from": "Document", "to": "Organization", "desc": "发布机关", "symmetric": false, "transitive": false},
+    {"id": "effective_from", "from": "Document", "to": "TimePoint", "desc": "施行时间", "symmetric": false, "transitive": false},
+    {"id": "applies_to", "from": "Document", "to": "Region", "desc": "适用地域", "symmetric": false, "transitive": false},
+    {"id": "mentions", "from": "Document", "to": "Concept", "desc": "提及概念（弱关系，不参与推理链）", "symmetric": false, "transitive": false}
+  ],
+  "provenance": {
+    "required": ["chunk_id", "doc_id", "char_offset", "evidence"],
+    "desc": "每条三元组必须能回查到原文切片；char_offset 是块内偏移，配合 chunk_id 可定位到清洗后正文"
+  },
+  "confidence": {
+    "levels": ["high", "medium", "low"],
+    "high": "同句内出现关系动词 + 两端实体",
+    "medium": "同块内共现，但无明确关系动词",
+    "low": "仅标题或摘要级线索，需人工确认"
+  },
+  "review_gate": {
+    "desc": "半自动构建的人工确认闸门：low 置信度候选不得直接入库",
+    "auto_accept": ["high"],
+    "needs_human": ["medium", "low"]
+  }
+}

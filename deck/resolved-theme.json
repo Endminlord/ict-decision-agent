@@ -1,0 +1,95 @@
+{
+  "name": "custom+accent-bar+standard",
+  "colors": {
+    "primary": "#1E5AB8",
+    "on-primary": "#FFFFFF",
+    "secondary": "#64748B",
+    "accent": "#0096C7",
+    "background": "#FFFFFF",
+    "foreground": "#0A1E3D",
+    "muted": "#F0F4F8",
+    "muted-foreground": "#6B7B8D",
+    "border": "#DEE5EF",
+    "destructive": "#EF4444"
+  },
+  "typography": {
+    "heading": "微软雅黑",
+    "body": "微软雅黑"
+  },
+  "dark_mode": false,
+  "decoration": {
+    "name": "Accent Bar",
+    "left_accent": true,
+    "title_underline": true,
+    "card_top_bar": true,
+    "description": "Clean accent bars and underlines"
+  },
+  "layout_variant": {
+    "name": "Standard",
+    "content_margin_left": 0.9,
+    "content_margin_right": 0.9,
+    "title_alignment": "left",
+    "card_style": "rounded",
+    "description": "Standard left-aligned layout"
+  },
+  "text_effect_preset": "steel",
+  "image_effect": "soft_edge",
+  "semantic_roles": {
+    "background": "#FFFFFF",
+    "surface": "#F0F4F8",
+    "ink": "#0A1E3D",
+    "muted": "#6B7B8D",
+    "accent": "#0096C7",
+    "accent-secondary": "#64748B",
+    "success": "#0096C7",
+    "warning": "#64748B",
+    "danger": "#EF4444",
+    "border": "#DEE5EF",
+    "data-series-1": "#1E5AB8",
+    "data-series-2": "#0096C7"
+  },
+  "source": {
+    "requested": {
+      "style": null,
+      "palette": "government-public-service",
+      "fonts": "clean-corporate",
+      "decoration": "accent-bar",
+      "layout": "standard",
+      "mood": null,
+      "seed": 17,
+      "query": null,
+      "text_effect_preset": null,
+      "image_effect": null
+    },
+    "resolved": {
+      "style": null,
+      "palette": "ocean-blue",
+      "fonts": "clean-corporate",
+      "decoration": "accent-bar",
+      "layout": "standard",
+      "mood": [
+        "professional"
+      ]
+    },
+    "seed": 17,
+    "resolver": "local",
+    "package_version": "1.0.0b11",
+    "fallbacks": [
+      {
+        "field": "palette",
+        "requested": "government-public-service",
+        "used": "ocean-blue"
+      }
+    ],
+    "warnings": []
+  },
+  "atoms": {
+    "palette": "ocean-blue",
+    "fonts": "clean-corporate",
+    "decoration": "accent-bar",
+    "layout": "standard",
+    "moods": [
+      "professional"
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "name": "workbench",
+  "server_url": "http://172.20.0.1:8791/mcp",
+  "transport": "streamable-http",
+  "source": "local",
+  "enabled": true,
+  "framework": "fastmcp 2.14.7",
+  "server_file": "workbench-mcp-server.py",
+  "server_sha256": "8a25cabfccb1ec9f07a7c16c1e897a5c9e9e25db0331fd1c353eee30c7f4afd6",
+  "run": "systemd user unit ~/.config/systemd/user/workbench-mcp.service (enabled+active, Restart=always), 0.0.0.0:8791, path /mcp",
+  "tools": [
+    {
+      "name": "workbench_task_status",
+      "description": "读取工作台项目的《终极任务计划 · 状态对账表》，返回已完成/部分完成/待办三项计数与文档元信息。",
+      "params": {},
+      "returns": {"file": "string", "bytes": "int", "mtime": "string", "done": "int", "partial": "int", "todo": "int"},
+      "nexent_tool_id": 34
+    },
+    {
+      "name": "workbench_recent_commits",
+      "description": "返回工作台仓库最近 limit 条提交（git log --oneline），limit 取值 1-20。",
+      "params": {"limit": {"type": "int", "default": 5}},
+      "returns": ["string"],
+      "nexent_tool_id": 35
+    },
+    {
+      "name": "workbench_run_demo",
+      "description": "在工作台项目里跑一次离线演示链（python3 run.py --demo），返回退出码、耗时与链路统计。",
+      "params": {},
+      "returns": {"rc": "int", "seconds": "float", "model_calls": "int", "model_mode": "string", "domains": ["string"]},
+      "nexent_tool_id": 36
+    }
+  ],
+  "registration": {
+    "api": "POST /api/mcp/add",
+    "scan": "GET /api/tool/scan_tool",
+    "observed": {"mcp_id": 1, "status": true, "enabled": true, "tool_ids": [34, 35, 36]}
+  }
+}
