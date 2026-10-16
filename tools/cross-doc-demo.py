@@ -23,15 +23,35 @@ from __future__ import annotations
 import argparse
 import collections
 import json
+import os
 import re
 import sys
 import urllib.request
 from pathlib import Path
 
-ES = "http://localhost:9220"
-ES_KEY = "QTJyUkphRUJKZHZMaV9ubFNYLUs6V1ZWcl94WS1SSnFmTjZXVnhzTTBvUQ=="
-EMBED = "http://127.0.0.1:8792/v1/embeddings"
-DEFAULT_INDEX = "1-43ce427e8b5447ecad015534f953e084"
+
+def _load_es_key() -> str:
+    """从环境变量或本机凭据文件读取 ES API key。
+
+    源码里不硬编码 key：材料包会分发给评委、仓库会公开推送，
+    凭据一旦写进源码就等于公开。
+    """
+    key = os.environ.get("ES_API_KEY", "").strip()
+    if key:
+        return key
+    for candidate in (Path.home() / ".dsh" / "es-key.env",
+                      Path.home() / ".config" / "ict-demo.env"):
+        if candidate.is_file():
+            for line in candidate.read_text(encoding="utf-8").splitlines():
+                if line.startswith("ES_API_KEY="):
+                    return line.split("=", 1)[1].strip().strip('"').strip("'")
+    return ""
+
+
+ES = os.environ.get("ES_URL", "http://localhost:9220")
+ES_KEY = _load_es_key()
+EMBED = os.environ.get("EMBED_URL", "http://127.0.0.1:8792/v1/embeddings")
+DEFAULT_INDEX = os.environ.get("ES_INDEX", "1-43ce427e8b5447ecad015534f953e084")
 
 # 规则：法规/文件名（含书名号与常见后缀）；发文机关；年份
 RE_DOC = re.compile(r"《([^》]{4,60}(?:条例|办法|意见|通知|规定|方案|决定|细则|规划|纲要|清单))》")
