@@ -37,16 +37,75 @@ TIMEOUT = 15
 UA = "Mozilla/5.0 (compatible; ict-decision-agent/1.0)"
 
 
-def fetch(url):
-    """返回 (html_text, err)。不走代理 —— 实测代理会让 gov.cn 超时。"""
+_OCR = None
+
+
+def _get_ocr():
+    """OCR 引擎单例 —— 模型加载约 1-2 秒，不要每张图重建。"""
+    global _OCR
+    if _OCR is None:
+        from rapidocr_onnxruntime import RapidOCR
+        _OCR = RapidOCR()
+    return _OCR
+
+
+def _get_bytes(url):
+    """取原始字节。不走代理 —— 实测代理会让 gov.cn 超时。
+
+    `file://` 不能带 headers（Request 会报 unknown url type），单独走 urlopen。
+    """
+    if url.startswith("file://"):
+        with urllib.request.urlopen(url, timeout=TIMEOUT) as r:
+            return r.read()
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+    with opener.open(req, timeout=TIMEOUT) as r:
+        return r.read()
+
+
+def fetch(url):
+    """按扩展名分派：图片 → OCR；PDF → pymupdf 文本层；其余 → HTML。
+
+    返回 (payload, err, kind)。kind 决定下游怎么解：
+      "html" → 走 extract() 抽 <p>；"text" → OCR/PDF 的纯文本，直接用。
+    不走代理 —— 实测代理会让 gov.cn 超时。
+    """
+    low = url.lower().split("?")[0]
     try:
-        with opener.open(req, timeout=TIMEOUT) as r:
-            charset = r.headers.get_content_charset() or "utf-8"
-            return r.read().decode(charset, errors="ignore"), None
+        raw = _get_bytes(url)
     except Exception as e:
-        return None, f"{type(e).__name__}: {e}"
+        return None, f"{type(e).__name__}: {e}", "html"
+
+    # 图片：OCR（rapidocr-onnxruntime，纯 Python + ONNX，无外部二进制）
+    if low.endswith((".png", ".jpg", ".jpeg", ".webp", ".bmp", ".tif", ".tiff")):
+        try:
+            import io
+            from PIL import Image
+            img = Image.open(io.BytesIO(raw))
+            res, _ = _get_ocr()(img)
+            text = "\n".join(r[1] for r in res) if res else ""
+            return (text, None, "text") if text.strip() else (None, "OCR 未识别出文字", "text")
+        except ImportError as e:
+            return None, f"OCR 依赖缺失：{e}", "text"
+        except Exception as e:
+            return None, f"OCR 失败：{type(e).__name__}: {e}", "text"
+
+    # PDF：pymupdf 抽文本层（覆盖文字版 PDF；扫描件无文本层，走 OCR 需先渲染成图）
+    if low.endswith(".pdf"):
+        try:
+            import fitz
+            doc = fitz.open(stream=raw, filetype="pdf")
+            text = "\n".join(page.get_text() for page in doc)
+            doc.close()
+            return (text, None, "text") if text.strip() else (None, "PDF 无文本层（扫描件，需先渲染成图再 OCR）", "text")
+        except Exception as e:
+            return None, f"PDF 解析失败：{type(e).__name__}: {e}", "text"
+
+    # 其余按 HTML
+    try:
+        return raw.decode("utf-8", errors="ignore"), None, "html"
+    except Exception as e:
+        return None, f"{type(e).__name__}: {e}", "html"
 
 
 def extract(html_text, url):
@@ -91,7 +150,7 @@ def discover(index_url, limit=30):
     `gongbao/` 与 `gongbao/2024/` 分别返回 898 B 空壳与 403，不可用；
     `/zhengce/pdf/` 是 404（政策页本来就不挂 PDF）。
     """
-    h, err = fetch(index_url)
+    h, err, _kind = fetch(index_url)
     if err:
         return [], err
     pat = r'<a[^>]*href="([^"]*content_\d+\.htm[^"]*)"[^>]*>(.*?)</a>'
@@ -121,11 +180,17 @@ def ingest(urls, base, out_path, workdir=None):
     report = {"urls": [], "chunks": 0, "docs": 0, "strict": 0, "loose": 0}
     chunks = []
     for i, url in enumerate(urls, 1):
-        h, err = fetch(url)
+        payload, err, kind = fetch(url)
         if err:
             report["urls"].append({"url": url, "status": "failed", "error": err})
             continue
-        title, body = extract(h, url)
+        if kind == "html":
+            title, body = extract(payload, url)
+        else:
+            # OCR / PDF：payload 已是纯文本，标题取首个非空行
+            lines = [l.strip() for l in payload.splitlines() if l.strip()]
+            title = (lines[0][:60] if lines else url.rstrip("/").rsplit("/", 1)[-1])
+            body = "\n".join(lines)
         cs = to_chunks(title, body, f"live-{i:03d}", url)
         if not cs:
             report["urls"].append({"url": url, "status": "no_text", "title": title,
@@ -215,6 +280,17 @@ def self_test():
         got.append(u)
     ck("列表页能抽出 content 链接", len(got) == 2, str(len(got)))
     ck("列表页去重", len(got) == len(set(got)))
+    try:
+        from rapidocr_onnxruntime import RapidOCR  # noqa: F401
+        from PIL import Image  # noqa: F401
+        ck("OCR 依赖可用（图片通道）", True)
+    except ImportError:
+        ck("OCR 依赖可用（图片通道）", False, "未装 rapidocr-onnxruntime")
+    try:
+        import fitz  # noqa: F401
+        ck("pymupdf 可用（PDF 通道）", True)
+    except ImportError:
+        ck("pymupdf 可用（PDF 通道）", False)
 
     ok = all(c[1] for c in cases)
     for name, passed, detail in cases:
