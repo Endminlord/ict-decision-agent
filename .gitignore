@@ -7,3 +7,7 @@ venv/
 .DS_Store
 .idea/
 .vscode/
+
+# track2 大文件（可由 scripts/build_data.py 重建）
+track2-mcp/src/ict_track2_mcp/data/
+track2-mcp/dist/

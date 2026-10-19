@@ -1,0 +1,33 @@
+[project]
+name = "ict-track2-mcp"
+version = "0.1.0"
+description = "引用回查 MCP 服务：给定 chunk_id 或引用文本，返回原文片段与文档元信息（零第三方依赖，自包含）"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [{ name = "ICT Track2 Team" }]
+keywords = ["mcp", "model-context-protocol", "citation", "provenance"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+]
+# 零第三方依赖：MCP 的 stdio 协议由 server.py 手写实现，
+# 避免 mcp SDK 1.x→2.x 的 API 变更（FastMCP → MCPServer）导致沙箱启动失败。
+dependencies = []
+
+[project.scripts]
+ict-track2-mcp = "ict_track2_mcp.server:main"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ict_track2_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/", "README.md", "tests/", "scripts/"]

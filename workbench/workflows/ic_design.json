@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "description": "声明式工作流表（与 domains.json 同构：信封同构、内容不同构）",
+  "workflows": [
+    {
+      "schema_version": 1,
+      "workflow_id": "ic_design_adder",
+      "name": "数字 IC 加法器（RTL → iverilog 真仿真）",
+      "description": "以 iverilog 仿真为验证手段的 RTL 工作流：需求 → 规格 → 实现 → 自检测试台 → 真仿真",
+      "keywords": [
+        "verilog",
+        "rtl",
+        "hdl",
+        "加法器",
+        "iverilog",
+        "数字电路",
+        "module"
+      ],
+      "prompts": {
+        "tdd_coder": "面向数字 IC 设计：产出可综合的 Verilog-2001 模块，接口需明确位宽与方向。",
+        "tdd_planner": "测试用例需覆盖该模块接口的位宽与边界组合。"
+      },
+      "contract": {
+        "architecture": "ic_module",
+        "language": "verilog",
+        "version": "2001",
+        "test_framework": "iverilog",
+        "verification": {
+          "mode": "cli",
+          "capability": "execute_verilog"
+        },
+        "note": "契约从需求推导：sdd_spec_builder 用 LLM 从需求文本得出模块名与端口（位宽、方向），planner 据此产出端口赋值形态的用例，runtime/executor.build_verilog_testbench 用这些用例生成自检测试台，由 execute_verilog 跑真实 iverilog 仿真。不再有硬编码的 fixture 契约。有时钟端口（clk/clock，含 clk2/clk_b 等第二时钟写法）的模块走时钟测试台：测试台驱动每一个时钟、按极性复位一个上升沿（有复位端口时），用例用 `cycles` 给出等待的上升沿数，`given` 不给时钟赋值。没有复位端口时按序列语义执行：不复位、状态在用例之间延续，日志里打一行 NOTE，依赖未知初态的用例会显式失败而不是被猜过去。inout 双向端口按 wire 连接：用例给了期望值就检查，用例想驱动它则拒绝并报出用例号与端口名。"
+      },
+      "adversary": {
+        "note": "本领域的产物是 verilog；红队目前只会推 Python 的邻居，所以它在这里不会跑——不跑不等于通过，这句话会跟着结论一起进报告。（这里**不**关掉任何类别：本领域里的 Python 产物照常受检。）"
+      },
+      "steps": [
+        {
+          "step_id": "S1_req",
+          "stage": "S1",
+          "agent": "hermes",
+          "inputs": [
+            "需求文本"
+          ],
+          "outputs": [
+            "requirement.md"
+          ],
+          "assertions": []
+        },
+        {
+          "step_id": "S2_prd",
+          "stage": "S2",
+          "agent": "prd_builder",
+          "inputs": [
+            "requirement.md"
+          ],
+          "outputs": [
+            "prd.md"
+          ],
+          "assertions": []
+        },
+        {
+          "step_id": "S2_req",
+          "stage": "S2",
+          "agent": "req_writer",
+          "inputs": [
+            "prd.md"
+          ],
+          "outputs": [
+            "requirements.md"
+          ],
+          "assertions": []
+        },
+        {
+          "step_id": "S3_sdd",
+          "stage": "S3",
+          "agent": "sdd_spec_builder",
+          "inputs": [
+            "requirements.md"
+          ],
+          "outputs": [
+            "sdd.md"
+          ],
+          "assertions": [
+            "A：模块名与端口（位宽+方向）可从 sdd.md 解析"
+          ]
+        },
+        {
+          "step_id": "S3_trd",
+          "stage": "S3",
+          "agent": "trd_adr_generator",
+          "inputs": [
+            "sdd.md"
+          ],
+          "outputs": [
+            "trd.md"
+          ],
+          "assertions": []
+        },
+        {
+          "step_id": "S5_plan",
+          "stage": "S5",
+          "agent": "tdd_planner",
+          "inputs": [
+            "sdd.md"
+          ],
+          "outputs": [
+            "test_plan.md"
+          ],
+          "assertions": [
+            "A：用例给出端口赋值形态（含边界组合）"
+          ]
+        },
+        {
+          "step_id": "S5_code",
+          "stage": "S5",
+          "agent": "tdd_coder",
+          "inputs": [
+            "sdd.md",
+            "test_plan.md"
+          ],
+          "outputs": [
+            "adder.v"
+          ],
+          "assertions": [
+            "B：Verilog-2001 可综合；端口位宽/方向与 sdd.md 一致"
+          ]
+        },
+        {
+          "step_id": "S5_review",
+          "stage": "S5",
+          "agent": "tdd_reviewer",
+          "inputs": [
+            "adder.v"
+          ],
+          "outputs": [
+            "review.md"
+          ],
+          "assertions": []
+        },
+        {
+          "step_id": "S6_e2e",
+          "stage": "S6",
+          "agent": "e2e_validator",
+          "inputs": [
+            "adder.v",
+            "test_plan.md"
+          ],
+          "outputs": [
+            "sim.log",
+            "tb_adder.v"
+          ],
+          "assertions": [
+            "A：execute_verilog 真跑（iverilog 11.0 + vvp）退出码 0、测试台自检通过"
+          ]
+        }
+      ],
+      "token_budget": {
+        "workflow_total": 400000,
+        "per_step": {
+          "S5": 150000,
+          "S6": 60000
+        },
+        "on_exceed": "pause"
+      },
+      "checkpoint": {
+        "mode": "journal",
+        "journal": "state/journals/<run_id>.jsonl",
+        "resume_from": "S5_code"
+      },
+      "depends_on": [],
+      "idempotency": {
+        "event_key": "sha256(provider+sourceId+deliveryId)",
+        "intent_key": "sha256(需求+产物路径)",
+        "overlap": "success"
+      },
+      "timeout": {
+        "step_seconds": 600,
+        "workflow_seconds": 3600,
+        "wall_clock_guard": 5400
+      },
+      "cancel_points": [
+        "S3_trd",
+        "S5_plan",
+        "S5_review"
+      ],
+      "on_failure": {
+        "retry_max": 1,
+        "backoff": "2x",
+        "fallback_step": null,
+        "escalate": "pending_action"
+      },
+      "produces": [
+        {
+          "path": "artifacts/<run_id>/adder.v",
+          "kind": "rtl",
+          "sha256": null,
+          "note": "首跑后由门禁一回填；null = 尚无期望值，不是通过"
+        },
+        {
+          "path": "artifacts/<run_id>/tb_adder.v",
+          "kind": "testbench",
+          "sha256": null,
+          "note": "首跑后由门禁一回填；null = 尚无期望值，不是通过"
+        },
+        {
+          "path": "artifacts/<run_id>/sim.log",
+          "kind": "evidence",
+          "sha256": null,
+          "note": "首跑后由门禁一回填；null = 尚无期望值，不是通过"
+        }
+      ],
+      "policy": {
+        "level": "排队",
+        "sandbox_backend": "docker",
+        "level_basis": "research/92-workbench-automation.md:41 —— 允许=可逆∧不出域∧不花钱∧不触生产∧不写外部；本工作流有 LLM 调用（花钱）⇒ 排队"
+      },
+      "owner": {
+        "created_by": "user-session (1b0bca7d)",
+        "revision": 1,
+        "updated_at": "2026-10-07"
+      }
+    }
+  ]
+}

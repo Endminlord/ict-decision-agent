@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "description": "元框架侧声明：它依赖哪些 dsh 侧 agent preset id。这是跨重启的契约 —— 会话 header 里的 agentPreset 一旦指向不存在的 id，冷恢复就会失败（fail loud），所以这份清单必须能被机器核对。",
+  "generated_at": "2026-10-07",
+  "source_of_truth": "preset 定义在 ~/.dsh/profiles/*/cordis.patch.yml 与出厂 presets/*.patch.yml；本清单**只声明 id 与用途，不复制定义**（复制就会分叉）",
+  "verified_against": {
+    "command": "dsh --profile web --dump-config | sed -n 's/^- id: preset-\\(.*\\)$/\\1/p'",
+    "at": "2026-10-07T14:0x+08:00",
+    "result": ["standard", "ptc", "minimal", "cordis", "router-standard", "router-spec", "router-react", "computer-use"],
+    "count": 8
+  },
+  "consumers": [
+    {
+      "consumer": "dsh-executor-roster（dsh 侧插件）",
+      "action": "启动时逐条校验 required=true 的 id 能被 agentPresets.list() 解析；缺任何一条就写进 roster-state.json 并打错误行（fail loud，不静默）"
+    },
+    {
+      "consumer": "workflows/*.json 的 steps",
+      "action": "派发时按 agent 名选 preset；本清单保证被引用的 preset id 在重启后仍然存在"
+    }
+  ],
+  "presets": [
+    {
+      "id": "standard",
+      "required": true,
+      "why": "默认 preset（agentPresets.defaultId）兼主链 7 站的组合（S0–S7 的 30 个 Agent 都在这套组合里）",
+      "evidence": "备份快照 152 个会话头里 134 个是 standard（research/218-restore-drill.md）"
+    },
+    {
+      "id": "minimal",
+      "required": true,
+      "why": "无人值守/一次性运行用的最小组合（自动化会话走它）",
+      "evidence": "152 个会话头里 11 个是 minimal",
+      "caveat": "它**不挂** agent-instructions ⇒ ~/.dsh/AGENTS.md 的名册对走 minimal 的会话不可见（stage 2 实测 6/8 preset 挂 agent-instructions）"
+    },
+    {
+      "id": "router-standard",
+      "required": false,
+      "why": "路由变体（dsh-router-presets 提供的三种之一）",
+      "evidence": "152 个会话头里 7 个是 router-standard"
+    },
+    { "id": "router-spec", "required": false, "why": "路由变体（实验性）" },
+    { "id": "router-react", "required": false, "why": "路由变体（实验性）" },
+    { "id": "ptc", "required": false, "why": "模式变体（按需选用）" },
+    { "id": "cordis", "required": false, "why": "模式变体（按需选用）" },
+    {
+      "id": "computer-use",
+      "required": false,
+      "why": "模式变体（桌面操控）",
+      "caveat": "同 minimal：不挂 agent-instructions，名册对它不可见"
+    }
+  ],
+  "not_registered_here": {
+    "decision": "本清单不调用 agentPresets.register()，只做校验。",
+    "why": "注册表对同一 id 二次登记会**无条件抛错**（dsh-agent-preset-registry/lib/index.js 的 register()：if (this.definitions.has(definition.id)) throw new Error(`Duplicate agent preset: ${definition.id}`)），而这 8 个 preset 已由 profile 组合注册 ⇒ 照 156 号 §7③ 的字面「按清单 register() 同一批 id」去做，启动时必然抛 Duplicate。清单的职责是**校验 + fail loud**，不是注册。",
+    "consequence": "清单只能发现「声明了但不存在」，不能凭空造出 preset；要新增 preset 必须改 profile 组合（~/.dsh/profiles/*/cordis.patch.yml）。"
+  }
+}

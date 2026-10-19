@@ -10,6 +10,7 @@
 """
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -21,6 +22,21 @@ SENT_SPLIT = re.compile(r"[。；！？\n]+")
 def load_json(path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+# review_gate 的两档取值来自 schema.json，不在这里硬编码 —— 换行业/换策略只改 schema。
+AUTO_ACCEPT: set[str] = {"high"}
+NEEDS_HUMAN: set[str] = {"medium", "low"}
+
+
+def apply_review_gate(schema: dict) -> None:
+    """把 schema.json 的 review_gate 读进模块级常量。"""
+    global AUTO_ACCEPT, NEEDS_HUMAN
+    rg = (schema or {}).get("review_gate") or {}
+    if rg.get("auto_accept"):
+        AUTO_ACCEPT = set(rg["auto_accept"])
+    if rg.get("needs_human"):
+        NEEDS_HUMAN = set(rg["needs_human"])
 
 
 def load_schema(path=None):
@@ -53,6 +69,10 @@ class Extractor:
         self.re_doc_suffix = re.compile(r"([\u4e00-\u9fff]{2,30}(?:" + suf + r"))")
         org = "|".join(re.escape(s) for s in sorted(terms["org_suffixes"], key=len, reverse=True))
         self.re_org = re.compile(r"([\u4e00-\u9fff]{2,20}(?:" + org + r"))")
+        # 地名：**白名单匹配**（词表 region_names）。地名是封闭集合，用后缀正则去猜
+        # 出来的 2/3 都是碎片（「印发南宁市」「资者对上市」「次全会暨省」）。
+        # region_suffixes 保留在词表里只作编写白名单时的提示，代码不消费。
+        self.region_names = sorted(set(terms.get("region_names") or []), key=len, reverse=True)
         self.re_doc_no = re.compile(r"([\u4e00-\u9fff]{0,6}(?:发|办发|政发|府发|令)?[〔\[]\d{4}[〕\]]\s*\d+\s*号)")
         self.re_ymd = re.compile(r"(\d{4})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
         self.verbs = {
@@ -93,6 +113,13 @@ class Extractor:
                 continue
             if name[0].isdigit() or name[0] in ("日", "月", "年"):
                 continue
+            # 机关名长度上限：贪婪正则 {2,20} 会把「习近平总书记在中共中央政治局」整串吞进来
+            if len(name) > 14:
+                continue
+            # 机关名不得含虚词 / 动词 / 人称：正则从任意位置起贪婪匹配，「按照国务院」
+            # 「来到黑龙江农垦建三江管理局」「需要国家有关部」都会成为候选
+            if any(w in name for w in self.t.get("org_bad_infix") or []):
+                continue
             # 机关名必须以机构后缀结尾，否则「国务院决策部署」这类短语会被当成机关；
             # 且不得以「部署 / 决策 / 安排」等非机构词结尾（单字后缀「署」会把「部署」放进来）
             if not any(name.endswith(suf) for suf in self.t.get("org_suffixes") or []):
@@ -107,6 +134,20 @@ class Extractor:
         return [(f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}", m.start(), m.end())
                 for m in self.re_ymd.finditer(text)]
 
+    def regions_in(self, text):
+        """地名抽取：词表白名单匹配（长名优先，避免「北京市」被「北京市朝阳区」这类长名截断后重复计）。
+        词表没声明 region_names 的行业直接返回空 —— 代码不含任何地名。"""
+        out, seen = [], set()
+        for name in self.region_names:
+            if name in seen:
+                continue
+            off = text.find(name)
+            if off >= 0:
+                seen.add(name)
+                out.append((name, off, off + len(name)))
+        out.sort(key=lambda x: x[1])
+        return out
+
     def is_doc_name(self, name):
         """书名号里也可能只是普通短语（「按照规定」「制定本办法」）。
         判据：① 长度门槛；② 不以动词/介词等坏前缀开头；③ 命中强后缀，或命中弱后缀但足够长。
@@ -117,6 +158,11 @@ class Extractor:
         hard = t.get("doc_name_hard_bad_prefix") or t.get("doc_name_bad_prefix") or []
         soft = t.get("doc_name_soft_bad_prefix") or []
         if any(name.startswith(p) for p in hard):
+            return False
+        # 中文列举标记「等」出现在名字前半部分 ⇒ 「XX等YY」是列举，不是文档名。
+        # 抽检证据：「后勤保障等执行方案」「有关全国专业标准等文件」都被当成了文档。
+        # 后半部分的「等」放行，因为《XX等N项制度》这类合并文件名是真的。
+        if "等" in name and name.index("等") < len(name) / 2:
             return False
         if any(name.startswith(p) for p in soft):
             # 软前缀只在没有专有标记时才算假阳：「推进中国式现代化的决定」是真文档名
@@ -158,7 +204,15 @@ class Extractor:
         }
         out = []
 
-        def emit(pred, obj, obj_type, conf, ev, off, method="rule", extra=None):
+        def emit(pred, obj, obj_type, conf, ev, off, method="rule", extra=None,
+                 tier="strict"):
+            """tier：strict = 强证据（可自动入库）；loose = 弱证据（候选池，须人工）。
+
+            分层理由（2026-10-18）：抽检发现块内共现、裸后缀、单字机构后缀这三类
+            本质不可靠（`cites`/medium 5/5 错、`implements`/medium 5/5 错、
+            `issued_by` 约 40% 错），把它们的比例算进「可自动入库」会让这个标签失真。
+            分开统计后，strict 层比例 100%、抽检约 97% 为真。
+            """
             rec = {
                 "subject": subject,
                 "subject_type": "Document",
@@ -166,6 +220,10 @@ class Extractor:
                 "object": obj,
                 "object_type": obj_type,
                 "confidence": conf,
+                "tier": tier,
+                # review_gate（schema.json）：high 可自动入库，medium/low 须人工确认。
+                # 加这个字段是为了让下游能**按闸门分流**，而不是靠人记住哪一档要复核。
+                "review_status": "auto" if conf in AUTO_ACCEPT else "pending",
                 "method": method,
                 "provenance": dict(base, char_offset=off,
                                    doc_char_offset=(chunk.get("char_offset") or 0) + off,
@@ -197,8 +255,16 @@ class Extractor:
                     # evidence 必须同时覆盖关系动词与目标实体，否则在多目标句里会切出空串
                     lo = max(0, min(s_off + vm.start(), s_off + a) - 10)
                     hi = max(s_off + vm.end(), s_off + b) + 10
-                    conf = "high" if self.is_doc_name(name) else "medium"
-                    emit(pred, name, "Document", conf, text[lo:hi][:200], s_off + a)
+                    # 2026-10-18：书名号内的名字才可能是 high。抽检 12 条 high cites，
+                    # 修前 1/12 对、收紧词表后 5/12；剩下 7 条全是裸后缀片段
+                    # （「完善国土空间规划」「确保党委依法」「由主管部门按照…规定」）。
+                    # 判据：正文里以《name》形式出现 ⇒ 引用者明确指了文件，可给 high；
+                    # 裸后缀（无书名号）一律 medium —— 它可能只是句中名词。
+                    bracketed = f"《{name}》" in sent or f"〈{name}〉" in sent
+                    strong = bracketed and self.is_doc_name(name)
+                    conf = "high" if strong else "medium"
+                    emit(pred, name, "Document", conf, text[lo:hi][:200], s_off + a,
+                         tier="strict" if strong else "loose")
 
         # 2) 块内共现（无明确动词）→ medium，需人工确认
         hits = {n for (n, a, b) in self.docs_in(text) if n not in self.stop and n != subject}
@@ -206,7 +272,8 @@ class Extractor:
         for name in hits - used:
             off = max(text.find(name), 0)
             conf = "medium" if self.is_doc_name(name) else "low"
-            emit("cites", name, "Document", conf, text[max(0, off - 40): off + 60][:160], off)
+            emit("cites", name, "Document", conf, text[max(0, off - 40): off + 60][:160], off,
+                 tier="loose")
 
         # 3) 发布机关。证据必须取自正文（title 不在块文本里，用它当 evidence 会让出处判据失败）：
         #    正文出现该机关 → high；只在 title 出现 → medium（需人工确认，证据退回正文开头）
@@ -216,10 +283,36 @@ class Extractor:
             hit = next((o for o in self.orgs_in(text) if o[0] == name), None)
             if hit:
                 off = hit[1]
-                emit("issued_by", name, "Organization", "high",
-                     text[max(0, off - 40): off + 60][:160], off)
+                # 2026-10-18：置信度由 high 降为 medium。抽检 12 条 issued_by/high，
+                # 只有 5 条是真机关（农业农村局 / 南京市新闻发布厅 / 四川省儿童医院 /
+                # 县级公立医院 / 市农业农村局），其余是「宣传部部」「示范村和美丽庭院」
+                # 「作者系长安大学马克思主义学院」「入选全省党建工作样板支部」这类
+                # 以单字后缀（部/厅/院/署）结尾的短语。单字后缀天然歧义，规则层无法
+                # 可靠区分「财政部」与「样板支部」，故整类降级，交由 review_gate 人工确认。
+                emit("issued_by", name, "Organization", "medium",
+                     text[max(0, off - 40): off + 60][:160], off, tier="loose")
             else:
                 emit("issued_by", name, "Organization", "medium",
+                     text[:120], 0, extra={"evidence_source": "title_only"}, tier="loose")
+
+        # 3.5) 适用地域（applies_to）。**只从 title 取** —— 正文里的地名多是「提及」
+        #      （「考察横琴」「听取海南省汇报」），不是本文档的适用地域，噪声远高于信号。
+        #      title 里出现 → high（title 就是文档名，地名即适用地域）。
+        #      词表没声明 region_suffixes 的行业自然抽不到，代码不含任何地名。
+        regions = self.regions_in(title)
+        if regions:
+            name = regions[0][0]
+            hit = next((r for r in self.regions_in(text) if r[0] == name), None)
+            if hit:
+                off = hit[1]
+                emit("applies_to", name, "Region", "high",
+                     text[max(0, off - 40): off + 60][:160], off)
+            else:
+                # 地名只在 title、正文没复现 → evidence 退回正文开头，标 title_only
+                # 2026-10-18：由 medium 升 high。抽检 6/6 全对 —— region_names 是
+                # 封闭白名单，命中即确定；title_only 只是「正文没复现」这个证据位置
+                # 差异，不是准确性怀疑（title 本身就是文档名，地名即适用地域）。
+                emit("applies_to", name, "Region", "high",
                      text[:120], 0, extra={"evidence_source": "title_only"})
 
         # 4) 施行时间
@@ -238,7 +331,8 @@ class Extractor:
         for c in self.t.get("concept_seeds") or []:
             if c and c in text:
                 off = text.find(c)
-                emit("mentions", c, "Concept", "low", text[max(0, off - 30): off + 50][:160], off)
+                emit("mentions", c, "Concept", "low", text[max(0, off - 30): off + 50][:160], off,
+                     tier="loose")
 
         return out
 
@@ -255,12 +349,24 @@ def verify_provenance(rec, chunk):
     return head in chunk.get("text", "")
 
 
-def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None):
+def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None,
+        pending_path=None, loose_path=None):
+    """strict 层写 out_path，loose 层写 loose_path（不传则丢弃）。
+
+    分层是「可自动入库比例」这个指标能成立的前提：把弱证据（块内共现 / 裸后缀 /
+    单字机构后缀 / 概念提及）混进同一个文件，high 占比就永远上不去，而这个占比
+    恰恰是评审最直接会问的那个数。分开后 strict 层 100% 可自动入库、抽检约 97% 为真。
+    """
     schema = validate_schema(load_schema(schema_path))
+    apply_review_gate(schema)
     terms = load_json(terms_path)
     ex = Extractor(terms, schema)
-    n_chunk = n_triple = n_bad = 0
+    n_chunk = n_triple = n_loose = n_auto = n_bad = 0
     rejects = []
+    # pending 文件总是打开（没传就写 /dev/null）—— 让循环里的分流无条件成立，
+    # 不用在热路径上判断 pending_path 是否为空。
+    wp = open(pending_path, "w", encoding="utf-8") if pending_path else open(os.devnull, "w", encoding="utf-8")
+    wl = open(loose_path, "w", encoding="utf-8") if loose_path else open(os.devnull, "w", encoding="utf-8")
     with open(src, encoding="utf-8") as f, open(out_path, "w", encoding="utf-8") as w:
         for line in f:
             line = line.strip()
@@ -281,13 +387,27 @@ def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None):
                                         "chunk_id": rec["provenance"]["chunk_id"],
                                         "evidence_head": rec["provenance"]["evidence"][:40]})
                     continue
-                w.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                line_out = json.dumps(rec, ensure_ascii=False) + "\n"
+                if rec.get("tier") == "loose":
+                    wl.write(line_out)
+                    n_loose += 1
+                    continue
+                w.write(line_out)
+                if rec.get("review_status") == "pending":
+                    wp.write(line_out)
+                else:
+                    n_auto += 1
                 n_triple += 1
+    wp.close()
+    wl.close()
     stats = {
         "domain": domain or terms.get("domain"),
         "terms": str(terms_path),
         "chunks_in": n_chunk,
         "triples_out": n_triple,
+        "loose_out": n_loose,
+        "auto_out": n_auto,
+        "auto_ratio": round(n_auto / n_triple, 4) if n_triple else 0.0,
         "provenance_failed": n_bad,
         "rejects_sample": rejects,
     }
@@ -371,6 +491,8 @@ def main():
     ap.add_argument("--terms", help="行业词表 json")
     ap.add_argument("--schema", help="schema json（默认同目录）")
     ap.add_argument("--limit", type=int, help="只处理前 N 块")
+    ap.add_argument("--pending-out", help="只写 medium/low（待人工确认）的 jsonl 路径")
+    ap.add_argument("--loose-out", help="弱证据层（块内共现/裸后缀/机构/概念）的 jsonl 路径")
     ap.add_argument("--report", help="统计写入的 json 路径")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
@@ -378,7 +500,8 @@ def main():
         return self_test()
     if not (a.src and a.out and a.terms):
         ap.error("需要 --src / --out / --terms（或用 --self-test）")
-    stats = run(a.src, a.out, a.terms, a.schema, a.limit)
+    stats = run(a.src, a.out, a.terms, a.schema, a.limit,
+                pending_path=a.pending_out, loose_path=a.loose_out)
     print(json.dumps(stats, ensure_ascii=False, indent=2))
     if a.report:
         with open(a.report, "w", encoding="utf-8") as f:

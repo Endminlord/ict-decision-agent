@@ -1,0 +1,285 @@
+#!/usr/bin/env python3
+"""lookup 层自测（不依赖 mcp SDK，可直接 python3 tests/test_lookup.py 运行）。
+
+若已 `pip install -e .`，直接跑；否则脚本会自己把 src/ 加进 sys.path。
+"""
+
+from __future__ import annotations
+
+import gzip
+import json
+import os
+import sys
+import tempfile
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+SRC = os.path.join(os.path.dirname(HERE), "src")
+if SRC not in sys.path:
+    sys.path.insert(0, SRC)
+
+from ict_track2_mcp.lookup import Chunk, Corpus, normalize  # noqa: E402
+
+
+def make_corpus() -> Corpus:
+    tmp = tempfile.mkdtemp(prefix="corpus_selftest_")
+    path = os.path.join(tmp, "chunks.jsonl.gz")
+    rows = [
+        {"chunk_id": "d1-0001", "doc_id": "d1", "char_offset": 0,
+         "title": "优化营商环境条例", "date": "2019-10-22", "source": "中国政府网",
+         "text": "第一条 为了持续优化营商环境，不断解放和发展社会生产力，加快建设现代化经济体系。"},
+        {"chunk_id": "d1-0002", "doc_id": "d1", "char_offset": 120,
+         "title": "优化营商环境条例", "date": "2019-10-22", "source": "中国政府网",
+         "text": "第二条 本条例所称营商环境，是指企业等市场主体在市场经济活动中所涉及的体制机制性因素和条件。"},
+        {"chunk_id": "d2-0001", "doc_id": "d2", "char_offset": 0,
+         "title": "国务院办公厅关于进一步优化营商环境的意见", "date": "2020-07-15",
+         "source": "国务院办公厅",
+         "text": "深化“放管服”改革，进一步优化营商环境，激发市场主体活力。"},
+    ]
+    with gzip.open(path, "wt", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    return Corpus(path)
+
+
+def main() -> int:
+    ok = total = 0
+
+    def check(name: str, cond: bool, detail: str = "") -> None:
+        nonlocal ok, total
+        total += 1
+        if cond:
+            ok += 1
+            print(f"  ✓ {name}")
+        else:
+            print(f"  ✗ {name} {detail}")
+
+    c = make_corpus()
+
+    # L1 加载
+    st = c.stats()
+    check("L1 加载块数与文档数", st["chunks"] == 3 and st["documents"] == 2,
+          f"got {st}")
+
+    # L2 精确回查
+    hit = c.lookup("d1-0002")
+    check("L2 lookup 命中", hit is not None and "体制机制性因素" in hit.text)
+    check("L3 lookup 未命中返回 None", c.lookup("nope-0001") is None)
+
+    # L4 verify 精确
+    hits = c.verify("持续优化营商环境")
+    check("L4 verify 精确命中", len(hits) == 1 and hits[0]["chunk_id"] == "d1-0001",
+          f"got {hits}")
+
+    # L5 verify 规范化（全角引号 + 空白差异）
+    hits = c.verify("深化“放管服”改革")
+    check("L5 verify 全角引号可命中", len(hits) >= 1, f"got {hits}")
+    hits2 = c.verify("深化 “放管服” 改革")
+    check("L6 verify 带空格也能命中（规范化）", len(hits2) >= 1, f"got {hits2}")
+
+    # L7 短引用拒绝
+    check("L7 过短引用直接返回空", c.verify("优化") == [])
+
+    # L8 未命中
+    check("L8 语料外的引用返回空", c.verify("这是一段语料里不存在的引用文本") == [])
+
+    # L9 sources 统计
+    s = c.sources("营商环境")
+    check("L9 sources 按主题统计", s["matched_chunks"] == 3 and s["matched_docs"] == 2,
+          f"got {s['matched_chunks']}/{s['matched_docs']}")
+    check("L10 sources 来源分组", s["by_source"].get("中国政府网") == 2,
+          f"got {s['by_source']}")
+
+    # L11 snippet 截断
+    long_chunk = Chunk("x-0001", "x", 0, "T", "2020", "S", "字" * 1000)
+    sn = long_chunk.snippet(limit=10)
+    check("L11 snippet 超长截断并加省略号", sn == "字" * 10 + "…", f"got {sn[:20]}")
+    check("L12 snippet 短文本不截断",
+          Chunk("y", "y", 0, "T", "2020", "S", "短").snippet(10) == "短")
+
+    # L13 normalize
+    check("L13 normalize 去空白 + 全角转半角",
+          normalize("a， b　c") == "a,bc", f"got {normalize('a， b　c')!r}")
+
+    # L14/L15/L16 主题降级：模型常把整句问句当 topic 传进来（实测踩过），
+    # 直接子串匹配会 0 命中。_topic_terms 会先拆出书名号/引号内的专名。
+    q = c.sources("请问《营商环境》方面的政策有哪些？")
+    check("L14 整句问句能降级命中", q["matched_chunks"] > 0,
+          f"got {q['matched_chunks']}")
+    check("L15 降级后记录 matched_by", bool(q.get("matched_by")),
+          f"got {q.get('matched_by')!r}")
+    nope = c.sources("量子纠缠的退相干时间是多少？")
+    check("L16 无关问句不假匹配并给出 hint",
+          nope["matched_chunks"] == 0 and bool(nope.get("hint")),
+          f"got {nope['matched_chunks']} hint={nope.get('hint')!r}")
+
+    # L17/L18 省略号分段：模型给的引用常带「……」，整句逐字匹配不到，
+    # 但每一段都能在同一篇里找到 —— 这是省略不是编造，必须能区分出来。
+    # 注意：本测试用的是上面 3 条合成语料，引用必须取自其中。
+    seg = c.verify("第一条 为了持续优化营商环境……加快建设现代化经济体系。")
+    check("L17 省略号引用识别为 segments",
+          bool(seg) and seg[0]["match"] == "segments",
+          f"got {[(h['match'], h['chunk_id']) for h in seg[:2]]}")
+    fake = c.verify("《优化营商环境条例》明确规定各地应在三十个工作日内办结企业开办手续。")
+    check("L18 编造引用仍然查不到（分段不放水）", not fake,
+          f"got {len(fake)} hits")
+
+    # L19/L20/L21 分段的顺序与跨度（2026-10-16 优化）：
+    # 原来只要求「各段都在同一篇里」，于是把两段语义无关的话拼起来也能通过
+    # ——实测「优化营商环境……破坏市场秩序」间隙 357 字、跨度占全文 42%，
+    # 两段一在讲知识产权检察、一在讲侵害公共利益，毫无关系。
+    # 现在要求各段按原文顺序出现（逆序 = 拼接，拒绝），并把跨度作为事实返回。
+    rev = c.verify("加快建设现代化经济体系……持续优化营商环境")
+    check("L19 逆序分段被拒绝（拼接不是省略）", not rev,
+          f"got {[(h['match'], h['chunk_id']) for h in rev[:2]]}")
+    fwd = c.verify("持续优化营商环境……加快建设现代化经济体系。")
+    check("L20 segments 带 gap_max 与 span_ratio（跨度作为事实返回）",
+          bool(fwd) and "gap_max" in fwd[0] and "span_ratio" in fwd[0],
+          f"got {fwd[0] if fwd else None}")
+    check("L21 规范化文本被缓存（不再每次重算全部块）",
+          len(c._norm_text) > 0, f"cache={len(c._norm_text)}")
+
+    # L22 零宽字符：从 PDF / 网页复制来的引用常夹带 U+200B 等 Cf 类字符，
+    # 若不剥除，逐字匹配会被打断，合法引用被判"查不到"（假阴性）。
+    zw = c.verify("持续优化营商\u200b环境")
+    check("L22 零宽字符被剥除后可命中", len(zw) >= 1, f"got {zw[:1]}")
+
+    # L23 H1：零宽字符不能当长度用。fragment 判据若取原始 len()，给 6 字引用
+    # 末尾补 6 个 U+200B 就能把它撑到 12 字，警告被抹掉。
+    long_raw = "破坏营商环境" + "\u200b" * 6
+    check("L23 零宽填充不能抹掉 fragment 警告",
+          c.verify_report("破坏营商环境").fragment
+          and c.verify_report(long_raw).fragment,
+          f"raw={c.verify_report(long_raw).qlen}")
+
+    # L24 H3：4-5 字专名不得被「长度闸门」误杀成「语料中未找到」。
+    # 下限从 6 降到 4；短引用仍由 fragment / generic 事实兜住。
+    # 用 4 字的「营商环境」：改前阈值是 6，它必被判「语料中未找到」。
+    short_proper = c.verify_report("营商环境")
+    check("L24 4 字专名可核验（不再报未找到）",
+          short_proper.matched >= 1 and not short_proper.short,
+          f"matched={short_proper.matched} short={short_proper.short}")
+    check("L25 低于下限仍走「无法核验」而非「不存在」",
+          c.verify_report("优化").short and c.verify_report("优化").matched == 0)
+
+    # L26 H2：context_sentence 不得跨句。normalize() 把「。」转成「.」，
+    # 若 _SENT_SPLIT 不认「.」，normalized/segments 路径会返回整段多句。
+    tmp2 = tempfile.mkdtemp(prefix="corpus_sent_")
+    path2 = os.path.join(tmp2, "chunks.jsonl.gz")
+    with gzip.open(path2, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "chunk_id": "s-0001", "doc_id": "s", "char_offset": 0,
+            "title": "句界自测", "date": "2026-01-01", "source": "自测",
+            "text": "第一句话讲的是背景。第二句话不得滥用 行政权力。第三句话是结尾。",
+        }, ensure_ascii=False) + "\n")
+    cs = Corpus(path2)
+    rep = cs.verify_report("行政权力")          # 中间有空格 → 走 normalized 路径
+    sent = (rep.hits[0].get("context_sentence") or "") if rep.hits else ""
+    check("L26 context_sentence 不跨句",
+          bool(sent) and "第一句" not in sent and "第三句" not in sent,
+          f"got {sent!r}")
+
+    # L27 小句边界：命中区间与否定词之间隔着逗号/引号时，那个否定词属于邻句，
+    # 不能把整条引用判成「省略了否定」（「一网通办」387 块里 4 块踩过）。
+    tmp3 = tempfile.mkdtemp(prefix="corpus_clause_")
+    path3 = os.path.join(tmp3, "chunks.jsonl.gz")
+    with gzip.open(path3, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "chunk_id": "c-0001", "doc_id": "c", "char_offset": 0,
+            "title": "小句自测", "date": "2026-01-01", "source": "自测",
+            "text": "推进“一网通办”,不动产登记同步办理。",
+        }, ensure_ascii=False) + "\n")
+    cc = Corpus(path3)
+    check("L27 邻句否定词不计入本引用",
+          not cc.verify_report("一网通办").omitted_negation,
+          f"words={cc.verify_report('一网通办').negation_words}")
+
+    # L28 省略号后的短段不丢弃整条引用（M6）：修复前 "优化营商环境……好"
+    # 过滤后只剩 1 段 → return [] → 整条判「未找到」，而前半段本身命中数千块。
+    # 修法：短段不参与匹配约束，但记进 dropped_segments 回传（不作约束 ≠ 不存在）。
+    tmp4 = tempfile.mkdtemp(prefix="corpus_shortseg_")
+    path4 = os.path.join(tmp4, "chunks.jsonl.gz")
+    with gzip.open(path4, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "chunk_id": "s-0001", "doc_id": "s", "char_offset": 0,
+            "title": "短段自测", "date": "2026-01-01", "source": "自测",
+            "text": "持续优化营商环境，激发市场主体活力。",
+        }, ensure_ascii=False) + "\n")
+    cs2 = Corpus(path4)
+    rep4 = cs2.verify_report("优化营商环境……好")
+    check("L28 省略号短段不吞掉整条引用",
+          rep4.matched > 0 and rep4.dropped_segments == ["好"]
+          and not rep4.verbatim,
+          f"matched={rep4.matched} dropped={rep4.dropped_segments} "
+          f"verbatim={rep4.verbatim}")
+
+    # L29 Corpus 的 snippet_limit 真的生效（L1）。修复前它是死参数：
+    # Chunk.snippet() 用模块级 SNIPPET_LIMIT，to_dict() 永远给 600 字。
+    cs3 = Corpus(path4, snippet_limit=5)
+    hit = cs3.verify("持续优化营商环境")[0]
+    check("L29 snippet_limit 生效",
+          hit["snippet"].endswith("…") and len(hit["snippet"]) <= 6,
+          f"got {hit['snippet']!r}")
+
+    # L30 数据坏行报**文件行号**（M7）。修复前 gzip 流只给
+    # "line 1 column 2"（解压流偏移），15,000 行里定位坏行只能二分。
+    tmp5 = tempfile.mkdtemp(prefix="corpus_badline_")
+    path5 = os.path.join(tmp5, "chunks.jsonl.gz")
+    with gzip.open(path5, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "chunk_id": "b-0001", "doc_id": "bd", "char_offset": 0,
+            "title": "坏行自测", "date": "2026-01-01", "source": "自测",
+            "text": "第一行是好的。",
+        }, ensure_ascii=False) + "\n")
+        f.write('{"chunk_id": "b-0002", "text":\n')   # 第 2 行：JSON 不完整
+    err = ""
+    try:
+        Corpus(path5)
+    except ValueError as e:
+        err = str(e)
+    check("L30 数据坏行报文件行号", "第 2 行" in err, f"got {err!r}")
+
+    # L30b 缺必需字段（chunk_id）也报行号，而不是裸 KeyError（M7）
+    tmp6 = tempfile.mkdtemp(prefix="corpus_missingkey_")
+    path6 = os.path.join(tmp6, "chunks.jsonl.gz")
+    with gzip.open(path6, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({"chunk_id": "c-0001", "doc_id": "cd",
+                            "text": "好的。"}, ensure_ascii=False) + "\n")
+        f.write(json.dumps({"doc_id": "cd", "text": "缺 chunk_id"},
+                           ensure_ascii=False) + "\n")
+    err2 = ""
+    exc_type = ""
+    try:
+        Corpus(path6)
+    except Exception as e:
+        err2, exc_type = str(e), type(e).__name__
+    # 关键：不是裸 KeyError，而是带文件行号的 ValueError（消息里提到
+    # KeyError 是正常的 —— 它记录了根因类型）。
+    check("L30b 缺必需字段报行号",
+          exc_type == "ValueError" and "第 2 行" in err2,
+          f"got {exc_type}: {err2!r}")
+
+    # L32 转折词不能替否定词顶包（L10）。原文「严禁破坏营商环境，但是要
+    # 依法监管」，引用省掉「严禁」却保留了「但是」—— 修复前
+    # `bool(src_marks) and not q_marks` 认为「引用里也有标记」，于是不报风险，
+    # 一条语义反转的引用被判成 verified。
+    tmp7 = tempfile.mkdtemp(prefix="corpus_l10_")
+    path7 = os.path.join(tmp7, "chunks.jsonl.gz")
+    with gzip.open(path7, "wt", encoding="utf-8") as f:
+        f.write(json.dumps({
+            "chunk_id": "e-0001", "doc_id": "ed", "char_offset": 0,
+            "title": "否定转折自测", "date": "2026-01-01", "source": "自测",
+            "text": "严禁破坏营商环境，但是要依法监管。",
+        }, ensure_ascii=False) + "\n")
+    rep7 = Corpus(path7).verify_report("破坏营商环境……但是要依法监管")
+    check("L32 转折词不能替否定词顶包",
+          rep7.omitted_negation is True and "严禁" in rep7.negation_words
+          and rep7.matched > 0,
+          f"omitted={rep7.omitted_negation} words={rep7.negation_words} "
+          f"matched={rep7.matched}")
+
+    print(f"\n[test_lookup] {ok}/{total}")
+    return 0 if ok == total else 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
