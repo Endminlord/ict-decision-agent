@@ -445,7 +445,7 @@ return {..., "multi_level_rate": None if unknown_only else ...,
 2. **`破坏营商环境` 这类「短 + 落在否定性列举里」的片段，`specificity`/`generic` 抓不到** —— 它只占 3/2000（0.15%），完全不泛。现在只做到 `fragment=True` + 句级 `context_sentence` 回传，**没有自动判定**。
 3. **否定词表是中文政务词表** —— 英文 `not`/`shall not`、法律英语的 `may not` 当时**未覆盖**；**2026-10-18 已补 `_NEG_EN`（24 项，L51 判据）与繁体 `_T2S_NEG`（10 项，L52），见 §13.6**。换行业仍需换词表。
 4. **省略号阈值是经验值** —— 60/120 两个数来自 15,000 块语料的分位数，**换语料要重测**。
-5. **本节只覆盖 `verify_quote`** —— `lookup_chunk` 与 `list_sources` 的对抗测试未做（它们不做真伪判定，风险面小但非零）。
+5. **本节原本只覆盖 `verify_quote`** —— `lookup_chunk` 与 `list_sources` 的对抗测试**已于 2026-10-18 补做**（15 个输入，找到两个真 bug）：① `lookup(123)` 抛 `AttributeError`（`(123 or "").strip()` 对 int 崩）→ 加 `isinstance(chunk_id, str)` 校验；② `sources("营"×10240)` 卡 **180 秒**（滑窗 10,000 窗口 × 15,000 块 = 1.5 亿次子串比较且不命中不早退）→ 加 `TOPIC_MAX=200` 与 `WINDOW_MAX=600` 两道上限。修后 10 KB 同字 **2,809 ms**（快 64×），正常 4 字查询 5.8 ms 未变。判据 L53/L54 已锁。
 
 ### 13.5 第二轮对抗：16 条绕过与修掉的 7 条（2026-10-17）
 

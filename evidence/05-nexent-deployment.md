@@ -22,7 +22,7 @@
 | GPU | NVIDIA RTX 5070 Laptop GPU（Nexent 非必需，模型走 OpenAI 兼容 API） |
 | 官方要求 | CPU 4（推荐 8）/ 内存 8 GiB（推荐 16 GiB）/ 磁盘 40 G（推荐 100 G），见源码 `README_CN.md:29-36` |
 
-内存 11 GiB 低于官方推荐的 16 GiB ⇒ 本次通过降 ES 堆（§3.3）压到可跑。
+内存 11 GiB 低于官方推荐的 16 GiB ⇒ 本次通过降 ES 堆（§3 偏离清单第 3 条）压到可跑。
 
 ## 2. 可复跑部署命令
 
@@ -252,6 +252,20 @@ python3 /home/endmin/dsh/research/tools/mcp-probe.py   # 默认 http://localhost
 - 安装命令（实测 200）：`POST /api/skills/install {"skill_names":["analyze-text-file","read-file","mcp-builder","skill-creator"],"locale":"zh"}` → `{"installed":[…4 项],"total":4}`。
 - 落地验证：`GET /api/skills` → 4 条（id 1–4，`source:"official"`）；容器内 `/mnt/nexent-data/skills/tenant_id/` 出现实体目录；`GET /api/skills/analyze-text-file/files` → `{"name":"analyze-text-file","type":"directory","children":[{"name":"examples.md",…},{"name":"SKILL.md",…}]}`。
 - 注意：**装了技能 ≠ 技能被用上**。技能要生效需绑定到智能体（`AgentInfoRequest.enabled_skill_ids` / `skill_instances`）并由运行时的 skill 执行链调用；本次仅验证"安装 + 落地 + 可读"，**绑定与调用未测**（列入未完成清单）。
+
+### 11.5.1 五个自建 Skill 已装并绑定（2026-10-19 补）
+
+官方要求「深度集成 Nexent 的 MCP 协议与 Skills 编排能力」，此前只验证了「官方技能安装 + 落地 + 可读」，**自建 Skill 既没装也没绑**。本轮补齐：
+
+| 步骤 | 命令 | 结果 |
+|---|---|---|
+| 上传自建 Skill | `POST /api/skills/upload`（multipart，`file=@skills/<name>/SKILL.md`，`source=custom`） | `citation-verify` → id 7 · `ontology-migrate` → id 8 · `table-extract` → id 9（各返回 201） |
+| 绑定到智能体 | `POST /api/skills/instance/update {"agent_id":1,"skill_id":N,"version_no":0}` | 5 个自建全部 `enabled: true`（id 5 / 6 / 7 / 8 / 9） |
+| 复查 | `GET /api/skills` | **9 个**：4 官方（`analyze-text-file` / `read-file` / `mcp-builder` / `skill-creator`）+ **5 自建**（`workbench-status-report` / `governance-policy-trace` / `citation-verify` / `ontology-migrate` / `table-extract`） |
+
+**注意**：`POST /api/skills/upload` 支持单个 `SKILL.md` 或 ZIP（ZIP 可带 `scripts/` 与 `assets/`）；`source=custom` 与官方技能同目录落地（容器内 `/mnt/nexent-data/skills/tenant_id/`）。绑定接口要求 `version_no=0`（草稿版），已发布版本的绑定需走版本升级路径 —— 本次绑的是 `ict-demo-agent` 的草稿版。
+
+**仍未验证**：绑定之后智能体在真实对话里**是否真的会调用**这些自建 Skill（`05` 原文 §11.5 的「装了 ≠ 用上」同理）。要验需跑一轮对话并检查 trace 里的 skill 调用记录。
 
 ### 11.6 本节新增的上游问题（合计 4 个）
 

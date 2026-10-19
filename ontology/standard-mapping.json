@@ -1,0 +1,116 @@
+{
+  "version": "1.0",
+  "note": "把 schema.json 的实体类型与关系类型映射到公开的通用标准词汇表（Schema.org 与 W3C PROV-O），用于说明「本体的概念不是自造的」。schema.json 本身保持行业无关，本文件是它的一层对外对照，不参与抽取。",
+  "vocabularies": {
+    "schema.org": {
+      "url": "https://schema.org/",
+      "note": "Google/Bing/Yandex 共同维护的通用结构化数据词汇表，Type 与 Property 均为公开定义"
+    },
+    "prov-o": {
+      "url": "https://www.w3.org/TR/prov-o/",
+      "note": "W3C 溯源本体（Provenance Ontology）推荐标准"
+    }
+  },
+  "entity_types": [
+    {
+      "id": "Document",
+      "schema_org": ["CreativeWork", "Legislation"],
+      "prov_o": ["prov:Entity"],
+      "coverage": "partial",
+      "note": "Schema.org 的 Legislation 覆盖法规类，但政务文件里的「通知/意见/办法」不在 Legislation 下，故主类型用 CreativeWork，法规类可细化为 Legislation。"
+    },
+    {
+      "id": "Organization",
+      "schema_org": ["Organization", "GovernmentOrganization"],
+      "prov_o": ["prov:Agent"],
+      "coverage": "exact",
+      "note": "GovernmentOrganization 是 Organization 的子类型，正好对应「发布机关」。"
+    },
+    {
+      "id": "Region",
+      "schema_org": ["AdministrativeArea", "Place"],
+      "prov_o": [],
+      "coverage": "exact",
+      "note": "AdministrativeArea 明确是「行政区划」，与 schema.json 的 desc 一致。PROV-O 不描述地域，故无对应。"
+    },
+    {
+      "id": "TimePoint",
+      "schema_org": ["Date", "DateTime"],
+      "prov_o": ["prov:generatedAtTime", "prov:invalidatedAtTime"],
+      "coverage": "partial",
+      "note": "Schema.org 用 Date 表达时间点；PROV-O 的两个时间属性分别对应「产生时间」与「失效时间」，不覆盖「施行时间」这一政务特有语义。"
+    },
+    {
+      "id": "Concept",
+      "schema_org": ["DefinedTerm"],
+      "prov_o": [],
+      "coverage": "exact",
+      "note": "DefinedTerm 是「受控词表里的一个词条」，与 schema.json 的「主题概念或术语」一致。"
+    }
+  ],
+  "relation_types": [
+    {
+      "id": "cites",
+      "schema_org": ["citation"],
+      "prov_o": ["prov:wasDerivedFrom"],
+      "coverage": "exact",
+      "note": "citation 用于「CreativeWork 引用另一个 CreativeWork」，与本体定义完全对齐；PROV-O 的 wasDerivedFrom 表达同一语义的另一视角。"
+    },
+    {
+      "id": "implements",
+      "schema_org": ["isBasedOn"],
+      "prov_o": ["prov:wasInfluencedBy"],
+      "coverage": "partial",
+      "note": "isBasedOn 表达「以某作品为基础」，与「落实/细化上位文件」语义接近但不完全相同 —— 前者不隐含「下位」的方向约束。"
+    },
+    {
+      "id": "amends",
+      "schema_org": [],
+      "prov_o": ["prov:wasRevisionOf"],
+      "coverage": "partial",
+      "note": "Schema.org 无「修订」属性（Legislation 有 amendment 相关但未成为通用 Property）；PROV-O 的 wasRevisionOf 精确对应「本版本取代前一版本」，故以 PROV-O 为准。"
+    },
+    {
+      "id": "repeals",
+      "schema_org": [],
+      "prov_o": ["prov:wasInvalidatedBy"],
+      "coverage": "partial",
+      "note": "两个词汇表都没有「废止」的精确属性；wasInvalidatedBy 表达「因某活动而失效」，方向与「A 废止 B」相反，需在实现层翻转。这是本体的自定义扩展。"
+    },
+    {
+      "id": "issued_by",
+      "schema_org": ["publisher", "author"],
+      "prov_o": ["prov:wasAttributedTo"],
+      "coverage": "exact",
+      "note": "publisher 用于「发布作品的机构」，与「发布机关」一致；wasAttributedTo 是 PROV-O 的标准溯源关系。"
+    },
+    {
+      "id": "effective_from",
+      "schema_org": ["datePublished", "validFrom"],
+      "prov_o": ["prov:generatedAtTime"],
+      "coverage": "partial",
+      "note": "datePublished 是「发布日期」，validFrom 是「生效日期」—— 本体定义的是后者，两者在语料里常不同（发布与施行可相隔数月），映射时必须选 validFrom。"
+    },
+    {
+      "id": "applies_to",
+      "schema_org": ["spatialCoverage"],
+      "prov_o": [],
+      "coverage": "exact",
+      "note": "spatialCoverage 明确是「内容适用的地理范围」，与本体的「适用地域」语义完全一致。"
+    },
+    {
+      "id": "mentions",
+      "schema_org": ["mentions"],
+      "prov_o": [],
+      "coverage": "exact",
+      "note": "mentions 是 Schema.org 的标准属性，且本体已声明它是弱关系、不参与推理链 —— 这与 Schema.org 里 mentions 的定位一致。"
+    }
+  ],
+  "summary": {
+    "entity_types_total": 5,
+    "entity_types_exact": 3,
+    "relation_types_total": 8,
+    "relation_types_exact": 4,
+    "note": "exact 指「词汇表里有语义完全一致的词条」；partial 指「有近似词条但语义或方向有偏差」；空数组指「词汇表里没有，属本体的自定义扩展」。"
+  }
+}

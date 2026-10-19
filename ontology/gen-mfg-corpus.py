@@ -120,7 +120,11 @@ DOCS = [
     },
 ]
 
-OUT_DIR = "/home/endmin/dsh/research/ict-corpus-manufacturing"
+# 产物落在**本包内**的 ict-corpus-manufacturing/ —— 下游 §W2 读的就是这个相对路径。
+# 不用绝对路径：包要分发给评委，`/home/<某人>/...` 在别人机器上会把产物写到包外，
+# 于是「改了语料重跑 W1，W2 却读到旧文件」这种假绿就会出现。
+OUT_DIR = os.environ.get("MFG_OUT_DIR") or os.path.normpath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "ict-corpus-manufacturing"))
 
 
 def main():

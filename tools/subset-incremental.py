@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """比对 ES 已导入块 与 15,000 块子集，算出真正需要新增导入的部分。
 
-用法: python3 /tmp/check-overlap.py
+用法: python3 tools/subset-incremental.py
+      （子集默认取本包 ../ict-corpus-subset/subset-env.jsonl；可用 SUBSET_PATH 覆盖）
 """
 import hashlib
 import json
@@ -10,7 +11,10 @@ import subprocess
 
 ES = os.environ.get("ES_URL", "http://localhost:9220/1-43ce427e8b5447ecad015534f953e084")
 AUTH = os.environ.get("ES_AUTH", "")  # 形如 elastic:<密码>，从环境变量读取，不写入源码
-SUB = os.environ.get("SUBSET_PATH", "/home/endmin/dsh/research/ict-corpus-subset/subset-env.jsonl")
+# 相对材料包定位，不用绝对路径：子集语料不随包分发，但路径必须对得上「包在哪」
+_HERE = os.path.dirname(os.path.abspath(__file__))
+SUB = os.environ.get("SUBSET_PATH") or os.path.normpath(
+    os.path.join(_HERE, "..", "ict-corpus-subset", "subset-env.jsonl"))
 
 
 def fetch_es():

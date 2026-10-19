@@ -65,6 +65,7 @@ def retrieval_cross_doc(query: str, hops: int = 2, top_k: int = 5) -> dict:
                 "path_or_url": src.get("path_or_url"),
                 "excerpt": body[:120],
                 "grounded": core.keyword_grounded(query, body + " " + (src.get("title") or "")),
+                "cross_lingual": core.is_cross_lingual(query, body + " " + (src.get("title") or "")),
             })
         top = [k for k, _ in sorted(ents.items(), key=lambda kv: -kv[1]) if len(k) >= 6][:4]
         if h < hops and top:
@@ -73,7 +74,7 @@ def retrieval_cross_doc(query: str, hops: int = 2, top_k: int = 5) -> dict:
             break
     max_score = max((r["score"] for r in rings), default=0.0)
     grounded = [r for r in rings if r["grounded"]]
-    insufficient = max_score < 0.75 or not grounded
+    insufficient = core.evidence_insufficient(query, rings, max_score)
     levels = sorted({r["level"] for r in rings})
     dates = sorted(r["date"] for r in rings if r["date"])
     return {

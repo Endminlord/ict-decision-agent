@@ -1,0 +1,1433 @@
+{
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "generated_at": "2026-10-19T11:38:56+08:00",
+  "questions_file": "evidence/eval-questions-cold.json",
+  "script_supports_questions_flag": false,
+  "harness": "把 tools/eval-retrieval.py 当模块导入（未改脚本），覆盖模块级 IN_DOMAIN/OUT_OF_DOMAIN 后调用 eval_abstention()；问题级命中另用 core.knn + path_or_url 精确匹配计算",
+  "baseline_recorded": {
+    "A_hit_rate": {
+      "n": 100,
+      "k": 10,
+      "hit@1": 0.6,
+      "hit@3": 0.69,
+      "hit@5": 0.7,
+      "hit@10": 0.71,
+      "mrr": 0.6418,
+      "misses": [
+        {
+          "title": "《新能源汽车产业发展规划（2021-2035年）》国务院政策例行吹风会",
+          "doc": "49d504c677ec1655.txt"
+        },
+        {
+          "title": "国务院办公厅关于对2018年落实有关重大政策措施真抓实干成效明显地方予以督查 激励的通报",
+          "doc": "35ca44933e0e035f.txt"
+        },
+        {
+          "title": "自治区党委十届六次全会召开",
+          "doc": "6160964682a3b0be.txt"
+        },
+        {
+          "title": "六安市商务局关于印发六安市商务发展第十四个五年规划纲要的通知",
+          "doc": "2ad1bee0a0b0d934.txt"
+        },
+        {
+          "title": "共担全球责任 共迎全球挑战 ——李克强在第十二届亚欧首脑会议上的发言",
+          "doc": "d3940b443ff1e7ee.txt"
+        },
+        {
+          "title": "和县人民政府办公室关于印发进一步深化“互联网+政务服务”推进政务服务“一网、一门、一次”改革行动实施方案的通知",
+          "doc": "ca32b88d184f57cc.txt"
+        },
+        {
+          "title": "让产业成为乡村振兴强大引擎",
+          "doc": "5ec34fc1c92659b7.txt"
+        },
+        {
+          "title": "淮南市人民政府办公室关于印发全面推行行政执法公示制度执法全过程记录制度重大执法决定法制审核制度实施细则的通知",
+          "doc": "90ad5565dfca0ec5.txt"
+        },
+        {
+          "title": "中共中央 国务院关于建立更加有效的区域协调发展新机制的意见",
+          "doc": "2306ed74916eb0bb.txt"
+        },
+        {
+          "title": "在全国深化“放管服”改革优化营商环境电视电话会议上的讲话 ……………………………… 李克强",
+          "doc": "d87bed73a74d3612.txt"
+        }
+      ]
+    },
+    "C_abstention": {
+      "out_of_domain_n": 20,
+      "out_abstained": 20,
+      "abstain_recall": 1.0,
+      "in_domain_n": 10,
+      "in_answered": 10,
+      "answer_rate": 1.0,
+      "kw_hit_rate": 1.0,
+      "out_rows": [
+        {
+          "q": "如何用 Rust 实现一个无锁队列？",
+          "abstained": true,
+          "max_score": 0.7132,
+          "grounded": 0
+        },
+        {
+          "q": "红烧肉的家常做法是什么？",
+          "abstained": true,
+          "max_score": 0.6859,
+          "grounded": 0
+        },
+        {
+          "q": "量子计算机的超导制冷方案原理",
+          "abstained": true,
+          "max_score": 0.7067,
+          "grounded": 0
+        },
+        {
+          "q": "2026 年世界杯小组赛赛程",
+          "abstained": true,
+          "max_score": 0.7104,
+          "grounded": 0
+        },
+        {
+          "q": "如何训练一个扩散模型生成猫的图片？",
+          "abstained": true,
+          "max_score": 0.6848,
+          "grounded": 0
+        },
+        {
+          "q": "太阳系外行星的凌日观测方法",
+          "abstained": true,
+          "max_score": 0.6835,
+          "grounded": 0
+        },
+        {
+          "q": "Python 的 GIL 是什么？",
+          "abstained": true,
+          "max_score": 0.6888,
+          "grounded": 0
+        },
+        {
+          "q": "怎么给吉他换弦？",
+          "abstained": true,
+          "max_score": 0.7066,
+          "grounded": 0
+        },
+        {
+          "q": "国际象棋的开局原则有哪些？",
+          "abstained": true,
+          "max_score": 0.7466,
+          "grounded": 0
+        },
+        {
+          "q": "混凝土抗压强度的测试标准 ASTM C39",
+          "abstained": true,
+          "max_score": 0.7243,
+          "grounded": 0
+        },
+        {
+          "q": "如何用 Kubernetes 做金丝雀发布？",
+          "abstained": true,
+          "max_score": 0.7328,
+          "grounded": 0
+        },
+        {
+          "q": "咖啡豆的烘焙曲线怎么定？",
+          "abstained": true,
+          "max_score": 0.7046,
+          "grounded": 0
+        },
+        {
+          "q": "植物光合作用的卡尔文循环步骤",
+          "abstained": true,
+          "max_score": 0.7093,
+          "grounded": 0
+        },
+        {
+          "q": "怎样在 Excel 里做数据透视表？",
+          "abstained": true,
+          "max_score": 0.7364,
+          "grounded": 0
+        },
+        {
+          "q": "黑洞的信息悖论是什么？",
+          "abstained": true,
+          "max_score": 0.7025,
+          "grounded": 0
+        },
+        {
+          "q": "如何配置 Nginx 的反向代理缓存？",
+          "abstained": true,
+          "max_score": 0.727,
+          "grounded": 0
+        },
+        {
+          "q": "马拉松训练的周跑量怎么安排？",
+          "abstained": true,
+          "max_score": 0.7171,
+          "grounded": 0
+        },
+        {
+          "q": "葡萄酒的单宁来自哪里？",
+          "abstained": true,
+          "max_score": 0.6725,
+          "grounded": 0
+        },
+        {
+          "q": "如何用 PyTorch 做分布式训练？",
+          "abstained": true,
+          "max_score": 0.7079,
+          "grounded": 0
+        },
+        {
+          "q": "中国传统建筑中的斗拱结构起什么作用？",
+          "abstained": true,
+          "max_score": 0.7088,
+          "grounded": 0
+        }
+      ],
+      "in_rows": [
+        {
+          "q": "优化营商环境的政策依据有哪些？",
+          "abstained": false,
+          "max_score": 0.8572,
+          "grounded": 9,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ]
+        },
+        {
+          "q": "市场准入负面清单是哪一年开始实施的？",
+          "abstained": false,
+          "max_score": 0.8535,
+          "grounded": 5,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ]
+        },
+        {
+          "q": "国务院关于政务公开有哪些规定？",
+          "abstained": false,
+          "max_score": 0.8663,
+          "grounded": 5,
+          "kw_hit": true,
+          "levels": [
+            "国家"
+          ]
+        },
+        {
+          "q": "数字政府建设有哪些国家层面的文件？",
+          "abstained": false,
+          "max_score": 0.8555,
+          "grounded": 5,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ]
+        },
+        {
+          "q": "社会信用体系建设的政策脉络是什么？",
+          "abstained": false,
+          "max_score": 0.835,
+          "grounded": 6,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "媒体"
+          ]
+        },
+        {
+          "q": "外商投资法的主要内容是什么？",
+          "abstained": false,
+          "max_score": 0.8561,
+          "grounded": 6,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "媒体"
+          ]
+        },
+        {
+          "q": "减税降费政策有哪些文件？",
+          "abstained": false,
+          "max_score": 0.8402,
+          "grounded": 4,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "媒体"
+          ]
+        },
+        {
+          "q": "知识产权保护的国家政策有哪些？",
+          "abstained": false,
+          "max_score": 0.8506,
+          "grounded": 7,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "媒体"
+          ]
+        },
+        {
+          "q": "乡村振兴战略的顶层文件是什么？",
+          "abstained": false,
+          "max_score": 0.8052,
+          "grounded": 4,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ]
+        },
+        {
+          "q": "放管服改革的主要举措有哪些？",
+          "abstained": false,
+          "max_score": 0.8525,
+          "grounded": 9,
+          "kw_hit": true,
+          "levels": [
+            "国家",
+            "媒体"
+          ]
+        }
+      ]
+    },
+    "D_chain": {
+      "n": 10,
+      "multi_level": 9,
+      "multi_level_rate": 0.9,
+      "not_applicable": false,
+      "rows": [
+        {
+          "q": "优化营商环境的政策依据有哪些？",
+          "rings": 9,
+          "grounded_rings": 9,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2024-06-23",
+            "2019-10-22"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "市场准入负面清单是哪一年开始实施的？",
+          "rings": 5,
+          "grounded_rings": 5,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2024-09-11",
+            "2015-10-30"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "国务院关于政务公开有哪些规定？",
+          "rings": 8,
+          "grounded_rings": 7,
+          "levels": [
+            "国家"
+          ],
+          "level_span": 1,
+          "date_span": [
+            "2022-05-10",
+            "2016-10-19"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "数字政府建设有哪些国家层面的文件？",
+          "rings": 7,
+          "grounded_rings": 5,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2022-11-10",
+            "2019-08-07"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "社会信用体系建设的政策脉络是什么？",
+          "rings": 8,
+          "grounded_rings": 7,
+          "levels": [
+            "国家",
+            "媒体"
+          ],
+          "level_span": 2,
+          "date_span": [
+            "2024-08-18",
+            "2019-07-30"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "外商投资法的主要内容是什么？",
+          "rings": 8,
+          "grounded_rings": 6,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2024-11-02",
+            "2019-12-26"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "减税降费政策有哪些文件？",
+          "rings": 13,
+          "grounded_rings": 4,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2024-02-24",
+            "2018-08-20"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "知识产权保护的国家政策有哪些？",
+          "rings": 9,
+          "grounded_rings": 9,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2023-11-21",
+            "2016-01-10"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "乡村振兴战略的顶层文件是什么？",
+          "rings": 5,
+          "grounded_rings": 4,
+          "levels": [
+            "国家",
+            "地方",
+            "媒体"
+          ],
+          "level_span": 3,
+          "date_span": [
+            "2023-10-09",
+            "2018-10-20"
+          ],
+          "insufficient": false
+        },
+        {
+          "q": "放管服改革的主要举措有哪些？",
+          "rings": 9,
+          "grounded_rings": 9,
+          "levels": [
+            "国家",
+            "媒体"
+          ],
+          "level_span": 2,
+          "date_span": [
+            "2021-04-30",
+            "2017-07-10"
+          ],
+          "insufficient": false
+        }
+      ]
+    }
+  },
+  "C_abstention_cold": {
+    "out_of_domain_n": 10,
+    "out_abstained": 10,
+    "abstain_recall": 1.0,
+    "in_domain_n": 20,
+    "in_answered": 19,
+    "answer_rate": 0.95,
+    "kw_hit_rate": 0.85,
+    "out_rows": [
+      {
+        "q": "如何用 Verilog 实现一个 AXI4 从机接口？",
+        "abstained": true,
+        "max_score": 0.704,
+        "grounded": 0
+      },
+      {
+        "q": "宋代汝窑天青釉的呈色机理是什么？",
+        "abstained": true,
+        "max_score": 0.6687,
+        "grounded": 0
+      },
+      {
+        "q": "如何调整山地自行车后拨链器的限位螺丝？",
+        "abstained": true,
+        "max_score": 0.7234,
+        "grounded": 0
+      },
+      {
+        "q": "mRNA 疫苗的脂质纳米颗粒是怎么被细胞摄取的？",
+        "abstained": true,
+        "max_score": 0.7214,
+        "grounded": 0
+      },
+      {
+        "q": "怎样用 Blender 做布料物理模拟？",
+        "abstained": true,
+        "max_score": 0.7203,
+        "grounded": 0
+      },
+      {
+        "q": "拜占庭容错算法在什么条件下能达成共识？",
+        "abstained": true,
+        "max_score": 0.736,
+        "grounded": 0
+      },
+      {
+        "q": "日本能剧的面具在表演中起什么作用？",
+        "abstained": true,
+        "max_score": 0.6821,
+        "grounded": 0
+      },
+      {
+        "q": "如何诊断汽车氧传感器故障？",
+        "abstained": true,
+        "max_score": 0.7258,
+        "grounded": 0
+      },
+      {
+        "q": "冰岛苔原带的植被如何适应低温环境？",
+        "abstained": true,
+        "max_score": 0.714,
+        "grounded": 0
+      },
+      {
+        "q": "怎么用 LaTeX 排一个规范的三线表？",
+        "abstained": true,
+        "max_score": 0.7364,
+        "grounded": 0
+      }
+    ],
+    "in_rows": [
+      {
+        "q": "泰州市对用人单位招用无合法身份证件人员不予行政处罚，要求同时具备哪几个条件？",
+        "abstained": false,
+        "max_score": 0.8891,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "地方"
+        ]
+      },
+      {
+        "q": "睢宁县在市场监管领域推行部门联合“双随机、一公开”监管，提出了哪三项基本要求？",
+        "abstained": false,
+        "max_score": 0.9112,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方"
+        ]
+      },
+      {
+        "q": "合肥市要求把企业开办时间压缩到几个工作日以内，截止时间是哪一天？",
+        "abstained": false,
+        "max_score": 0.9082,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "地方"
+        ]
+      },
+      {
+        "q": "六安市规定供水、供气企业在多少个工作日内完成用水、用气报装的申请受理？",
+        "abstained": false,
+        "max_score": 0.8795,
+        "grounded": 2,
+        "kw_hit": true,
+        "levels": [
+          "地方"
+        ]
+      },
+      {
+        "q": "常州市金坛区对开竣工履约保证金按宗地收取的总额上限分别是多少？",
+        "abstained": false,
+        "max_score": 0.8929,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "2022年江西省GDP增长多少？电子信息产业营业收入居全国第几位？",
+        "abstained": false,
+        "max_score": 0.8346,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "2020年上半年人民币跨境收付金额是多少，占本外币跨境收付比重多少？",
+        "abstained": false,
+        "max_score": 0.8413,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "东海县对获准马德里商标国际注册且延伸注册国10个以上的，每件奖励多少？同一企业每年上限多少？",
+        "abstained": false,
+        "max_score": 0.8715,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "《关于推进社会信用体系建设高质量发展促进形成新发展格局的意见》把完善的社会信用体系定位为哪三个方面？",
+        "abstained": false,
+        "max_score": 0.8867,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "泾县农业“标准地”改革在风险管控方面要求建立什么负面清单？",
+        "abstained": false,
+        "max_score": 0.8516,
+        "grounded": 1,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "宣城市为保障南京都市圈一体化提出制定什么清单？南通市人大常委会对经济工作开展监督可以采用哪些方式？",
+        "abstained": false,
+        "max_score": 0.8646,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "地方"
+        ]
+      },
+      {
+        "q": "国家《关于推进贸易高质量发展的指导意见》要求打造什么样的营商环境？李强在进博会讲话中把中国高水平开放概括为哪四个“开放”？",
+        "abstained": false,
+        "max_score": 0.8753,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "全国首例“暗刷流量案”由哪家互联网法院审理？新疆在推动高质量发展中提出打造什么样的营商环境？",
+        "abstained": false,
+        "max_score": 0.82,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "媒体"
+        ]
+      },
+      {
+        "q": "进博会报道提到中国放宽市场准入的两张标志性负面清单分别是什么？阜南县工业项目推进中要求贯彻哪些营商环境工作部署？",
+        "abstained": false,
+        "max_score": 0.8157,
+        "grounded": 7,
+        "kw_hit": false,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "马鞍山市先后两次清理市政府文件，请分别说明这两次清理涉及的文件数量。",
+        "abstained": false,
+        "max_score": 0.8479,
+        "grounded": 3,
+        "kw_hit": true,
+        "levels": [
+          "地方"
+        ]
+      },
+      {
+        "q": "2020年国庆招待会致辞提出做好哪两项工作？陕西省政协在商洛调研时把良好的营商环境比作什么？",
+        "abstained": false,
+        "max_score": 0.8163,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "黄山区政府工作规则对政务服务提出哪三个标志性口号？高邮市人大决定要求做到哪“四落实”？",
+        "abstained": true,
+        "max_score": 0.8072,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "阜阳市要求“证照分离”改革破解哪两个问题？北京市政府在全体会议上把优化营商环境与哪项工作并列部署？",
+        "abstained": false,
+        "max_score": 0.867,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "10+3领导人会议上中方提出牵头开展哪两项合作？河北省委书记在石家庄调研时强调用好哪项税收政策支持企业创新？",
+        "abstained": false,
+        "max_score": 0.8376,
+        "grounded": 4,
+        "kw_hit": false,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "上合组织总理会议提到哪15个国家共同签署了哪个自贸协定？浙江省在湖州提出打造什么品牌？",
+        "abstained": false,
+        "max_score": 0.792,
+        "grounded": 3,
+        "kw_hit": false,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      }
+    ]
+  },
+  "C_abstention_old_repro": {
+    "out_of_domain_n": 20,
+    "out_abstained": 20,
+    "abstain_recall": 1.0,
+    "in_domain_n": 10,
+    "in_answered": 10,
+    "answer_rate": 1.0,
+    "kw_hit_rate": 1.0,
+    "out_rows": [
+      {
+        "q": "如何用 Rust 实现一个无锁队列？",
+        "abstained": true,
+        "max_score": 0.7132,
+        "grounded": 0
+      },
+      {
+        "q": "红烧肉的家常做法是什么？",
+        "abstained": true,
+        "max_score": 0.6859,
+        "grounded": 0
+      },
+      {
+        "q": "量子计算机的超导制冷方案原理",
+        "abstained": true,
+        "max_score": 0.7067,
+        "grounded": 0
+      },
+      {
+        "q": "2026 年世界杯小组赛赛程",
+        "abstained": true,
+        "max_score": 0.7104,
+        "grounded": 0
+      },
+      {
+        "q": "如何训练一个扩散模型生成猫的图片？",
+        "abstained": true,
+        "max_score": 0.6848,
+        "grounded": 0
+      },
+      {
+        "q": "太阳系外行星的凌日观测方法",
+        "abstained": true,
+        "max_score": 0.6778,
+        "grounded": 0
+      },
+      {
+        "q": "Python 的 GIL 是什么？",
+        "abstained": true,
+        "max_score": 0.6888,
+        "grounded": 0
+      },
+      {
+        "q": "怎么给吉他换弦？",
+        "abstained": true,
+        "max_score": 0.706,
+        "grounded": 0
+      },
+      {
+        "q": "国际象棋的开局原则有哪些？",
+        "abstained": true,
+        "max_score": 0.7466,
+        "grounded": 0
+      },
+      {
+        "q": "混凝土抗压强度的测试标准 ASTM C39",
+        "abstained": true,
+        "max_score": 0.7243,
+        "grounded": 0
+      },
+      {
+        "q": "如何用 Kubernetes 做金丝雀发布？",
+        "abstained": true,
+        "max_score": 0.7328,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡豆的烘焙曲线怎么定？",
+        "abstained": true,
+        "max_score": 0.7046,
+        "grounded": 0
+      },
+      {
+        "q": "植物光合作用的卡尔文循环步骤",
+        "abstained": true,
+        "max_score": 0.7093,
+        "grounded": 0
+      },
+      {
+        "q": "怎样在 Excel 里做数据透视表？",
+        "abstained": true,
+        "max_score": 0.7364,
+        "grounded": 0
+      },
+      {
+        "q": "黑洞的信息悖论是什么？",
+        "abstained": true,
+        "max_score": 0.7025,
+        "grounded": 0
+      },
+      {
+        "q": "如何配置 Nginx 的反向代理缓存？",
+        "abstained": true,
+        "max_score": 0.727,
+        "grounded": 0
+      },
+      {
+        "q": "马拉松训练的周跑量怎么安排？",
+        "abstained": true,
+        "max_score": 0.7188,
+        "grounded": 0
+      },
+      {
+        "q": "葡萄酒的单宁来自哪里？",
+        "abstained": true,
+        "max_score": 0.674,
+        "grounded": 0
+      },
+      {
+        "q": "如何用 PyTorch 做分布式训练？",
+        "abstained": true,
+        "max_score": 0.7079,
+        "grounded": 0
+      },
+      {
+        "q": "中国传统建筑中的斗拱结构起什么作用？",
+        "abstained": true,
+        "max_score": 0.7088,
+        "grounded": 0
+      }
+    ],
+    "in_rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "abstained": false,
+        "max_score": 0.8572,
+        "grounded": 9,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "abstained": false,
+        "max_score": 0.8535,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "国务院关于政务公开有哪些规定？",
+        "abstained": false,
+        "max_score": 0.8663,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家"
+        ]
+      },
+      {
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "abstained": false,
+        "max_score": 0.8555,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "abstained": false,
+        "max_score": 0.835,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "外商投资法的主要内容是什么？",
+        "abstained": false,
+        "max_score": 0.8561,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "abstained": false,
+        "max_score": 0.8402,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "知识产权保护的国家政策有哪些？",
+        "abstained": false,
+        "max_score": 0.8506,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "abstained": false,
+        "max_score": 0.8052,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "放管服改革的主要举措有哪些？",
+        "abstained": false,
+        "max_score": 0.8525,
+        "grounded": 9,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      }
+    ]
+  },
+  "question_hit_cold": {
+    "n": 20,
+    "hit@1": 0.7,
+    "hit@3": 0.8,
+    "hit@1_single_hop": 1.0,
+    "hit@1_cross_doc": 0.4,
+    "cross_doc_both_found_rate": 0.0,
+    "rows": [
+      {
+        "id": "C01",
+        "type": "single_hop",
+        "q": "泰州市对用人单位招用无合法身份证件人员不予行政处罚，要求同时具备哪几个条件？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "泰州市人力资源和社会保障局关于印发《涉企轻微违法行为不予行政处罚和一般违法行为从轻行政处罚清单》的通知",
+        "max_score": 0.8891,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C02",
+        "type": "single_hop",
+        "q": "睢宁县在市场监管领域推行部门联合“双随机、一公开”监管，提出了哪三项基本要求？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "徐州市睢宁县市场监管领域部门联合“双随机、一公开”监管工作实施办法",
+        "max_score": 0.9112,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C03",
+        "type": "single_hop",
+        "q": "合肥市要求把企业开办时间压缩到几个工作日以内，截止时间是哪一天？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "合政办秘〔2018〕151号 合肥市人民政府办公厅关于进一步贯彻落实压缩企业开办时间的通知",
+        "max_score": 0.9082,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C04",
+        "type": "single_hop",
+        "q": "六安市规定供水、供气企业在多少个工作日内完成用水、用气报装的申请受理？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "六安市住房和城乡建设局关于印发《六安市优化获得用水、用气营商环境工作标准及服务规范》的通知",
+        "max_score": 0.8795,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C05",
+        "type": "single_hop",
+        "q": "常州市金坛区对开竣工履约保证金按宗地收取的总额上限分别是多少？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "常州市金坛区建设工程验线和规划核实实施办法（试行）",
+        "max_score": 0.8929,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C06",
+        "type": "single_hop",
+        "q": "2022年江西省GDP增长多少？电子信息产业营业收入居全国第几位？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "2023年江西省政府工作报告",
+        "max_score": 0.8346,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C07",
+        "type": "single_hop",
+        "q": "2020年上半年人民币跨境收付金额是多少，占本外币跨境收付比重多少？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "金融机构支持实体经济政策落实情况国务院政策例行吹风会",
+        "max_score": 0.8413,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C08",
+        "type": "single_hop",
+        "q": "东海县对获准马德里商标国际注册且延伸注册国10个以上的，每件奖励多少？同一企业每年上限多少？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "东海县人民政府关于促进知识产权高质量发展若干政策措施",
+        "max_score": 0.8715,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C09",
+        "type": "single_hop",
+        "q": "《关于推进社会信用体系建设高质量发展促进形成新发展格局的意见》把完善的社会信用体系定位为哪三个方面？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "中共中央办公厅 国务院办公厅印发《关于推进社会信用体系建设高质量发展促进形成 新发展格局的意见》",
+        "max_score": 0.8867,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C10",
+        "type": "single_hop",
+        "q": "泾县农业“标准地”改革在风险管控方面要求建立什么负面清单？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 1,
+        "targets_found": 1,
+        "top1_title": "关于印发《泾县农业“标准地”改革试验 方案》的通知",
+        "max_score": 0.8516,
+        "kw_hit@1": true,
+        "both_targets_found": true
+      },
+      {
+        "id": "C11",
+        "type": "cross_doc",
+        "q": "宣城市为保障南京都市圈一体化提出制定什么清单？南通市人大常委会对经济工作开展监督可以采用哪些方式？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "宣城市人大常委会关于支持和保障 南京都市圈共建长三角一体化高质量发展 合作示范区的决定",
+        "max_score": 0.8351,
+        "kw_hit@1": true,
+        "both_targets_found": false
+      },
+      {
+        "id": "C12",
+        "type": "cross_doc",
+        "q": "国家《关于推进贸易高质量发展的指导意见》要求打造什么样的营商环境？李强在进博会讲话中把中国高水平开放概括为哪四个“开放”？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "新征程上，中国开放的大门只会越开越大",
+        "max_score": 0.8753,
+        "kw_hit@1": true,
+        "both_targets_found": false
+      },
+      {
+        "id": "C13",
+        "type": "cross_doc",
+        "q": "全国首例“暗刷流量案”由哪家互联网法院审理？新疆在推动高质量发展中提出打造什么样的营商环境？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "最高法举行《中国法院的互联网司法》白皮书发布会",
+        "max_score": 0.82,
+        "kw_hit@1": true,
+        "both_targets_found": false
+      },
+      {
+        "id": "C14",
+        "type": "cross_doc",
+        "q": "进博会报道提到中国放宽市场准入的两张标志性负面清单分别是什么？阜南县工业项目推进中要求贯彻哪些营商环境工作部署？",
+        "hit@1": false,
+        "hit@3": false,
+        "targets": 2,
+        "targets_found": 0,
+        "top1_title": "阜南县人民政府关于印发阜南县深化“证照分离”改革进一步激发市场主体发展活力 实施方案的通知",
+        "max_score": 0.8131,
+        "kw_hit@1": false,
+        "both_targets_found": false
+      },
+      {
+        "id": "C15",
+        "type": "cross_doc",
+        "q": "马鞍山市先后两次清理市政府文件，请分别说明这两次清理涉及的文件数量。",
+        "hit@1": false,
+        "hit@3": true,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "马鞍山市人民政府办公室关于公布马鞍山市直单位取消政务服务事项申请材料清单（第二批）的通知",
+        "max_score": 0.8479,
+        "kw_hit@1": true,
+        "both_targets_found": false
+      },
+      {
+        "id": "C16",
+        "type": "cross_doc",
+        "q": "2020年国庆招待会致辞提出做好哪两项工作？陕西省政协在商洛调研时把良好的营商环境比作什么？",
+        "hit@1": false,
+        "hit@3": false,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "认真传达学习习近平总书记在看望参加政协会议的民建工商联界委员时的重要讲话精神",
+        "max_score": 0.8163,
+        "kw_hit@1": false,
+        "both_targets_found": false
+      },
+      {
+        "id": "C17",
+        "type": "cross_doc",
+        "q": "黄山区政府工作规则对政务服务提出哪三个标志性口号？高邮市人大决定要求做到哪“四落实”？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "黄山区人民政府关于印发黄山区人民政府工作规则的通知",
+        "max_score": 0.8003,
+        "kw_hit@1": true,
+        "both_targets_found": false
+      },
+      {
+        "id": "C18",
+        "type": "cross_doc",
+        "q": "阜阳市要求“证照分离”改革破解哪两个问题？北京市政府在全体会议上把优化营商环境与哪项工作并列部署？",
+        "hit@1": false,
+        "hit@3": true,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "阜阳市开展 “证照分离”改革全覆盖工作实施方案的通知",
+        "max_score": 0.867,
+        "kw_hit@1": false,
+        "both_targets_found": false
+      },
+      {
+        "id": "C19",
+        "type": "cross_doc",
+        "q": "10+3领导人会议上中方提出牵头开展哪两项合作？河北省委书记在石家庄调研时强调用好哪项税收政策支持企业创新？",
+        "hit@1": false,
+        "hit@3": false,
+        "targets": 2,
+        "targets_found": 0,
+        "top1_title": "以解放思想奋发进取破题开路 以深化改革扩大开放勇毅前行",
+        "max_score": 0.8376,
+        "kw_hit@1": false,
+        "both_targets_found": false
+      },
+      {
+        "id": "C20",
+        "type": "cross_doc",
+        "q": "上合组织总理会议提到哪15个国家共同签署了哪个自贸协定？浙江省在湖州提出打造什么品牌？",
+        "hit@1": false,
+        "hit@3": false,
+        "targets": 2,
+        "targets_found": 1,
+        "top1_title": "在上海合作组织成员国政府首脑（总理）理事会第二十一次会议上的讲话",
+        "max_score": 0.792,
+        "kw_hit@1": false,
+        "both_targets_found": false
+      }
+    ],
+    "hit@1_kw_consistent": 0.75,
+    "hit@3_single_hop": 1.0,
+    "hit@3_cross_doc": 0.6,
+    "note": "hit@1/hit@3 为精确 path_or_url 口径；hit@1_kw_consistent 为与旧题库同口径的 title 关键词口径"
+  },
+  "question_hit_old_kw": {
+    "n": 10,
+    "hit@1": 0.9,
+    "hit@3": 0.9,
+    "rows": [
+      {
+        "id": "O01",
+        "type": "old_kw",
+        "q": "优化营商环境的政策依据有哪些？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "优化营商环境，“近悦远来”推进高质量发展",
+        "max_score": 0.8572
+      },
+      {
+        "id": "O02",
+        "type": "old_kw",
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "国务院关于实行市场准入负面清单制度的意见",
+        "max_score": 0.8535
+      },
+      {
+        "id": "O03",
+        "type": "old_kw",
+        "q": "国务院关于政务公开有哪些规定？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "国务院办公厅关于印发2022年政务公开工作要点的通知 2022年政务公开工作要点",
+        "max_score": 0.8663
+      },
+      {
+        "id": "O04",
+        "type": "old_kw",
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "hit@1": false,
+        "hit@3": false,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "国务院办公厅关于印发全国一体化政务大数据体系建设指南的通知 全国一体化政务大数据体系建设指南",
+        "max_score": 0.8386
+      },
+      {
+        "id": "O05",
+        "type": "old_kw",
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "中共中央办公厅 国务院办公厅印发《关于推进社会信用体系建设高质量发展促进形成 新发展格局的意见》",
+        "max_score": 0.8308
+      },
+      {
+        "id": "O06",
+        "type": "old_kw",
+        "q": "外商投资法的主要内容是什么？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "最高法关于《外商投资法司法解释》《“一带一路”意见二》《新片区意见》发布会",
+        "max_score": 0.8561
+      },
+      {
+        "id": "O07",
+        "type": "old_kw",
+        "q": "减税降费政策有哪些文件？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "税务总局 发展改革委 公安部 司法部 财政部 人力资源社会保障部 住房城乡建设部 商务部 人民银行 海关总署 医保局 档",
+        "max_score": 0.825
+      },
+      {
+        "id": "O08",
+        "type": "old_kw",
+        "q": "知识产权保护的国家政策有哪些？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "中共中央办公厅 国务院办公厅印发《关于强化知识产权保护的意见》",
+        "max_score": 0.8506
+      },
+      {
+        "id": "O09",
+        "type": "old_kw",
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "中共中央 国务院印发《乡村振兴战略规划（2018－2022年）》",
+        "max_score": 0.8052
+      },
+      {
+        "id": "O10",
+        "type": "old_kw",
+        "q": "放管服改革的主要举措有哪些？",
+        "hit@1": true,
+        "hit@3": true,
+        "targets": null,
+        "targets_found": null,
+        "top1_title": "在全国深化“放管服”改革 优化营商环境电视电话会议上的讲话 ………………………………… 李克强",
+        "max_score": 0.8407
+      }
+    ],
+    "note": "旧题库无 target_doc，只能按 title 关键词口径"
+  },
+  "comparison": {
+    "hit@1_kw_consistent": {
+      "old": 0.9,
+      "cold": 0.75,
+      "delta": -0.15
+    },
+    "hit@1_exact_doc": {
+      "old": null,
+      "cold": 0.7,
+      "note": "旧题库无 target_doc，不可算"
+    },
+    "answer_rate": {
+      "old": 1.0,
+      "cold": 0.95,
+      "delta": -0.05
+    },
+    "abstain_recall": {
+      "old": 1.0,
+      "cold": 1.0,
+      "delta": 0.0
+    },
+    "kw_hit_rate": {
+      "old": 1.0,
+      "cold": 0.85,
+      "delta": -0.15
+    },
+    "A_hit_rate_note": "A 组（标题自召回 hit@1=0.6）与题库无关，冷题库不改变该读数"
+  },
+  "findings": [
+    "单跳题 hit@1=1.00(10/10)：语义检索本身没有过拟合，旧题库在该维度的分数是真实的",
+    "跨文档题 hit@1=0.40(4/10)、两篇目标都进 top-10 的比例=0.00(0/10)：旧题库 10 道领域内题全是单主题泛问，从未测过多跳",
+    "跨文档失败的机制：hop2 用实体词重检索，拉回的是同主题兄弟文件（南京都市圈→常州/扬州同名决定；上合讲话→第二十一次会议版本），不是第二篇目标文档",
+    "假拒答 1 例（C17）：检索正确(top1 命中目标)且 max_score=0.8072>0.75 过分数门，但 grounded=0 → 判 insufficient。词面落地判据对题干措辞敏感",
+    "附带发现：C20/C14 的目标文档用自身标题检索 rank=None（top-10 不含自己），标题与 chunk 内容不对齐，这是 A 组 hit@1=0.6 的结构性原因之一"
+  ]
+}

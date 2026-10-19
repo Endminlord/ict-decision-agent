@@ -16,9 +16,12 @@
 
 用法：
   python3 judge.py --src triples-governance.jsonl --limit 200 --out judged.jsonl
+  python3 judge.py --candidates-file object-prune-todo.txt --limit 0 --batch 40 --workers 8 \
+                   --key "$K" --out /tmp/judged-object-full.jsonl
   python3 judge.py --self-test        # 不联网，用桩模型
 """
 import argparse, hashlib, json, os, re, sys, time, urllib.request
+from concurrent.futures import ThreadPoolExecutor
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -39,6 +42,34 @@ PROMPT = """你是政务文件引用判定器。下面每个条目都是从政�
 %s
 
 只输出 JSON 数组，每项 {"i": 序号, "is_doc": true/false, "reason": "不超过 20 字"}。
+不要输出任何其他文字。"""
+
+# issued_by 的 object 是**机构名**，用上面那份判据恒判 false（机构当然不是文件）。
+# 那份判据回答的是「这个字符串是不是一份可引用文件」，对机构名不成立；
+# 需要的是另一个问题：「这个机构是不是**这份文档**的发布机关」。
+# 判据从「实体为真」换成「关系为真」——两者在 issued_by 上相差很大：
+# 机构为真的 51.8% 里，只有约四成是本文档的真发布机关（其余是调研对象、
+# 发布会主体、被引用上级文件的发布者）。
+PROMPT_ISSUED_BY = """你是政务文件发布机关判定器。下面每个条目给出三样东西（以制表符分隔）：
+① 候选机构名；② 该候选所属文档的标题；③ 该候选在文档正文中出现处的上下文片段。
+
+请判断：**这个机构是不是「这份文档」的发布机关**（印发 / 发布 / 制定这份文件的主体），
+而不是「是不是一个真实存在的机构」。
+
+判定标准：
+- 是发布机关：标题或证据片段表明该机构就是本文档的印发者 / 发布者 / 制定者。
+  例如标题形如「XX局关于印发《…》的通知」中的 XX 局；文末「XX市人民政府办公室印发」中的机关；
+  正文「XX部制定了本办法」「本通知由 XX 办公厅负责解释」中的机关。
+- 不是发布机关：该机构只是文中被提及 —— 调研 / 考察 / 检查对象、会议主办或参会单位、
+  新闻发布厅或发布会主体、被引用的上级文件的发布者、转述他人观点的机构、
+  以及「各级各有关部门」这类泛指短语。
+- 判断不了就判 false：宁可漏判，不可把「提及」升成「发布」。
+
+候选（每条一行）：
+%s
+
+只输出 JSON 数组，每项 {"i": 序号, "is_doc": true/false, "reason": "不超过 20 字"}。
+字段名沿用 is_doc：true 表示「是本文档的发布机关」，false 表示「不是（或只是提及）」。
 不要输出任何其他文字。"""
 
 
@@ -86,12 +117,18 @@ def strip_fence(t):
     return t[i:j + 1] if i >= 0 and j > i else t
 
 
-def call_model(cands, base, key, model, timeout=180, retries=2):
-    """把一批候选发给模型，返回 [{i,is_doc,reason}]。"""
+def call_model(cands, base, key, model, prompt=None, timeout=180, retries=2):
+    """把一批候选发给模型，返回 [{i,is_doc,reason}]。
+
+    prompt 缺省用模块级 PROMPT（判「是不是一份可引用文件」）——**保持原有调用方行为不变**。
+    issued_by 传 PROMPT_ISSUED_BY（判「是不是本文档的发布机关」）。判据按谓词分派，
+    因为这两问对同一批字符串的答案不同：机构名在「是不是文件」下恒为 false。
+    """
+    prompt = prompt or PROMPT
     listing = "\n".join(f"{n+1}. {c}" for n, c in enumerate(cands))
     body = json.dumps({
         "model": model, "temperature": 0,
-        "messages": [{"role": "user", "content": PROMPT % listing}],
+        "messages": [{"role": "user", "content": prompt % listing}],
     }).encode("utf-8")
     last = None
     for attempt in range(retries + 1):
@@ -118,8 +155,16 @@ def call_model(cands, base, key, model, timeout=180, retries=2):
     raise RuntimeError(f"模型调用失败：{last}")
 
 
-def collect_candidates(src, limit=None, preds=("cites",), confs=("medium", "low"), side="object"):
-    """从三元组里收集「需要判定」的候选（对象侧）。返回 [候选字符串]。"""
+def collect_candidates(src, limit=None, preds=("cites",), confs=("medium", "low"), side="object",
+                       with_context=False):
+    """从三元组里收集「需要判定」的候选（对象侧）。
+
+    返回 `[候选字符串]`；with_context=True 时返回
+    `[{"object", "title", "evidence"}]` —— issued_by 必须带标题与证据片段：
+    要判的是「这个机构是不是**这份文档**的发布机关」，脱离文档就退化成
+    「是不是一个真实机构」，而后者正是被替换掉的旧判据。
+    上下文取 `provenance.title` / `provenance.evidence`（build.py 落盘时就带着）。
+    """
     seen, out = set(), []
     with open(src, encoding="utf-8") as f:
         for line in f:
@@ -134,42 +179,121 @@ def collect_candidates(src, limit=None, preds=("cites",), confs=("medium", "low"
             if not o or o in seen:
                 continue
             seen.add(o)
-            out.append(o)
+            if with_context:
+                pv = t.get("provenance") or {}
+                out.append({"object": o,
+                            "title": (pv.get("title") or "").strip(),
+                            "evidence": (pv.get("evidence") or "").strip()})
+            else:
+                out.append(o)
     return out
 
 
-def judge(cands, base, key, model, cache_path=None, batch=20, verbose=True):
-    """逐批判定；命中缓存不重复调用。返回 {候选: 判定记录}。"""
+def load_candidates_file(path, limit=None):
+    """从上游剪枝清单读候选：逐行一条，去重保序，limit 截断（0/None = 全量）。
+
+    与 collect_candidates 的区别：清单是**上一段流水线的产物**（例如
+    `object-prune-todo.txt` = 从已确认文件出发生成的一圈 object 候选），
+    已经做过谓词/置信度/已判定排除，这里不再过滤，只负责去重保序与截断。
+    清单可能含空行与重复（不同起点重复指向同一对象），顺序即优先级。
+    """
+    seen, out = set(), []
+    with open(path, encoding="utf-8") as f:
+        for line in f:
+            c = line.strip()
+            if not c or c in seen:
+                continue
+            seen.add(c)
+            out.append(c)
+            if limit and len(out) >= limit:
+                break
+    return out
+
+
+def judge_ident(cand, predicate, contexts):
+    """判定身份键：issued_by 必须把文档上下文并进键里。
+
+    同一机构名在不同文档里答案不同（在 A 文是发布机关、在 B 文只是被调研对象）。
+    若沿用纯候选名做键，缓存与结果都会跨文档串味：一次判定会污染同名的所有文档。
+    """
+    if predicate != "issued_by":
+        return cand
+    ctx = (contexts or {}).get(cand) or {}
+    return f"{cand}\x1f{ctx.get('title', '')}\x1f{ctx.get('evidence', '')}"
+
+
+def issued_by_line(ident, contexts):
+    """把一条 issued_by 候选排成 prompt 里的一行：机构名 / 标题 / 证据片段。"""
+    cand, _, _ = ident.partition("\x1f")
+    ctx = (contexts or {}).get(cand) or {}
+    title = (ctx.get("title") or "").strip() or "（标题缺失）"
+    ev = (ctx.get("evidence") or "").strip() or "（证据缺失）"
+    return f"{cand}\t标题：{title}\t证据：{ev}"
+
+
+def judge(cands, base, key, model, cache_path=None, batch=20, verbose=True, workers=1,
+          predicate=None, contexts=None):
+    """逐批判定；命中缓存不重复调用。返回 {判定身份键: 判定记录}。
+
+    predicate 决定判据：issued_by 用 PROMPT_ISSUED_BY 并把 title/evidence 拼进每条候选，
+    其余谓词一律用原 PROMPT（行为与改前逐条一致）。
+    contexts：{候选: {"title","evidence"}}，仅 issued_by 需要。
+
+    workers > 1 时批次并发发出，但**结果组装与缓存落盘仍在主线程按批次顺序做**
+    —— 缓存逐批 append，中断不丢已判部分（这是 63 分钟全量跑的前提）。
+    """
+    prompt = PROMPT_ISSUED_BY if predicate == "issued_by" else PROMPT
     cache = load_cache(cache_path)
     result, todo = {}, []
     for c in cands:
-        k = cand_key(c)
+        k = cand_key(judge_ident(c, predicate, contexts))
         if k in cache:
-            result[c] = cache[k]
+            result[judge_ident(c, predicate, contexts)] = cache[k]
         else:
             todo.append(c)
     if verbose:
-        print(f"[judge] 候选 {len(cands)} · 缓存命中 {len(cands)-len(todo)} · 待判 {len(todo)}")
-    for s in range(0, len(todo), batch):
-        chunk = todo[s:s + batch]
-        arr = call_model(chunk, base, key, model)
-        got = {}
-        for item in arr:
-            got[item["i"]] = item
+        print(f"[judge] 候选 {len(cands)} · 缓存命中 {len(cands)-len(todo)} · 待判 {len(todo)}"
+              f" · 判据 {'issued_by（发布机关）' if predicate == 'issued_by' else 'document'}"
+              + (f" · 并发 {workers}" if workers and workers > 1 else ""))
+    chunks = [todo[s:s + batch] for s in range(0, len(todo), batch)]
+
+    def payload_of(chunk):
+        if predicate == "issued_by":
+            return [issued_by_line(judge_ident(c, predicate, contexts), contexts) for c in chunk]
+        return chunk
+
+    def absorb(n, chunk, arr):
+        got = {item["i"]: item for item in arr}
         new = []
-        for n, c in enumerate(chunk, 1):
-            item = got.get(n)
-            rec = {"key": cand_key(c), "candidate": c,
+        for idx, c in enumerate(chunk, 1):
+            item = got.get(idx)
+            ident = judge_ident(c, predicate, contexts)
+            rec = {"key": cand_key(ident), "candidate": c,
                    "is_doc": bool(item["is_doc"]) if item else None,
                    "reason": item["reason"] if item else "模型未返回该条",
                    "model": model, "method": "llm_judge"}
+            if predicate == "issued_by":
+                ctx = (contexts or {}).get(c) or {}
+                rec["predicate"] = "issued_by"
+                rec["title"] = ctx.get("title", "")
+                rec["evidence"] = ctx.get("evidence", "")
             validate_judgement(rec)      # 缺理由 / is_doc 非布尔，直接抛错而不是静默入库
-            result[c] = rec
+            result[ident] = rec
             new.append(rec)
         append_cache(cache_path, new)
         if verbose:
             ok = sum(1 for r in new if r["is_doc"])
-            print(f"  批 {s//batch+1}: {len(chunk)} 条 → 判为文件 {ok} / 非文件 {len(chunk)-ok}")
+            print(f"  批 {n}: {len(chunk)} 条 → 判真 {ok} / 判假 {len(chunk)-ok}")
+
+    if workers and workers > 1 and len(chunks) > 1:
+        with ThreadPoolExecutor(max_workers=workers) as ex:
+            futures = [ex.submit(call_model, payload_of(chunk), base, key, model, prompt)
+                       for chunk in chunks]
+            for n, (chunk, fut) in enumerate(zip(chunks, futures), 1):
+                absorb(n, chunk, fut.result())   # map 保序：缓存仍按批次顺序落盘
+    else:
+        for n, chunk in enumerate(chunks, 1):
+            absorb(n, chunk, call_model(payload_of(chunk), base, key, model, prompt))
     return result
 
 
@@ -256,6 +380,20 @@ def self_test():
             pass
     case("J5 围栏剥离可用 / 真坏 JSON 抛错", n5)
 
+    def n6():
+        """J6 清单读入：逐行去重保序，--limit 截断，limit=0 视为全量。"""
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = os.path.join(d, "todo.txt")
+            open(p, "w", encoding="utf-8").write(
+                "甲条例\n\n乙办法\n甲条例\n丙规定\n丁通知\n乙办法\n")
+            assert load_candidates_file(p) == ["甲条例", "乙办法", "丙规定", "丁通知"], \
+                f"去重保序不对：{load_candidates_file(p)}"
+            assert load_candidates_file(p, limit=2) == ["甲条例", "乙办法"], \
+                f"limit 截断不对：{load_candidates_file(p, limit=2)}"
+            assert len(load_candidates_file(p, limit=0)) == 4, "limit=0 应视为全量"
+    case("J6 清单读入去重保序 + limit 截断", n6)
+
     passed = sum(1 for _, ok, _ in cases if ok)
     print(f"\n自测：{passed}/{len(cases)} 个负对照被抓到")
     for label, ok, msg in cases:
@@ -265,16 +403,25 @@ def self_test():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--src", default=os.path.join(HERE, "triples-governance.jsonl"))
+    ap.add_argument("--src", default=os.path.join(HERE, "triples-governance.jsonl"),
+                    help="从三元组现收候选（谓词/置信度过滤）；与 --candidates-file 二选一")
+    ap.add_argument("--candidates-file", default=None,
+                    help="从上游剪枝清单读候选（逐行一条，去重保序，--limit 截断）")
     ap.add_argument("--out", default=os.path.join(HERE, "judged.jsonl"))
     ap.add_argument("--cache", default=None)
-    ap.add_argument("--limit", type=int, default=200)
+    ap.add_argument("--limit", type=int, default=200, help="0 = 全量")
     ap.add_argument("--batch", type=int, default=20)
+    ap.add_argument("--workers", type=int, default=1,
+                    help="并发批次数（实测网关约 2 条/秒是瓶颈，8 之后再加无益）")
     ap.add_argument("--base", default=DEFAULT_BASE)
     ap.add_argument("--key", default=DEFAULT_KEY)
     ap.add_argument("--model", default=DEFAULT_MODEL)
     ap.add_argument("--side", default="object", choices=["object", "subject"],
                     help="判定哪一侧（subject = 引用者，object = 被引用者）")
+    ap.add_argument("--predicate", default=None,
+                    help="按谓词选判据：issued_by = 判「是不是本文档的发布机关」（自动带上 "
+                         "provenance 的 title 与 evidence）；cites/implements/amends/repeals = "
+                         "原判据「是不是一份可引用文件」。缺省 cites")
     ap.add_argument("--confs", default="medium,low", help="逗号分隔的置信度白名单")
     ap.add_argument("--self-test", action="store_true")
     a = ap.parse_args()
@@ -283,17 +430,41 @@ def main():
     if not a.key:
         print("需要 --key 或环境变量 JUDGE_API_KEY", file=sys.stderr)
         return 2
-    cands = collect_candidates(a.src, limit=a.limit,
-                               confs=tuple(x.strip() for x in a.confs.split(",") if x.strip()),
-                               side=a.side)
+    pred = (a.predicate or "cites").strip()
+    if pred not in ("cites", "implements", "amends", "repeals", "issued_by"):
+        print(f"不支持的谓词：{pred}", file=sys.stderr)
+        return 2
+    with_ctx = pred == "issued_by"
+    contexts = None
+    if a.candidates_file:
+        cands = load_candidates_file(a.candidates_file, limit=a.limit)
+        print(f"[judge] 清单 {a.candidates_file} → 候选 {len(cands)}（去重保序后）")
+        if with_ctx:
+            print("[judge] 警告：清单只有候选名、不含 title/evidence，issued_by 判定会退化成"
+                  "「是不是一个真实机构」——请改用 --src 以带上文档上下文", file=sys.stderr)
+    else:
+        rows = collect_candidates(a.src, limit=a.limit, preds=(pred,),
+                                  confs=tuple(x.strip() for x in a.confs.split(",") if x.strip()),
+                                  side=a.side, with_context=with_ctx)
+        if with_ctx:
+            cands = [r["object"] for r in rows]
+            contexts = {r["object"]: {"title": r["title"], "evidence": r["evidence"]}
+                        for r in rows}
+            print(f"[judge] 谓词 issued_by → 候选 {len(cands)}（已带 title/evidence 上下文）")
+        else:
+            cands = rows
     cache = a.cache or os.path.join(HERE, f"judge-cache-{a.side}.jsonl")
-    res = judge(cands, a.base, a.key, a.model, cache_path=cache, batch=a.batch)
+    res = judge(cands, a.base, a.key, a.model, cache_path=cache, batch=a.batch,
+                workers=a.workers, predicate=pred if with_ctx else None, contexts=contexts)
     with open(a.out, "w", encoding="utf-8") as f:
         for c in cands:
-            f.write(json.dumps(res[c], ensure_ascii=False) + "\n")
-    docs = [c for c in cands if res[c]["is_doc"]]
-    print(f"\n候选 {len(cands)} · 判为文件 {len(docs)} · 判为非文件 {len(cands)-len(docs)}")
-    print("非文件例：", [c for c in cands if not res[c]["is_doc"]][:5])
+            f.write(json.dumps(res[judge_ident(c, pred if with_ctx else None, contexts)],
+                               ensure_ascii=False) + "\n")
+    idents = [judge_ident(c, pred if with_ctx else None, contexts) for c in cands]
+    docs = [i for i in idents if res[i]["is_doc"]]
+    label = "本文档发布机关" if with_ctx else "文件"
+    print(f"\n候选 {len(cands)} · 判为{label} {len(docs)} · 判为其他 {len(cands)-len(docs)}")
+    print(f"非{label}例：", [res[i]["candidate"] for i in idents if not res[i]["is_doc"]][:5])
     return 0
 
 

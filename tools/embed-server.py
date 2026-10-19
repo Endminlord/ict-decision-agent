@@ -15,6 +15,7 @@
 """
 import argparse
 import json
+import os
 import sys
 import threading
 import time
@@ -177,7 +178,9 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     global EMB
     ap = argparse.ArgumentParser()
-    ap.add_argument("--model-dir", default="/home/endmin/.cache/bge-m3-onnx")
+    ap.add_argument("--model-dir",
+                    default=os.environ.get("BGE_M3_DIR", os.path.expanduser("~/.cache/bge-m3-onnx")),
+                    help="bge-m3 ONNX 目录；默认取 BGE_M3_DIR 或 ~/.cache/bge-m3-onnx")
     ap.add_argument("--host", default="0.0.0.0")
     ap.add_argument("--port", type=int, default=8792)
     ap.add_argument("--max-length", type=int, default=512)

@@ -1,0 +1,471 @@
+{
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "seed": 42,
+  "top_k": 10,
+  "A_hit_rate": {
+    "n": 100,
+    "k": 10,
+    "hit@1": 0.6,
+    "hit@3": 0.69,
+    "hit@5": 0.7,
+    "hit@10": 0.71,
+    "mrr": 0.6418,
+    "misses": [
+      {
+        "title": "《新能源汽车产业发展规划（2021-2035年）》国务院政策例行吹风会",
+        "doc": "49d504c677ec1655.txt"
+      },
+      {
+        "title": "国务院办公厅关于对2018年落实有关重大政策措施真抓实干成效明显地方予以督查 激励的通报",
+        "doc": "35ca44933e0e035f.txt"
+      },
+      {
+        "title": "自治区党委十届六次全会召开",
+        "doc": "6160964682a3b0be.txt"
+      },
+      {
+        "title": "六安市商务局关于印发六安市商务发展第十四个五年规划纲要的通知",
+        "doc": "2ad1bee0a0b0d934.txt"
+      },
+      {
+        "title": "共担全球责任 共迎全球挑战 ——李克强在第十二届亚欧首脑会议上的发言",
+        "doc": "d3940b443ff1e7ee.txt"
+      },
+      {
+        "title": "和县人民政府办公室关于印发进一步深化“互联网+政务服务”推进政务服务“一网、一门、一次”改革行动实施方案的通知",
+        "doc": "ca32b88d184f57cc.txt"
+      },
+      {
+        "title": "让产业成为乡村振兴强大引擎",
+        "doc": "5ec34fc1c92659b7.txt"
+      },
+      {
+        "title": "淮南市人民政府办公室关于印发全面推行行政执法公示制度执法全过程记录制度重大执法决定法制审核制度实施细则的通知",
+        "doc": "90ad5565dfca0ec5.txt"
+      },
+      {
+        "title": "中共中央 国务院关于建立更加有效的区域协调发展新机制的意见",
+        "doc": "2306ed74916eb0bb.txt"
+      },
+      {
+        "title": "在全国深化“放管服”改革优化营商环境电视电话会议上的讲话 ……………………………… 李克强",
+        "doc": "d87bed73a74d3612.txt"
+      }
+    ]
+  },
+  "B_grounding": {
+    "checked": 500,
+    "found": 500,
+    "grounding_rate": 1.0,
+    "unreachable": []
+  },
+  "C_abstention": {
+    "out_of_domain_n": 20,
+    "out_abstained": 20,
+    "abstain_recall": 1.0,
+    "in_domain_n": 10,
+    "in_answered": 9,
+    "answer_rate": 0.9,
+    "kw_hit_rate": 1.0,
+    "out_rows": [
+      {
+        "q": "如何用 Rust 实现一个无锁队列？",
+        "abstained": true,
+        "max_score": 0.7132,
+        "grounded": 0
+      },
+      {
+        "q": "红烧肉的家常做法是什么？",
+        "abstained": true,
+        "max_score": 0.692,
+        "grounded": 0
+      },
+      {
+        "q": "量子计算机的超导制冷方案原理",
+        "abstained": true,
+        "max_score": 0.7067,
+        "grounded": 0
+      },
+      {
+        "q": "2026 年世界杯小组赛赛程",
+        "abstained": true,
+        "max_score": 0.7104,
+        "grounded": 0
+      },
+      {
+        "q": "如何训练一个扩散模型生成猫的图片？",
+        "abstained": true,
+        "max_score": 0.6848,
+        "grounded": 0
+      },
+      {
+        "q": "太阳系外行星的凌日观测方法",
+        "abstained": true,
+        "max_score": 0.6776,
+        "grounded": 0
+      },
+      {
+        "q": "Python 的 GIL 是什么？",
+        "abstained": true,
+        "max_score": 0.6887,
+        "grounded": 0
+      },
+      {
+        "q": "怎么给吉他换弦？",
+        "abstained": true,
+        "max_score": 0.7067,
+        "grounded": 0
+      },
+      {
+        "q": "国际象棋的开局原则有哪些？",
+        "abstained": true,
+        "max_score": 0.7466,
+        "grounded": 0
+      },
+      {
+        "q": "混凝土抗压强度的测试标准 ASTM C39",
+        "abstained": true,
+        "max_score": 0.7241,
+        "grounded": 0
+      },
+      {
+        "q": "如何用 Kubernetes 做金丝雀发布？",
+        "abstained": true,
+        "max_score": 0.7329,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡豆的烘焙曲线怎么定？",
+        "abstained": true,
+        "max_score": 0.7046,
+        "grounded": 0
+      },
+      {
+        "q": "植物光合作用的卡尔文循环步骤",
+        "abstained": true,
+        "max_score": 0.7092,
+        "grounded": 0
+      },
+      {
+        "q": "怎样在 Excel 里做数据透视表？",
+        "abstained": true,
+        "max_score": 0.7313,
+        "grounded": 0
+      },
+      {
+        "q": "黑洞的信息悖论是什么？",
+        "abstained": true,
+        "max_score": 0.7026,
+        "grounded": 0
+      },
+      {
+        "q": "如何配置 Nginx 的反向代理缓存？",
+        "abstained": true,
+        "max_score": 0.7272,
+        "grounded": 0
+      },
+      {
+        "q": "马拉松训练的周跑量怎么安排？",
+        "abstained": true,
+        "max_score": 0.7187,
+        "grounded": 0
+      },
+      {
+        "q": "葡萄酒的单宁来自哪里？",
+        "abstained": true,
+        "max_score": 0.6739,
+        "grounded": 0
+      },
+      {
+        "q": "如何用 PyTorch 做分布式训练？",
+        "abstained": true,
+        "max_score": 0.7078,
+        "grounded": 0
+      },
+      {
+        "q": "中国传统建筑中的斗拱结构起什么作用？",
+        "abstained": true,
+        "max_score": 0.7088,
+        "grounded": 0
+      }
+    ],
+    "in_rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "abstained": false,
+        "max_score": 0.8571,
+        "grounded": 9,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "abstained": false,
+        "max_score": 0.8536,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "国务院关于政务公开有哪些规定？",
+        "abstained": false,
+        "max_score": 0.8663,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家"
+        ]
+      },
+      {
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "abstained": false,
+        "max_score": 0.8555,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "abstained": false,
+        "max_score": 0.8349,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "外商投资法的主要内容是什么？",
+        "abstained": false,
+        "max_score": 0.8561,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "abstained": false,
+        "max_score": 0.8402,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "知识产权保护的国家政策有哪些？",
+        "abstained": false,
+        "max_score": 0.8506,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "abstained": false,
+        "max_score": 0.8052,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "放管服改革的主要举措有哪些？",
+        "abstained": true,
+        "max_score": 0.8524,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      }
+    ]
+  },
+  "D_chain": {
+    "n": 10,
+    "multi_level": 9,
+    "multi_level_rate": 0.9,
+    "rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "rings": 9,
+        "grounded_rings": 9,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-06-23",
+          "2019-10-22"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "rings": 7,
+        "grounded_rings": 7,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-09-11",
+          "2015-10-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "国务院关于政务公开有哪些规定？",
+        "rings": 8,
+        "grounded_rings": 7,
+        "levels": [
+          "国家"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2022-05-10",
+          "2016-10-19"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "rings": 7,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2022-11-10",
+          "2019-08-07"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "rings": 8,
+        "grounded_rings": 7,
+        "levels": [
+          "国家",
+          "媒体"
+        ],
+        "level_span": 2,
+        "date_span": [
+          "2024-08-18",
+          "2019-07-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "外商投资法的主要内容是什么？",
+        "rings": 8,
+        "grounded_rings": 6,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-11-02",
+          "2019-12-26"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "rings": 13,
+        "grounded_rings": 4,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-02-24",
+          "2018-08-20"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "知识产权保护的国家政策有哪些？",
+        "rings": 9,
+        "grounded_rings": 9,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2023-11-21",
+          "2016-01-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "rings": 8,
+        "grounded_rings": 6,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-12-24",
+          "2018-10-20"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "放管服改革的主要举措有哪些？",
+        "rings": 9,
+        "grounded_rings": 0,
+        "levels": [
+          "国家",
+          "媒体"
+        ],
+        "level_span": 2,
+        "date_span": [
+          "2021-04-30",
+          "2017-07-10"
+        ],
+        "insufficient": true
+      }
+    ]
+  }
+}

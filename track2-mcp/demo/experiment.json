@@ -1,0 +1,2409 @@
+{
+  "model": "glm-5.3-flash",
+  "summary": {
+    "strict": {
+      "runs": 20,
+      "ok": 19,
+      "failed": 1,
+      "questions_with_citations": 13,
+      "questions_refused": 6,
+      "total_citations": 97,
+      "total_verbatim": 97,
+      "total_omitted": 0,
+      "total_rejected": 0,
+      "verbatim_rate": 1.0,
+      "reject_rate": 0.0,
+      "questions_with_rejection": 0,
+      "avg_seconds": 7.3
+    },
+    "loose": {
+      "runs": 20,
+      "ok": 19,
+      "failed": 1,
+      "questions_with_citations": 13,
+      "questions_refused": 7,
+      "total_citations": 61,
+      "total_verbatim": 11,
+      "total_omitted": 24,
+      "total_rejected": 26,
+      "verbatim_rate": 0.1803,
+      "reject_rate": 0.4262,
+      "questions_with_rejection": 10,
+      "avg_seconds": 10.6
+    }
+  },
+  "results": {
+    "strict": [
+      {
+        "ok": true,
+        "top_score": 0.882,
+        "answer_len": 99,
+        "answer": "国家层面的《优化营商环境条例》于2019年出台。该条例经2019年10月8日国务院第66次常务会议通过，2019年10月22日由李克强总理签发国务院令（第722号）公布，自2020年1月1日起施行。",
+        "refused": false,
+        "citations": 2,
+        "citations_detail": [
+          {
+            "chunk_id": "f2f4a096a72581f7",
+            "quote": "《优化营商环境条例》已经2019年10月8日国务院第66次常务会议通过，现予公布，自2020年1月1日起施行。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8cc5ab305e682dd5",
+            "quote": "李克强总理于10月22日（本周二）签发国务院令，公布了《优化营商环境条例》，为优化营商环境进一步提供了制度性保障。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 2,
+        "omitted": 0,
+        "verified": 2,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 4.1,
+        "kind": "in",
+        "question": "国家层面的《优化营商环境条例》是哪一年出台的？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8467,
+        "answer_len": 85,
+        "answer": "现有资料不足以支撑结论。提供的检索片段虽然包含《优化营商环境条例》的部分条文（第一至十三条），但均未涉及中小投资者保护的具体规定，片段中并无关于中小投资者保护的条款内容。",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 3.6,
+        "kind": "in",
+        "question": "《优化营商环境条例》对中小投资者保护是怎么规定的？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8896,
+        "answer_len": 289,
+        "answer": "根据现有检索片段，安徽省在优化营商环境方面出台的主要文件是《安徽省优化营商环境条例》。该条例于2023年11月17日经安徽省第十四届人民代表大会常务委员会第五次会议表决通过，自2024年1月1日起施行，并根据2024年11月22日安徽省第十四届人民代表大会常务委员会第十二次会议《关于修改部分地方性法规的决定》进行了修正。条例共九章，涵盖总则、市场环境、要素环境、政务环境、监管环境、法治环境、监督保障、法律责任和附则，从构建利企惠企的市场环境、保障有力的要素环境、高效便利的政务环境等多个方面对优化营商环境作出具体规定。除该条例外，片段中未提及其他优化营商环境方面的具体文件。",
+        "refused": false,
+        "citations": 4,
+        "citations_detail": [
+          {
+            "chunk_id": "e02f46b350972f40",
+            "quote": "2023年11月17日，省十四届人大常委会第五次会议表决通过《安徽省优化营商环境条例》，从构建利企惠企的市场环境、保障有力的要素环境、高效便利的政务环境等多个方面，对优化营商环境作出具体规定。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3c574a31fd8c12da",
+            "quote": "11月17日，安徽省十四届人大常委会第五次会议表决通过《安徽省优化营商环境条例》（以下简称《条例》），将于2024年1月1日起施行。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "df3c3ab940b3d8cf",
+            "quote": "安徽省优化营商环境条例 （ 202 3 年 11 月 17 日安徽省第 十四 届人民代表大会常务委员会第 五 次会议通过 根据 2024 年 11 月 22 日安徽省第十四届人民代表大会常务委员会第十二次会议《关于修改部分地方性法规的决定》修正 ） 目 录 第一章 总 则 第二章 市场环境 第三章 要素环境 第四章 政务环境 第五章 监管环境 第六章 法治环境 第七章 监督保障 第八章 法律责任 ",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ab8fa01ee020240a",
+            "quote": "今年9月19日，《条例（草案）》提请安徽省十四届人大常委会第四次会议审议。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 4,
+        "omitted": 0,
+        "verified": 4,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 7.3,
+        "kind": "in",
+        "question": "安徽省在优化营商环境方面出台了哪些文件？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8426,
+        "answer_len": 562,
+        "answer": "根据检索资料，2024年优化营商环境的新政策主要包括：\n\n1. 市场监管领域：9月3日国家市场监督管理总局出台《市场监管部门优化营商环境重点举措（2024年版）》，针对企业跨区迁移、冒名登记、职业索赔等问题提出企业异地迁移可直接到迁入地办理登记、完善企业实名登记机制、依法规制职业索赔行为等举措；同时提出科学确定处罚种类和幅度、健全食品安全风险防控体系、深化注册资本认缴登记制度、推进信用风险分类管理、健全公平竞争制度机制等。\n\n2. 国家发改委层面：2024年将发布新版市场准入负面清单、实施营商环境改进提升行动、更大力度引进外资，健全与企业常态化沟通交流机制，营造市场化、法治化、国际化营商环境。\n\n3. 国务院常务会议：听取优化营商环境专项督查调研情况汇报，要求对意见建议逐条分析研究、在政策制定中吸收，总结推广典型经验；研究健全解决企业账款拖欠问题长效机制，提高拖欠主体违规成本、降低被拖欠企业维权成本。\n\n4. 招投标及特许经营领域：国家发改委等8部门印发《招标投标领域公平竞争审查规则》，首次为招投标领域出台政策措施列明“负面清单”，自2024年5月1日起施行；修订发布《基础设施和公用事业特许经营管理办法》，将特许经营最长期限延长到40年，鼓励民营企业多种方式参与特许经营项目，同样自2024年5月1日起施行。",
+        "refused": false,
+        "citations": 9,
+        "citations_detail": [
+          {
+            "chunk_id": "0548b5c679aa5845",
+            "quote": "9月3日，国家市场监督管理总局出台了《市场监管部门优化营商环境重点举措（2024年版）》 （以下简称《重点举措》） 。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0548b5c679aa5845",
+            "quote": "提出企业异地迁移可以直接到迁入地办理登记、完善企业实名登记机制和程序、依法规制职业索赔行为等务实举措。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0548b5c679aa5845",
+            "quote": "提出深化注册资本认缴登记制度，实行依法按期认缴；全面深入推进信用风险分类管理，切实减少对企业正常生产经营活动不必要的干扰；健全公平竞争制度机制，重点破除限制企业自主迁移、妨碍市场公平准入、构筑自我“小循环”等问题。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "e4903686913a7b33",
+            "quote": "国家发改委：今年将发布新版市场准入负面清单、实施营商环境改进提升行动、更大力度引进外资",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "e4903686913a7b33",
+            "quote": "进一步优化营商环境。健全与企业常态化沟通交流机制，实施营商环境改进提升行动，营造市场化、法治化、国际化营商环境",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0ca07e4ea4eb8292",
+            "quote": "国务院常务会议听取关于优化营商环境专项督查调研情况的汇报。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0ca07e4ea4eb8292",
+            "quote": "国务院常务会议研究健全解决企业账款拖欠问题长效机制的举措。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0ca07e4ea4eb8292",
+            "quote": "国家发展改革委等8部门联合印发《招标投标领域公平竞争审查规则》，主要内容包括招标投标领域公平竞争审查的总则、审查标准、审查机制、监督管理和附则等，自2024年5月1日起施行。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0ca07e4ea4eb8292",
+            "quote": "国家发展改革委等6部门发布修订后的《基础设施和公用事业特许经营管理办法》，自2024年5月1日起施行。办法明确将特许经营最长期限延长到40年， 鼓励民营企业 通过直接投资、独资、控股、参与联合体等多种方式参与特许经营项目。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 9,
+        "omitted": 0,
+        "verified": 9,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 9.5,
+        "kind": "in",
+        "question": "2024年优化营商环境有哪些新政策？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8147,
+        "answer_len": 164,
+        "answer": "现有资料未系统列出世界银行营商环境评价体系的完整指标清单，但从片段中可识别出涉及的部分指标：办理建筑许可、获得电力、跨境贸易、开办企业、登记财产、执行合同、保护中小投资者、办理破产、纳税等。片段[4][5]还提到参照国际通行营商环境评价指标，从企业开办、施工许可、产权登记、信贷获取、投资者保护、纳税、破产清算等方面梳理和对标。",
+        "refused": false,
+        "citations": 3,
+        "citations_detail": [
+          {
+            "chunk_id": "8cc5ab305e682dd5",
+            "quote": "在办理建筑许可、获得电力、跨境贸易、开办企业、登记财产等领域进行了一系列大刀阔斧的改革",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8cc5ab305e682dd5",
+            "quote": "其中，执行合同、获得电力指标排名分别位居全球第5位、第12位，位居全球前沿；办理建筑许可指标排名实现了弯道超车，排名由第121位跃居至第33位；保护中小投资者指标排名大幅上升36位至第28位。跨境贸易、办理破产、纳税、开办企业等指标排名也实现了不同幅度的提升。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ee2306016363acf9",
+            "quote": "参照国际通行营商环境评价指标，从企业开办、施工许可、产权登记、信贷获取、投资者保护、纳税、破产清算等方面梳理和对标",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 3,
+        "omitted": 0,
+        "verified": 3,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 6.4,
+        "kind": "in",
+        "question": "世界银行营商环境评价体系包含哪些指标？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8408,
+        "answer_len": 352,
+        "answer": "根据检索资料，放管服改革的主要举措可归纳为：一、简政放权方面：进一步精简行政许可事项，对所有涉企经营许可事项实行“证照分离”改革，推进“照后减证”，实施市场准入负面清单制度，压减准入类职业资格数量。二、放管结合方面：加强和创新事中事后监管，健全以“双随机、一公开”监管为基本手段、以重点监管为补充、以信用监管为基础的新型监管机制，对新兴业态实行包容审慎监管，推进市场监管领域综合行政执法改革。三、优化服务方面：深入开展“互联网+政务服务”，推进政务服务“一站式”和“网上办理”，加快全国一体化政务服务平台建设。四、优化营商环境方面：深化商事制度改革（如“多证合一”“一照一码”）、全面开展工程建设项目审批制度改革、深化投资审批制度改革并推进投资项目承诺制改革、落实《优化营商环境条例》并开展营商环境评价。",
+        "refused": false,
+        "citations": 10,
+        "citations_detail": [
+          {
+            "chunk_id": "ca9c34c78f656ce0",
+            "quote": "深入推进“放管服”改革，深化行政审批制度改革，进一步精简行政许可事项，对所有涉企经营许可事项实行“证照分离”改革，大力推进“照后减证”。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ca9c34c78f656ce0",
+            "quote": "加强市场监管改革创新，健全以“双随机、一公开”监管为基本手段、以重点监管为补充、以信用监管为基础的新型监管机制。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ca9c34c78f656ce0",
+            "quote": "创新行政管理和服务方式，深入开展“互联网+政务服务”，加快推进全国一体化政务服务平台建设。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ca9c34c78f656ce0",
+            "quote": "全面开展工程建设项目审批制度改革。深化投资审批制度改革，简化、整合投资项目报建手续，推进投资项目承诺制改革",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8682b96602ee3e48",
+            "quote": "我们在简政放权的同时，加强和创新事中事后监管，对新兴产业实行包容审慎监管，为其成长留下充分空间。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c56140aaff48a87e",
+            "quote": "市场准入负面清单管理制度全面实施。事中事后监管得到加强，改革和理顺市场监管体制，严格规范行政执法，“双随机、一公开”成为日常监管的基本方式。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "cd0fed3ca437dbe7",
+            "quote": "深化商事制度改革，全面实施企业“五证合一、一照一码”、个体工商户“两证整合”，深入推进“多证合一”。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "cd0fed3ca437dbe7",
+            "quote": "鼓励双创示范基地结合实际整合市场监管职能和执法力量，推进市场监管领域综合行政执法改革，着力解决重复检查、多头执法等问题。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8682b96602ee3e48",
+            "quote": "落实《优化营商环境条例》，完善营商环境评价体系，适时在全国范围开展营商环境评价，加快打造市场化、法治化、国际化营商环境。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8a298ec39569788a",
+            "quote": "进一步梳理压减准入类职业资格数量，取消乡村兽医、勘察设计注册石油天然气工程师等职业资格，推进社会化职业技能等级认定，持续动态优化国家职业资格目录。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 10,
+        "omitted": 0,
+        "verified": 10,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 6.4,
+        "kind": "in",
+        "question": "放管服改革的主要举措有哪些？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8572,
+        "answer_len": 188,
+        "answer": "优化营商环境的政策目标主要包括：一是培育和激发市场活力、增强经营主体内生动力，创造竞争新优势；二是稳定社会预期、提振发展信心，推动经济运行持续回升向好，推动经济高质量发展；三是打造市场化、法治化、国际化营商环境；四是解放生产力、提高竞争力，通过激发全社会创新创业热情和市场活力为经济发展培育新动能；五是厚植政府有为、市场有效、企业有感的营商沃土，提升经营主体的获得感和满意度。",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "d688c4b05b510ac8",
+            "quote": "优化营商环境是培育和激发市场活力、增强经营主体内生动力的关键之举。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "d688c4b05b510ac8",
+            "quote": "厚植政府有为、市场有效、企业有感的营商沃土。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "98f69e46c91458fa",
+            "quote": "强调“要把打造市场化、法治化、国际化营商环境摆在重要位置，进一步稳定社会预期，提振发展信心，激发市场活力，推动经济运行持续回升向好”。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "303d9e4ca650ffd0",
+            "quote": "优化营商环境，就是解放生产力、提高竞争力。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "303d9e4ca650ffd0",
+            "quote": "优化营商环境还具有明显的溢出效应，有助于激发全社会创新创业热情和市场活力，为经济发展培育新动能。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 5,
+        "omitted": 0,
+        "verified": 5,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 4.8,
+        "kind": "in",
+        "question": "优化营商环境的政策目标是什么？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8909,
+        "answer_len": 664,
+        "answer": "市场主体登记管理的主要规定依据《中华人民共和国市场主体登记管理条例》（国务院令第746号，2021年4月14日国务院第131次常务会议通过，自2022年3月1日起施行）。主要内容包括：\n\n1. 立法目的与原则：为规范市场主体登记管理行为、优化营商环境制定本条例；市场主体登记管理应当遵循依法合规、规范统一、公开透明、便捷高效的原则。\n\n2. 市场主体范围：包括公司、非公司企业法人及其分支机构，个人独资企业、合伙企业及其分支机构，农民专业合作社（联合社）及其分支机构，个体工商户，外国公司分支机构，以及法律、行政法规规定的其他市场主体。\n\n3. 登记基本要求：市场主体应当依照条例办理登记，未经登记不得以市场主体名义从事经营活动（法律、行政法规规定无需登记的除外）；登记包括设立登记、变更登记和注销登记。\n\n4. 管理体制：国务院市场监督管理部门主管全国市场主体登记管理工作，县级以上地方人民政府市场监督管理部门主管本辖区登记管理工作。\n\n5. 便利化措施：推行当场办结、一次办结、限时办结等制度，实现集中办理、就近办理、网上办理、异地可办；配套《实施细则》将各类文书压减近一半，取消6项证明材料，取消受理环节，推行形式审查、当场登记。\n\n6. 退出机制：优化注销办理流程，推行网上注销服务；对设立后未开展生产经营活动或无债权债务的市场主体可按简易程序办理注销；条例还创设了歇业制度，帮助市场主体“停机保号”。\n\n7. 其他改革：推进住所（经营场所）登记申报承诺制、一照多址、一业一证、证照联办等改革，以及年度报告“多报合一”。",
+        "refused": false,
+        "citations": 10,
+        "citations_detail": [
+          {
+            "chunk_id": "af7a4b5e36ff64ef",
+            "quote": "《中华人民共和国市场主体登记管理条例》已经2021年4月14日国务院第131次常务会议通过，现予公布，自2022年3月1日起施行。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "af7a4b5e36ff64ef",
+            "quote": "市场主体应当依照本条例办理登记。未经登记，不得以市场主体名义从事经营活动。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "af7a4b5e36ff64ef",
+            "quote": "市场主体登记管理应当遵循依法合规、规范统一、公开透明、便捷高效的原则。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "af7a4b5e36ff64ef",
+            "quote": "推行当场办结、一次办结、限时办结等制度，实现集中办理、就近办理、网上办理、异地可办，提升市场主体登记便利化程度。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ea330cd7646e31ab",
+            "quote": "对设立后未开展生产经营活动或者无债权债务的市场主体，可以按照简易程序办理注销。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ea330cd7646e31ab",
+            "quote": "推进住所（经营场所）登记申报承诺制改革、一照多址、一业一证、证照联办审批模式改革及其他改革事项，简化服务流程，创新服务方式。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0585405bea755352",
+            "quote": "这是我国制定出台的第一部统一规范各类市场主体登记管理的行政法规，为解决我国登记管理规定分散杂乱等突出问题，有效保护市场主体合法权益、促进创业创新、维护市场秩序提供了法治保障。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0585405bea755352",
+            "quote": "一方面创设歇业制度。2022年，全国向登记机关办理歇业备案的市场主体共有23184户，更多市场主体正逐步熟悉和利用歇业制度实现“停机保号”，从容面对自身的经营困难。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "f5d08c65c735c459",
+            "quote": "一方面将市场主体申请类、审核类、通知类文书压减近一半，取消了6项证明材料，显著降低了市场主体办事成本，另一方面取消受理环节，推行形式审查、当场登记，为各地提高登记效率、压缩企业开办时间提供了制度支撑。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c416c4bf6231fab4",
+            "quote": "《条例》共六章，五十五条，主要对以营利为目的从事经营活动的公司、合伙企业、个体工商户等各类市场主体的登记管理进行了统一规定。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 10,
+        "omitted": 0,
+        "verified": 10,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 11.7,
+        "kind": "in",
+        "question": "市场主体登记管理有哪些规定？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8522,
+        "answer_len": 871,
+        "answer": "各地在简化企业开办流程方面的做法主要包括：\n\n一、压缩企业开办时间。国务院要求2018年底前各直辖市、计划单列市、副省级城市和省会城市将企业开办时间由平均20天减至8.5天以内，2019年上半年在全国实现该目标；2019年又提出年底前全国压缩至5个工作日内，鼓励具备条件的地方压缩至3个工作日内；2020年国务院明确提出全国减到4个工作日以内，有条件的地区还可进一步缩短。[2][3][1] 江苏省确保2018年底全面实现开办企业3个工作日内完成的目标。[5]\n\n二、推行\"一窗受理、并行办理\"和\"一网通办\"。将申请人依次向各部门提交材料的传统流程改造为一次提交、同步办理、信息共享、限时办结的流程。[2] 各地开通\"一网通办\"平台，整合设立登记、印章制作、申领发票、社保登记等事项，实现\"登录一个平台、填报一次信息、后台实时流转、即时回馈信息\"，有条件的地方推行办件寄递、证票自助打印，逐步实现\"不见面\"办理；并依托政务服务大厅建立企业开办专窗（专区）。[3] 绝大部分省份已开通该平台，到2020年底全部开通，实现企业开办全程网上办理。[1] 江苏推行\"一窗受理、一表填报\"，增设\"企业开办\"一站式受理窗口，提供集成服务。[5]\n\n三、压减办理环节。各地清理非法定事项，将企业登记、印章刻制、申领发票和社保登记4个环节至少压减为3个环节，社保登记申请合并到企业登记环节，并将各环节办理时间分别控制在企业登记2个工作日内、印章刻制1个工作日内、初次申领发票2个工作日内。[3]\n\n四、推进住所与经营场所登记改革。支持各省统筹开展住所与经营场所分离登记试点，企业在登记一个住所的同时还可登记多个经营场所，减少登记事项。[1]\n\n五、地方创新做法。如北京推行\"一业一证\"改革，向市场主体颁发一张综合许可凭证，并叠加\"证照联办\"，实现\"一次告知、一表申请、一套材料、一窗受理、一网办理、一次办结、证照同发",
+        "refused": false,
+        "citations": 13,
+        "citations_detail": [
+          {
+            "chunk_id": "b7de0dea1dca7b69",
+            "quote": "今年国务院明确提出全国要减到四个工作日以内，有条件的地区还可以进一步地缩短企业开办时间。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "b7de0dea1dca7b69",
+            "quote": "目前，绝大部分省自治区直辖市已经开通了企业开办“一网通办”平台，到今年底要全部开通这个平台，实现企业开办全程网上办理。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "b7de0dea1dca7b69",
+            "quote": "我们将支持各省统筹开展住所与经营场所分离登记试点。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "1c7d30f317e3e260",
+            "quote": "2018年年底前，各直辖市、计划单列市、副省级城市和省会城市要将企业开办时间压缩一半以上，由目前平均20天减至8.5天（指工作日，下同）以内，其他地方也要积极压减企业开办时间，2019年上半年在全国实现上述目标。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "1c7d30f317e3e260",
+            "quote": "将申请人依次向各部门提交材料的传统办事流程，改造为一次提交、同步办理、信息共享、限时办结的“一窗受理、并行办理”流程。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ebcf2837a74b745f",
+            "quote": "力争2019年年底前，全国实现压缩企业开办时间至5个工作日内，提前完成本届政府提出的目标。鼓励具备条件的地方，在确保工作质量前提下，压缩企业开办时间至3个工作日内。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ebcf2837a74b745f",
+            "quote": "共同将《意见》规定的企业登记、印章刻制、申领发票和社保登记4个环节至少压减为企业登记、印章刻制、申领发票3个环节，社保登记的申请合并到企业登记环节中。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ebcf2837a74b745f",
+            "quote": "各地要开通“一网通办”平台（或服务专区等），整合设立登记、印章制作、申领发票、社保登记等各类企业开办事项和网上服务资源，加强信息共享，切实具备“登录一个平台、填报一次信息、后台实时流转、即时回馈信息”的企业开办服务能力。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "228c35bd3e70e5f4",
+            "quote": "确保 2018 年年底全面实现开办企业三个工作日内完成的目标。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "228c35bd3e70e5f4",
+            "quote": "增设“企业开办”一站式受理窗口，负责企业申请材料的受理和传递，为企业提供“一站式”办理工商登记、刻章备案、银行开户、涉税事项、社会保险登记等集成服务",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "23f6ffa141a1a495",
+            "quote": "2021年，北京率先在经开区的10个场景启动“一业一证”改革，推动同一行业经营涉及的多项行政审批事项跨部门集成办理，由政务服务管理部门汇聚相关行政审批证件信息，向市场主体颁发一张综合许可凭证。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "23f6ffa141a1a495",
+            "quote": "高女士点赞的“证照联办”和“一业一证”叠加合并改革，实现了“一次告知、一表申请、一套材料、一窗受理、一网办理、一次办结、证照同发”，最大程度上减环节、减材料、减时限。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "23f6ffa141a1a495",
+            "quote": "截至目前，餐饮店、咖啡厅等40个行业“一业一证”已全部上线。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 13,
+        "omitted": 0,
+        "verified": 13,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 17.3,
+        "kind": "in",
+        "question": "各地在简化企业开办流程方面做了什么？",
+        "mode": "strict"
+      },
+      {
+        "ok": false,
+        "error": "输出里找不到 JSON",
+        "raw": "{\n  \"answer\": \"根据资料，中国营商环境评价指标体系由国家发展改革委按照国务院部署牵头建立并不断完善，设计遵循国际可比、对标世行、中国特色原则，以市场主体和社会公众满意度为导向。从指标结构看，紧扣市场主体和社会公众的满意度，紧扣营造稳定公平透明、可预期的营商环境的要求，紧扣投资吸引力和城市的高质量发展，从衡量企业全生命周期、反映投资吸引力、体现监管与服务三个维度设计，包含18个一级指标",
+        "kind": "in",
+        "question": "营商环境评价的指标体系是怎么设计的？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8358,
+        "answer_len": 670,
+        "answer": "根据检索到的资料，政务服务“一网通办”的政策依据主要包括以下国务院层面文件：\n\n1. 《国务院关于加快推进“互联网+政务服务”工作的指导意见》（国发〔2016〕55号，2016年）——提出推进数据共享、打通信息孤岛，让企业和群众少跑腿、好办事，是“一网通办”的早期基础性政策依据。\n\n2. 《国务院关于加快推进全国一体化在线政务服务平台建设的指导意见》（2018年）——明确提出“全面推进‘一网通办’”，推动政务服务从“线下跑”向“网上办”、“分头办”向“协同办”转变。\n\n3. 《国务院办公厅关于加快推进政务服务“跨省通办”的指导意见》（国办发〔2020〕35号，2020年）——指出“政务服务‘一网通办’深入推进”，依托全国一体化政务服务平台推动更多事项“跨省通办”。\n\n4. 《国务院办公厅关于加快推进“一件事一次办”打造政务服务升级版的指导意见》（国办发〔2022〕32号，2022年）——在“一网、一门、一次”改革和“互联网＋政务服务”基础上推进集成化办理，提升政务服务标准化、规范化、便利化水平。\n\n5. 《国务院办公厅关于依托全国一体化政务服务平台建立政务服务效能提升常态化工作机制的意见》（2023年印发）——推动实现“一地创新、多地复用”，持续提升“一网通办”能力，实现政务服务从“能办”到“好办”。\n\n此外，2020年国新办政策例行吹风会也介绍了上述“跨省通办”指导意见的出台背景，其中提到党中央、国务院陆续出台“互联网+政务服务”等系列政策文件，全国一体化政务服务平台初步建成并发挥作用，政务服务“一网通办”深入推进。",
+        "refused": false,
+        "citations": 6,
+        "citations_detail": [
+          {
+            "chunk_id": "3214781bd3aa171b",
+            "quote": "推进“互联网+政务服务”，是贯彻落实党中央、国务院决策部署，把简政放权、放管结合、优化服务改革推向纵深的关键环节",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "47a1f6c5d4083bad",
+            "quote": "从“线下跑”向“网上办”、“分头办”向“协同办”转变，全面推进“一网通办”",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "d84dd741cf44ad65",
+            "quote": "全国一体化政务服务平台初步建成并发挥作用，政务服务“一网通办”深入推进",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "396355a250fa63d5",
+            "quote": "在深入推进政务服务“一网、一门、一次”改革、“互联网＋政务服务”的基础上，一些地区进一步加大改革创新力度，将多个部门相关联的“单项事”整合为企业和群众视角的“一件事”",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9dc8e6f5ed59b0ab",
+            "quote": "国务院办公厅印发《关于依托全国一体化政务服务平台建立政务服务效能提升常态化工作机制的意见》",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "acca7c17bd637816",
+            "quote": "近日，国务院常务会议审议通过《关于加快推进政务服务“跨省通办”的指导意见》，《意见》已于近日印发",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 6,
+        "omitted": 0,
+        "verified": 6,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 9.0,
+        "kind": "in",
+        "question": "政务服务一网通办有哪些政策依据？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8405,
+        "answer_len": 597,
+        "answer": "根据检索到的资料，国家在减轻企业负担方面出台的相关文件主要包括：\n\n1. 《国务院关于印发降低实体经济企业成本工作方案的通知》（国发〔2016〕48号，2016年8月8日印发）。该方案提出经过1—2年努力取得初步成效、3年左右使实体经济企业综合成本合理下降，具体包括税费负担合理降低、融资成本有效降低、制度性交易成本明显降低、人工成本上涨得到合理控制等目标任务。\n\n2. 《国务院关于落实〈政府工作报告〉重点工作部门分工的意见》（2018年4月30日），其中明确部署“进一步减轻企业税负”和“大幅降低企业非税负担”，提出全年再为企业和个人减税8000多亿元、为市场主体减轻非税负担3000多亿元。\n\n3. 《国务院办公厅关于聚焦企业关切进一步推动优化营商环境政策落实的通知》（国办发〔2018〕104号，2018年11月27日），针对企业负担仍需降低、小微企业融资难融资贵等问题部署破除市场准入限制、缓解中小微企业融资难融资贵等措施。\n\n4. 《国务院办公厅关于进一步优化营商环境更好服务市场主体的实施意见》（2020年8月10日），其中专门提出“降低小微企业等经营成本”，包括推行以保险、保函等替代现金缴纳涉企保证金等举措。\n\n此外，2023年在支持民营经济发展方面还出台了《意见》和《若干举措》，强化促进民营经济发展的政策措施，上半年民营经济纳税人缴费人新增减税降费及退税缓费7049亿元。",
+        "refused": false,
+        "citations": 10,
+        "citations_detail": [
+          {
+            "chunk_id": "27607f575d092049",
+            "quote": "国务院关于印发 降低实体经济企业成本工作方案的通知 国发〔2016〕48号",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "27607f575d092049",
+            "quote": "经过1—2年努力，降低实体经济企业成本工作取得初步成效，3年左右使实体经济企业综合成本合理下降，盈利能力较为明显增强。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c4860a7b7cfcb8e4",
+            "quote": "（九）进一步减轻企业税负。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c4860a7b7cfcb8e4",
+            "quote": "全年再为企业和个人减税8000多亿元，促进实体经济转型升级，着力激发市场活力和社会创造力。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c4860a7b7cfcb8e4",
+            "quote": "全年为市场主体减轻非税负担3000多亿元，不合理的坚决取消，过高的坚决降下来，让企业轻装上阵、聚力发展。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "bca6ad8ffc96bb03",
+            "quote": "国务院办公厅关于聚焦企业关切 进一步推动优化营商环境政策落实的通知 国办发〔2018〕104号",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "bca6ad8ffc96bb03",
+            "quote": "（二）推动缓解中小微企业融资难融资贵问题。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7591fe5406444a8a",
+            "quote": "（六）降低小微企业等经营成本。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7591fe5406444a8a",
+            "quote": "在工程建设、政府采购等领域，推行以保险、保函等替代现金缴纳涉企保证金，减轻企业现金流压力。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "6c21f417f0225696",
+            "quote": "上半年，包括小微企业和个体工商户在内的民营经济纳税人缴费人新增减税降费及退税缓费7049亿元，占比76%，是政策惠及的主体。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 10,
+        "omitted": 0,
+        "verified": 10,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 10.7,
+        "kind": "in",
+        "question": "国家在减轻企业负担方面出台了哪些文件？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.7012,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.5,
+        "kind": "out",
+        "question": "如何做红烧肉？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.699,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.6,
+        "kind": "out",
+        "question": "量子纠缠的退相干时间是多少？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.7313,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.6,
+        "kind": "out",
+        "question": "Rust 语言的所有权模型是怎么实现的？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.7239,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.8,
+        "kind": "out",
+        "question": "Kubernetes 的 Pod 调度策略有哪些？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.6783,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.6,
+        "kind": "out",
+        "question": "太阳系八大行星的公转周期各是多少？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8633,
+        "answer_len": 558,
+        "answer": "总体来看，北京市营商环境处于全国领先水平，呈现持续改善态势。主要依据：\n\n1. 改革成效领先：北京强力推进5个版本营商环境改革，千余创新举措落地，在中国营商环境评价中综合排名连续3年成绩优异，实现了从跟跑摸索到领先示范的转变；全国政协调研也评价其实现从\"跟跑\"到\"领跑\"的转变，为全国提供了\"北京样本\"。\n\n2. 审批效率高：企业开办1天即可全部办结，截至11月底84万余户企业通过全程电子化办理开办，全程网办率超95%；过去5年在企业开办、办理建筑许可、获得电力等领域共压减审批环节42个、压缩审批时间656天，直接减少企业经营成本约60亿元。\n\n3. 法治保障不断健全：2020年出台《北京市优化营商环境条例》，2022年修订并将启动新一轮修订；2023年印发《北京市全面优化营商环境打造\"北京服务\"意见》，作为指导性、框架性文件。\n\n4. 市场活力体现：2022年1月至11月新设企业23.10万户，同比增长7.36%，电子营业执照累计调用量居全国首位；外资企业也反映\"北京营商环境好，为我们节约了大量磨合时间\"。\n\n5. 仍存在的不足：民建北京市委调研发现部分企业在人才引进、融资贷款等方面有实际诉求，一些\"专精特新\"企业仍面临贷款利率高、期限短、数额小等问题；个别政策与实际需求存在差距等\"堵点\"仍需打通。",
+        "refused": false,
+        "citations": 12,
+        "citations_detail": [
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "近年来，北京强力推进5个版本营商环境改革，千余创新举措接茬落地，改革经验也向全国推广。在中国营商环境评价中，北京综合排名连续3年成绩优异，营商环境改革实现了从跟跑摸索到领先示范的转变。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "过去5年北京市在企业开办、办理建筑许可、获得电力、不动产登记、跨境贸易、纳税等领域共压减审批环节42个、压缩审批时间656天，企业\"准入不准营\"现象得到明显改善。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "normalized"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "今年1月至11月，北京市新设企业23.10万户，同比增长7.36%；截至目前，全市电子营业执照累计调用量9100余万次，居全国首位；截至11月底，84万余户企业通过全程电子化办理企业开办，全程网办率超95%",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "仅由于营商环境改革措施的出台，直接减少企业经营成本约60亿元。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "2ba927242a7ce602",
+            "quote": "北京市把优化营商环境作为转变政府职能、推动首都高质量发展的重要抓手，实现营商环境从\"跟跑\"到\"领跑\"的转变，为全国推进法治化营商环境建设提供了\"北京样本\"，经验弥足珍贵。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "normalized"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "2ba927242a7ce602",
+            "quote": "一方面，我们的股东（公司）有上百年从业史，经验丰富；另一方面，北京营商环境好，为我们节约了大量磨合时间，疫情防控期间都没耽误一天。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "2ba927242a7ce602",
+            "quote": "2020年出台的《北京市优化营商环境条例》，经过2022年修订后，将面临新一轮的修订。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "2ba927242a7ce602",
+            "quote": "2023年5月以来，北京总结6年来优化营商环境经验，形成《北京市全面优化营商环境打造\"北京服务\"意见》，并以市委、市政府名义印发，成为今后一个时期优化营商环境工作的指导性、框架性文件。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "normalized"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "a06e1ab57fffcf1e",
+            "quote": "近年来，北京市持续全面优化营商环境，始终保持营商环境首善之区的地位。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "a06e1ab57fffcf1e",
+            "quote": "一些\"专精特新\"企业依然面临贷款利率高、期限短、数额小等情况。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "normalized"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "a06e1ab57fffcf1e",
+            "quote": "北京营商环境持续改善的同时也有一些\"堵点\"需要打通，例如部分政策不符合企业实际需求，个别中介机构利用专业优势挤占政策红利。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "normalized"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "26660919f3b31cbb",
+            "quote": "持续打造国际一流的营商环境，积极帮助解决企业特别是中小微企业面临的实际困难，加大政策宣传解读，营造良好社会氛围，擦亮\"北京服务\"品牌。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "normalized"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 12,
+        "omitted": 0,
+        "verified": 12,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 16.3,
+        "kind": "edge",
+        "question": "北京市的营商环境怎么样？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.843,
+        "answer_len": 370,
+        "answer": "现有资料表明，中小企业融资难融资贵问题尚未得到根本解决，仍是当前反映较多的问题。2021年政策吹风会上，融资难融资贵被列为中小企业面临的突出困难之一，国务院为此出台了《关于进一步加大对中小企业纾困帮扶力度的通知》，提出“灵活精准运用多种金融政策工具”等措施[75a3eab2ff304501]。2024年的报道显示，企业负责人仍普遍反映“融资难、融资贵”，科技型中小企业在创业、研发、投产等环节均面临这一问题[7c642e952727035c]。同时，银企信息不对称的痛点“始终存在”，银行仍依赖传统抵押担保方式[49537461ea379f6d]。部分地区已有探索成效，如重庆南岸区建设的纯信用中小企业融资信用服务平台有效破解了小微主体融资难题[7c642e952727035c]，但从整体看，融资难问题仍在持续解决过程中，尚未完全解决。",
+        "refused": false,
+        "citations": 6,
+        "citations_detail": [
+          {
+            "chunk_id": "75a3eab2ff304501",
+            "quote": "当前不少中小企业面临原材料价格上涨、订单不足、融资难融资贵等困难和挑战",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "75a3eab2ff304501",
+            "quote": "特别是近期受原材料价格高企、订单不足、用工难用工贵、融资难回款慢、物流成本高、新冠肺炎疫情散发、用电紧张等因素影响，中小企业主要经营指标增速放缓",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7c642e952727035c",
+            "quote": "融资难、融资贵，高新技术企业支持政策力度不够大等，仍是大家反映最多的问题。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7c642e952727035c",
+            "quote": "科技企业特别是科技型中小企业在创业、研发、投产等重要环节，均面临“融资难”“融资贵”问题。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "49537461ea379f6d",
+            "quote": "银企信息不对称这一痛点问题始终存在，给金融体系带来一定的风险隐患，银行仍然依赖传统的抵押担保方式，智能化手段应用较少。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7c642e952727035c",
+            "quote": "目前，系统录入小微企业87户，通过测试并获得授信27户，有效破解小微市场主体融资覆盖度低、信贷违约高、融资成本高的“不可能三角”问题。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 6,
+        "omitted": 0,
+        "verified": 6,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 9.0,
+        "kind": "edge",
+        "question": "中小企业的融资难问题解决了吗？",
+        "mode": "strict"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8289,
+        "answer_len": 527,
+        "answer": "外商在华投资的准入限制呈持续放宽趋势，主要变化包括：\n\n1. 负面清单大幅缩减：外商投资负面清单2018年做了大幅度削减，2019年又比2018年减少20%，当时负面清单里只有40个行业受到禁止或限制，且未来条目还会进一步减少。[1]\n\n2. 制造业限制全面取消：2024年9月8日发布《外商投资准入特别管理措施（负面清单）（2024年版）》，全面取消了制造业领域外资准入限制措施，并于2024年11月1日起实施；负面清单以外的领域按照内外资一致的原则管理，切实给予外资企业国民待遇。[2][3]\n\n3. 服务业等新领域开放推进：通过连续修订负面清单不断扩大外商投资市场准入规模；相关部门正在研究修订鼓励外商投资产业目录，重点方向之一是继续增加服务业条目，引导更多外资投向服务业领域。[2] 同时在医疗、增值电信等领域开展准入试点，支持更多符合条件的外资机构开展银行保险、债券基金等领域业务。[4]\n\n4. 制度保障不断强化：2020年1月1日起施行的《中华人民共和国外商投资法》为外资发展奠定法制保障；2024年国务院发布《扎实推进高水平对外开放更大力度吸引和利用外资行动方案》，进一步拓展外商投资空间、优化营商环境、提升要素跨境流动便利化水平。[2]",
+        "refused": false,
+        "citations": 7,
+        "citations_detail": [
+          {
+            "chunk_id": "9344f4b4364e2ecc",
+            "quote": "我们的外商投资负面清单，2018年做了大幅度削减，2019年和2018年相比又减少了20%，现行的负面清单里只有40个行业受到禁止或者限制。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9af2739be73ff6a0",
+            "quote": "9月8日，国家发展改革委、商务部发布了《外商投资准入特别管理措施（负面清单）（2024年版）》，制造业领域外资准入限制措施全面取消。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "945e4f4bcfa5bc4e",
+            "quote": "修订出台了《外商投资准入特别管理措施（负面清单）（2024年版）》，全面取消了制造业领域外资准入限制措施。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "945e4f4bcfa5bc4e",
+            "quote": "确保外资准入负面清单以外的领域，按照内外资一致的原则管理，切实给予外资企业国民待遇",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9af2739be73ff6a0",
+            "quote": "相关部门正在研究修订鼓励外商投资产业目录，重点方向之一就是继续增加服务业条目，引导更多外资投向服务业领域。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "d85f95a27450aba0",
+            "quote": "出台新版外资准入负面清单，继续减少外资准入限制，并在外资企业非常关心的医疗、增值电信等领域开展准入试点。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9af2739be73ff6a0",
+            "quote": "2020年1月1日起施行的《中华人民共和国外商投资法》，为促进外资发展壮大奠定了坚实的法制保障。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 7,
+        "omitted": 0,
+        "verified": 7,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 9.3,
+        "kind": "edge",
+        "question": "外商在华投资的准入限制有哪些变化？",
+        "mode": "strict"
+      }
+    ],
+    "loose": [
+      {
+        "ok": true,
+        "top_score": 0.882,
+        "answer_len": 86,
+        "answer": "国家层面的《优化营商环境条例》于2019年出台：2019年10月8日国务院第66次常务会议通过，2019年10月22日以国务院令第722号公布，自2020年1月1日起施行。",
+        "refused": false,
+        "citations": 2,
+        "citations_detail": [
+          {
+            "chunk_id": "f2f4a096a72581f7",
+            "quote": "《优化营商环境条例》已经2019年10月8日国务院第66次常务会议通过，现予公布，自2020年1月1日起施行。总 理 李克强 2019年10月22日（国务院令第722号）",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "e1e559444caabdc8",
+            "quote": "国务院颁布了《优化营商环境条例》，并将于2020年1月1日起施行。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 1,
+        "omitted": 0,
+        "verified": 1,
+        "rejected": 1,
+        "rejected_detail": [
+          {
+            "quote": "《优化营商环境条例》已经2019年10月8日国务院第66次常务会议通过，现予公布，自2020年1月1日起施行。总 理 李",
+            "reason": ""
+          }
+        ],
+        "seconds": 4.7,
+        "kind": "in",
+        "question": "国家层面的《优化营商环境条例》是哪一年出台的？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8467,
+        "answer_len": 176,
+        "answer": "现有资料不足以支撑结论。检索片段中虽包含《优化营商环境条例》的部分条文（第一至十三条），但内容主要涉及市场主体保护的一般性规定（如权利平等、经营自主权、平等使用生产要素等），未出现关于中小投资者保护的具体条文。其余片段为地方法院的司法举措和最高法答问内容，均非《条例》原文规定。建议补充检索该条例中涉及投资者保护的相关章节（如法治保障部分）后再作结论。",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 4.5,
+        "kind": "in",
+        "question": "《优化营商环境条例》对中小投资者保护是怎么规定的？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8896,
+        "answer_len": 314,
+        "answer": "根据现有检索资料，安徽省在优化营商环境方面出台的核心文件是《安徽省优化营商环境条例》：该条例于2023年11月17日经安徽省第十四届人民代表大会常务委员会第五次会议表决通过，自2024年1月1日起施行，并于2024年11月22日经省十四届人大常委会第十二次会议《关于修改部分地方性法规的决定》修正。条例共九章（总则、市场环境、要素环境、政务环境、监管环境、法治环境、监督保障、法律责任、附则），从构建利企惠企的市场环境、保障有力的要素环境、高效便利的政务环境等方面对优化营商环境作出具体规定。此前，其草案曾于2023年9月19日提请省十四届人大常委会第四次会议审议。除该条例外，检索片段中未提及安徽省出台的其他营商环境专项文件。",
+        "refused": false,
+        "citations": 4,
+        "citations_detail": [
+          {
+            "chunk_id": "e02f46b350972f40",
+            "quote": "2023年11月17日，省十四届人大常委会第五次会议表决通过《安徽省优化营商环境条例》，从构建利企惠企的市场环境、保障有力的要素环境、高效便利的政务环境等多个方面，对优化营商环境作出具体规定。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3c574a31fd8c12da",
+            "quote": "11月17日，安徽省十四届人大常委会第五次会议表决通过《安徽省优化营商环境条例》……将于2024年1月1日起施行。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "df3c3ab940b3d8cf",
+            "quote": "《安徽省优化营商环境条例》（2023年11月17日安徽省第十四届人民代表大会常务委员会第五次会议通过 根据2024年11月22日安徽省第十四届人民代表大会常务委员会第十二次会议《关于修改部分地方性法规的决定》修正）……第一章 总 则 第二章 市场环境 第三章 要素环境 第四章 政务环境 第五章 监管环境 第六章 法治环境 第七章 监督保障 第八章 法律责任 第九章 附 则",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ab8fa01ee020240a",
+            "quote": "今年9月19日，《条例（草案）》提请安徽省十四届人大常委会第四次会议审议。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 2,
+        "omitted": 1,
+        "verified": 3,
+        "rejected": 1,
+        "rejected_detail": [
+          {
+            "quote": "《安徽省优化营商环境条例》（2023年11月17日安徽省第十四届人民代表大会常务委员会第五次会议通过 根据2024年11",
+            "reason": ""
+          }
+        ],
+        "seconds": 10.7,
+        "kind": "in",
+        "question": "安徽省在优化营商环境方面出台了哪些文件？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8426,
+        "answer_len": 712,
+        "answer": "2024年优化营商环境的新政策主要包括：\n\n一、市场监管领域：2024年9月3日，国家市场监督管理总局出台《市场监管部门优化营商环境重点举措（2024年版）》，按照既要\"放得活\"又要\"管得住\"的要求提出重点举措，包括：\n1. 针对企业跨区迁移、冒名登记、职业索赔等问题，提出企业异地迁移可直接到迁入地办理登记、完善企业实名登记机制和程序、依法规制职业索赔行为等举措；\n2. 推进严格规范公正文明执法，科学确定处罚种类和幅度，健全食品安全风险防控体系；\n3. 深化注册资本认缴登记制度改革，全面深入推进信用风险分类管理，健全公平竞争制度机制，破除限制企业自主迁移、妨碍市场公平准入等问题。\n\n二、国家发改委层面：2024年将发布新版市场准入负面清单、实施营商环境改进提升行动、健全与企业常态化沟通交流机制、更大力度引进外资，营造市场化、法治化、国际化营商环境。\n\n三、国务院层面（2024年4月）：\n1. 国务院常务会议听取优化营商环境专项督查调研情况汇报，要求吸收意见建议制定政策、总结推广典型经验；\n2. 研究健全解决企业账款拖欠问题长效机制，提高拖欠主体违规成本、降低被拖欠企业维权成本；\n3. 国家发改委等8部门印发《招标投标领域公平竞争审查规则》（2024年5月1日施行），首次为招投标领域政策措施列明\"负面清单\"；\n4. 修订发布《基础设施和公用事业特许经营管理办法》（2024年5月1日施行），特许经营最长期限延长到40年，鼓励民营企业参与特许经营项目。\n\n四、财税配套政策：2024年积极财政政策\"提质增效\"，落实研发费用税前加计扣除、科技成果转化税收减免、制造业技术改造投资税收优惠等政策，提振企业发展信心。",
+        "refused": false,
+        "citations": 4,
+        "citations_detail": [
+          {
+            "chunk_id": "0548b5c679aa5845",
+            "quote": "9月3日，国家市场监督管理总局出台了《市场监管部门优化营商环境重点举措（2024年版）》……提出企业异地迁移可以直接到迁入地办理登记、完善企业实名登记机制和程序、依法规制职业索赔行为等务实举措……提出深化注册资本认缴登记制度，实行依法按期认缴；全面深入推进信用风险分类管理……健全公平竞争制度机制，重点破除限制企业自主迁移、妨碍市场公平准入等问题。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "e4903686913a7b33",
+            "quote": "今年将发布新版市场准入负面清单、实施营商环境改进提升行动、更大力度引进外资……进一步优化营商环境。健全与企业常态化沟通交流机制，实施营商环境改进提升行动，营造市场化、法治化、国际化营商环境。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0ca07e4ea4eb8292",
+            "quote": "国务院常务会议听取关于优化营商环境专项督查调研情况的汇报……研究健全解决企业账款拖欠问题长效机制的举措……国家发展改革委等8部门联合印发《招标投标领域公平竞争审查规则》，自2024年5月1日起施行，首次为招投标领域出台政策措施列明\"负面清单\"……修订后的《基础设施和公用事业特许经营管理办法》明确将特许经营最长期限延长到40年，鼓励民营企业参与特许经营项目。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "330dcecba8e112fa",
+            "quote": "落实研发费用税前加计扣除、科技成果转化税收减免等政策，强化对制造业企业技术改造的资金支持，落实技术改造相关投资税收优惠政策，这些举措有助于进一步提振企业发展信心。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          }
+        ],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 4,
+        "rejected_detail": [
+          {
+            "quote": "9月3日，国家市场监督管理总局出台了《市场监管部门优化营商环境重点举措（2024年版）》……提出企业异地迁移可以直接到迁",
+            "reason": ""
+          },
+          {
+            "quote": "今年将发布新版市场准入负面清单、实施营商环境改进提升行动、更大力度引进外资……进一步优化营商环境。健全与企业常态化沟通交",
+            "reason": ""
+          },
+          {
+            "quote": "国务院常务会议听取关于优化营商环境专项督查调研情况的汇报……研究健全解决企业账款拖欠问题长效机制的举措……国家发展改革委",
+            "reason": ""
+          },
+          {
+            "quote": "落实研发费用税前加计扣除、科技成果转化税收减免等政策，强化对制造业企业技术改造的资金支持，落实技术改造相关投资税收优惠政",
+            "reason": ""
+          }
+        ],
+        "seconds": 13.6,
+        "kind": "in",
+        "question": "2024年优化营商环境有哪些新政策？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8147,
+        "answer_len": 355,
+        "answer": "现有资料未系统列出世界银行营商环境评价体系的完整指标清单，但可从片段中归纳出其中涉及的指标：开办企业、办理建筑许可、获得电力、登记财产（产权登记）、跨境贸易、纳税、保护中小投资者（投资者保护）、执行合同、办理破产（破产清算）、信贷获取等。片段[3][6]显示，北京、上海作为世行评估样本城市，重点围绕办理建筑许可、获得电力、跨境贸易、开办企业、登记财产、纳税、执行合同、保护中小投资者、办理破产等指标开展改革；片段[4][5]提到参照国际通行营商环境评价指标，从企业开办、施工许可、产权登记、信贷获取、投资者保护、纳税、破产清算等方面对标。另需注意，片段[1][2]提到的18个一级指标、87个二级指标是中国营商环境评价体系，并非世界银行的指标体系。世界银行评价体系的完整官方指标清单，现有资料不足以支撑结论。",
+        "refused": true,
+        "citations": 4,
+        "citations_detail": [
+          {
+            "chunk_id": "8cc5ab305e682dd5",
+            "quote": "在办理建筑许可、获得电力、跨境贸易、开办企业、登记财产等领域进行了一系列大刀阔斧的改革……执行合同、获得电力指标排名分别位居全球第5位、第12位……办理建筑许可指标排名……保护中小投资者指标排名大幅上升36位至第28位。跨境贸易、办理破产、纳税、开办企业等指标排名也实现了不同幅度的提升。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "b08045fa2998cee6",
+            "quote": "一是在办理建筑许可方面……二是在纳税方面……三是在跨境贸易方面……主要是针对营商环境中的一些突出短板和问题",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ee2306016363acf9",
+            "quote": "参照国际通行营商环境评价指标，从企业开办、施工许可、产权登记、信贷获取、投资者保护、纳税、破产清算等方面梳理和对标",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ec4906bac545078a",
+            "quote": "中国营商环境评价指标体系……包含18个一级指标和87个二级指标（注：此为中国评价体系，非世界银行体系）",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          }
+        ],
+        "verbatim": 1,
+        "omitted": 2,
+        "verified": 3,
+        "rejected": 1,
+        "rejected_detail": [
+          {
+            "quote": "中国营商环境评价指标体系……包含18个一级指标和87个二级指标（注：此为中国评价体系，非世界银行体系）",
+            "reason": ""
+          }
+        ],
+        "seconds": 11.9,
+        "kind": "in",
+        "question": "世界银行营商环境评价体系包含哪些指标？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8408,
+        "answer_len": 763,
+        "answer": "综合给定片段，“放管服”改革的主要举措可归纳为以下几个方面：\n\n一、简政放权（“放”）\n1. 大幅压缩各类行政审批事项：中央层面核准的企业投资项目压减90%，非行政许可审批退出历史舞台；进一步精简行政许可事项，对所有涉企经营许可事项实行“证照分离”改革，推进“照后减证”。\n2. 全面实施市场准入负面清单管理制度，放宽民间资本市场准入，扩大服务领域开放。\n3. 深化投资审批和工程建设项目审批制度改革，简化、整合投资项目报建手续，推进投资项目承诺制改革。\n4. 深化商事制度改革，实施“五证合一、一照一码”、“多证合一”，推进电子营业执照应用。\n\n二、放管结合、创新监管（“管”）\n1. 加强事中事后监管，“双随机、一公开”成为日常监管的基本方式。\n2. 改革和理顺市场监管体制，推进市场监管领域综合行政执法改革，解决重复检查、多头执法问题。\n3. 健全以“双随机、一公开”监管为基本手段、以重点监管为补充、以信用监管为基础的新型监管机制；对新兴产业和新业态实行包容审慎监管；将优惠政策由事前审批向事中事后监管转变。\n\n三、优化服务（“服”）\n1. 政务服务基本实现“一站式”和“网上办理”，深入开展“互联网+政务服务”，推进全国一体化政务服务平台建设。\n2. 压减办事时限：企业开办不到5个工作日办成，工程建设项目审批不超过120个工作日。\n3. 聚焦解决“办事难、办事慢”、“多头跑、来回跑”、“奇葩证明”等企业和群众反映突出的问题。\n\n四、优化营商环境\n落实《优化营商环境条例》，完善营商环境评价体系，打造市场化、法治化、国际化营商环境；自贸试验区率先探索负面清单管理、“证照分离”、“一照一码”等做法并向全国推广。\n\n总体上形成了“放”“管”“服”三管齐下、互为支撑的改革局面，推动政府职能深刻转变，激发市场主体活力。",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "c56140aaff48a87e",
+            "quote": "从“简政放权”入手，进而推动“放管结合”和“优化服务”，形成了“放”“管”“服”三管齐下、互为支撑的改革局面；各类行政审批大幅压缩，中央层面核准的企业投资项目压减90%，非行政许可审批退出历史舞台，市场准入负面清单管理制度全面实施。“双随机、一公开”成为日常监管的基本方式。政务服务基本实现“一站式”和“网上办理”。企业开办……不到5个工作日就能办成。工程建设项目审批……不超过120个工作日。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "cd0fed3ca437dbe7",
+            "quote": "进一步减少行政审批事项，简化优化办事流程……实施市场准入负面清单制度……深化商事制度改革，全面实施企业“五证合一、一照一码”……推进市场监管领域综合行政执法改革，着力解决重复检查、多头执法等问题。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ca9c34c78f656ce0",
+            "quote": "对所有涉企经营许可事项实行“证照分离”改革，大力推进“照后减证”。全面开展工程建设项目审批制度改革。深化投资审批制度改革……推进投资项目承诺制改革。深入开展“互联网+政务服务”，加快推进全国一体化政务服务平台建设。健全以“双随机、一公开”监管为基本手段、以重点监管为补充、以信用监管为基础的新型监管机制。健全对新业态的包容审慎监管制度。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8682b96602ee3e48",
+            "quote": "在简政放权的同时，加强和创新事中事后监管，对新兴产业实行包容审慎监管。自贸试验区率先突破，比如负面清单管理、“证照分离”、“一照一码”等，大多已在全国复制推广。聚焦企业和群众反映突出的“办事难、办事慢”、“多头跑、来回跑”、“奇葩证明”等问题。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "8a298ec39569788a",
+            "quote": "坚持放管结合、并重，着力清理对市场主体的不合理限制，实施更加有效监管，持续优化政务服务，不断提高改革含金量。",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 1,
+        "omitted": 1,
+        "verified": 2,
+        "rejected": 3,
+        "rejected_detail": [
+          {
+            "quote": "从“简政放权”入手，进而推动“放管结合”和“优化服务”，形成了“放”“管”“服”三管齐下、互为支撑的改革局面；各类行政审",
+            "reason": ""
+          },
+          {
+            "quote": "对所有涉企经营许可事项实行“证照分离”改革，大力推进“照后减证”。全面开展工程建设项目审批制度改革。深化投资审批制度改革",
+            "reason": ""
+          },
+          {
+            "quote": "在简政放权的同时，加强和创新事中事后监管，对新兴产业实行包容审慎监管。自贸试验区率先突破，比如负面清单管理、“证照分离”",
+            "reason": ""
+          }
+        ],
+        "seconds": 17.3,
+        "kind": "in",
+        "question": "放管服改革的主要举措有哪些？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8572,
+        "answer_len": 293,
+        "answer": "优化营商环境的政策目标主要包括：（1）激发市场活力、增强经营主体内生动力，解放生产力、提高竞争力，稳定社会预期、提振发展信心，推动经济高质量发展和经济运行持续回升向好；（2）打造市场化、法治化、国际化的一流营商环境，形成政府有为、市场有效、企业有感的营商沃土，实现“有求必应、无事不扰”和“能放敢放、善管巧管”；（3）构建“亲清”政商关系，提供公平竞争的市场环境与精准有效的政策支持，帮助企业在全生命周期释放发展活力、提升市场竞争力，培育新质生产力和经济发展新动能；（4）促进投资环境、发展环境改善，吸引人才、企业与资金集聚，增强国家和地区的软实力、投资经营活跃度、创新度及区域竞争力。",
+        "refused": false,
+        "citations": 6,
+        "citations_detail": [
+          {
+            "chunk_id": "d688c4b05b510ac8",
+            "quote": "优化营商环境是培育和激发市场活力、增强经营主体内生动力的关键之举……厚植政府有为、市场有效、企业有感的营商沃土。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "98f69e46c91458fa",
+            "quote": "要把打造市场化、法治化、国际化营商环境摆在重要位置，进一步稳定社会预期，提振发展信心，激发市场活力，推动经济运行持续回升向好。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7990c964472d0ddf",
+            "quote": "形成更优的营商环境需做到“有求必应、无事不扰”……营商环境就像一面镜子，映照出行政效能与市场活力……吸引更多的人才、企业与资金。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "489b33c9fee96063",
+            "quote": "致力于构建一个健康、可持续的政商互动生态，即所谓的“亲清”政商关系，乃是持续推动营商环境优化的核心追求……助力其提升市场竞争力。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "303d9e4ca650ffd0",
+            "quote": "优化营商环境，就是解放生产力、提高竞争力……不仅是稳预期、强信心的关键举措……有助于激发全社会创新创业热情和市场活力，为经济发展培育新动能。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "16b54ba0f73190f0",
+            "quote": "营商环境涉及投资经营的活跃度、社会的创新度，以及地区发展的竞争力和可持续能力。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          }
+        ],
+        "verbatim": 0,
+        "omitted": 3,
+        "verified": 3,
+        "rejected": 3,
+        "rejected_detail": [
+          {
+            "quote": "要把打造市场化、法治化、国际化营商环境摆在重要位置，进一步稳定社会预期，提振发展信心，激发市场活力，推动经济运行持续回升",
+            "reason": ""
+          },
+          {
+            "quote": "形成更优的营商环境需做到“有求必应、无事不扰”……营商环境就像一面镜子，映照出行政效能与市场活力……吸引更多的人才、企业",
+            "reason": ""
+          },
+          {
+            "quote": "营商环境涉及投资经营的活跃度、社会的创新度，以及地区发展的竞争力和可持续能力。",
+            "reason": ""
+          }
+        ],
+        "seconds": 12.7,
+        "kind": "in",
+        "question": "优化营商环境的政策目标是什么？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8909,
+        "answer_len": 699,
+        "answer": "市场主体登记管理主要由《中华人民共和国市场主体登记管理条例》（国务院令第746号，2021年4月14日国务院常务会议通过，2022年3月1日起施行）规范，这是我国第一部统一规范各类市场主体登记管理的行政法规。主要规定包括：\n\n1. 适用范围：在中华人民共和国境内以营利为目的从事经营活动的自然人、法人及非法人组织，包括公司、非公司企业法人及其分支机构，个人独资企业、合伙企业及其分支机构，农民专业合作社（联合社）及其分支机构，个体工商户，外国公司分支机构等。\n\n2. 登记基本要求：市场主体应当依照条例办理登记，未经登记不得以市场主体名义从事经营活动（法律、行政法规规定无需登记的除外）；登记包括设立登记、变更登记和注销登记。\n\n3. 登记原则：遵循依法合规、规范统一、公开透明、便捷高效的原则，对登记主体、登记程序、登记备案事项、登记规范等4个方面统一规定。\n\n4. 管理体制：国务院市场监督管理部门主管全国市场主体登记管理工作，县级以上地方市场监督管理部门主管本辖区登记管理工作；推行当场办结、一次办结、限时办结等制度，实现集中办理、就近办理、网上办理、异地可办。\n\n5. 便利化措施：《条例》配套《实施细则》压减文书近一半、取消6项证明材料、取消受理环节推行形式审查和当场登记；创设歇业制度方便市场主体“停机保号”；要求迁出地登记机关无正当理由不得拒绝移交市场主体档案，便利跨地经营。\n\n此外，地方层面如《石家庄市优化营商环境条例》还规定推行住所（经营场所）登记申报承诺制、一照多址、一业一证、证照联办等改革，推进年度报告“多报合一”，优化注销流程并允许符合条件的市场主体按简易程序办理注销。",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "af7a4b5e36ff64ef",
+            "quote": "《中华人民共和国市场主体登记管理条例》已经2021年4月14日国务院第131次常务会议通过，现予公布，自2022年3月1日起施行……第二条 本条例所称市场主体，是指在中华人民共和国境内以营利为目的从事经营活动的下列自然人、法人及非法人组织……第三条 市场主体应当依照本条例办理登记。未经登记，不得以市场主体名义从事经营活动……市场主体登记包括设立登记、变更登记和注销登记。第四条 市场主体登记管理应当",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "0585405bea755352",
+            "quote": "这是我国制定出台的第一部统一规范各类市场主体登记管理的行政法规……一方面创设歇业制度……另一方面，为市场主体（或经营主体）跨地经营提供便利。《条例》明确要求迁出地登记机关无正当理由不得拒绝移交市场主体档案等相关材料",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "f5d08c65c735c459",
+            "quote": "市场监管总局同步制定并实施了配套规定《实施细则》，一方面将市场主体申请类、审核类、通知类文书压减近一半，取消了6项证明材料……另一方面取消受理环节，推行形式审查、当场登记",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c416c4bf6231fab4",
+            "quote": "《条例》共六章，五十五条，主要对以营利为目的从事经营活动的公司、合伙企业、个体工商户等各类市场主体的登记管理进行了统一规定……《条例》明确市场主体登记管理应当遵循依法合规、规范统一、公开透明、便捷高效的原则，对登记主体、登记程序、登记备案事项、登记规范等4个方面的内容进行了统一规定",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ea330cd7646e31ab",
+            "quote": "推进住所（经营场所）登记申报承诺制改革、一照多址、一业一证、证照联办审批模式改革……推进市场主体年度报告涉及税务、市场监管、社保、审批、海关等事项的“多报合一”……优化市场主体注销办理流程，推行网上注销服务……对设立后未开展生产经营活动或者无债权债务的市场主体，可以按照简易程序办理注销",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 0,
+        "omitted": 4,
+        "verified": 4,
+        "rejected": 1,
+        "rejected_detail": [
+          {
+            "quote": "《条例》共六章，五十五条，主要对以营利为目的从事经营活动的公司、合伙企业、个体工商户等各类市场主体的登记管理进行了统一规",
+            "reason": ""
+          }
+        ],
+        "seconds": 18.9,
+        "kind": "in",
+        "question": "市场主体登记管理有哪些规定？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8522,
+        "answer_len": 830,
+        "answer": "各地在简化企业开办流程方面主要有以下做法：\n\n一、压缩企业开办时间。按国务院部署，2018年底前各直辖市、计划单列市、副省级城市和省会城市将企业开办时间由平均20天压缩至8.5个工作日以内，2019年上半年在全国实现该目标；2019年底前全国压缩至5个工作日内，具备条件的地方压缩至3个工作日内；2020年国务院进一步明确全国减至4个工作日以内，有条件的地区还可进一步缩短。地方上如江苏要求2018年底全面实现开办企业3个工作日内完成。\n\n二、推行流程再造和集成办理。将申请人依次向各部门提交材料的传统流程改造为“一次提交、同步办理、信息共享、限时办结”的“一窗受理、并行办理”流程；江苏等地增设“企业开办”一站式受理窗口，实行“一窗受理、一表填报”，提供工商登记、刻章、银行开户、涉税、社保登记等集成服务。\n\n三、推行“一网通办”全程网上办。各地开通企业开办“一网通办”平台（或服务专区），整合设立登记、印章制作、申领发票、社保登记等事项，实现“登录一个平台、填报一次信息、后台实时流转、即时回馈信息”，2020年底全部开通平台，实现企业开办全程网上办理；有条件的地方推行办件寄递、证票自助打印，逐步实现“不见面”办理。\n\n四、压减开办环节。将企业登记、印章刻制、申领发票和社保登记4个环节至少压减为企业登记、印章刻制、申领发票3个环节，社保登记合并到企业登记环节，并分别控制各环节办理时限。\n\n五、推进住所与经营场所登记改革。支持各省统筹开展住所与经营场所分离登记试点，企业登记一个住所的同时可登记多个经营场所，减少登记事项。\n\n六、地方创新探索。如北京推行“一业一证”改革，向市场主体颁发一张综合许可凭证，覆盖餐饮店、咖啡厅等40个行业，并叠加“证照联办”，实现“一次告知、一表申请、一套材料、一窗受理、一网办理、一次办结、证照同发”，全流程办理时限从14个工作日压缩至1个工作日，申请材料缩减",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "1c7d30f317e3e260",
+            "quote": "2018年年底前，各直辖市、计划单列市、副省级城市和省会城市要将企业开办时间压缩一半以上，由目前平均20天减至8.5天以内……将申请人依次向各部门提交材料的传统办事流程，改造为一次提交、同步办理、信息共享、限时办结的“一窗受理、并行办理”流程。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ebcf2837a74b745f",
+            "quote": "力争2019年年底前，全国实现压缩企业开办时间至5个工作日内……共同将……4个环节至少压减为企业登记、印章刻制、申领发票3个环节，社保登记的申请合并到企业登记环节中……各地要开通“一网通办”平台（或服务专区等），整合设立登记、印章制作、申领发票、社保登记等各类企业开办事项。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "b7de0dea1dca7b69",
+            "quote": "今年国务院明确提出全国要减到四个工作日以内……到今年底要全部开通这个平台，实现企业开办全程网上办理……支持各省统筹开展住所与经营场所分离登记试点……企业在登记一个住所的同时，还可以登记多个经营场所。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "228c35bd3e70e5f4",
+            "quote": "确保2018年年底全面实现开办企业三个工作日内完成的目标……增设“企业开办”一站式受理窗口……为企业提供“一站式”办理工商登记、刻章备案、银行开户、涉税事项、社会保险登记等集成服务。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "23f6ffa141a1a495",
+            "quote": "北京率先在经开区的10个场景启动“一业一证”改革……餐饮店、咖啡厅等40个行业“一业一证”已全部上线……实现了“一次告知、一表申请、一套材料、一窗受理、一网办理、一次办结、证照同发”，全流程办理时限从14个工作日压缩至1个工作日，申请材料缩减50%。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          }
+        ],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 5,
+        "rejected_detail": [
+          {
+            "quote": "2018年年底前，各直辖市、计划单列市、副省级城市和省会城市要将企业开办时间压缩一半以上，由目前平均20天减至8.5天以",
+            "reason": ""
+          },
+          {
+            "quote": "力争2019年年底前，全国实现压缩企业开办时间至5个工作日内……共同将……4个环节至少压减为企业登记、印章刻制、申领发票",
+            "reason": ""
+          },
+          {
+            "quote": "今年国务院明确提出全国要减到四个工作日以内……到今年底要全部开通这个平台，实现企业开办全程网上办理……支持各省统筹开展住",
+            "reason": ""
+          },
+          {
+            "quote": "确保2018年年底全面实现开办企业三个工作日内完成的目标……增设“企业开办”一站式受理窗口……为企业提供“一站式”办理工",
+            "reason": ""
+          },
+          {
+            "quote": "北京率先在经开区的10个场景启动“一业一证”改革……餐饮店、咖啡厅等40个行业“一业一证”已全部上线……实现了“一次告知",
+            "reason": ""
+          }
+        ],
+        "seconds": 18.7,
+        "kind": "in",
+        "question": "各地在简化企业开办流程方面做了什么？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.842,
+        "answer_len": 338,
+        "answer": "根据给定资料，中国营商环境评价指标体系由国家发展改革委按照国务院部署，于2018年起牵头建立，设计原则是「国际可比、对标世行、中国特色」，并以市场主体和社会公众满意度为导向。指标体系紧扣营造稳定公平透明、可预期的营商环境要求，紧扣投资吸引力和城市高质量发展，从三个维度设计：衡量企业全生命周期、反映投资吸引力、体现监管与服务，共包含18个一级指标和87个二级指标，综合反映各地营商环境情况。在评价方法上，充分考虑市场主体和社会公众感受，通过企业问卷、电话采访、深度对接企业、暗访政务大厅、大数据智能分析等方式了解各方意见。此外还形成了指标「1+N」机制：国家层面是包含18个大项87个小项的统一指标体系，「N」是地方结合实际自行增加的指标，各地对照国家指标体系开展针对性改革。",
+        "refused": false,
+        "citations": 3,
+        "citations_detail": [
+          {
+            "chunk_id": "ec4906bac545078a",
+            "quote": "2018年以来，国家发展改革委按照国务院部署，本着国际可比、对标世行、中国特色原则，牵头建立并不断完善以市场主体和社会公众满意度为导向的中国营商环境评价体系……从衡量企业全生命周期、反映投资吸引力、体现监管与服务三个维度，包含18个一级指标和87个二级指标，综合反映各地营商环境情况",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "f8aadbd88b4d5025",
+            "quote": "指标“1+N”，“1”是中国营商环境评价指标体系，包括18个大项和87个小项，“N”是地方结合实际增加的N项指标",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "ec4906bac545078a",
+            "quote": "评价方法充分考虑市场主体和社会公众感受，比如，2020年评价中，我们发放企业问卷36万余份，电话采访企业1900余家……通过电话核验、企业调研、大厅暗访、大数据智能分析等方式，更深入地听取和了解市场主体和社会公众的感受和意见",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 1,
+        "omitted": 2,
+        "verified": 3,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 11.5,
+        "kind": "in",
+        "question": "营商环境评价的指标体系是怎么设计的？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8358,
+        "answer_len": 737,
+        "answer": "根据检索片段，政务服务“一网通办”的政策依据主要包括：\n\n1. 《国务院关于加快推进“互联网+政务服务”工作的指导意见》（国发〔2016〕55号，2016年10月）——推进“互联网+政务服务”，是深化简政放权、放管结合、优化服务改革的关键环节，为“一网通办”奠定了早期政策基础。\n\n2. 《国务院关于加快推进全国一体化在线政务服务平台建设的指导意见》（2018年8月）——明确提出推动政务服务从“线下跑”向“网上办”、“分头办”向“协同办”转变，全面推进“一网通办”，是最直接的政策依据。\n\n3. 《国务院办公厅关于加快推进政务服务“跨省通办”的指导意见》（国办发〔2020〕35号，2020年10月）——指出在审批服务便民化、“互联网+政务服务”、优化营商环境等政策文件基础上，全国一体化政务服务平台初步建成，政务服务“一网通办”深入推进，并依托全国一体化政务服务平台推进“跨省通办”。\n\n4. 《国务院办公厅关于加快推进“一件事一次办”打造政务服务升级版的指导意见》（国办发〔2022〕32号，2022年10月）——在深入推进政务服务“一网、一门、一次”改革、“互联网+政务服务”基础上，推动“一件事一次办”，提升政务服务标准化、规范化、便利化水平。\n\n5. 《关于依托全国一体化政务服务平台建立政务服务效能提升常态化工作机制的意见》（国务院办公厅印发，2023年）——依托全国一体化政务服务平台提升政务服务效能，推动“一网通办”能力持续增强，实现从“能办”到“好办”的转变。\n\n综上，“一网通办”的政策依据是以上述国务院文件为核心的一系列政策体系，涵盖“互联网+政务服务”、全国一体化政务服务平台建设、“跨省通办”、“一件事一次办”及政务服务效能提升常态化机制等方面。",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "3214781bd3aa171b",
+            "quote": "推进“互联网+政务服务”，是贯彻落实党中央、国务院决策部署，把简政放权、放管结合、优化服务改革推向纵深的关键环节……让企业和群众少跑腿、好办事、不添堵",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "47a1f6c5d4083bad",
+            "quote": "推动政务服务从政府供给导向向群众需求导向转变，从“线下跑”向“网上办”、“分头办”向“协同办”转变，全面推进“一网通办”",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "d84dd741cf44ad65",
+            "quote": "党中央、国务院陆续出台审批服务便民化、“互联网+政务服务”、优化营商环境等一系列政策文件，全国一体化政务服务平台初步建成并发挥作用，政务服务“一网通办”深入推进",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "396355a250fa63d5",
+            "quote": "在深入推进政务服务“一网、一门、一次”改革、“互联网＋政务服务”的基础上……推行集成化办理，实现“一件事一次办”",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9dc8e6f5ed59b0ab",
+            "quote": "国务院办公厅印发《关于依托全国一体化政务服务平台建立政务服务效能提升常态化工作机制的意见》……“一网通办”能力显著增强",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 2,
+        "omitted": 3,
+        "verified": 5,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 11.6,
+        "kind": "in",
+        "question": "政务服务一网通办有哪些政策依据？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8405,
+        "answer_len": 722,
+        "answer": "根据检索片段，国家在减轻企业负担方面出台的文件主要包括：\n\n1. 《国务院关于印发降低实体经济企业成本工作方案的通知》（国发〔2016〕48号，2016年8月8日）：部署降低实体经济企业成本工作，提出税费负担合理降低（全面推开营改增试点，年减税额5000亿元以上，清理规范涉企政府性基金和行政事业性收费）、融资成本有效降低、制度性交易成本明显降低、人工成本上涨得到合理控制（降低企业“五险一金”缴费比例）等目标任务。\n\n2. 《国务院关于落实〈政府工作报告〉重点工作部门分工的意见》（2018年4月30日）：提出“进一步减轻企业税负”和“大幅降低企业非税负担”，包括改革完善增值税制度、扩大小微企业减半征收所得税优惠范围、全年再为企业和个人减税8000多亿元；清理规范行政事业性收费、阶段性降低“五险一金”缴费比例、一般工商业电价平均降低10%、降低过路过桥费用，全年为市场主体减轻非税负担3000多亿元。\n\n3. 《国务院办公厅关于聚焦企业关切进一步推动优化营商环境政策落实的通知》（国办发〔2018〕104号，2018年11月27日）：针对企业负担仍需降低、小微企业融资难融资贵等问题，部署破除市场准入限制、推动缓解中小微企业融资难融资贵等措施。\n\n4. 《国务院办公厅关于进一步优化营商环境更好服务市场主体的实施意见》（2020年8月10日）：提出降低小微企业等经营成本，包括“一照多址”改革、引导平台企业降低佣金和支付手续费、以保险保函替代现金缴纳涉企保证金以减轻企业现金流压力等。\n\n此外，2023年国家还出台了支持民营经济发展壮大的相关文件（《意见》及《若干举措》），强化促进民营经济发展政策，推动减税降费及退税缓费等惠企措施落地。",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "27607f575d092049",
+            "quote": "国务院关于印发降低实体经济企业成本工作方案的通知 国发〔2016〕48号……一是税费负担合理降低。全面推开营改增试点，年减税额5000亿元以上。清理规范涉企政府性基金和行政事业性收费……四是人工成本上涨得到合理控制……企业“五险一金”缴费占工资总额的比例合理降低。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "c4860a7b7cfcb8e4",
+            "quote": "（九）进一步减轻企业税负……全年再为企业和个人减税8000多亿元……（十）大幅降低企业非税负担。进一步清理规范行政事业性收费，调低部分政府性基金征收标准。继续阶段性降低企业“五险一金”缴费比例……全年为市场主体减轻非税负担3000多亿元。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "bca6ad8ffc96bb03",
+            "quote": "国务院办公厅关于聚焦企业关切进一步推动优化营商环境政策落实的通知 国办发〔2018〕104号……企业负担仍需降低，小微企业融资难融资贵仍待缓解……（二）推动缓解中小微企业融资难融资贵问题。",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "7591fe5406444a8a",
+            "quote": "国务院办公厅关于进一步优化营商环境更好服务市场主体的实施意见……（六）降低小微企业等经营成本……推行以保险、保函等替代现金缴纳涉企保证金，减轻企业现金流压力。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "6c21f417f0225696",
+            "quote": "《若干举措》在《意见》基础上，对既有举措进行深化和加强……上半年，包括小微企业和个体工商户在内的民营经济纳税人缴费人新增减税降费及退税缓费7049亿元，占比76%。",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          }
+        ],
+        "verbatim": 0,
+        "omitted": 2,
+        "verified": 2,
+        "rejected": 3,
+        "rejected_detail": [
+          {
+            "quote": "（九）进一步减轻企业税负……全年再为企业和个人减税8000多亿元……（十）大幅降低企业非税负担。进一步清理规范行政事业性",
+            "reason": ""
+          },
+          {
+            "quote": "国务院办公厅关于进一步优化营商环境更好服务市场主体的实施意见……（六）降低小微企业等经营成本……推行以保险、保函等替代现",
+            "reason": ""
+          },
+          {
+            "quote": "《若干举措》在《意见》基础上，对既有举措进行深化和加强……上半年，包括小微企业和个体工商户在内的民营经济纳税人缴费人新增",
+            "reason": ""
+          }
+        ],
+        "seconds": 17.9,
+        "kind": "in",
+        "question": "国家在减轻企业负担方面出台了哪些文件？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.7012,
+        "answer_len": 54,
+        "answer": "现有资料不足以支撑结论。检索片段均为政务内容（农业强省建设、耕地保护、区域发展等），不包含红烧肉的做法信息。",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 3.1,
+        "kind": "out",
+        "question": "如何做红烧肉？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.699,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 3.2,
+        "kind": "out",
+        "question": "量子纠缠的退相干时间是多少？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.7313,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.6,
+        "kind": "out",
+        "question": "Rust 语言的所有权模型是怎么实现的？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.7239,
+        "answer_len": 90,
+        "answer": "现有资料不足以支撑结论。给定的检索片段均为政务政策类内容（海关监管、区域一体化、营商环境、产业转移、互联网+监管等），不包含 Kubernetes Pod 调度策略相关的技术信息。",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 3.0,
+        "kind": "out",
+        "question": "Kubernetes 的 Pod 调度策略有哪些？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.6783,
+        "answer_len": 11,
+        "answer": "现有资料不足以支撑结论",
+        "refused": true,
+        "citations": 0,
+        "citations_detail": [],
+        "verbatim": 0,
+        "omitted": 0,
+        "verified": 0,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 2.9,
+        "kind": "out",
+        "question": "太阳系八大行星的公转周期各是多少？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8633,
+        "answer_len": 614,
+        "answer": "北京市的营商环境总体处于全国领先水平，实现了从'跟跑'到'领跑'的转变。主要表现：\n\n1. **改革成效显著**：北京强力推进多个版本营商环境改革（1.0到6.0版），千余项（1270余项）创新举措接茬落地，改革经验向全国推广。在中国营商环境评价中，北京综合排名连续3年成绩优异，始终保持营商环境首善之区的地位。\n\n2. **审批效率大幅提升**：企业开办1天即可全部办结，全程网办率超95%；过去5年在企业开办、办理建筑许可、获得电力等领域共压减审批环节42个、压缩审批时间656天，直接减少企业经营成本约60亿元。\n\n3. **市场活力强**：2022年1-11月新设企业23.10万户，同比增长7.36%；电子营业执照累计调用量9100余万次，居全国首位。\n\n4. **法治保障较完善**：2020年出台《北京市优化营商环境条例》（2022年修订），2023年印发《北京市全面优化营商环境打造'北京服务'意见》，作为优化营商环境的指导性框架文件；法治环境获外资企业认可，被认为与全球其他国际金融中心没有差别。\n\n5. **政策优势独特**：北京是全国唯一同时享有'两区'政策的城市，持续打造国际一流营商环境，擦亮'北京服务'品牌。\n\n需要指出的不足：营商环境仍存在一些'堵点'，如部分'专精特新'企业面临贷款利率高、期限短、数额小等融资难题；部分政策不符合企业实际需求，个别中介机构挤占政策红利等，相关部门已提出改进建议。",
+        "refused": false,
+        "citations": 8,
+        "citations_detail": [
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "北京强力推进5个版本营商环境改革，千余创新举措接茬落地……在中国营商环境评价中，北京综合排名连续3年成绩优异，营商环境改革实现了从跟跑摸索到领先示范的转变",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "过去5年北京市在企业开办、办理建筑许可、获得电力、不动产登记、跨境贸易、纳税等领域共压减审批环节42个、压缩审批时间656天……直接减少企业经营成本约60亿元",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "3d32d838627bfecf",
+            "quote": "今年1月至11月，北京市新设企业23.10万户，同比增长7.36%；……全市电子营业执照累计调用量9100余万次，居全国首位",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "a06e1ab57fffcf1e",
+            "quote": "北京市持续全面优化营商环境，始终保持营商环境首善之区的地位……先后出台1.0到6.0版改革方案，实现营商环境从'跟跑'到'领跑'的转变",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "2ba927242a7ce602",
+            "quote": "2017年以来，北京已推出1270余项改革举措。其中，2020年出台的《北京市优化营商环境条例》，经过2022年修订……形成《北京市全面优化营商环境打造'北京服务'意见》，并以市委、市政府名义印发",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "2ba927242a7ce602",
+            "quote": "北京营商环境好，为我们节约了大量磨合时间……北京上海等地的法治环境，与全球其他国际金融中心没有差别",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "26660919f3b31cbb",
+            "quote": "北京是全国唯一同时享有'两区'政策的城市……持续打造国际一流的营商环境……擦亮'北京服务'品牌",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          },
+          {
+            "chunk_id": "a06e1ab57fffcf1e",
+            "quote": "一些'专精特新'企业依然面临贷款利率高、期限短、数额小等情况……部分政策不符合企业实际需求，个别中介机构利用专业优势挤占政策红利",
+            "verified": false,
+            "verbatim": false,
+            "match_kinds": [],
+            "reason": ""
+          }
+        ],
+        "verbatim": 0,
+        "omitted": 4,
+        "verified": 4,
+        "rejected": 4,
+        "rejected_detail": [
+          {
+            "quote": "北京市持续全面优化营商环境，始终保持营商环境首善之区的地位……先后出台1.0到6.0版改革方案，实现营商环境从'跟跑'到",
+            "reason": ""
+          },
+          {
+            "quote": "2017年以来，北京已推出1270余项改革举措。其中，2020年出台的《北京市优化营商环境条例》，经过2022年修订……",
+            "reason": ""
+          },
+          {
+            "quote": "北京是全国唯一同时享有'两区'政策的城市……持续打造国际一流的营商环境……擦亮'北京服务'品牌",
+            "reason": ""
+          },
+          {
+            "quote": "一些'专精特新'企业依然面临贷款利率高、期限短、数额小等情况……部分政策不符合企业实际需求，个别中介机构利用专业优势挤占",
+            "reason": ""
+          }
+        ],
+        "seconds": 19.8,
+        "kind": "edge",
+        "question": "北京市的营商环境怎么样？",
+        "mode": "loose"
+      },
+      {
+        "ok": false,
+        "error": "输出里找不到 JSON",
+        "raw": "{\n  \"answer\": \"现有资料表明，中小企业融资难、融资贵问题尚未得到根本解决。虽然国家层面持续出台帮扶政策，如2021年国务院办公厅《关于进一步加大对中小企业纾困帮扶力度的通知》提出灵活精准运用多种金融政策工具等措施，各地也在探索数字化信用融资平台等创新做法（如重庆南岸区纯信用中小企业融资信用服务平台、知识价值信用贷款等），取得一定成效，但2024年的报道仍显示企业普遍反映\"融资难\"\"融",
+        "kind": "edge",
+        "question": "中小企业的融资难问题解决了吗？",
+        "mode": "loose"
+      },
+      {
+        "ok": true,
+        "top_score": 0.8289,
+        "answer_len": 651,
+        "answer": "外商在华投资的准入限制呈持续放宽趋势，主要变化如下：\n\n1. 负面清单持续缩减：2018年外商投资负面清单大幅削减，2019年又比2018年减少20%，当时负面清单仅剩40个行业受禁止或限制，且官方表态未来条目还将进一步减少（片段1）。\n\n2. 制造业限制全面取消：2024年9月国家发展改革委、商务部发布《外商投资准入特别管理措施（负面清单）（2024年版）》，全面取消制造业领域外资准入限制措施，自2024年11月1日起施行；清单以外领域按内外资一致原则管理，给予外资企业国民待遇（片段2、3）。\n\n3. 服务业及重点领域进一步开放：2024年国务院《扎实推进高水平对外开放更大力度吸引和利用外资行动方案》提出出台新版外资准入负面清单、继续减少限制，并在医疗、增值电信等领域开展准入试点，支持更多外资机构开展银行保险、债券基金等业务；同时正修订鼓励外商投资产业目录，增加服务业条目，引导外资投向服务业（片段2、4）。\n\n4. 法制与制度保障完善：2020年1月1日《外商投资法》施行，为外资发展提供法制保障；自贸试验区和海南自由贸易港作为开放平台，通过连续修订负面清单不断扩大外商投资市场准入（片段2）。\n\n5. 配套便利化措施：放宽外资企业管理和技术人员签证入境有效期至2年、为外籍人才停居留和永久居留提供便利，促进数据跨境安全有序流动等（片段4）。\n\n总体上，外资准入从「负面清单逐步缩减」走向「制造业限制全面取消」，开放重点正转向服务业和医疗、电信等领域，并辅以国民待遇和要素流动便利化措施。",
+        "refused": false,
+        "citations": 5,
+        "citations_detail": [
+          {
+            "chunk_id": "9344f4b4364e2ecc",
+            "quote": "我们的外商投资负面清单，2018年做了大幅度削减，2019年和2018年相比又减少了20%，现行的负面清单里只有40个行业受到禁止或者限制。未来负面清单条目还会进一步减少",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9af2739be73ff6a0",
+            "quote": "9月8日，国家发展改革委、商务部发布了《外商投资准入特别管理措施（负面清单）（2024年版）》，制造业领域外资准入限制措施全面取消……重点方向之一就是继续增加服务业条目",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "945e4f4bcfa5bc4e",
+            "quote": "修订出台了《外商投资准入特别管理措施（负面清单）（2024年版）》，全面取消了制造业领域外资准入限制措施……将于2024年11月1日起实施……确保外资准入负面清单以外的领域，按照内外资一致的原则管理",
+            "verified": true,
+            "verbatim": false,
+            "match_kinds": [
+              "segments"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "d85f95a27450aba0",
+            "quote": "出台新版外资准入负面清单，继续减少外资准入限制，并在外资企业非常关心的医疗、增值电信等领域开展准入试点。同时，将支持更多符合条件的外资机构开展银行保险、债券基金等领域业务",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          },
+          {
+            "chunk_id": "9af2739be73ff6a0",
+            "quote": "2020年1月1日起施行的《中华人民共和国外商投资法》，为促进外资发展壮大奠定了坚实的法制保障",
+            "verified": true,
+            "verbatim": true,
+            "match_kinds": [
+              "exact"
+            ],
+            "reason": ""
+          }
+        ],
+        "verbatim": 3,
+        "omitted": 2,
+        "verified": 5,
+        "rejected": 0,
+        "rejected_detail": [],
+        "seconds": 12.1,
+        "kind": "edge",
+        "question": "外商在华投资的准入限制有哪些变化？",
+        "mode": "loose"
+      }
+    ]
+  }
+}

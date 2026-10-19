@@ -1,0 +1,77 @@
+{
+  "_doc": "Action Launcher 注册表 —— 每个 agent 一条通路。kind 三选一：terminal / open-in-app / url。level 是保真等级（L-A 原生 / L-B 插件 / L-C 直通 / L-D 派单）。",
+  "agents": [
+    {
+      "id": "dsh",
+      "kind": "url",
+      "label": "DSH 工作台（本会话）",
+      "target": "http://127.0.0.1:3080",
+      "level": "L-A",
+      "note": "生产工具本体，30 个 agent 定义在此运行"
+    },
+    {
+      "id": "nexent",
+      "kind": "url",
+      "label": "Nexent（赛题三平台）",
+      "target": "http://localhost:3000/zh/newchat",
+      "level": "L-A",
+      "note": "ICT 演示智能体所在"
+    },
+    {
+      "id": "metaframework",
+      "kind": "url",
+      "label": "元框架（7 站流水线）",
+      "target": "http://127.0.0.1:8101",
+      "level": "L-A",
+      "note": "7 站流水线；`cd ~/project && PORT=8101 python3 server.py`"
+    },
+    {
+      "id": "opencode",
+      "kind": "terminal",
+      "label": "OpenCode",
+      "target": "opencode run",
+      "level": "L-C",
+      "note": "已配 provider，可直接派单"
+    },
+    {
+      "id": "aider",
+      "kind": "terminal",
+      "label": "Aider",
+      "target": "aider",
+      "level": "L-C",
+      "note": "需 API key"
+    },
+    {
+      "id": "gemini",
+      "kind": "terminal",
+      "label": "Gemini CLI",
+      "target": "gemini",
+      "level": "L-C",
+      "note": "需登录"
+    },
+    {
+      "id": "cursor",
+      "kind": "open-in-app",
+      "label": "Cursor",
+      "target": "cursor",
+      "level": "L-A",
+      "note": "IDE 跳转，扩展随编辑器走"
+    },
+    {
+      "id": "vscode",
+      "kind": "open-in-app",
+      "label": "VS Code",
+      "target": "code",
+      "level": "L-A",
+      "note": "IDE 跳转"
+    },
+    {
+      "id": "ollama",
+      "kind": "url",
+      "label": "Ollama 本地模型",
+      "target": "http://127.0.0.1:11434",
+      "level": "L-A",
+      "note": "作为 provider 接入"
+    }
+  ]
+}

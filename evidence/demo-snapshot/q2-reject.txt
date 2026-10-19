@@ -1,0 +1,24 @@
+问题：红烧肉怎么做？
+索引：rfc-1024 · 跳数 2 · top-k 5
+
+── 跳 1：红烧肉怎么做？
+   [0.7400] 媒体 · 2015-05-01 · RFC 7519: JSON Web Token (JWT)
+           出处 chunk_id=dyOwRKEBaifM2AmUFFQ4…  实体=[]
+   [0.7073] 媒体 · 2022-08-01 · RFC 9293: Transmission Control Protocol (TCP
+           出处 chunk_id=1COjRKEBaifM2AmUIU8P…  实体=[]
+   [0.6942] 媒体 · 2022-06-01 · RFC 9112: HTTP/1.1
+           出处 chunk_id=uSOiRKEBaifM2AmUsk92…  实体=[]
+   [0.6913] 媒体 · 2022-08-01 · RFC 9293: Transmission Control Protocol (TCP
+           出处 chunk_id=OSOkRKEBaifM2AmUQFDL…  实体=[]
+   [0.6872] 媒体 · 2022-06-01 · RFC 9112: HTTP/1.1
+           出处 chunk_id=qiOiRKEBaifM2AmUeU-P…  实体=[]
+
+判据：
+  ✓ C1 出处可回查
+  ✓ C2 跨层级或跨时间
+  ✓ C3 每环带出处
+  ✗ C4 最高分 ≥ 0.75
+  ✗ C5 跨语言分数门 ≥ 0.8
+  （最高分 0.7400 · 跨语言分数门）
+
+⚠ 证据不足：库内语料未覆盖该主题，不做推断（C4/C5 拦截）。

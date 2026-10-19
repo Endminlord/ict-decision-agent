@@ -201,6 +201,11 @@ class Extractor:
             "date": chunk.get("date"),
             "source": chunk.get("source"),
             "chunk_char_offset": chunk.get("char_offset"),
+            # 资产标识（2026-10-19）：官方要求「多模态数据统一识别与资产标识」。
+            # asset_id 是**文档级**（一份文档切 85 块，85 条三元组共享同一个），
+            # chunk_id 是**块级** —— 两级粒度都能回查「这条事实出自哪个资产 / 哪一块」。
+            "asset_id": __import__("hashlib").sha256(str(doc_id).encode()).hexdigest()[:16],
+            "asset_type": "policy_document",
         }
         out = []
 
@@ -361,8 +366,16 @@ def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None,
     apply_review_gate(schema)
     terms = load_json(terms_path)
     ex = Extractor(terms, schema)
-    n_chunk = n_triple = n_loose = n_auto = n_bad = 0
+    n_chunk = n_triple = n_loose = n_auto = n_bad = n_dup = 0
     rejects = []
+    # 跨 chunk 去重：三元组是「事实」，不是「事件」。同一份文档的 85 个块都抽出
+    # `applies_to 广州市`，那是一条事实被记了 85 次，不是 85 条事实。
+    # 去重前实测：12,594 条里只有 12,699 条唯一（39.6% 是重复），其中 9,462 个键
+    # 在同一块内被抽多次、3,237 个键跨块重复。
+    # 方案 B：去重但保留 occurrence_count —— 「85 个块都抽出这条关系」是证据强度，
+    # 不能因为去重就丢掉。seen 存的是 key -> rec，重复时给已收的记录加计数。
+    seen = {}
+    buf_strict, buf_loose = [], []
     # pending 文件总是打开（没传就写 /dev/null）—— 让循环里的分流无条件成立，
     # 不用在热路径上判断 pending_path 是否为空。
     wp = open(pending_path, "w", encoding="utf-8") if pending_path else open(os.devnull, "w", encoding="utf-8")
@@ -380,6 +393,11 @@ def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None,
                 continue
             n_chunk += 1
             for rec in ex.triples(chunk):
+                key = (rec["subject"], rec["predicate"], rec["object"])
+                if key in seen:
+                    seen[key]["occurrence_count"] += 1
+                    n_dup += 1
+                    continue
                 if not verify_provenance(rec, chunk):
                     n_bad += 1
                     if len(rejects) < 20:
@@ -387,17 +405,24 @@ def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None,
                                         "chunk_id": rec["provenance"]["chunk_id"],
                                         "evidence_head": rec["provenance"]["evidence"][:40]})
                     continue
-                line_out = json.dumps(rec, ensure_ascii=False) + "\n"
+                rec["occurrence_count"] = 1
+                seen[key] = rec
                 if rec.get("tier") == "loose":
-                    wl.write(line_out)
-                    n_loose += 1
-                    continue
-                w.write(line_out)
-                if rec.get("review_status") == "pending":
-                    wp.write(line_out)
+                    buf_loose.append(rec)
                 else:
-                    n_auto += 1
-                n_triple += 1
+                    buf_strict.append(rec)
+        # 循环结束后统一写（occurrence_count 要靠后续重复累加，流式写就改不动已写出的行）
+        for rec in buf_strict:
+            line_out = json.dumps(rec, ensure_ascii=False) + "\n"
+            w.write(line_out)
+            if rec.get("review_status") == "pending":
+                wp.write(line_out)
+            else:
+                n_auto += 1
+            n_triple += 1
+        for rec in buf_loose:
+            wl.write(json.dumps(rec, ensure_ascii=False) + "\n")
+            n_loose += 1
     wp.close()
     wl.close()
     stats = {
@@ -409,6 +434,7 @@ def run(src, out_path, terms_path, schema_path=None, limit=None, domain=None,
         "auto_out": n_auto,
         "auto_ratio": round(n_auto / n_triple, 4) if n_triple else 0.0,
         "provenance_failed": n_bad,
+        "duplicates_dropped": n_dup,
         "rejects_sample": rejects,
     }
     return stats

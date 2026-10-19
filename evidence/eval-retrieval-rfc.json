@@ -1,0 +1,522 @@
+{
+  "index": "rfc-1024",
+  "seed": 42,
+  "top_k": 10,
+  "A_hit_rate": {
+    "n": 14,
+    "k": 10,
+    "hit@1": 0.7857,
+    "hit@3": 0.9286,
+    "hit@5": 0.9286,
+    "hit@10": 1.0,
+    "mrr": 0.869,
+    "misses": []
+  },
+  "B_grounding": {
+    "checked": 70,
+    "found": 70,
+    "grounding_rate": 1.0,
+    "unreachable": []
+  },
+  "C_abstention": {
+    "out_of_domain_n": 20,
+    "out_abstained": 20,
+    "abstain_recall": 1.0,
+    "in_domain_n": 15,
+    "in_answered": 15,
+    "answer_rate": 1.0,
+    "kw_hit_rate": 0.8667,
+    "out_rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "abstained": true,
+        "max_score": 0.7318,
+        "grounded": 0
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "abstained": true,
+        "max_score": 0.7282,
+        "grounded": 0
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "abstained": true,
+        "max_score": 0.7365,
+        "grounded": 0
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "abstained": true,
+        "max_score": 0.7211,
+        "grounded": 0
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "abstained": true,
+        "max_score": 0.7269,
+        "grounded": 0
+      },
+      {
+        "q": "红烧肉的家常做法是什么？",
+        "abstained": true,
+        "max_score": 0.7192,
+        "grounded": 0
+      },
+      {
+        "q": "怎么给吉他换弦？",
+        "abstained": true,
+        "max_score": 0.7194,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡豆的烘焙曲线怎么定？",
+        "abstained": true,
+        "max_score": 0.7145,
+        "grounded": 0
+      },
+      {
+        "q": "葡萄酒的单宁来自哪里？",
+        "abstained": true,
+        "max_score": 0.7012,
+        "grounded": 0
+      },
+      {
+        "q": "中国传统建筑中的斗拱结构起什么作用？",
+        "abstained": true,
+        "max_score": 0.7017,
+        "grounded": 0
+      },
+      {
+        "q": "马拉松训练的周跑量怎么安排？",
+        "abstained": true,
+        "max_score": 0.7218,
+        "grounded": 0
+      },
+      {
+        "q": "植物光合作用的卡尔文循环步骤",
+        "abstained": true,
+        "max_score": 0.7064,
+        "grounded": 0
+      },
+      {
+        "q": "国际象棋的开局原则有哪些？",
+        "abstained": true,
+        "max_score": 0.7104,
+        "grounded": 0
+      },
+      {
+        "q": "怎样在 Excel 里做数据透视表？",
+        "abstained": true,
+        "max_score": 0.76,
+        "grounded": 0
+      },
+      {
+        "q": "黑洞的信息悖论是什么？",
+        "abstained": true,
+        "max_score": 0.728,
+        "grounded": 0
+      },
+      {
+        "q": "如何训练一个扩散模型生成猫的图片？",
+        "abstained": true,
+        "max_score": 0.7161,
+        "grounded": 0
+      },
+      {
+        "q": "太阳系外行星的凌日观测方法",
+        "abstained": true,
+        "max_score": 0.6934,
+        "grounded": 0
+      },
+      {
+        "q": "混凝土抗压强度的测试标准 ASTM C39",
+        "abstained": true,
+        "max_score": 0.734,
+        "grounded": 0
+      },
+      {
+        "q": "2026 年世界杯小组赛赛程",
+        "abstained": true,
+        "max_score": 0.7022,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡因在人体内的代谢半衰期是多少？",
+        "abstained": true,
+        "max_score": 0.5405,
+        "grounded": 0
+      }
+    ],
+    "in_rows": [
+      {
+        "q": "How does HTTP caching work?",
+        "abstained": false,
+        "max_score": 0.8491,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What are the semantics of HTTP methods?",
+        "abstained": false,
+        "max_score": 0.8536,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How does TCP congestion control work?",
+        "abstained": false,
+        "max_score": 0.8467,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How is DNS resolution performed?",
+        "abstained": false,
+        "max_score": 0.7982,
+        "grounded": 1,
+        "kw_hit": false,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What is the JSON grammar?",
+        "abstained": false,
+        "max_score": 0.8359,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How does the TLS 1.3 handshake work?",
+        "abstained": false,
+        "max_score": 0.8721,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What is QUIC multiplexing?",
+        "abstained": false,
+        "max_score": 0.7978,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How does OAuth 2.0 authorization work?",
+        "abstained": false,
+        "max_score": 0.8557,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What is the URI generic syntax?",
+        "abstained": false,
+        "max_score": 0.8296,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How are WebSocket frames structured?",
+        "abstained": false,
+        "max_score": 0.8513,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "HTTP 缓存是怎么工作的？",
+        "abstained": false,
+        "max_score": 0.835,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "TCP 的拥塞控制是怎么做的？",
+        "abstained": false,
+        "max_score": 0.8182,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "TLS 1.3 的握手过程是什么？",
+        "abstained": false,
+        "max_score": 0.8503,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "JSON 的语法规则有哪些？",
+        "abstained": false,
+        "max_score": 0.8518,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "DNS 解析是怎么进行的？",
+        "abstained": false,
+        "max_score": 0.8197,
+        "grounded": 0,
+        "kw_hit": false,
+        "levels": [
+          "未知"
+        ]
+      }
+    ]
+  },
+  "D_chain": {
+    "n": 15,
+    "multi_level": 0,
+    "multi_level_rate": null,
+    "not_applicable": true,
+    "rows": [
+      {
+        "q": "How does HTTP caching work?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2022-06-01",
+          "2022-06-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "What are the semantics of HTTP methods?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2022-06-01",
+          "2022-06-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "How does TCP congestion control work?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2022-08-01",
+          "2022-08-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "How is DNS resolution performed?",
+        "rings": 5,
+        "grounded_rings": 1,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2005-01-01",
+          "1987-11-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "What is the JSON grammar?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2017-12-01",
+          "2014-03-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "How does the TLS 1.3 handshake work?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2018-08-01",
+          "2018-08-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "What is QUIC multiplexing?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2021-05-01",
+          "2021-05-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "How does OAuth 2.0 authorization work?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2012-10-01",
+          "2012-10-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "What is the URI generic syntax?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2005-01-01",
+          "2005-01-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "How are WebSocket frames structured?",
+        "rings": 5,
+        "grounded_rings": 5,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2011-12-01",
+          "2011-12-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "HTTP 缓存是怎么工作的？",
+        "rings": 5,
+        "grounded_rings": 0,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2022-06-01",
+          "2022-06-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "TCP 的拥塞控制是怎么做的？",
+        "rings": 5,
+        "grounded_rings": 0,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2022-08-01",
+          "2021-05-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "TLS 1.3 的握手过程是什么？",
+        "rings": 5,
+        "grounded_rings": 0,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2018-08-01",
+          "2018-08-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "JSON 的语法规则有哪些？",
+        "rings": 5,
+        "grounded_rings": 0,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2017-12-01",
+          "2014-03-01"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "DNS 解析是怎么进行的？",
+        "rings": 5,
+        "grounded_rings": 0,
+        "levels": [
+          "未知"
+        ],
+        "level_span": 1,
+        "date_span": [
+          "2005-01-01",
+          "1987-11-01"
+        ],
+        "insufficient": false
+      }
+    ]
+  }
+}

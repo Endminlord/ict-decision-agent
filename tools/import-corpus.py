@@ -20,13 +20,17 @@ DEFAULT_SRC = "ict-corpus-chunks/chunks.jsonl"
 DEFAULT_HOST = "http://localhost:5010"
 
 
-def to_doc(c):
-    """Nexent 契约：正文放 content（不是 text），元数据放 metadata。"""
+def to_doc(c, process_source="corpus-chunk.py"):
+    """Nexent 契约：正文放 content（不是 text），元数据放 metadata。
+
+    process_source 记录这批语料由哪个脚本产生——换语料时同步改，
+    别让 RFC 语料被标成 corpus-chunk.py。
+    """
     return {
         "content": c["text"],
         "path_or_url": f"{c['doc_id']}.txt",
         "metadata": {"title": c["title"], "date": c["date"], "author": c["source"],
-                     "process_source": "corpus-chunk.py"},
+                     "process_source": process_source},
         "source_type": "text",
         "file_size": len(c["text"]),
         "filename": f"{c['doc_id']}.txt",
@@ -54,6 +58,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="0 = 全部")
     ap.add_argument("--offset", type=int, default=0)
     ap.add_argument("--batch", type=int, default=100)
+    ap.add_argument("--process-source", default="corpus-chunk.py",
+                    help="写入 metadata.process_source，标明这批语料的产生脚本")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--report", default="")
     ap.add_argument("--self-test", action="store_true")
@@ -108,7 +114,7 @@ def main():
                 continue
             if a.limit and (n_sub + len(buf)) >= a.limit:
                 break
-            buf.append(to_doc(json.loads(line)))
+            buf.append(to_doc(json.loads(line), a.process_source))
             if len(buf) >= a.batch:
                 batch_no = flush(buf, batch_no)
                 buf = []
