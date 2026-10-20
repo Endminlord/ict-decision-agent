@@ -126,10 +126,10 @@ ict-material-20261010/
 ├── workbench/                           ← 工作台 30 个 agent 定义 + 8 个工作流（`01` §4.1 的代码）
 ├── multidomain/                         ← 8 个合成领域语料（医疗/软件/金融/法律/制造/环保/教育/能源）
 ├── rfc-corpus/                          ← RFC 英文真实语料（1,739 块 / 14 篇，跨语言验证）
-└── MANIFEST.sha256                      ← 全包校验（229 个文件，`wc -l MANIFEST.sha256`）
+└── MANIFEST.sha256                      ← 全包校验（281 个文件，`wc -l MANIFEST.sha256`）
 ```
 
-**清单口径（`wc -l MANIFEST.sha256` = 223，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
+**清单口径（`wc -l MANIFEST.sha256` = 281，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
 刻意排除备份/缓存/虚拟环境 —— `.venv/**`、`__pycache__/*.pyc`、`*.bak*`、`*.pre-crosslingual`、
 `track2-mcp/dist/.gitignore`、`MANIFEST.sha256` 自身。要看全部文件用
 `find . -type f | wc -l`；要看「哪些没被校验」用
@@ -184,14 +184,14 @@ ict-material-20261010/
 ```bash
 cd ict-material-20261010
 
-# 一键验收（约 15 秒）：MANIFEST + 判据自测 + ES 块数 + track2 四层 96 条 + 4 条演示 + 双侧评测
+# 一键验收（约 15 秒）：MANIFEST + 判据自测 + ES 块数 + track2 五层 121 条 + 4 条演示 + 双侧评测
 bash tools/verify-all.sh              # --fast 跳过评测
 
 # 答辩现场一键启动：预检 → 必要时拉起 Nexent → 开浏览器 → 打印演示问题
 bash tools/demo-launch.sh             # --check 只检查不动手
 
 # 全包完整性
-sha256sum -c MANIFEST.sha256          # 预期 223 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
+sha256sum -c MANIFEST.sha256          # 预期 281 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
 
 # 契约一致性（5 通过 / 0 失败）+ 负对照自测（6/6）
 python3 tools/check-contract-doc.py --self-test
@@ -230,7 +230,7 @@ python3 tools/rehearsal-timer.py            # 计时并出偏差报告
 |---|---|---|
 | 设计方案（Agent 设计 / 架构 / MCP 方案 / Skill 方案 / 迁移清单 / 诚实边界） | `246-ict-track2-design.md` | ✅ |
 | **引用回查 MCP 服务**（UVX 包，零依赖，wheel 11.7 MB） | `track2-mcp/` | ✅ 源码 + `BUILD.md` 重建说明 |
-| 四层自测（数据生成 6/6 · 查询层 52/52 · MCP 协议往返 28/28 · 领域无关 10/10，共 96 条） | `track2-mcp/tests/` | ✅ |
+| 五层自测（数据生成 6/6 · 查询层 52/52 · MCP 协议往返 28/28 · 领域无关 10/10 · HTTP 传输 25/25，共 121 条） | `track2-mcp/tests/` | ✅ |
 | **全领域通用**（引擎与领域无关：`--data` / `ICT_TRACK2_DATA` 换语料不改代码） | `track2-mcp/README.md` · `tests/test_domains.py` | ✅ **十一领域 110/110**（政务真实语料 10/10 + **RFC 英文真实语料** 10/10 + 先进制造真实语料 10/10 + 医疗·软件·金融·法律·制造·环保·教育·能源 80/80）· 多领域语料见 `multidomain/` 与 `rfc-corpus/` |
 | 实测读数（冷启动 0.34 秒 · 第三方依赖 0 个 · 干净环境验证通过） | `track2-mcp/README.md` | ✅ |
 | **端到端演示**（`demo/ask.py`：检索 → `list_sources` → 模型生成 → `verify_quote` 核验 → 只输出通过核验的引用） | `track2-mcp/demo/ask.py` | ✅ 本机跑通 5/5 问；含「注入编造引用被拦下」实验 |
