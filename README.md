@@ -126,7 +126,7 @@ ict-material-20261010/
 ├── workbench/                           ← 工作台 30 个 agent 定义 + 8 个工作流（`01` §4.1 的代码）
 ├── multidomain/                         ← 8 个合成领域语料（医疗/软件/金融/法律/制造/环保/教育/能源）
 ├── rfc-corpus/                          ← RFC 英文真实语料（1,739 块 / 14 篇，跨语言验证）
-└── MANIFEST.sha256                      ← 全包校验（223 个文件，`wc -l MANIFEST.sha256`）
+└── MANIFEST.sha256                      ← 全包校验（229 个文件，`wc -l MANIFEST.sha256`）
 ```
 
 **清单口径（`wc -l MANIFEST.sha256` = 223，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
