@@ -76,7 +76,11 @@ python3 conformance.py --self-test                    # 本体实现：7/7
 python3 conformance.py --impl "<你的实现命令>"         # 你的实现
 ```
 
+套件自带 fixture 语料（`FIXTURE_ROWS`），**不依赖 `scripts/build_data.py` 生成的数据文件** ——
+第三方拿到脚本即可验证，不需要先跑构建。
+
 套件有鉴别力：一个「凡有命中即通过」的错误实现只得 **2/7**（见 `EVIDENCE-conformance.md`）。
+V01/V03 两条它恰好通过，属巧合：对这两种输入它给出的结果与协议一致。
 
 ## 不做什么
 
