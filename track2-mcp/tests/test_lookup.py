@@ -535,6 +535,31 @@ def main() -> int:
         check("L54 超长 topic（10 KB）在 5 秒内返回",
               False, f"抛异常 {type(e).__name__}: {e}")
 
+    # ---- 严格档（strict）：只改变「检测到之后算不算通过」，不改检测本身 ----
+    # 同一段语料、同一条引用，strict 开关必须让判定从通过变为不通过，
+    # 且使用的风险种类必须是三类「默认只回传事实」之一。
+    sys.path.insert(0, SRC)
+    from ict_track2_mcp import server as _srv
+    _prev = _srv._corpus
+    try:
+        _srv._corpus = make_corpus()   # server.corpus() 读的是模块级单例变量
+        for strict, want_verified, why in ((False, True, "默认档：短专名可引"),
+                                           (True, False, "严格档：短/泛引用不通过")):
+            payload, _err = _srv._call_tool("verify_quote",
+                                            {"quote": "优化营商环境", "strict": strict})
+            check(f"L55 strict={strict} 时 verified={want_verified}（{why}）",
+                  payload.get("verified") is want_verified,
+                  f"got verified={payload.get('verified')} flags={payload.get('risk_flags')}")
+        # 严格档不得凭空造风险：完整长引用在严格档下仍应通过
+        payload, _ = _srv._call_tool("verify_quote",
+                                     {"quote": "深化“放管服”改革，进一步优化营商环境，激发市场主体活力",
+                                      "strict": True})
+        check("L56 严格档不误伤完整长引用",
+              payload.get("verified") is True,
+              f"got verified={payload.get('verified')} flags={payload.get('risk_flags')}")
+    finally:
+        _srv._corpus = _prev
+
     print(f"\n[test_lookup] {ok}/{total}")
     return 0 if ok == total else 1
 

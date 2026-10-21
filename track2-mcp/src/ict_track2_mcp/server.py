@@ -25,7 +25,7 @@ from .lookup import MIN_QUOTE_CHARS, Corpus
 
 SERVER_NAME = "ict-track2-mcp"
 SERVER_VERSION = "0.1.0"
-PROTOCOL_VERSION = "2024-11-05"
+PROTOCOL_VERSION = "2025-03-26"
 
 _corpus: Corpus | None = None
 
@@ -90,6 +90,18 @@ TOOLS: list[dict[str, Any]] = [
                                     "风险扫描（omitted_negation / long_omission）"
                                     "始终对全量命中进行，与这个值无关"),
                     "default": 10,
+                },
+                "strict": {
+                    "type": "boolean",
+                    "description": ("严格档。默认 false：只有「内容不在语料里」或"
+                                    "「在但省略吞掉语义」才判 verified=false，"
+                                    "其余可疑情形（短片段、区分度低、原句含否定、"
+                                    "丢弃限定语）只回传事实，由调用方决定。"
+                                    "strict=true：把上述可疑情形一并判为 verified=false。"
+                                    "这个开关存在的原因是——任何单一阈值都会在"
+                                    "「误报合法引用」和「漏报危险引用」之间取舍，"
+                                    "而正确的取舍取决于使用场景，不该由工具替你决定。"),
+                    "default": False,
                 },
             },
             "required": ["quote"],
@@ -195,6 +207,25 @@ def _call_tool(name: str, arguments: dict[str, Any]) -> tuple[dict, bool]:
                 risk_flags.append("dropped_qualifier")
             partial = bool(risk_flags)
             verified = bool(hits) and not partial
+            # 严格档：把「已检测到、但默认只回传事实」的可疑情形一并判不可引用。
+            # 这三类不做默认拦截的原因各不相同，但都能被同一个比例实测支持：
+            #   fragment          —— 6 字专名（放管服改革）同样短，一刀切误伤合法引用
+            #   generic           —— 区分度低不等于内容假，调用方可能就是要引高频表述
+            #   sentence_negation —— 非片段的合法引用邻句也常带否定（实测噪声 4.75%-10.85%）
+            # 严格档不改变任何检测逻辑，只改变「检测到之后算不算通过」。
+            strict = bool(arguments.get("strict", False))
+            if strict and hits:
+                strict_flags = []
+                if rep.fragment:
+                    strict_flags.append("fragment")
+                if rep.generic:
+                    strict_flags.append("generic")
+                if rep.sentence_negation:
+                    strict_flags.append("context_negation")
+                if strict_flags:
+                    risk_flags = list(dict.fromkeys(risk_flags + strict_flags))
+                    partial = True
+                    verified = False
             if rep.short:
                 # 「太短不查」不等于「语料里没有」。混用同一句话会把真实的
                 # 4-5 字专名说成编造 —— 把真的说成假的比漏报更糟。

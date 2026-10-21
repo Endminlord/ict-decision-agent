@@ -128,10 +128,10 @@ ict-material-20261010/
 ├── multidomain/                         ← 8 个合成领域语料（医疗/软件/金融/法律/制造/环保/教育/能源）
 ├── rfc-corpus/                          ← RFC 英文真实语料（1,739 块 / 14 篇，跨语言验证）
 ├── 250-ict-manufacturing-corpus.md     ← 先进制造真实语料打通记录（9 篇 / 46 块 / strict 10 / loose 498）
-└── MANIFEST.sha256                      ← 全包校验（321 个文件，`wc -l MANIFEST.sha256`）
+└── MANIFEST.sha256                      ← 全包校验（322 个文件，`wc -l MANIFEST.sha256`）
 ```
 
-**清单口径（`wc -l MANIFEST.sha256` = 321，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
+**清单口径（`wc -l MANIFEST.sha256` = 322，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
 刻意排除备份/缓存/虚拟环境 —— `.venv/**`、`__pycache__/*.pyc`、`*.bak*`、`*.pre-crosslingual`、
 `track2-mcp/dist/.gitignore`、`MANIFEST.sha256` 自身。要看全部文件用
 `find . -type f | wc -l`；要看「哪些没被校验」用
@@ -193,7 +193,7 @@ bash tools/verify-all.sh              # --fast 跳过评测
 bash tools/demo-launch.sh             # --check 只检查不动手
 
 # 全包完整性
-sha256sum -c MANIFEST.sha256          # 预期 321 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
+sha256sum -c MANIFEST.sha256          # 预期 322 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
 
 # 契约一致性（5 通过 / 0 失败）+ 负对照自测（6/6）
 python3 tools/check-contract-doc.py --self-test
@@ -261,3 +261,17 @@ python3 tools/rehearsal-timer.py            # 计时并出偏差报告
 | 2 段演示录屏 | Demo 视频 | ✓ 需按赛题 2 重录 |
 
 赛题 2 的**新增要求**：AgentArts 平台上的实现、可在线访问的 Demo 页面、社区分享帖截图。
+
+### QuoteVerification 引用核验协议（protocol/）
+
+一个可执行标准：**支撑答案的那句话，是不是原文、是不是被掐头去尾。**
+
+- `protocol/QuoteVerification-1.0.json` —— 协议 schema（52 条判据 + 6 项阈值依据）
+- `protocol/conformance.py` —— 一致性测试套件，`--self-test` 本体 7/7；
+  鉴别力对照：一个「凡有命中即通过」的错误实现只得 2/7
+- `protocol/EXPERIMENT-crossdomain.json` —— 判据可迁移性实测：
+  中文 4 行业召回 82.7%–88.2%，英文 RFC 99.9%（漏判样本含原文）
+- `protocol/README.md` —— 两个设计决定及其代价、残余风险诚实清单
+
+严格档：`verify_quote(strict=true)` 把「能查到但语境可疑」（短片段/区分度低/原句含否定）
+一并判不可引用。默认关闭，因为补救不对称 —— 把真的说成假的比漏报更糟。
