@@ -26,7 +26,7 @@
 | 5 | `04-迁移改动清单模板.md` | 迁移四项指标（§1.1 已填 `MIG-002` 实测值） |
 | 6 | `复核命令.md` | **每条结论怎么复跑**（A–Z 段，逐条命令 + 预期输出） |
 | 7 | `待补充清单.md` | 诚实边界：哪些项还没做、为什么 |
-| 8 | **开源仓库**（GitHub） | ✅ **已开源**：https://github.com/Endminlord/ict-decision-agent （Public · Apache-2.0 · **280 文件** · README 含部署与复现步骤 · 截图见 `evidence/16-open-source-repo.png`） |
+| 8 | **开源仓库**（GitHub） | ✅ **已开源**：https://github.com/Endminlord/ict-decision-agent （Public · Apache-2.0 · **382 文件（本地全包）** · README 含部署与复现步骤 · 截图见 `evidence/16-open-source-repo.png`） |
 | 9 | `242-ict-rules-compliance.md` | **规则符合性核对**：把官方赛题 3 要求逐条对照我们的材料（初赛 9/9 项齐备）+ 资格性条款风险（组队是唯一阻断项） |
 | 10 | `244-ict-finals-gap.md` | **决赛差距与执行状态**：决赛评分结构（技术 60% + 答辩 40% + 附加 10 分）逐项差距、已完成项与待办 |
 | 11 | `答辩稿.md` | **决赛答辩稿**：15 分钟逐页展示稿（含时间码与钩子）+ 5 分钟问答预案（**14 题**，每题短答/证据/边界） |
@@ -129,7 +129,7 @@ ict-material-20261010/
 └── MANIFEST.sha256                      ← 全包校验（315 个文件，`wc -l MANIFEST.sha256`）
 ```
 
-**清单口径（`wc -l MANIFEST.sha256` = 315，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
+**清单口径（`wc -l MANIFEST.sha256` = 281，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
 刻意排除备份/缓存/虚拟环境 —— `.venv/**`、`__pycache__/*.pyc`、`*.bak*`、`*.pre-crosslingual`、
 `track2-mcp/dist/.gitignore`、`MANIFEST.sha256` 自身。要看全部文件用
 `find . -type f | wc -l`；要看「哪些没被校验」用
@@ -191,7 +191,7 @@ bash tools/verify-all.sh              # --fast 跳过评测
 bash tools/demo-launch.sh             # --check 只检查不动手
 
 # 全包完整性
-sha256sum -c MANIFEST.sha256          # 预期 315 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
+sha256sum -c MANIFEST.sha256          # 预期 281 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
 
 # 契约一致性（5 通过 / 0 失败）+ 负对照自测（6/6）
 python3 tools/check-contract-doc.py --self-test
