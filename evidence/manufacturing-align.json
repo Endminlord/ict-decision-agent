@@ -1,0 +1,162 @@
+{
+ "中华人民共和国国家安全法": {
+  "canonical": "中华人民共和国国家安全法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国国家安全法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 154,
+    "evidence": "社会稳定和国家安全，根据《中华人民共和国国家安全法》、《中华人民共和国对",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 154,
+    "evidence": "稳定和国家安全，根据《中华人民共和国国家安全法》、《中华人民共和国对外关系法》、《中华人民共和国反外国制裁法》、《中华人民共和国对外贸易法》等法律，制定本规定。第二条产业链供",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "中华人民共和国对外关系法": {
+  "canonical": "中华人民共和国对外关系法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国对外关系法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 169,
+    "evidence": "社会稳定和国家安全，根据《中华人民共和国国家安全法》、《中华人民共和国对外关系法》、《中华人民共和国反",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 169,
+    "evidence": "共和国国家安全法》、《中华人民共和国对外关系法》、《中华人民共和国反外国制裁法》、《中华人民共和国对外贸易法》等法律，制定本规定。第二条产业链供",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "中华人民共和国反外国制裁法": {
+  "canonical": "中华人民共和国反外国制裁法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国反外国制裁法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 184,
+    "evidence": "社会稳定和国家安全，根据《中华人民共和国国家安全法》、《中华人民共和国对外关系法》、《中华人民共和国反外国制裁法》、《中华人民共和国对",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 184,
+    "evidence": "共和国对外关系法》、《中华人民共和国反外国制裁法》、《中华人民共和国对外贸易法》等法律，制定本规定。第二条产业链供",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "中华人民共和国对外贸易法": {
+  "canonical": "中华人民共和国对外贸易法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国对外贸易法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 200,
+    "evidence": "社会稳定和国家安全，根据《中华人民共和国国家安全法》、《中华人民共和国对外关系法》、《中华人民共和国反外国制裁法》、《中华人民共和国对外贸易法》等法律，制定本规定。",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "mfg-000-0000",
+    "doc_id": "mfg-000",
+    "doc_char_offset": 200,
+    "evidence": "和国反外国制裁法》、《中华人民共和国对外贸易法》等法律，制定本规定。第二条产业链供",
+    "title": "国务院关于产业链供应链安全的规定",
+    "date": "2026-04-07"
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "党和国家机构改革方案": {
+  "canonical": "党和国家机构改革方案",
+  "entity_type": "Document",
+  "aliases": [
+   "党和国家机构改革方案"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "mfg-003-0000",
+    "doc_id": "mfg-003",
+    "doc_char_offset": 47,
+    "evidence": "023年9月24日）根据《党和国家机构改革方案》和《党中央、国务院议",
+    "title": "中共中央办公厅 国务院办公厅关于调整工业和信息化部职责机构编制的通知",
+    "date": "2023-10-13"
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "党中央、国务院议事协调机构优化调整方案": {
+  "canonical": "党中央、国务院议事协调机构优化调整方案",
+  "entity_type": "Document",
+  "aliases": [
+   "党中央、国务院议事协调机构优化调整方案"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "mfg-003-0000",
+    "doc_id": "mfg-003",
+    "doc_char_offset": 60,
+    "evidence": "023年9月24日）根据《党和国家机构改革方案》和《党中央、国务院议事协调机构优化调整方案》，经报党中央、国务院",
+    "title": "中共中央办公厅 国务院办公厅关于调整工业和信息化部职责机构编制的通知",
+    "date": "2023-10-13"
+   }
+  ],
+  "occurrence_count": 1
+ }
+}

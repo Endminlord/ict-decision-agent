@@ -122,14 +122,16 @@ ict-material-20261010/
 │   ├── action-launcher.py      9 个外部 agent 的统一入口
 │   ├── agents-registry.json    注册表（url / terminal / open-in-app 三种挂载形态）                               ← 语料链 9 脚本 + UI 实拍/录屏脚本 + 契约判据
 ├── ict-corpus-manufacturing/            ← 先进制造合成语料（MIG-002 复跑用）
+│                                        ← 真实语料见 evidence/manufacturing-*（9 篇 / 29,812 字，国务院政策文件库）
 ├── track2-mcp/                          ← 赛题 2：引用回查 MCP（UVX 包 · 零依赖 · 3 工具 · 引擎与领域无关）
 ├── workbench/                           ← 工作台 30 个 agent 定义 + 8 个工作流（`01` §4.1 的代码）
 ├── multidomain/                         ← 8 个合成领域语料（医疗/软件/金融/法律/制造/环保/教育/能源）
 ├── rfc-corpus/                          ← RFC 英文真实语料（1,739 块 / 14 篇，跨语言验证）
-└── MANIFEST.sha256                      ← 全包校验（315 个文件，`wc -l MANIFEST.sha256`）
+├── 250-ict-manufacturing-corpus.md     ← 先进制造真实语料打通记录（9 篇 / 46 块 / strict 10 / loose 498）
+└── MANIFEST.sha256                      ← 全包校验（321 个文件，`wc -l MANIFEST.sha256`）
 ```
 
-**清单口径（`wc -l MANIFEST.sha256` = 281，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
+**清单口径（`wc -l MANIFEST.sha256` = 321，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
 刻意排除备份/缓存/虚拟环境 —— `.venv/**`、`__pycache__/*.pyc`、`*.bak*`、`*.pre-crosslingual`、
 `track2-mcp/dist/.gitignore`、`MANIFEST.sha256` 自身。要看全部文件用
 `find . -type f | wc -l`；要看「哪些没被校验」用
@@ -191,7 +193,7 @@ bash tools/verify-all.sh              # --fast 跳过评测
 bash tools/demo-launch.sh             # --check 只检查不动手
 
 # 全包完整性
-sha256sum -c MANIFEST.sha256          # 预期 281 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
+sha256sum -c MANIFEST.sha256          # 预期 321 个 OK（清单只覆盖交付物；排除项见 §3 末尾「清单口径」）
 
 # 契约一致性（5 通过 / 0 失败）+ 负对照自测（6/6）
 python3 tools/check-contract-doc.py --self-test
