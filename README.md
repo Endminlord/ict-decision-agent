@@ -122,12 +122,12 @@ ict-material-20261010/
 │   ├── action-launcher.py      9 个外部 agent 的统一入口
 │   ├── agents-registry.json    注册表（url / terminal / open-in-app 三种挂载形态）                               ← 语料链 9 脚本 + UI 实拍/录屏脚本 + 契约判据
 ├── ict-corpus-manufacturing/            ← 先进制造合成语料（MIG-002 复跑用）
-│                                        ← 真实语料见 evidence/manufacturing-*（9 篇 / 29,812 字，国务院政策文件库）
-├── track2-mcp/                          ← 赛题 2：引用回查 MCP（UVX 包 · 零依赖 · 3 工具 · 引擎与领域无关）
+│                                        ← 真实语料见 evidence/manufacturing-*（22 篇 / 119,981 字，国务院政策文件库）
+├── track2-mcp/                          ← 引用回查 MCP 通用件（UVX 包 · 零依赖 · 3 工具 · 引擎与领域无关；见 §7）
 ├── workbench/                           ← 工作台 30 个 agent 定义 + 8 个工作流（`01` §4.1 的代码）
 ├── multidomain/                         ← 8 个合成领域语料（医疗/软件/金融/法律/制造/环保/教育/能源）
 ├── rfc-corpus/                          ← RFC 英文真实语料（1,739 块 / 14 篇，跨语言验证）
-├── 250-ict-manufacturing-corpus.md     ← 先进制造真实语料打通记录（9 篇 / 46 块 / strict 10 / loose 498）
+├── 250-ict-manufacturing-corpus.md     ← 先进制造真实语料打通记录（22 篇 / 178 块 / strict 30 / loose 1,226）
 └── MANIFEST.sha256                      ← 全包校验（305 个文件，`wc -l MANIFEST.sha256`）
 ```
 
@@ -188,7 +188,7 @@ ict-material-20261010/
 ```bash
 cd ict-material-20261010
 
-# 一键验收（约 15 秒）：MANIFEST + 判据自测 + ES 块数 + track2 五层 124 条 + 4 条演示 + 双侧评测
+# 一键验收（约 15 秒）：MANIFEST + 判据自测 + ES 块数 + MCP 五层 124 条 + 4 条演示 + 双侧评测
 bash tools/verify-all.sh              # --fast 跳过评测
 
 # 答辩现场一键启动：预检 → 必要时拉起 Nexent → 开浏览器 → 打印演示问题
@@ -224,42 +224,17 @@ python3 tools/rehearsal-timer.py            # 计时并出偏差报告
 
 逐条命令与预期输出见 **`复核命令.md`**（A–Z 段）。
 
-## 7. 赛题 2 材料（AgentArts 平台）
+## 7. 赛题 3 之外的产出（不作为赛题提交物）
 
-> 本包主体是**赛题 3**（Nexent）的交付物。赛题 2 是另一条赛道、平台不同（华为云 AgentArts），材料不通用但能力可迁移。这一节记录赛题 2 的进度。
+> **本届参赛只报赛题 3。** 赛题 2（华为云 AgentArts 平台）不在参赛范围内。下面这些是备赛过程中顺带做出来的东西，**不构成赛题 3 的交付物，也不计入任何评分项**。放在这里只是如实交代它们存在、在哪、什么状态 —— 免得评委翻到 `track2-mcp/` 或 `246-*.md` 时以为我们在做两条赛道。
 
-### 7.1 已做（不依赖平台的部分）
-
-| 交付物 | 位置 | 状态 |
+| 产出 | 位置 | 状态 |
 |---|---|---|
-| 设计方案（Agent 设计 / 架构 / MCP 方案 / Skill 方案 / 迁移清单 / 诚实边界） | `246-ict-track2-design.md` | ✅ |
-| **引用回查 MCP 服务**（UVX 包，零依赖，wheel 11.7 MB） | `track2-mcp/` | ✅ 源码 + `BUILD.md` 重建说明 |
-| 五层自测（数据生成 6/6 · 查询层 55/55 · MCP 协议往返 28/28 · 领域无关 10/10 · HTTP 传输 25/25，共 124 条） | `track2-mcp/tests/` | ✅ |
-| **全领域通用**（引擎与领域无关：`--data` / `ICT_TRACK2_DATA` 换语料不改代码） | `track2-mcp/README.md` · `tests/test_domains.py` | ✅ **十一领域 110/110**（政务真实语料 10/10 + **RFC 英文真实语料** 10/10 + 先进制造真实语料 10/10 + 医疗·软件·金融·法律·制造·环保·教育·能源 80/80）· 多领域语料见 `multidomain/` 与 `rfc-corpus/` |
-| 实测读数（冷启动 0.34 秒 · 第三方依赖 0 个 · 干净环境验证通过） | `track2-mcp/README.md` | ✅ |
-| **端到端演示**（`demo/ask.py`：检索 → `list_sources` → 模型生成 → `verify_quote` 核验 → 只输出通过核验的引用） | `track2-mcp/demo/ask.py` | ✅ 本机跑通 5/5 问；含「注入编造引用被拦下」实验 |
+| **引用回查 MCP 服务**（UVX 包，零依赖，3 工具） | `track2-mcp/` | ✅ 源码 + `BUILD.md` 重建说明 · 五层自测 **124 条全过** |
+| **全领域通用验证**（引擎与领域无关，换语料不改代码） | `track2-mcp/README.md` · `tests/test_domains.py` | ✅ 十一领域 **110/110**（政务 10 + RFC 英文 10 + 先进制造 10 + 合成领域 80） |
 | **核验价值对照实验**（20 问 × 2 组提示词，只改提示词其余不变） | `249-ict-track2-verify-experiment.md` · `track2-mcp/demo/experiment.py` | ✅ 要求逐字：97/97 可回查；不要求逐字：仅 18.0% 逐字、42.6% 语料里查不到 |
-| **AgentArts 工作流设计**（9 个节点 / 数据流转映射 / 3 段关键提示词 / 5 项待验证） | `247-ict-track2-workflow.md` | ✅ 设计（平台未搭） |
-| **Demo 视频脚本**（7 段分镜 / 逐字旁白 / 录制方法） | `248-ict-track2-demo-script.md` | ✅ 脚本（未录制） |
+| 早期面向 AgentArts 的设计稿 | `246-ict-track2-design.md` · `247-*.md` · `248-*.md` | 🗄 **已归档，不再维护**（保留是为了留存「同一套判据换平台重写」的思考记录） |
 
-**为什么选 UVX 而不是 SSE**：AgentArts 要求 MCP 服务在**公网可访问地址**（IP 不应为内网）。我们的服务跑在 WSL 内网，要暴露就得买 ECS 或开隧道；UVX 不需要——AgentArts 在自己沙箱里执行 `uvx <包名>`。代价是包必须自包含，所以我们把「片段 + 定位信息」打进 wheel（11.7 MB），而不打包全文（4.18 GB）。
+**为什么不删**：`track2-mcp` 是**通用件**——它不是为某个平台写的，引擎与领域无关，任何 MCP 宿主（Nexent、Claude Desktop、VS Code）都能挂。本次赛题 3 里它的判据思路（出处可回查 / 证据不足拒答 / 引用必须逐字落地）已经在 Nexent 侧落地成 `citation-verify` 与 `verify_quote`。把它留在包里，是作为「同一套判据能换宿主复用」的证据，而不是第二条赛道的交付物。
 
-### 7.2 待做（依赖 AgentArts 公测权限，审核中）
-
-| 交付物 | 为什么等 |
-|---|---|
-| AgentArts 上的 Agent 实现 | 需要平台权限 |
-| 可在线访问的 Demo 页面 | 平台发布后自带 |
-| 社区分享帖截图 | 需要平台账号 |
-| Demo 视频 | 脚本已就绪（`248-ict-track2-demo-script.md`），待平台可跑后录制 |
-
-### 7.3 能力迁移对照
-
-| 赛题 3 已有资产 | 赛题 2 对应要求 | 能否直接用 |
-|---|---|---|
-| 2 套 MCP（6 工具） | 自定义 MCP 服务说明 | ✓ 说明可复用；平台侧需重新接入 |
-| 2 个 Skill（`SKILL.md`） | 自定义 Skill 说明 | ✓ 作为可迁移性证据 |
-| 12 页演示 PPT | 答辩 PPT | ✓ 需按赛题 2 重写内容 |
-| 2 段演示录屏 | Demo 视频 | ✓ 需按赛题 2 重录 |
-
-赛题 2 的**新增要求**：AgentArts 平台上的实现、可在线访问的 Demo 页面、社区分享帖截图。
+**与赛题 3 的真实关系**：赛题 3 的五条要求（多模态 / 本体 / Nexent MCP+Skills / 跨文档多跳 / 平台可运行）**全部由赛题 3 自己的交付物满足**，不依赖 AgentArts，也不依赖 `track2-mcp`。依赖关系见 §2 的评分对照表。
