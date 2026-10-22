@@ -1,0 +1,38 @@
+# 工作台 G1–G5 复跑 · 2026-10-21T00:19:03+08:00
+
+## 主机
+Linux WIN-AQ0TBED2RU8 6.18.33.2-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Thu Jun 18 21:54:43 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+
+## G1 元框架 demo
+  "domains": [
+    "coding",
+    "default",
+    "ic_design"
+  ],
+  "retries": [],
+  "retry_note": "",
+  "memory_recorded": false,
+  "stored": false,
+  "model_calls": 22,
+  "model_mode": "offline_fixture_NOT_live_LLM"
+}
+rc=0
+
+## G2 git log
+f42babf 修同步脚本幂等判据：比共同祖先而不是 HEAD（否则每次都空跑 rebase）
+48bb1ee ICT版：入口端口改 3091（3081 被 dsh web 占用）+ 基线推进脚本 + 版本说明更新
+3be58e1 华为ICT参赛版：端口/状态目录隔离启动器 + CHANGELOG 邮箱脱敏 + 版本说明
+
+## G3 pytest collect
+2016 tests collected in 0.45s
+
+## G4 status mtime
+81097 2026-10-09 22:44:19.087479177 +0800
+
+## G5 勾选计数
+94
+
+## runtime 关键文件
+-rw-r--r-- 1 endmin endmin   3017 Oct  7 18:39 runtime/capability_bus.py
+-rw-r--r-- 1 endmin endmin 113928 Oct 10 09:14 runtime/chain.py
+-rw-r--r-- 1 endmin endmin   3751 Oct  7 18:39 runtime/execution.py

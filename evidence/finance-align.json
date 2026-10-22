@@ -1,0 +1,684 @@
+{
+ "证券法": {
+  "canonical": "证券法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国证券法",
+   "证券法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-dc821401bbe9-0000",
+    "doc_id": "csrc-dc821401bbe9",
+    "doc_char_offset": 135,
+    "evidence": "答：2019年修订的《中华人民共和国证券法》（以下简称《证券法》）对违规转让证券违法行为的认定和处罚作了较大修改，尤其是将规制范围从“违反法律规定”扩张至“违反法律、行政法规和国务院证券监督管理机构规定”，将规制类型从“违反限制转让期限”扩张至“违反限制转让期限、卖出时间、卖出数量、卖出方式、信息披露等”，为打击此类违法行为提供了充足法律依据。 同时，2025年",
+    "title": "中国证监会有关部门负责人就《违规转让证券案件行政处罚实施规则》答记者问",
+    "date": null
+   },
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-dc821401bbe9-0000",
+    "doc_id": "csrc-dc821401bbe9",
+    "doc_char_offset": 152,
+    "evidence": "国证券法》（以下简称《证券法》）对违规转让证券违法行为的认定和处罚作了较大修改，尤其是将规制范围从“违反法律规定”扩张至“违反法律、行政法规和国务院证券监督管理机构规定”，将规制类型从“违反限制转让期限”扩张至“违反限制转让期限、卖出时间、卖出数量、卖出方式、信息披露等”，为打击此类违法行为提供了充足法律依据。 同时，2025年",
+    "title": "中国证监会有关部门负责人就《违规转让证券案件行政处罚实施规则》答记者问",
+    "date": null
+   },
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-dc821401bbe9-0000",
+    "doc_id": "csrc-dc821401bbe9",
+    "doc_char_offset": 135,
+    "evidence": "么？ 答：2019年修订的《中华人民共和国证券法》（以下简称《证券法》",
+    "title": "中国证监会有关部门负责人就《违规转让证券案件行政处罚实施规则》答记者问",
+    "date": null
+   }
+  ],
+  "occurrence_count": 14
+ },
+ "国务院关于加强监管防范风险推动资本市场高质量发展的若干意见": {
+  "canonical": "国务院关于加强监管防范风险推动资本市场高质量发展的若干意见",
+  "entity_type": "Document",
+  "aliases": [
+   "国务院关于加强监管防范风险推动资本市场高质量发展的若干意见"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-dc821401bbe9-0000",
+    "doc_id": "csrc-dc821401bbe9",
+    "doc_char_offset": 401,
+    "evidence": "在这一背景下，为深入贯彻落实《国务院关于加强监管防范风险推动资本市场高质量发展的若干意见》精神，全面完善减持规",
+    "title": "中国证监会有关部门负责人就《违规转让证券案件行政处罚实施规则》答记者问",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-dc821401bbe9-0000",
+    "doc_id": "csrc-dc821401bbe9",
+    "doc_char_offset": 401,
+    "evidence": "在这一背景下，为深入贯彻落实《国务院关于加强监管防范风险推动资本市场高质量发展的若干意见》精神，全面完善减持规",
+    "title": "中国证监会有关部门负责人就《违规转让证券案件行政处罚实施规则》答记者问",
+    "date": null
+   },
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-b55e7855d403-0000",
+    "doc_id": "csrc-b55e7855d403",
+    "doc_char_offset": 640,
+    "evidence": "中国证监会将深入贯彻《国务院关于加强监管防范风险推动资本市场高质量发展的若干意见》精神，落实《规则》各项规定，规",
+    "title": "中国证监会发布《违规转让证券案件行政处罚实施规则》",
+    "date": null
+   }
+  ],
+  "occurrence_count": 6
+ },
+ "自-2026-12": {
+  "canonical": "自-2026-12",
+  "entity_type": "TimePoint",
+  "aliases": [
+   "自-2026-12"
+  ],
+  "occurrences": [
+   {
+    "predicate": "effective_from",
+    "confidence": "high",
+    "chunk_id": "csrc-b55e7855d403-0000",
+    "doc_id": "csrc-b55e7855d403",
+    "doc_char_offset": 82,
+    "evidence": "行政处罚实施规则》（以下简称《规则》），自2026年12月1日起施行",
+    "title": "中国证监会发布《违规转让证券案件行政处罚实施规则》",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "科创属性评价指引(试行)": {
+  "canonical": "科创属性评价指引(试行)",
+  "entity_type": "Document",
+  "aliases": [
+   "科创属性评价指引（试行）"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 458,
+    "evidence": "括2项规则修订。一是修订《科创属性评价指引（试行）》。为落实《若干意见》",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "中国证监会随机抽查事项清单": {
+  "canonical": "中国证监会随机抽查事项清单",
+  "entity_type": "Document",
+  "aliases": [
+   "中国证监会随机抽查事项清单"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 607,
+    "evidence": "“硬科技”特色。二是修订《中国证监会随机抽查事项清单》。为落实《若干意见》",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则": {
+  "canonical": "上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则",
+  "entity_type": "Document",
+  "aliases": [
+   "上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 920,
+    "evidence": "做了针对性完善。二是修订《上市公司董事、监事和高级管理人员所持本公司股份及其变动管理规则》。吸收整合原减持规定",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "关于加强上市证券公司监管的规定": {
+  "canonical": "关于加强上市证券公司监管的规定",
+  "entity_type": "Document",
+  "aliases": [
+   "关于加强上市证券公司监管的规定"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 1021,
+    "evidence": "公司监管方面，主要是修订《关于加强上市证券公司监管的规定》，旨在通过加强监管，",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "关于严格执行退市制度的意见": {
+  "canonical": "关于严格执行退市制度的意见",
+  "entity_type": "Document",
+  "aliases": [
+   "关于严格执行退市制度的意见"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 1656,
+    "evidence": "情市情的基础上，制定《关于严格执行退市制度的意见》（以下简称《退市意见",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "上市规则": {
+  "canonical": "上市规则",
+  "entity_type": "Document",
+  "aliases": [
+   "上市规则"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 3548,
+    "evidence": "将会同交易所有序推进《上市规则》等的修订工作，对主板创业板财",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "关于加强证券公司和公募基金监管加快推进建设一流投资银行和投资机构的意见(试行)": {
+  "canonical": "关于加强证券公司和公募基金监管加快推进建设一流投资银行和投资机构的意见(试行)",
+  "entity_type": "Document",
+  "aliases": [
+   "关于加强证券公司和公募基金监管加快推进建设一流投资银行和投资机构的意见（试行）"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 5046,
+    "evidence": " 这次修订《规定》是落实《国务院关于加强监管防范风险推动资本市场高质量发展的若干意见》《关于加强证券公司和公募基金监管加快推进建设一流投资银行和投资机构的意见（试行）》的具体举措。本次修订",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   },
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-bdf4b21564dd-0000",
+    "doc_id": "csrc-bdf4b21564dd",
+    "doc_char_offset": 5046,
+    "evidence": "仍有较大差距。 这次修订《规定》是落实《国务院关于加强监管防范风险推动资本市场高质量发展的若干意见》《关于加强证券公司和公募基金监管加快推进建设一流投资银行和投资机构的意见（试行）》的具体举措。本次修订",
+    "title": "2024年4月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "中共中央办公厅国务院办公厅关于依法从严打击证券违法活动的意见": {
+  "canonical": "中共中央办公厅国务院办公厅关于依法从严打击证券违法活动的意见",
+  "entity_type": "Document",
+  "aliases": [
+   "中共中央办公厅国务院办公厅关于依法从严打击证券违法活动的意见"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-172ffa0921aa-0000",
+    "doc_id": "csrc-172ffa0921aa",
+    "doc_char_offset": 2374,
+    "evidence": "年来，新证券法、刑法修正案（十一）以及《中共中央办公厅国务院办公厅关于依法从严打击证券违法活动的意见》等发布实施，资本市场",
+    "title": "2024 年1月19日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "上市公司创业投资基金股东减持股份的特别规定": {
+  "canonical": "上市公司创业投资基金股东减持股份的特别规定",
+  "entity_type": "Document",
+  "aliases": [
+   "上市公司创业投资基金股东减持股份的特别规定"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-172ffa0921aa-0000",
+    "doc_id": "csrc-172ffa0921aa",
+    "doc_char_offset": 6471,
+    "evidence": "在2018年就发布了《上市公司创业投资基金股东减持股份的特别规定》，2020年又做了修订，私募股权创投基金投",
+    "title": "2024 年1月19日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "关于依法从严打击证券违法活动的意见": {
+  "canonical": "关于依法从严打击证券违法活动的意见",
+  "entity_type": "Document",
+  "aliases": [
+   "关于依法从严打击证券违法活动的意见"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-172ffa0921aa-0000",
+    "doc_id": "csrc-172ffa0921aa",
+    "doc_char_offset": 8177,
+    "evidence": "党中央、国务院对严格贯彻执行证券法律规定严厉打击证券期货违法犯罪活动工作高度重视，以“两办”名义印发了《关于依法从严打击证券违法活动的意见》，这是党中央历史上第",
+    "title": "2024 年1月19日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "上市公司监管指引第3号——上市公司现金分红(2023年修订)": {
+  "canonical": "上市公司监管指引第3号——上市公司现金分红(2023年修订)",
+  "entity_type": "Document",
+  "aliases": [
+   "上市公司监管指引第3号——上市公司现金分红（2023年修订）"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-5f99dfc0503f-0000",
+    "doc_id": "csrc-5f99dfc0503f",
+    "doc_char_offset": 1064,
+    "evidence": "年12月15日，发布《上市公司监管指引第3号——上市公司现金分红（2023年修订）》《上市公司章程指引》",
+    "title": "2024年1月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "上市公司章程指引": {
+  "canonical": "上市公司章程指引",
+  "entity_type": "Document",
+  "aliases": [
+   "上市公司章程指引"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-5f99dfc0503f-0000",
+    "doc_id": "csrc-5f99dfc0503f",
+    "doc_char_offset": 1096,
+    "evidence": "现金分红（2023年修订）》《上市公司章程指引》及交易所相关自律监管",
+    "title": "2024年1月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "上市公司股份回购规则": {
+  "canonical": "上市公司股份回购规则",
+  "entity_type": "Document",
+  "aliases": [
+   "上市公司股份回购规则"
+  ],
+  "occurrences": [
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-5f99dfc0503f-0000",
+    "doc_id": "csrc-5f99dfc0503f",
+    "doc_char_offset": 1433,
+    "evidence": "年12月15日，我会修订发布《上市公司股份回购规则》，对部分条款予以优化",
+    "title": "2024年1月12日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 1
+ },
+ "关于深化生态保护补偿制度改革的意见": {
+  "canonical": "关于深化生态保护补偿制度改革的意见",
+  "entity_type": "Document",
+  "aliases": [
+   "关于深化生态保护补偿制度改革的意见"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-6d039d63f681-0000",
+    "doc_id": "csrc-6d039d63f681",
+    "doc_char_offset": 1329,
+    "evidence": "数。下一步,证监会将贯彻落实中办、国办印发《关于深化生态保护补偿制度改革的意见》,进一步健全绿色股票",
+    "title": "2021年9月24日新闻发布会",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-6d039d63f681-0000",
+    "doc_id": "csrc-6d039d63f681",
+    "doc_char_offset": 1329,
+    "evidence": "数。下一步,证监会将贯彻落实中办、国办印发《关于深化生态保护补偿制度改革的意见》,进一步健全绿色股票",
+    "title": "2021年9月24日新闻发布会",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "期货和衍生品法": {
+  "canonical": "期货和衍生品法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国期货和衍生品法",
+   "期货和衍生品法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-e70ade6a73c2-0000",
+    "doc_id": "csrc-e70ade6a73c2",
+    "doc_char_offset": 125,
+    "evidence": "二十届四中全会精神，落实新“国九条”和《国务院办公厅转发中国证监会等部门〈关于加强监管防范风险促进期货市场高质量发展的意见〉的通知》（国办发〔2024〕47号）部署要求，细化《期货和衍生品法》相关规定，中国证监会",
+    "title": "中国证监会发布《期货公司监督管理办法》及配套实施公告",
+    "date": null
+   },
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-e70ade6a73c2-0000",
+    "doc_id": "csrc-e70ade6a73c2",
+    "doc_char_offset": 125,
+    "evidence": "7号）部署要求，细化《期货和衍生品法》相关规定，中国证监会认真总结监管经验，充分听取各方意见，修订了《期货公司监督管理",
+    "title": "中国证监会发布《期货公司监督管理办法》及配套实施公告",
+    "date": null
+   },
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 267,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 4
+ },
+ "关于实施〈期货公司监督管理办法〉有关事项的公告": {
+  "canonical": "关于实施〈期货公司监督管理办法〉有关事项的公告",
+  "entity_type": "Document",
+  "aliases": [
+   "关于实施〈期货公司监督管理办法〉有关事项的公告"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-e70ade6a73c2-0000",
+    "doc_id": "csrc-e70ade6a73c2",
+    "doc_char_offset": 192,
+    "evidence": "二十届四中全会精神，落实新“国九条”和《国务院办公厅转发中国证监会等部门〈关于加强监管防范风险促进期货市场高质量发展的意见〉的通知》（国办发〔2024〕47号）部署要求，细化《期货和衍生品法》相关规定，中国证监会认真总结监管经验，充分听取各方意见，修订了《期货公司监督管理办法》（以下简称《办法》），并制定了《关于实施〈期货公司监督管理办法〉有关事项的公告》（以下简称《实施公告",
+    "title": "中国证监会发布《期货公司监督管理办法》及配套实施公告",
+    "date": null
+   },
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-e70ade6a73c2-0000",
+    "doc_id": "csrc-e70ade6a73c2",
+    "doc_char_offset": 192,
+    "evidence": "，充分听取各方意见，修订了《期货公司监督管理办法》（以下简称《办法》），并制定了《关于实施〈期货公司监督管理办法〉有关事项的公告》（以下简称《实施公告",
+    "title": "中国证监会发布《期货公司监督管理办法》及配套实施公告",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "关于加强监管防范风险促进期货市场高质量发展的意见": {
+  "canonical": "关于加强监管防范风险促进期货市场高质量发展的意见",
+  "entity_type": "Document",
+  "aliases": [
+   "关于加强监管防范风险促进期货市场高质量发展的意见"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-e70ade6a73c2-0000",
+    "doc_id": "csrc-e70ade6a73c2",
+    "doc_char_offset": 75,
+    "evidence": "二十届四中全会精神，落实新“国九条”和《国务院办公厅转发中国证监会等部门〈关于加强监管防范风险促进期货市场高质量发展的意见〉的通知》（国办发〔",
+    "title": "中国证监会发布《期货公司监督管理办法》及配套实施公告",
+    "date": null
+   },
+   {
+    "predicate": "amends",
+    "confidence": "high",
+    "chunk_id": "csrc-e70ade6a73c2-0000",
+    "doc_id": "csrc-e70ade6a73c2",
+    "doc_char_offset": 75,
+    "evidence": "发中国证监会等部门〈关于加强监管防范风险促进期货市场高质量发展的意见〉的通知》（国办发〔2024〕47号）部署要求，细化《期货和衍生品法》相关规定，中国证监会认真总结监管经验，充分听取各方意见，修订了《期货公司监督管理",
+    "title": "中国证监会发布《期货公司监督管理办法》及配套实施公告",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "证券投资基金法": {
+  "canonical": "证券投资基金法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国证券投资基金法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 284,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 284,
+    "evidence": "国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制定本方案。 一、总体要求",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "网络安全法": {
+  "canonical": "网络安全法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国网络安全法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 301,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 301,
+    "evidence": "国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制定本方案。 一、总体要求",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "个人信息保护法": {
+  "canonical": "个人信息保护法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国个人信息保护法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 316,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 316,
+    "evidence": "共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制定本方案。 一、总体要求",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "反洗钱法": {
+  "canonical": "反洗钱法",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国反洗钱法"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 333,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 333,
+    "evidence": "国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制定本方案。 一、总体要求",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "证券公司监督管理条例": {
+  "canonical": "证券公司监督管理条例",
+  "entity_type": "Document",
+  "aliases": [
+   "证券公司监督管理条例"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 347,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 347,
+    "evidence": "民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制定本方案。 一、总体要求",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ },
+ "外汇管理条例": {
+  "canonical": "外汇管理条例",
+  "entity_type": "Document",
+  "aliases": [
+   "中华人民共和国外汇管理条例"
+  ],
+  "occurrences": [
+   {
+    "predicate": "cites",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 360,
+    "evidence": "序和投资者合法权益，根据《中华人民共和国证券法》、《中华人民共和国期货和衍生品法》、《中华人民共和国证券投资基金法》、《中华人民共和国网络安全法》、《中华人民共和国个人信息保护法》、《中华人民共和国反洗钱法》、《证券公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   },
+   {
+    "predicate": "implements",
+    "confidence": "high",
+    "chunk_id": "csrc-2fc6d814d602-0000",
+    "doc_id": "csrc-2fc6d814d602",
+    "doc_char_offset": 360,
+    "evidence": "公司监督管理条例》、《中华人民共和国外汇管理条例》等法律法规规定，现制定本方案。 一、总体要求",
+    "title": "中国证监会 工业和信息化部 公安部 中国人民银行  市场监管总局 金融监管总局 国家网信办 国家外汇局关于印发《综合整治非法跨境证券期货基金经营活动实施方案》的",
+    "date": null
+   }
+  ],
+  "occurrence_count": 2
+ }
+}

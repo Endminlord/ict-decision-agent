@@ -18,6 +18,7 @@ dependencies = []
 
 [project.scripts]
 ict-track2-mcp = "ict_track2_mcp.server:main"
+ict-track2-mcp-http = "ict_track2_mcp.http_server:main"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]

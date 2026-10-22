@@ -94,7 +94,7 @@ def main():
     print("[4/6] track2 判据数")
     tests = HERE / "track2-mcp/tests"
     counts = {}
-    for name, want in (("test_lookup.py", 52), ("test_mcp_protocol.py", 28), ("test_domains.py", 10)):
+    for name, want in (("test_lookup.py", 55), ("test_mcp_protocol.py", 28), ("test_domains.py", 10)):
         p = tests / name
         if not p.exists():
             skip(f"{name} 条数", "文件不存在")
@@ -105,7 +105,7 @@ def main():
         counts[name] = got
         ok(f"{name} 条数", got, want)
     if len(counts) == 3:
-        ok("四层合计（含 build 6 条）", 6 + sum(counts.values()), 96)
+        ok("四层合计（含 build 6 条）", 6 + sum(counts.values()), 99)
 
     print("[5/6] 文档里不该出现的旧数字")
     stale = ["6,793", "31,210", "32,163", "13,026", "118,452", "136,395", "15,828", "2,115", "255,451"]
@@ -127,7 +127,7 @@ def main():
     demos = [
         ("Q1 跨层级", "国家层面的优化营商环境条例是哪一年出台的？", {}, 0.8816),
         ("Q2 跨语言", "HTTP/2 的流量控制怎么工作？", {"ES_INDEX": "rfc-1024"}, 0.8168),
-        ("Q2b 跨时间", "营商环境政策这几年有什么变化？", {}, 0.8594),
+        ("Q2b 跨时间", "营商环境政策这几年有什么变化？", {}, 0.8633),
     ]
     # Q3 是拒答，不能只比分数 —— 判输出里有没有「证据不足」
     r3 = subprocess.run([sys.executable, str(HERE / "tools/cross-doc-demo.py"), "--query", "量子计算的退相干时间如何测量？"],

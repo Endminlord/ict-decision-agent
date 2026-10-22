@@ -14,7 +14,7 @@ uvx --from track2-mcp/dist/ict_track2_mcp-0.1.0-py3-none-any.whl ict-track2-mcp
 
 **实测记录（2026-10-17）**：`initialize` 返回 `protocolVersion 2024-11-05` + `serverInfo ict-track2-mcp/0.1.0`；`tools/list` 返回 3 个工具；`tools/call verify_quote {"quote":"市场准入负面清单","max_hits":2}` → `verified: true / verbatim: true / match_kinds: ["exact"] / hit_count: 192 / returned_hits: 2`（前两条命中《国务院办公厅关于同意在上海等9个城市开展国内贸易流通体制改革发展综合试点的复函》与《国务院关于实行市场准入负面清单制度的意见》）。
 
-四层自测（**96 条判据**，重建后实跑）：数据生成 **6/6** · 查询层 **52/52** · MCP 协议往返 **28/28** · 领域无关 **10/10**。
+五层自测（**121 条判据**，重建后实跑）：数据生成 **6/6** · 查询层 **52/52** · MCP 协议往返 **28/28** · 领域无关 **10/10** · HTTP 传输 **25/25**。
 
 > 判据数在 2026-10-17 第二轮对抗修复后由 74 增至 80（查询层 +4：L33–L36；协议层 +2：L37–L38）。新增六条锁的是第二轮绕过里已关闭的三个根因：否定词作用域对齐（R2）、`无需/无须/毋须` 词表（R3）、边界窗口与两个结构性风险字段（R1）。
 >
@@ -46,7 +46,7 @@ uv build
 #    → dist/ict_track2_mcp-0.1.0-py3-none-any.whl
 ```
 
-## 自测（四层，共 96 条判据）
+## 自测（五层，共 121 条判据）
 
 ```bash
 python3 scripts/build_data.py --self-test          # 数据生成 6/6

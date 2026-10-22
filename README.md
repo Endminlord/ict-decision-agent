@@ -128,10 +128,10 @@ ict-material-20261010/
 ├── multidomain/                         ← 8 个合成领域语料（医疗/软件/金融/法律/制造/环保/教育/能源）
 ├── rfc-corpus/                          ← RFC 英文真实语料（1,739 块 / 14 篇，跨语言验证）
 ├── 250-ict-manufacturing-corpus.md     ← 先进制造真实语料打通记录（9 篇 / 46 块 / strict 10 / loose 498）
-└── MANIFEST.sha256                      ← 全包校验（305 个文件，`wc -l MANIFEST.sha256`）
+└── MANIFEST.sha256                      ← 全包校验（308 个文件，`wc -l MANIFEST.sha256`）
 ```
 
-**清单口径（`wc -l MANIFEST.sha256` = 305，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
+**清单口径（`wc -l MANIFEST.sha256` = 308，与 `find . -type f` 的数目不相等，差额是什么）**：`MANIFEST.sha256` 只覆盖**交付物**，
 刻意排除备份/缓存/虚拟环境 —— `.venv/**`、`__pycache__/*.pyc`、`*.bak*`、`*.pre-crosslingual`、
 `track2-mcp/dist/.gitignore`、`MANIFEST.sha256` 自身。要看全部文件用
 `find . -type f | wc -l`；要看「哪些没被校验」用

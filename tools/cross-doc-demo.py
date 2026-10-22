@@ -521,6 +521,8 @@ def chain(query: str, args, index: str, from_query: Optional[int] = None) -> lis
             cid = hit["_id"]
             if cid in seen:
                 continue
+            # 第 2 跳起，同一文档的其他块也算「新证据」——多跳的价值正在于从同一份
+            # 文件里翻出前半段没翻到的段落。但**同一个 chunk 不重复计入**（seen）。
             seen.add(cid)
             body = src.get("content") or ""
             e = extract(body + " " + (src.get("title") or ""))
@@ -554,11 +556,26 @@ def chain(query: str, args, index: str, from_query: Optional[int] = None) -> lis
             print(f"           出处 chunk_id={r['chunk_id'][:22]}…  实体={r['entities'][:2]}")
         if not ring:
             print("   （无命中）")
-        # 下一跳查询：用本轮最有代表性的法规名做二次检索
-        top = [k for k, _ in ents.most_common(4) if len(k) >= 6]
+        # 下一跳查询：用本轮最有代表性的**法规名**做二次检索。
+        #
+        # 为什么不是 most_common：词频排出来的是发文机关（「国家发展改革委」4 次），
+        # 而发文机关几乎每篇都有，追它等于原地打转。真正能往下追的是引用链上的
+        # **具体法规名**（「关于实行市场准入负面清单制度的意见」17 字）。
+        # 判据换成本轮出现次数 × 长度：既要求复用（≥2 次，说明是这条链的枢纽），
+        # 又要求具体（≥12 字，排除「国务院」「中共中央」这类泛称）。
+        # 实测（2026-10-22）：改前第 2 跳选「国家发展改革委」→ 召回 5 条全被去重吃掉；
+        # 改后选具体法规名 → 剩出 1 条新块。
+        doc_candidates = [(k, v) for k, v in ents.items() if len(k) >= 12 and v >= 2]
+        # 没有复用型法规名时退回「最长的那一个」——单次出现的法规名仍是有效线索
+        if not doc_candidates:
+            doc_candidates = [(k, 1) for k, _ in ents.most_common(6) if len(k) >= 12]
+        doc_candidates.sort(key=lambda kv: (-kv[1], -len(kv[0])))
+        top = [k for k, _ in doc_candidates]
         if h < args.hops and top:
-            # 首词取自**本条** query（单查询时即 args.query，与旧版完全等价）
-            q = f"{top[0]} {(query.split() or [''])[0]}".strip()
+            # 只用法规名做检索式。旧版拼接 `(query.split() or [''])[0]` 在中文里
+            # 取到的是**整个原问题**（中文无空格），等于把原问题再问一遍 ——
+            # 向量与原问题高度相似，必然召回到同一批块，第 2 跳形同虚设。
+            q = top[0]
         else:
             break
     return hops
@@ -624,9 +641,29 @@ def run(args) -> int:
     # C2 的时间条件必须按**自然年**比：按日期串比时，只要 ≥2 环日期几乎必然不同，
     # `or` 后半恒真，C2 就成了永远打勾的装饰（`？？？` 也 ✓）。
     years = {d[:4] for d in dates}
+    # C6 链式跳变（2026-10-22 新增）：C2 用合并后的全部环判断，测的是「这一批
+    # 结果里有没有跨层级」——第 1 跳自己就能满足，所以它在多跳场景下是**装饰**。
+    # 真正的「多跳」要求相邻两跳之间发生层级或年份跳变：第 1 跳全是国家级，
+    # 第 2 跳也必须给出一个不同的层级/年份，否则第 2 跳只是把同样的东西又问了一遍。
+    def _span(ring_hits):
+        lv = {r.get("level") for r in ring_hits} - {None, "媒体", "未知"}
+        yr = {(r.get("date") or "")[:4] for r in ring_hits} - {""}
+        return lv, yr
+    chain_jumps = []
+    prev = None
+    for blk in hops:
+        if not blk["hits"]:
+            continue
+        lv, yr = _span(blk["hits"])
+        if prev is not None:
+            plv, pyr = prev
+            chain_jumps.append(bool(lv and yr and (lv != plv or yr != pyr)))
+        prev = (lv, yr)
+    c6_val = bool(chain_jumps) and all(chain_jumps)
     checks = {
         "C1 出处可回查": bool(all_hits) and all(r["chunk_id"] for r in all_hits),
-        "C2 跨层级或跨时间": len(levels - {"媒体"}) >= 2 or len(years) >= 2,
+        "C2 跨层级或跨时间（批次口径）": len(levels - {"媒体"}) >= 2 or len(years) >= 2,
+        "C6 相邻跳之间发生层级/年份跳变": c6_val,
         "C3 每环带出处": bool(all_hits) and all(r["title"] and r["date"] for r in all_hits),
         f"C4 最高分 ≥ {args.min_score}": max_score >= args.min_score,
         c5_key: c5_val,
