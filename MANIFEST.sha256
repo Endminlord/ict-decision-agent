@@ -19,6 +19,7 @@ e4b8be7ec0a5d3e7b57733bdd42d2010f036652d  245-ict-retrieval-eval.md
 b98837c3e4f558776d7f2e00b5765d0982e846ec  248-ict-track2-demo-script.md
 a5c209fe14ee99984abe69d43e57ef81c0cb8769  249-ict-track2-verify-experiment.md
 8b8056a0c5cf885efc6d56d1c6126252381efbca  250-ict-manufacturing-corpus.md
+18c32c47735c9cc77e79a4a037d214e3d63f0152  AGENTS.md
 e6d597e64b9af2d6c04bad16f39f69fd944f4a23  BENCHMARK.md
 9d86cb7ed7aee7318007b2aee7e859485f572ecd  README.md
 9e14a26e669265eea75421f469ae87d0706e3e84  corpus-manufacturing/chunks.jsonl
@@ -59,6 +60,9 @@ e4b8be7ec0a5d3e7b57733bdd42d2010f036652d  docs/245-ict-retrieval-eval.md
 242e8990ba67225986cfbba62761a5d269ab6776  docs/247-ict-track2-workflow.md
 b98837c3e4f558776d7f2e00b5765d0982e846ec  docs/248-ict-track2-demo-script.md
 a5c209fe14ee99984abe69d43e57ef81c0cb8769  docs/249-ict-track2-verify-experiment.md
+4032de016c1e91119d33d477633e2b8f265f4195  docs/agents/domain.md
+0209a19af92c9c485cf3acc3d9e253171517ea17  docs/agents/issue-tracker.md
+5276464244857a3cc29890ff4a978a197b21f3fc  docs/agents/triage-labels.md
 8cde9d87eb0e2814453923f027baac8689c1bed8  docs/使用说明书.md
 f8e2c010fd64c5c61af3ab5901dcad80fbfac7eb  docs/团队分工建议.md
 13c69393bd78638d155b50836cda2d67ad0acd73  docs/复核命令.md
