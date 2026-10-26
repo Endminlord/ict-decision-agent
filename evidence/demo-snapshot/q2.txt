@@ -2,23 +2,24 @@
 索引：rfc-1024 · 跳数 2 · top-k 5
 
 ── 跳 1：HTTP/2 的流量控制怎么工作？
-   [0.8168] 媒体 · 2021-05-01 · RFC 9000: QUIC: A UDP-Based Multiplexed and 
+   [0.8168] 未知 · 2021-05-01 · RFC 9000: QUIC: A UDP-Based Multiplexed and 
            出处 chunk_id=uSOoRKEBaifM2AmUy1HW…  实体=[]
-   [0.8144] 媒体 · 2022-06-01 · RFC 9110: HTTP Semantics
+   [0.8144] 未知 · 2022-06-01 · RFC 9110: HTTP Semantics
            出处 chunk_id=7COdRKEBaifM2AmUnU1u…  实体=[]
-   [0.8090] 媒体 · 2022-06-01 · RFC 9110: HTTP Semantics
+   [0.8090] 未知 · 2022-06-01 · RFC 9110: HTTP Semantics
            出处 chunk_id=yCOdRKEBaifM2AmUQ02Q…  实体=[]
-   [0.8076] 媒体 · 2021-05-01 · RFC 9000: QUIC: A UDP-Based Multiplexed and 
+   [0.8076] 未知 · 2021-05-01 · RFC 9000: QUIC: A UDP-Based Multiplexed and 
            出处 chunk_id=uiOoRKEBaifM2AmUy1HW…  实体=[]
-   [0.8057] 媒体 · 2021-05-01 · RFC 9000: QUIC: A UDP-Based Multiplexed and 
+   [0.8057] 未知 · 2021-05-01 · RFC 9000: QUIC: A UDP-Based Multiplexed and 
            出处 chunk_id=viOoRKEBaifM2AmUy1HW…  实体=[]
 
 判据：
   ✓ C1 出处可回查
-  ✓ C2 跨层级或跨时间
+  ✓ C2 跨层级或跨时间（批次口径）
+  − C6 相邻跳之间发生层级/年份跳变（单跳链，无可比的相邻跳）
   ✓ C3 每环带出处
   ✓ C4 最高分 ≥ 0.75
   ✓ C5 跨语言分数门 ≥ 0.8
   （最高分 0.8168 · 跨语言分数门）
 
-链条：5 环，跨层级 ['媒体']，时间 2021-05-01 → 2022-06-01
+链条：5 环，跨层级 ['未知']，时间 2021-05-01 → 2022-06-01

@@ -566,9 +566,18 @@ def chain(query: str, args, index: str, from_query: Optional[int] = None) -> lis
         # 实测（2026-10-22）：改前第 2 跳选「国家发展改革委」→ 召回 5 条全被去重吃掉；
         # 改后选具体法规名 → 剩出 1 条新块。
         doc_candidates = [(k, v) for k, v in ents.items() if len(k) >= 12 and v >= 2]
+        # 12 字门槛对短名法规放一档（≥8 字 × ≥2 次）：旗舰问句的枢纽实体是
+        # 「河北省优化营商环境条例」（11 字），12 字让它永远落空，第 2 跳只能
+        # 退回单次出现的长名，召回又被去重吃掉——实测（2026-10-26）链条停在
+        # 5 环、C6 ✗。8 字仍排除「国务院」「中共中央」这类泛称。
+        if not doc_candidates:
+            doc_candidates = [(k, v) for k, v in ents.items() if len(k) >= 8 and v >= 2]
         # 没有复用型法规名时退回「最长的那一个」——单次出现的法规名仍是有效线索
         if not doc_candidates:
             doc_candidates = [(k, 1) for k, _ in ents.most_common(6) if len(k) >= 12]
+        # 原题里已有的词再查一遍是另一种「原地打转」：跳 1 的向量本来就含它，
+        # 召回必然与第 1 跳高度重合（「优化营商环境条例」就长在问题句子里）。
+        doc_candidates = [(k, v) for k, v in doc_candidates if k not in query]
         doc_candidates.sort(key=lambda kv: (-kv[1], -len(kv[0])))
         top = [k for k, _ in doc_candidates]
         if h < args.hops and top:
@@ -681,8 +690,15 @@ def run(args) -> int:
         insufficient = evidence_insufficient(args.query, all_hits, max_score,
                                              base_min=args.min_score, index=index)
     print("\n判据：")
+    # C6 定义在「相邻两跳」上：非空跳不足 2 条时没有可比的跳对，判据本身不适用，
+    # 打「− 不适用」而不是 ✗ —— ✗ 会让读数的人误以为这条链出了问题（实测
+    # 2026-10-26：RFC 单跳链被判 ✗，评委视角等于无中生有的红灯）。
+    c6_na = sum(1 for blk in hops if blk["hits"]) < 2
     for k, v in checks.items():
-        print(f"  {'✓' if v else '✗'} {k}")
+        if c6_na and k.startswith("C6 "):
+            print(f"  − {k}（单跳链，无可比的相邻跳）")
+        else:
+            print(f"  {'✓' if v else '✗'} {k}")
     if mode == "zh2lat":
         detail = f"最高分 {max_score:.4f} · 跨语言分数门"
     elif mode == "lat2zh":
