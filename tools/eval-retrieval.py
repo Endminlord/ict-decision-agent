@@ -194,14 +194,14 @@ def hit_rank(results: list[dict], target_doc: str) -> int | None:
 
 
 def eval_hit_rate(n: int, k: int = 10, seed: int = 42) -> dict:
-    """A 组：标题命中率。"""
+    """A 组：标题命中率（混合检索：core.hybrid_search 稠密+BM25 z 融合，alpha=0.6）。"""
     docs = sample_docs(n, seed)
     at = {1: 0, 3: 0, 5: 0, 10: 0}
     rr = 0.0
     misses = []
     for d in docs:
         try:
-            hits = core.knn(core.embed(d["title"]), INDEX, k)
+            hits = core.hybrid_search(d["title"], INDEX, k)
         except Exception as exc:                       # 单题失败不拖垮整轮
             misses.append({"title": d["title"], "error": str(exc)})
             continue
