@@ -1,0 +1,288 @@
+{
+  "index": "rfc-1024",
+  "seed": 42,
+  "top_k": 10,
+  "C_abstention": {
+    "out_of_domain_n": 20,
+    "out_abstained": 20,
+    "abstain_recall": 1.0,
+    "in_domain_n": 15,
+    "in_answered": 15,
+    "answer_rate": 1.0,
+    "kw_hit_rate": 0.8667,
+    "out_rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "abstained": true,
+        "max_score": 0.7318,
+        "grounded": 0
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "abstained": true,
+        "max_score": 0.7282,
+        "grounded": 0
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "abstained": true,
+        "max_score": 0.7365,
+        "grounded": 0
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "abstained": true,
+        "max_score": 0.7211,
+        "grounded": 0
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "abstained": true,
+        "max_score": 0.7269,
+        "grounded": 0
+      },
+      {
+        "q": "红烧肉的家常做法是什么？",
+        "abstained": true,
+        "max_score": 0.7192,
+        "grounded": 0
+      },
+      {
+        "q": "怎么给吉他换弦？",
+        "abstained": true,
+        "max_score": 0.7194,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡豆的烘焙曲线怎么定？",
+        "abstained": true,
+        "max_score": 0.7145,
+        "grounded": 0
+      },
+      {
+        "q": "葡萄酒的单宁来自哪里？",
+        "abstained": true,
+        "max_score": 0.7012,
+        "grounded": 0
+      },
+      {
+        "q": "中国传统建筑中的斗拱结构起什么作用？",
+        "abstained": true,
+        "max_score": 0.7017,
+        "grounded": 0
+      },
+      {
+        "q": "马拉松训练的周跑量怎么安排？",
+        "abstained": true,
+        "max_score": 0.7218,
+        "grounded": 0
+      },
+      {
+        "q": "植物光合作用的卡尔文循环步骤",
+        "abstained": true,
+        "max_score": 0.7064,
+        "grounded": 0
+      },
+      {
+        "q": "国际象棋的开局原则有哪些？",
+        "abstained": true,
+        "max_score": 0.7104,
+        "grounded": 0
+      },
+      {
+        "q": "怎样在 Excel 里做数据透视表？",
+        "abstained": true,
+        "max_score": 0.76,
+        "grounded": 0
+      },
+      {
+        "q": "黑洞的信息悖论是什么？",
+        "abstained": true,
+        "max_score": 0.728,
+        "grounded": 0
+      },
+      {
+        "q": "如何训练一个扩散模型生成猫的图片？",
+        "abstained": true,
+        "max_score": 0.7161,
+        "grounded": 0
+      },
+      {
+        "q": "太阳系外行星的凌日观测方法",
+        "abstained": true,
+        "max_score": 0.6934,
+        "grounded": 0
+      },
+      {
+        "q": "混凝土抗压强度的测试标准 ASTM C39",
+        "abstained": true,
+        "max_score": 0.734,
+        "grounded": 0
+      },
+      {
+        "q": "2026 年世界杯小组赛赛程",
+        "abstained": true,
+        "max_score": 0.7022,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡因在人体内的代谢半衰期是多少？",
+        "abstained": true,
+        "max_score": 0.7115,
+        "grounded": 0
+      }
+    ],
+    "in_rows": [
+      {
+        "q": "How does HTTP caching work?",
+        "abstained": false,
+        "max_score": 0.8491,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What are the semantics of HTTP methods?",
+        "abstained": false,
+        "max_score": 0.8536,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How does TCP congestion control work?",
+        "abstained": false,
+        "max_score": 0.8467,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How is DNS resolution performed?",
+        "abstained": false,
+        "max_score": 0.7982,
+        "grounded": 1,
+        "kw_hit": false,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What is the JSON grammar?",
+        "abstained": false,
+        "max_score": 0.8359,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How does the TLS 1.3 handshake work?",
+        "abstained": false,
+        "max_score": 0.8721,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What is QUIC multiplexing?",
+        "abstained": false,
+        "max_score": 0.7978,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How does OAuth 2.0 authorization work?",
+        "abstained": false,
+        "max_score": 0.8557,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "What is the URI generic syntax?",
+        "abstained": false,
+        "max_score": 0.8296,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "How are WebSocket frames structured?",
+        "abstained": false,
+        "max_score": 0.8513,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "HTTP 缓存是怎么工作的？",
+        "abstained": false,
+        "max_score": 0.835,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "TCP 的拥塞控制是怎么做的？",
+        "abstained": false,
+        "max_score": 0.8182,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "TLS 1.3 的握手过程是什么？",
+        "abstained": false,
+        "max_score": 0.8503,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "JSON 的语法规则有哪些？",
+        "abstained": false,
+        "max_score": 0.8518,
+        "grounded": 0,
+        "kw_hit": true,
+        "levels": [
+          "未知"
+        ]
+      },
+      {
+        "q": "DNS 解析是怎么进行的？",
+        "abstained": false,
+        "max_score": 0.8197,
+        "grounded": 0,
+        "kw_hit": false,
+        "levels": [
+          "未知"
+        ]
+      }
+    ]
+  }
+}

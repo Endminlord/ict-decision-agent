@@ -272,9 +272,20 @@ def _cross_doc(query: str, hops: int = 2, top_k: int = 5) -> dict:
                 "grounded": core.keyword_grounded(query, body + " " + (src.get("title") or "")),
                 "cross_lingual": core.is_cross_lingual(query, body + " " + (src.get("title") or "")),
             })
-        top = [kk for kk, _ in sorted(ents.items(), key=lambda kv: -kv[1]) if len(kk) >= 6][:4]
+        # 跳 2 检索式只用法规名，不拼原问题（与 mcp/retrieval-mcp-server.py 同一套
+        # 判据，两处必须同步改）：拼接后的向量与原问题高度相似，必然召回到同一批
+        # 块——政务公开题实测（2026-10-26）8 环停在国家级。
+        doc_candidates = [(kk, v) for kk, v in ents.items() if len(kk) >= 12 and v >= 2]
+        if not doc_candidates:
+            doc_candidates = [(kk, v) for kk, v in ents.items() if len(kk) >= 8 and v >= 2]
+        if not doc_candidates:
+            doc_candidates = [(kk, 1) for kk, _ in sorted(ents.items(), key=lambda kv: -kv[1])[:6]
+                              if len(kk) >= 12]
+        doc_candidates = [(kk, v) for kk, v in doc_candidates if kk not in query]
+        doc_candidates.sort(key=lambda kv: (-kv[1], -len(kv[0])))
+        top = [kk for kk, _ in doc_candidates]
         if h < hops and top:
-            q = f"{top[0]} {query}"
+            q = top[0]
         else:
             break
     max_score = max((r["score"] for r in rings), default=0.0)

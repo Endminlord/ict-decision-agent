@@ -1,0 +1,421 @@
+{
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "seed": 42,
+  "top_k": 10,
+  "C_abstention": {
+    "out_of_domain_n": 20,
+    "out_abstained": 20,
+    "abstain_recall": 1.0,
+    "in_domain_n": 10,
+    "in_answered": 10,
+    "answer_rate": 1.0,
+    "kw_hit_rate": 1.0,
+    "out_rows": [
+      {
+        "q": "如何用 Rust 实现一个无锁队列？",
+        "abstained": true,
+        "max_score": 0.6966,
+        "grounded": 0
+      },
+      {
+        "q": "红烧肉的家常做法是什么？",
+        "abstained": true,
+        "max_score": 0.6859,
+        "grounded": 0
+      },
+      {
+        "q": "量子计算机的超导制冷方案原理",
+        "abstained": true,
+        "max_score": 0.7067,
+        "grounded": 0
+      },
+      {
+        "q": "2026 年世界杯小组赛赛程",
+        "abstained": true,
+        "max_score": 0.7104,
+        "grounded": 0
+      },
+      {
+        "q": "如何训练一个扩散模型生成猫的图片？",
+        "abstained": true,
+        "max_score": 0.6848,
+        "grounded": 0
+      },
+      {
+        "q": "太阳系外行星的凌日观测方法",
+        "abstained": true,
+        "max_score": 0.6835,
+        "grounded": 0
+      },
+      {
+        "q": "Python 的 GIL 是什么？",
+        "abstained": true,
+        "max_score": 0.6888,
+        "grounded": 0
+      },
+      {
+        "q": "怎么给吉他换弦？",
+        "abstained": true,
+        "max_score": 0.7066,
+        "grounded": 0
+      },
+      {
+        "q": "国际象棋的开局原则有哪些？",
+        "abstained": true,
+        "max_score": 0.7466,
+        "grounded": 0
+      },
+      {
+        "q": "混凝土抗压强度的测试标准 ASTM C39",
+        "abstained": true,
+        "max_score": 0.7243,
+        "grounded": 0
+      },
+      {
+        "q": "如何用 Kubernetes 做金丝雀发布？",
+        "abstained": true,
+        "max_score": 0.7328,
+        "grounded": 0
+      },
+      {
+        "q": "咖啡豆的烘焙曲线怎么定？",
+        "abstained": true,
+        "max_score": 0.7046,
+        "grounded": 0
+      },
+      {
+        "q": "植物光合作用的卡尔文循环步骤",
+        "abstained": true,
+        "max_score": 0.7093,
+        "grounded": 0
+      },
+      {
+        "q": "怎样在 Excel 里做数据透视表？",
+        "abstained": true,
+        "max_score": 0.7364,
+        "grounded": 0
+      },
+      {
+        "q": "黑洞的信息悖论是什么？",
+        "abstained": true,
+        "max_score": 0.7025,
+        "grounded": 0
+      },
+      {
+        "q": "如何配置 Nginx 的反向代理缓存？",
+        "abstained": true,
+        "max_score": 0.727,
+        "grounded": 0
+      },
+      {
+        "q": "马拉松训练的周跑量怎么安排？",
+        "abstained": true,
+        "max_score": 0.7188,
+        "grounded": 0
+      },
+      {
+        "q": "葡萄酒的单宁来自哪里？",
+        "abstained": true,
+        "max_score": 0.6725,
+        "grounded": 0
+      },
+      {
+        "q": "如何用 PyTorch 做分布式训练？",
+        "abstained": true,
+        "max_score": 0.7079,
+        "grounded": 0
+      },
+      {
+        "q": "中国传统建筑中的斗拱结构起什么作用？",
+        "abstained": true,
+        "max_score": 0.7088,
+        "grounded": 0
+      }
+    ],
+    "in_rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "abstained": false,
+        "max_score": 0.8572,
+        "grounded": 9,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "abstained": false,
+        "max_score": 0.8535,
+        "grounded": 7,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "国务院关于政务公开有哪些规定？",
+        "abstained": false,
+        "max_score": 0.8663,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "abstained": false,
+        "max_score": 0.8575,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方"
+        ]
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "abstained": false,
+        "max_score": 0.863,
+        "grounded": 9,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "外商投资法的主要内容是什么？",
+        "abstained": false,
+        "max_score": 0.8561,
+        "grounded": 5,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "abstained": false,
+        "max_score": 0.825,
+        "grounded": 4,
+        "kw_hit": true,
+        "levels": [
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "知识产权保护的国家政策有哪些？",
+        "abstained": false,
+        "max_score": 0.8562,
+        "grounded": 8,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "媒体"
+        ]
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "abstained": false,
+        "max_score": 0.8192,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      },
+      {
+        "q": "放管服改革的主要举措有哪些？",
+        "abstained": false,
+        "max_score": 0.8823,
+        "grounded": 6,
+        "kw_hit": true,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ]
+      }
+    ]
+  },
+  "D_chain": {
+    "n": 10,
+    "multi_level": 10,
+    "multi_level_rate": 1.0,
+    "not_applicable": false,
+    "rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "rings": 14,
+        "grounded_rings": 14,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-12-20",
+          "2019-05-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "rings": 12,
+        "grounded_rings": 7,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-09-11",
+          "2015-10-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "国务院关于政务公开有哪些规定？",
+        "rings": 11,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2022-05-10",
+          "2017-06-21"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "rings": 6,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方"
+        ],
+        "level_span": 2,
+        "date_span": [
+          "2022-11-10",
+          "2018-08-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "rings": 10,
+        "grounded_rings": 10,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-08-14",
+          "2019-07-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "外商投资法的主要内容是什么？",
+        "rings": 12,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2023-11-07",
+          "2016-01-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "rings": 12,
+        "grounded_rings": 4,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-07-30",
+          "2017-06-27"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "知识产权保护的国家政策有哪些？",
+        "rings": 8,
+        "grounded_rings": 8,
+        "levels": [
+          "国家",
+          "媒体"
+        ],
+        "level_span": 2,
+        "date_span": [
+          "2024-04-27",
+          "2016-01-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "rings": 15,
+        "grounded_rings": 6,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-11-25",
+          "2018-08-11"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "放管服改革的主要举措有哪些？",
+        "rings": 10,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-09-07",
+          "2017-07-10"
+        ],
+        "insufficient": false
+      }
+    ]
+  }
+}

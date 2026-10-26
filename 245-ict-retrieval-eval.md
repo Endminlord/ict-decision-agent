@@ -76,7 +76,7 @@
 
 | 指标 | 值 |
 |---|---|
-| 跨 ≥2 层级的问题 | **9/10（0.9）** ✅ |
+| 跨 ≥2 层级的问题 | **10/10（1.0）** ✅（2026-10-26 生产端跳 2 修复后重跑；修复前 9/10） |
 | 单题环数范围 | 5 – 13 |
 | 最长日期跨度 | 2015-10-30 → 2024-09-11（约 9 年） |
 
@@ -373,3 +373,16 @@ python3 eval-retrieval.py --a 100 --seed 7 --report /tmp/eval-seed7.json
 ```
 
 **预期结果**：`B_grounding.grounding_rate = 1.0` · `C.abstain_recall = 1.0` · `C.kw_hit_rate = 1.0` · `A.hit@10 ≈ 0.71`。
+
+## 增补（2026-10-26）：生产端 MCP 跳 2 修复
+
+`mcp/retrieval-mcp-server.py` 的 `retrieval_cross_doc` 跳 2 原为「实体+原题拼接」，
+拼接向量与原问题高度相似、必然召回同批块（政务公开题 8 环停在国家级）。已改为与
+`tools/cross-doc-demo.py` 同判据的纯法规名检索式（≥12 字×2 → ≥8 字×2 兜底 →
+单次长名 + 原题子串排除），`tools/eval-retrieval.py` D 组镜像同步。
+
+重跑（`--skip A,B` / `ES_INDEX=rfc-1024`）：D 组 **9/10 → 10/10**（10 题全跨层级，
+rings 6-15 无一退化）；gov C 组 20/20+10/10、rfc C 组 20/20+15/15 均零退化；
+preflight 23/23。证据：`evidence/eval-retrieval-{d-gov,cd-gov,c-rfc}-20261026.json`。
+⚠ 运行口径：`--domain rfc` 不切换索引（`INDEX = core.DEFAULT_INDEX`），必须同时
+`ES_INDEX=rfc-1024`——2026-10-26 一次异常读数即因漏带该变量，已在此记档。

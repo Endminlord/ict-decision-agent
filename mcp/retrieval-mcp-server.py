@@ -67,9 +67,24 @@ def retrieval_cross_doc(query: str, hops: int = 2, top_k: int = 5) -> dict:
                 "grounded": core.keyword_grounded(query, body + " " + (src.get("title") or "")),
                 "cross_lingual": core.is_cross_lingual(query, body + " " + (src.get("title") or "")),
             })
-        top = [k for k, _ in sorted(ents.items(), key=lambda kv: -kv[1]) if len(k) >= 6][:4]
+        # 跳 2 检索式只用法规名，不拼原问题：拼接后的向量与原问题高度相似，
+        # 必然召回到同一批块——政务公开题实测（2026-10-26）8 环停在国家级。
+        # 为什么不是纯词频：词频冠军常是发文机关；能往下追的是引用链上的法规名
+        # （与 tools/cross-doc-demo.py 同一套判据，两处必须同步改）。
+        doc_candidates = [(k, v) for k, v in ents.items() if len(k) >= 12 and v >= 2]
+        # 12 字门槛对短名法规放一档（≥8 字 × ≥2 次），仍排除「国务院」类泛称
+        if not doc_candidates:
+            doc_candidates = [(k, v) for k, v in ents.items() if len(k) >= 8 and v >= 2]
+        # 没有复用型法规名时退回词频前 6 里最长的——单次出现的法规名仍是有效线索
+        if not doc_candidates:
+            doc_candidates = [(k, 1) for k, _ in sorted(ents.items(), key=lambda kv: -kv[1])[:6]
+                              if len(k) >= 12]
+        # 原题里已有的词再查一遍是另一种「原地打转」
+        doc_candidates = [(k, v) for k, v in doc_candidates if k not in query]
+        doc_candidates.sort(key=lambda kv: (-kv[1], -len(kv[0])))
+        top = [k for k, _ in doc_candidates]
         if h < hops and top:
-            q = f"{top[0]} {query}"
+            q = top[0]
         else:
             break
     max_score = max((r["score"] for r in rings), default=0.0)

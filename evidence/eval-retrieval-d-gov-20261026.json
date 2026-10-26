@@ -1,0 +1,171 @@
+{
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "seed": 42,
+  "top_k": 10,
+  "D_chain": {
+    "n": 10,
+    "multi_level": 10,
+    "multi_level_rate": 1.0,
+    "not_applicable": false,
+    "rows": [
+      {
+        "q": "优化营商环境的政策依据有哪些？",
+        "rings": 14,
+        "grounded_rings": 14,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-12-20",
+          "2019-05-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "市场准入负面清单是哪一年开始实施的？",
+        "rings": 12,
+        "grounded_rings": 7,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-09-11",
+          "2015-10-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "国务院关于政务公开有哪些规定？",
+        "rings": 11,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2022-05-10",
+          "2017-06-21"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "数字政府建设有哪些国家层面的文件？",
+        "rings": 6,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方"
+        ],
+        "level_span": 2,
+        "date_span": [
+          "2022-11-10",
+          "2018-08-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "社会信用体系建设的政策脉络是什么？",
+        "rings": 10,
+        "grounded_rings": 10,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-08-14",
+          "2019-07-30"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "外商投资法的主要内容是什么？",
+        "rings": 12,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2023-11-07",
+          "2016-01-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "减税降费政策有哪些文件？",
+        "rings": 12,
+        "grounded_rings": 4,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-07-30",
+          "2017-06-27"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "知识产权保护的国家政策有哪些？",
+        "rings": 8,
+        "grounded_rings": 8,
+        "levels": [
+          "国家",
+          "媒体"
+        ],
+        "level_span": 2,
+        "date_span": [
+          "2024-04-27",
+          "2016-01-10"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "乡村振兴战略的顶层文件是什么？",
+        "rings": 15,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-11-25",
+          "2018-08-11"
+        ],
+        "insufficient": false
+      },
+      {
+        "q": "放管服改革的主要举措有哪些？",
+        "rings": 10,
+        "grounded_rings": 5,
+        "levels": [
+          "国家",
+          "地方",
+          "媒体"
+        ],
+        "level_span": 3,
+        "date_span": [
+          "2024-09-07",
+          "2017-07-10"
+        ],
+        "insufficient": false
+      }
+    ]
+  }
+}
