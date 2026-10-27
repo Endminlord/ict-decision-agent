@@ -1,0 +1,28 @@
+待确认：15870 条
+
+按置信度：
+  high        9304  (58.6%)
+  medium      5269  (33.2%)
+  low         1297  (8.2%)
+
+按谓词（前 10）：
+  cites              11706
+  implements          2659
+  amends               986
+  repeals              519
+
+谓词 × 置信度（前 10，按量降序）：
+  cites            high        5615
+  cites            medium      4794
+  implements       high        2432
+  cites            low         1297
+  amends           high         772
+  repeals          high         485
+  implements       medium       227
+  amends           medium       214
+  repeals          medium        34
+
+可疑度（object<10字 记 1 分，evidence<60字 记 1 分）：
+  2 分：   1131 条  ← 建议先看这一档
+  1 分：   5787 条
+  0 分：   8952 条

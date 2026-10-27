@@ -1,0 +1,27 @@
+待确认：226710 条
+
+按置信度：
+  medium    166832  (73.6%)
+  low        59878  (26.4%)
+
+按谓词（前 10）：
+  cites             170456
+  issued_by          28060
+  implements         11649
+  mentions            9470
+  amends              6385
+  repeals              690
+
+谓词 × 置信度（前 10，按量降序）：
+  cites            medium    120048
+  cites            low        50408
+  issued_by        medium     28060
+  implements       medium     11649
+  mentions         low         9470
+  amends           medium      6385
+  repeals          medium       690
+
+可疑度（object<10字 记 1 分，evidence<60字 记 1 分）：
+  2 分：  19233 条  ← 建议先看这一档
+  1 分： 118934 条
+  0 分：  88543 条

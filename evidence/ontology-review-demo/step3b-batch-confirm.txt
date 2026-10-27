@@ -1,0 +1,3 @@
+接受 5269 条 → /home/endmin/dsh/research/ict-open-source/evidence/ontology-review-demo/triples-doc2doc-confirmed.jsonl
+拒绝 0 条 → /home/endmin/dsh/research/ict-open-source/evidence/ontology-review-demo/triples-doc2doc-rejected.jsonl
+留待下轮 10601 条 → /home/endmin/dsh/research/ict-open-source/evidence/ontology-review-demo/triples-doc2doc-pending-low.jsonl
