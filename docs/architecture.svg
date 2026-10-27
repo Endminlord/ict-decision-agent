@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 860" font-family="'Microsoft YaHei','PingFang SC',sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#5b6472"/>
+    </marker>
+    <marker id="arv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#8a63c9"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="860" fill="#f7f8fb"/>
+  <text x="40" y="52" font-size="26" font-weight="700" fill="#1a1a2e">ICT 产业决策 Agent — 架构一页图</text>
+  <text x="40" y="78" font-size="13" fill="#666">语料 → 混合检索 → 护栏作答 → 本体治理 → 可验证性（一切结论可溯源到块）</text>
+
+  <!-- L1 corpus -->
+  <rect x="40" y="700" width="1200" height="120" rx="12" fill="#fff" stroke="#e2e2ee"/>
+  <text x="60" y="728" font-size="14" font-weight="700" fill="#3a6ea5">① 语料层</text>
+  <rect x="60" y="742" width="330" height="62" rx="8" fill="#eef3fa" stroke="#c9d8ec"/>
+  <text x="76" y="766" font-size="13" fill="#233">政务政策语料（全量导入中）</text>
+  <text x="76" y="788" font-size="12" fill="#667">chunks.jsonl 4.2GB · ES 已入 18万+ 块</text>
+  <rect x="420" y="742" width="300" height="62" rx="8" fill="#eef3fa" stroke="#c9d8ec"/>
+  <text x="436" y="766" font-size="13" fill="#233">先进制造真实语料</text>
+  <text x="436" y="788" font-size="12" fill="#667">22 篇 / 178 块（gov.cn 政策库）</text>
+  <rect x="750" y="742" width="220" height="62" rx="8" fill="#eef3fa" stroke="#c9d8ec"/>
+  <text x="766" y="766" font-size="13" fill="#233">清洗 / 切片</text>
+  <text x="766" y="788" font-size="12" fill="#667">corpus-clean · corpus-chunk</text>
+  <rect x="1000" y="742" width="220" height="62" rx="8" fill="#eef3fa" stroke="#c9d8ec"/>
+  <text x="1016" y="766" font-size="13" fill="#233">采集自愈</text>
+  <text x="1016" y="788" font-size="12" fill="#667">import-resume 断点续跑</text>
+
+  <!-- arrow L1->L2 -->
+  <line x1="640" y1="700" x2="640" y2="652" stroke="#5b6472" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- L2 index -->
+  <rect x="40" y="520" width="580" height="126" rx="12" fill="#fff" stroke="#e2e2ee"/>
+  <text x="60" y="548" font-size="14" font-weight="700" fill="#2e8b57">② 索引与混合检索</text>
+  <rect x="60" y="562" width="250" height="66" rx="8" fill="#eaf6ef" stroke="#bfe3cd"/>
+  <text x="76" y="586" font-size="13" fill="#233">Elasticsearch</text>
+  <text x="76" y="608" font-size="12" fill="#667">BGE-M3 稠密 1024 + BM25 词面</text>
+  <rect x="330" y="562" width="270" height="66" rx="8" fill="#eaf6ef" stroke="#bfe3cd"/>
+  <text x="346" y="586" font-size="13" fill="#233">RRF 混合排序</text>
+  <text x="346" y="608" font-size="12" fill="#667">稠密语义 × 词面落地 双通道</text>
+
+  <!-- L2b MCP -->
+  <rect x="660" y="520" width="580" height="126" rx="12" fill="#fff" stroke="#e2e2ee"/>
+  <text x="680" y="548" font-size="14" font-weight="700" fill="#b0681f">③ 生产 MCP（8793）retrieval_cross_doc</text>
+  <rect x="680" y="562" width="255" height="66" rx="8" fill="#fbf3e6" stroke="#ecd9b8"/>
+  <text x="696" y="586" font-size="13" fill="#233">多跳检索 hops=2</text>
+  <text x="696" y="608" font-size="12" fill="#667">跨文档证据环 rings + 出处</text>
+  <rect x="955" y="562" width="265" height="66" rx="8" fill="#fbf3e6" stroke="#ecd9b8"/>
+  <text x="971" y="586" font-size="13" fill="#233">稠密护栏 0.75 拒答阈</text>
+  <text x="971" y="608" font-size="12" fill="#667">域外即拒答 · 词面落地核验</text>
+  <line x1="620" y1="583" x2="656" y2="583" stroke="#5b6472" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- arrow L2->L3 -->
+  <line x1="950" y1="520" x2="950" y2="472" stroke="#5b6472" stroke-width="2" marker-end="url(#ar)"/>
+
+  <!-- L3 ontology -->
+  <rect x="40" y="340" width="700" height="126" rx="12" fill="#fff" stroke="#e2e2ee"/>
+  <text x="60" y="368" font-size="14" font-weight="700" fill="#8a63c9">④ 本体三层治理</text>
+  <rect x="60" y="382" width="200" height="66" rx="8" fill="#f3edfa" stroke="#ddc9f0"/>
+  <text x="76" y="406" font-size="13" fill="#233">triples 图谱</text>
+  <text x="76" y="428" font-size="12" fill="#667">实体→关系→出处(chunk_id)</text>
+  <rect x="280" y="382" width="200" height="66" rx="8" fill="#f3edfa" stroke="#ddc9f0"/>
+  <text x="296" y="406" font-size="13" fill="#233">三层漏斗</text>
+  <text x="296" y="428" font-size="12" fill="#667">15870 边 → medium 5269</text>
+  <rect x="500" y="382" width="220" height="66" rx="8" fill="#f3edfa" stroke="#ddc9f0"/>
+  <text x="516" y="406" font-size="13" fill="#233">review_gate 人工闸门</text>
+  <text x="516" y="428" font-size="12" fill="#667">high 置信自动入库 + 复核</text>
+
+  <!-- L3b eval -->
+  <rect x="780" y="340" width="460" height="126" rx="12" fill="#fff" stroke="#e2e2ee"/>
+  <text x="800" y="368" font-size="14" font-weight="700" fill="#c2452d">⑤ 评测与测试</text>
+  <rect x="800" y="382" width="200" height="66" rx="8" fill="#fbeae6" stroke="#f0c8be"/>
+  <text x="816" y="406" font-size="13" fill="#233">分层评测 R/M/X/C</text>
+  <text x="816" y="428" font-size="12" fill="#667">检索/多跳/拒答/跨语言 ×25</text>
+  <rect x="1020" y="382" width="200" height="66" rx="8" fill="#fbeae6" stroke="#f0c8be"/>
+  <text x="1036" y="406" font-size="13" fill="#233">track2-mcp 118 测试</text>
+  <text x="1036" y="428" font-size="12" fill="#667">make eval 一键复跑</text>
+
+  <!-- arrow L3->L4 -->
+  <line x1="640" y1="340" x2="640" y2="292" stroke="#8a63c9" stroke-width="2" marker-end="url(#arv)"/>
+
+  <!-- L4 ritual -->
+  <rect x="40" y="150" width="1200" height="136" rx="12" fill="#fff" stroke="#d8c9f0" stroke-width="1.5"/>
+  <text x="60" y="178" font-size="14" font-weight="700" fill="#6a3fb5">⑥ 可验证性：verify-ritual 五幕仪式（90 秒 · 全程生产通路 · 无预录）</text>
+  <rect x="60" y="192" width="212" height="76" rx="8" fill="#efe8fa" stroke="#d5c2f0"/>
+  <text x="76" y="216" font-size="13" fill="#233">第 1 幕 · 提问作答</text>
+  <text x="76" y="238" font-size="12" fill="#667">判定 + 引用卡片（带 chunk_id）</text>
+  <rect x="292" y="192" width="212" height="76" rx="8" fill="#efe8fa" stroke="#d5c2f0"/>
+  <text x="308" y="216" font-size="13" fill="#233">第 2 幕 · 现场回查</text>
+  <text x="308" y="238" font-size="12" fill="#667">ES × 本地 4.2GB 指纹互认</text>
+  <rect x="524" y="192" width="212" height="76" rx="8" fill="#efe8fa" stroke="#d5c2f0"/>
+  <text x="540" y="216" font-size="13" fill="#233">第 3 幕 · 图谱三重出处</text>
+  <text x="540" y="238" font-size="12" fill="#667">独立回查走语料源文件</text>
+  <rect x="756" y="192" width="212" height="76" rx="8" fill="#efe8fa" stroke="#d5c2f0"/>
+  <text x="772" y="216" font-size="13" fill="#233">第 4 幕 · 对抗三连 ★新</text>
+  <text x="772" y="238" font-size="12" fill="#667">注入 / 混合域 / 日期溯源</text>
+  <rect x="988" y="192" width="232" height="76" rx="8" fill="#efe8fa" stroke="#d5c2f0"/>
+  <text x="1004" y="216" font-size="13" fill="#233">信任面板 trust-panel.html</text>
+  <text x="1004" y="238" font-size="12" fill="#667">评委扫码即看 · 四重出处</text>
+
+  <!-- side: decision agent -->
+  <rect x="40" y="98" width="1200" height="0" fill="none"/>
+  <line x1="640" y1="150" x2="640" y2="110" stroke="#8a63c9" stroke-width="2" marker-end="url(#arv)"/>
+  <rect x="480" y="46" width="320" height="60" rx="10" fill="#6a3fb5"/>
+  <text x="640" y="72" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">决策 Agent（评委 / 业务方入口）</text>
+  <text x="640" y="94" font-size="11" fill="#e2d6f7" text-anchor="middle">每个答案都长着可验证的根</text>
+</svg>
