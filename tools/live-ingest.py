@@ -90,13 +90,13 @@ def fetch(url):
         except Exception as e:
             return None, f"OCR 失败：{type(e).__name__}: {e}", "text"
 
-    # PDF：pymupdf 抽文本层（覆盖文字版 PDF；扫描件无文本层，走 OCR 需先渲染成图）
+    # PDF：pdfplumber 抽文本层（覆盖文字版 PDF；扫描件无文本层，走 OCR 需先渲染成图）
     if low.endswith(".pdf"):
         try:
-            import fitz
-            doc = fitz.open(stream=raw, filetype="pdf")
-            text = "\n".join(page.get_text() for page in doc)
-            doc.close()
+            import io
+            import pdfplumber
+            with pdfplumber.open(io.BytesIO(raw)) as pdf:
+                text = "\n".join((page.extract_text() or "") for page in pdf.pages)
             return (text, None, "text") if text.strip() else (None, "PDF 无文本层（扫描件，需先渲染成图再 OCR）", "text")
         except Exception as e:
             return None, f"PDF 解析失败：{type(e).__name__}: {e}", "text"
@@ -287,8 +287,8 @@ def self_test():
     except ImportError:
         ck("OCR 依赖可用（图片通道）", False, "未装 rapidocr-onnxruntime")
     try:
-        import fitz  # noqa: F401
-        ck("pymupdf 可用（PDF 通道）", True)
+        import pdfplumber  # noqa: F401
+        ck("pdfplumber 可用（PDF 通道）", True)
     except ImportError:
         ck("pymupdf 可用（PDF 通道）", False)
 
