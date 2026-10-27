@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh"><meta charset="utf-8">
+<title>信任面板 · 三重出处（2026-10-27）</title>
+<style>
+body{font-family:"Microsoft YaHei",system-ui,sans-serif;max-width:880px;margin:24px auto;padding:0 16px;color:#1a1a2e;background:#f7f7fb}
+h1{font-size:22px} .sub{color:#555;font-size:13px;margin-bottom:18px}
+.card{background:#fff;border:1px solid #e2e2ee;border-radius:10px;padding:14px 18px;margin:14px 0;box-shadow:0 1px 4px rgba(30,30,80,.06)}
+.triple{font-size:16px;margin-bottom:8px} .type{color:#888;font-size:13px}
+.layer{font-size:13.5px;margin:6px 0;line-height:1.65} .src{color:#777;font-size:12px}
+.tag{display:inline-block;min-width:76px;text-align:center;border-radius:5px;color:#fff;font-size:12px;padding:1px 6px;margin-right:8px}
+.t1{background:#3a6ea5}.t2{background:#7a5ea8}.t3{background:#b07d3c}.t4{background:#2e8b57}
+.ok{color:#2e8b57;font-weight:600}.warn{color:#b0432e;font-weight:600}
+</style>
+<h1>知识图谱信任面板 · 每条三元组的三重出处</h1>
+<div class="sub">规则层证据（可回查原文片段）→ 模型判定（零温度+理由）→ 人工闸门（review_gate 分级）→ 独立回查（语料源文件逐字落文）。样本取自强证据层（triples-governance.jsonl，auto 直入库），生成于 2026-10-27。</div>
+
+<div class="card">
+ <div class="triple">《国务院举行宪法宣誓仪式》 <b>--cites--&gt;</b> 中华人民共和国宪法 <span class="type">(Document)</span></div>
+ <div class="layer"><span class="tag t1">① 规则证据</span> [high·auto] 「务院总理李强监誓。 根据《中华人民共和国宪法》和《国务院及其各部门」<br>
+   <span class="src">chunk f5205f46e0e365f7-0000 · 偏移 45 ·《国务院举行宪法宣誓仪式》（2024-12-24·人民日报）</span></div>
+ <div class="layer"><span class="tag t2">② 模型判定</span> subject：is_doc=False · 仪式活动，非文件<br>
+   <span class="layer" style="margin-left:84px">object：is_doc=True · 宪法，可引用</span> <span class="src">(deepseek-v4.1-flash 零温度)</span></div>
+ <div class="layer"><span class="tag t3">③ 人工闸门</span> review_gate=high → 自动入库</div>
+ <div class="layer"><span class="tag t4">④ 独立回查</span> <span class="ok">✓ 语料文件命中该块，证据片段空白归一后逐字落在原文（32 字窗）</span></div>
+</div>
+<div class="card">
+ <div class="triple">《严金海在自治区人大常委会党组会议上强调》 <b>--implements--&gt;</b> 中共西藏自治区人大常委会党组关于贯彻落实自治区党 <span class="type">(Document)</span></div>
+ <div class="layer"><span class="tag t1">① 规则证据</span> [high·auto] 「贡献。 会议还研究了《中共西藏自治区人大常委会党组关于贯彻落实自治区党委十届七次全会暨自治区党委经济工作会议精神的意见》。 自治区人大常委会」<br>
+   <span class="src">chunk 513767e48a0c9626-0001 · 偏移 167 ·《严金海在自治区人大常委会党组会议上强调》（2024-12-24·西藏日报）</span></div>
+ <div class="layer"><span class="tag t2">② 模型判定</span> subject：is_doc=False · 会议报道，非文件<br>
+   <span class="layer" style="margin-left:84px">object：未判定（如实标注）</span> <span class="src">(deepseek-v4.1-flash 零温度)</span></div>
+ <div class="layer"><span class="tag t3">③ 人工闸门</span> review_gate=high → 自动入库</div>
+ <div class="layer"><span class="tag t4">④ 独立回查</span> <span class="ok">✓ 语料文件命中该块，证据片段空白归一后逐字落在原文（68 字窗）</span></div>
+</div>
+<div class="card">
+ <div class="triple">《赵刚主持召开省政府第四十四次常务会议》 <b>--amends--&gt;</b> 陕西省标准化条例（修订草案） <span class="type">(Document)</span></div>
+ <div class="layer"><span class="tag t1">① 规则证据</span> [high·auto] 「 会议讨论并原则同意《陕西省标准化条例（修订草案）》《陕西省森林管理条例」<br>
+   <span class="src">chunk 28c35ff7a4da383f-0000 · 偏移 592 ·《赵刚主持召开省政府第四十四次常务会议》（2024-12-24·陕西日报）</span></div>
+ <div class="layer"><span class="tag t2">② 模型判定</span> subject：is_doc=False · 会议新闻，非文件<br>
+   <span class="layer" style="margin-left:84px">object：未判定（如实标注）</span> <span class="src">(deepseek-v4.1-flash 零温度)</span></div>
+ <div class="layer"><span class="tag t3">③ 人工闸门</span> review_gate=high → 自动入库</div>
+ <div class="layer"><span class="tag t4">④ 独立回查</span> <span class="ok">✓ 语料文件命中该块，证据片段空白归一后逐字落在原文（35 字窗）</span></div>
+</div>
+<div class="card">
+ <div class="triple">《山东省供销合作社第五次代表大会在济南召开》 <b>--applies_to--&gt;</b> 山东省 <span class="type">(Region)</span></div>
+ <div class="layer"><span class="tag t1">① 规则证据</span> [high·auto] 「山东省供销合作社第五次代表大会在济南召开林武周乃翔提出要求王宇燕讲话 □记者 李子路 刘兵 报道本报济南12月23日讯 」<br>
+   <span class="src">chunk 6714f6a383ac5902-0000 · 偏移 0 ·《山东省供销合作社第五次代表大会在济南召开》（2024-12-24·大众日报）</span></div>
+ <div class="layer"><span class="tag t2">② 模型判定</span> subject：is_doc=False · 会议报道，非文件<br>
+   <span class="layer" style="margin-left:84px">object：未判定（如实标注）</span> <span class="src">(deepseek-v4.1-flash 零温度)</span></div>
+ <div class="layer"><span class="tag t3">③ 人工闸门</span> review_gate=high → 自动入库</div>
+ <div class="layer"><span class="tag t4">④ 独立回查</span> <span class="ok">✓ 语料文件命中该块，证据片段空白归一后逐字落在原文（55 字窗）</span></div>
+</div>
+<div class="card">
+ <div class="triple">《切实把思想行动统一到党中央决策部署和自治区党委工作 要求上来 为谱写好中》 <b>--cites--&gt;</b> 中共西藏自治区人大常委会党组关于贯彻落实自治区党 <span class="type">(Document)</span></div>
+ <div class="layer"><span class="tag t1">① 规则证据</span> [high·auto] 「贡献。 会议还研究了《中共西藏自治区人大常委会党组关于贯彻落实自治区党委十届七次全会暨自治区党委经济工作会议精神的意见》。」<br>
+   <span class="src">chunk 68130ec0b9ff84ce-0000 · 偏移 765 ·《切实把思想行动统一到党中央决策部署和自治区党委工作 要求上来》（2024-12-24·西藏日报）</span></div>
+ <div class="layer"><span class="tag t2">② 模型判定</span> subject：is_doc=False · 口号标题非文件<br>
+   <span class="layer" style="margin-left:84px">object：未判定（如实标注）</span> <span class="src">(deepseek-v4.1-flash 零温度)</span></div>
+ <div class="layer"><span class="tag t3">③ 人工闸门</span> review_gate=high → 自动入库</div>
+ <div class="layer"><span class="tag t4">④ 独立回查</span> <span class="ok">✓ 语料文件命中该块，证据片段空白归一后逐字落在原文（60 字窗）</span></div>
+</div></html>

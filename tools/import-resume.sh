@@ -21,7 +21,13 @@ m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
 print(m.ES.rstrip("/"))
 PY
 )
-COUNT=$(curl -sS -m 30 -H "Authorization: ApiKey $KEY" "$BASE/$IDX/_count" | python3 -c 'import json,sys;print(json.load(sys.stdin)["count"])')
+COUNT=""
+for i in 1 2 3 4 5; do
+  COUNT=$(curl -sS -m 30 -H "Authorization: ApiKey $KEY" "$BASE/$IDX/_count" 2>/dev/null | python3 -c 'import json,sys;print(json.load(sys.stdin)["count"])' 2>/dev/null) && [ -n "$COUNT" ] && break
+  echo "es count attempt $i failed, retry in 15s" >&2
+  sleep 15
+done
+[ -n "$COUNT" ] || { echo "ES count 持续不可用，交还 systemd 稍后重试"; exit 1; }
 OFFSET=$(( COUNT / 200 * 200 - 10000 ))
 if [ "$OFFSET" -lt 0 ]; then OFFSET=0; fi
 echo "resume: ES count=$COUNT -> offset=$OFFSET $(date +%F\ %T)"
