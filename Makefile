@@ -2,7 +2,7 @@
 .PHONY: test eval retrieval ritual adv full all
 
 test:
-	@for t in tests/test_*.py; do echo "== $$t"; python3 $$t || exit 1; done
+	@cd track2-mcp && for t in tests/test_*.py; do echo "== $$t"; python3 $$t || exit 1; done
 
 eval:
 	python3 tools/eval-stratified.py
