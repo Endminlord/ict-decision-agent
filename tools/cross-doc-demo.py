@@ -117,7 +117,14 @@ def hybrid_search(query, index, k=10, alpha=0.6, n_cand=30):
         fused.setdefault(dd, alpha * _ZN_MISS + (1 - alpha) * z)
     best = {}
     for h in dense + lex:
+        h = dict(h)
+        h["_fused"] = fused.get(_doc(h))
         best.setdefault(_doc(h), h)
+    # 词面-only 命中无稠密证据：_score 置 0 挡住拒答阈值（BM25 裸分 57.4
+    # 会击穿 0.75 门，水利部教训）；环排序仍按融合分，拒答判据留在稠密空间。
+    for dd, h in best.items():
+        if dd not in dz:
+            h["_score"] = 0.0
     return [best[dd] for dd, _ in sorted(fused.items(), key=lambda kv: -kv[1])[:k]]
 
 

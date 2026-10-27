@@ -1,0 +1,478 @@
+{
+ "config": {
+  "seed": 2026,
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "rfc_index": "rfc-1024",
+  "retrieval": "hybrid_search(alpha=0.6)",
+  "chain": "eval-retrieval._cross_doc(hops=2, top_k=5)"
+ },
+ "M": {
+  "n": 25,
+  "chain_pass": 25,
+  "chain_pass_rate": 1.0,
+  "rows": [
+   {
+    "q": "优化营商环境的政策依据有哪些？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "市场准入负面清单是哪一年开始实施的？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "国务院关于政务公开有哪些规定？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 8,
+    "grounded": 4,
+    "insufficient": false
+   },
+   {
+    "q": "数字政府建设有哪些国家层面的文件？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 7,
+    "insufficient": false
+   },
+   {
+    "q": "社会信用体系建设的政策脉络是什么？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "外商投资法的主要内容是什么？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 10,
+    "grounded": 6,
+    "insufficient": false
+   },
+   {
+    "q": "减税降费政策有哪些文件？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 10,
+    "grounded": 3,
+    "insufficient": false
+   },
+   {
+    "q": "知识产权保护的国家政策有哪些？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "乡村振兴战略的顶层文件是什么？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "放管服改革的主要举措有哪些？",
+    "src": "领域问",
+    "pass": true,
+    "levels": [
+     "国家",
+     "媒体"
+    ],
+    "n_dates": 10,
+    "grounded": 4,
+    "insufficient": false
+   },
+   {
+    "q": "新华时评：从国家层面建立健全香港维护国家安全法律制度和执行机制势在必行且刻不容缓",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 8,
+    "grounded": 8,
+    "insufficient": false
+   },
+   {
+    "q": "石家庄市人民政府办公厅关于印发石家庄市全面落实“菜篮子”市长负责制考核工作实施方",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "六安市人民政府关于印发承接安徽省人民政府委托用地审批权工作实施方案的通知",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方"
+    ],
+    "n_dates": 7,
+    "grounded": 7,
+    "insufficient": false
+   },
+   {
+    "q": "李克强总理出席记者会并回答中外记者提问",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "国家",
+     "媒体"
+    ],
+    "n_dates": 5,
+    "grounded": 2,
+    "insufficient": false
+   },
+   {
+    "q": "最高法举行《中国法院的互联网司法》白皮书发布会",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 4,
+    "insufficient": false
+   },
+   {
+    "q": "昆山深化两岸产业合作试验区条例（2020）",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 3,
+    "insufficient": false
+   },
+   {
+    "q": "滁州市全面推行行政执法公示制度执法全过程记录制度重大执法决定法制审核制度实施方案",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方"
+    ],
+    "n_dates": 8,
+    "grounded": 8,
+    "insufficient": false
+   },
+   {
+    "q": "河北省人民代表大会常务委员会关于进一步提升行政审批效能的决定",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方"
+    ],
+    "n_dates": 9,
+    "grounded": 4,
+    "insufficient": false
+   },
+   {
+    "q": "淮安市文化广电和旅游局关于印发《淮安市文化广电和旅游（文物）行政处罚裁量权适用办",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 9,
+    "grounded": 9,
+    "insufficient": false
+   },
+   {
+    "q": "关于授权国务院调整适用计量法委员审议建议根据立法法要求进一步完善相关内容",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "国家",
+     "媒体"
+    ],
+    "n_dates": 8,
+    "grounded": 4,
+    "insufficient": false
+   },
+   {
+    "q": "芜湖市人民政府关于印发推动制造业高质量发展打造“智造名城”若干政策的通知",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 8,
+    "grounded": 8,
+    "insufficient": false
+   },
+   {
+    "q": "苏州市相城区人民代表大会关于“加强沪苏联动，打造长三角一体化新标杆”的决定",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 8,
+    "grounded": 8,
+    "insufficient": false
+   },
+   {
+    "q": "合政〔2018〕149号 合肥市人民政府关于积极有效利用外资推动经济高质量发展的",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方"
+    ],
+    "n_dates": 8,
+    "grounded": 8,
+    "insufficient": false
+   },
+   {
+    "q": "江苏省高级人民法院、江苏省市场监督管理局关于推进企业司法文书送达地址承诺确认工作",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "地方"
+    ],
+    "n_dates": 9,
+    "grounded": 6,
+    "insufficient": false
+   },
+   {
+    "q": "江苏省人民政府办公厅关于加快推进社会信用体系建设构建以信用为基础的新型监管机制的",
+    "src": "标题",
+    "pass": true,
+    "levels": [
+     "国家",
+     "地方",
+     "媒体"
+    ],
+    "n_dates": 7,
+    "grounded": 7,
+    "insufficient": false
+   }
+  ]
+ },
+ "X": {
+  "n": 25,
+  "refused": 24,
+  "refusal_rate": 0.96,
+  "rows": [
+   {
+    "q": "如何用 Rust 实现一个无锁队列？",
+    "refused": true,
+    "max_score": 0.7132,
+    "grounded": 0
+   },
+   {
+    "q": "红烧肉的家常做法是什么？",
+    "refused": true,
+    "max_score": 0.7253,
+    "grounded": 0
+   },
+   {
+    "q": "量子计算机的超导制冷方案原理",
+    "refused": true,
+    "max_score": 0.7524,
+    "grounded": 0
+   },
+   {
+    "q": "2026 年世界杯小组赛赛程",
+    "refused": true,
+    "max_score": 0.7335,
+    "grounded": 0
+   },
+   {
+    "q": "如何训练一个扩散模型生成猫的图片？",
+    "refused": true,
+    "max_score": 0.7282,
+    "grounded": 0
+   },
+   {
+    "q": "太阳系外行星的凌日观测方法",
+    "refused": true,
+    "max_score": 0.8065,
+    "grounded": 0
+   },
+   {
+    "q": "Python 的 GIL 是什么？",
+    "refused": true,
+    "max_score": 0.8332,
+    "grounded": 0
+   },
+   {
+    "q": "怎么给吉他换弦？",
+    "refused": true,
+    "max_score": 0.7294,
+    "grounded": 0
+   },
+   {
+    "q": "国际象棋的开局原则有哪些？",
+    "refused": true,
+    "max_score": 0.7466,
+    "grounded": 0
+   },
+   {
+    "q": "混凝土抗压强度的测试标准 ASTM C39",
+    "refused": true,
+    "max_score": 0.854,
+    "grounded": 0
+   },
+   {
+    "q": "如何用 Kubernetes 做金丝雀发布？",
+    "refused": true,
+    "max_score": 0.7494,
+    "grounded": 0
+   },
+   {
+    "q": "咖啡豆的烘焙曲线怎么定？",
+    "refused": false,
+    "max_score": 0.9321,
+    "grounded": 1
+   },
+   {
+    "q": "植物光合作用的卡尔文循环步骤",
+    "refused": true,
+    "max_score": 0.733,
+    "grounded": 0
+   },
+   {
+    "q": "怎样在 Excel 里做数据透视表？",
+    "refused": true,
+    "max_score": 0.7547,
+    "grounded": 0
+   },
+   {
+    "q": "黑洞的信息悖论是什么？",
+    "refused": true,
+    "max_score": 0.7367,
+    "grounded": 0
+   },
+   {
+    "q": "如何配置 Nginx 的反向代理缓存？",
+    "refused": true,
+    "max_score": 0.8982,
+    "grounded": 0
+   },
+   {
+    "q": "马拉松训练的周跑量怎么安排？",
+    "refused": true,
+    "max_score": 0.9037,
+    "grounded": 0
+   },
+   {
+    "q": "葡萄酒的单宁来自哪里？",
+    "refused": true,
+    "max_score": 0.7565,
+    "grounded": 0
+   },
+   {
+    "q": "如何用 PyTorch 做分布式训练？",
+    "refused": true,
+    "max_score": 0.8846,
+    "grounded": 0
+   },
+   {
+    "q": "中国传统建筑中的斗拱结构起什么作用？",
+    "refused": true,
+    "max_score": 0.7344,
+    "grounded": 0
+   },
+   {
+    "q": "怎么做提拉米苏？",
+    "refused": true,
+    "max_score": 0.9321,
+    "grounded": 0
+   },
+   {
+    "q": "2026 年 NBA 总决赛的赛程安排",
+    "refused": true,
+    "max_score": 0.7282,
+    "grounded": 0
+   },
+   {
+    "q": "如何给猫咪剪指甲？",
+    "refused": true,
+    "max_score": 0.7238,
+    "grounded": 0
+   },
+   {
+    "q": "Bellman 方程在强化学习里的推导过程",
+    "refused": true,
+    "max_score": 0.8982,
+    "grounded": 0
+   },
+   {
+    "q": "怎么用 Arduino 点亮一盏 LED？",
+    "refused": true,
+    "max_score": 0.7348,
+    "grounded": 0
+   }
+  ]
+ }
+}

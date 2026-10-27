@@ -45,7 +45,7 @@ def retrieval_cross_doc(query: str, hops: int = 2, top_k: int = 5) -> dict:
     rings, seen = [], set()
     q = query
     for h in range(1, hops + 1):
-        hits = core.knn(core.embed(q), index, top_k)
+        hits = core.hybrid_search(q, index, top_k)
         ents = {}
         for hit in hits:
             src = hit["_source"]
