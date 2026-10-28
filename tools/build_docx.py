@@ -189,7 +189,9 @@ def main():
     ]:
         doc.add_paragraph(line, style="List Bullet")
     md_heading(doc, 2, "C.2 免疫记录（immunity-log.jsonl）")
-    doc.add_paragraph("治理链免疫记录累计 9 条（含 graph_retrieval v1.1.0/v1.2.0/v1.3.0 三版升级）——"
+    doc.add_paragraph("治理链免疫记录累计 10 条（head IMM-250ee98679，SHA-256 哈希链防篡改）——"
+                      "含 graph_retrieval v1.1.0/v1.2.0 与 eval-stratified v1.3.0/v1.4.0 升级"
+                      "（G24 负向集合题修复，G 层 0.96→1.00）；"
                       "每次路由修正 / 排序修复均先记免疫、再改代码、后复核，形成可追溯的治理闭环。")
     md_heading(doc, 2, "C.3 答辩数字速查卡")
     tbl = doc.add_table(rows=1, cols=2); tbl.style = "Table Grid"
