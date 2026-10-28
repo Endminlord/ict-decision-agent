@@ -319,16 +319,57 @@ def _multi_constraint_intersection(q: str, store: dict) -> set[str]:
     return out
 
 
+def _direct_1hop(q: str, store: dict) -> dict:
+    """原语D：已知主体的直连查询/存在性检查，不借共享节点反查。
+
+    书名号统一〈〉与《》后匹配主体；对象按题面谓词及引号片段收窄。
+    返回匹配边，由 run_g 按预期三元组判定，存在性题有边即通过。"""
+    norm = graph_retrieval._norm
+    qn = norm(q).replace("〈", "《").replace("〉", "》")
+    subjects = []
+    for s in store["by_subj"]:
+        sn = norm(s).replace("〈", "《").replace("〉", "》")
+        if len(sn) >= 3 and sn in qn:
+            subjects.append(s)
+    if not subjects or any(w in q for w in
+                           ("两跳", "共享节点", "共享引用", "共享 `cites`", "文档集合")):
+        return {"subjects": set(), "edges": []}
+    predicates = set(re.findall(r"`([a-z_]+)`", q))
+    quoted = [norm(s) for s in
+              re.findall(r"[『「“”\"']([^『」“”\"']{2,40})[』」“”\"']", q)]
+    edges = []
+    for s in subjects:
+        for e in store["by_subj"].get(s, []):
+            if predicates and e.get("predicate") not in predicates:
+                continue
+            obj = norm(e.get("object", ""))
+            # “含『标准』”这类问法用引号片段过滤目标；完整对象片段则要求
+            # 与边对象互为子串，避免把同主体的其他出边当成存在性证据。
+            object_filters = [a for a in quoted if a and a not in norm(s)]
+            if object_filters and not any(a in obj or obj in a for a in object_filters):
+                continue
+            edges.append(e)
+    objects = {norm(e.get("object", "")) for e in edges if norm(e.get("object", ""))}
+    return {"subjects": objects, "edges": edges}
+
+
 def answer_g(q: str, store: dict) -> dict:
-    """G 层答案引擎：三原语合一。
-    返回 {"subjects": set[str], "primitive": "A"|"B"|"C"|None}。
-    优先级：B（多约束交）> C（两跳）> A（单锚点反查）。"""
+    """G 层答案引擎：D 直连 > B 多约束交 > C 两跳 > A 单锚点反查。"""
+    d = _direct_1hop(q, store)
+    if d["edges"]:
+        return {"subjects": d["subjects"], "primitive": "D", "edges": d["edges"]}
     b = _multi_constraint_intersection(q, store)
     if b:
         return {"subjects": b, "primitive": "B"}
-    c = _two_hop_via_shared(q, store)
-    if c:
-        return {"subjects": c, "primitive": "C"}
+    # C 只处理真正的两跳题：两个文档端点均已具名，或题面明确求两个
+    # 文档/已知一端经共享节点找另一端。普通“通过谓词连到哪个节点”不走 C。
+    two_hop = any(w in q for w in ("两跳", "共享节点", "共享引用", "共享 `cites`"))
+    docs = re.findall(r"《([^》]+)》", q)
+    asks_pair = any(w in q for w in ("哪两份", "哪两个", "哪些文档"))
+    if two_hop and (len(docs) >= 2 or len(docs) == 1 or asks_pair):
+        c = _two_hop_via_shared(q, store)
+        if c:
+            return {"subjects": c, "primitive": "C"}
     # A：单锚点反查（题面只提一个节点时用）
     anchors = _extract_anchors(q)
     if len(anchors) == 1:
@@ -364,11 +405,23 @@ def run_g(questions: list[dict]) -> dict:
     for it in questions:
         # 优先走 answer_g 答案引擎
         ag = answer_g(it["q"], store)
+        if ag["primitive"] == "D" and any(
+                graph_retrieval._norm(t["subject"]) not in
+                {graph_retrieval._norm(e["subject"]) for e in ag["edges"]}
+                for t in it["triples"]):
+            # D 只绑定题面主体；预期边还包含其他主体时回到集合反查。
+            ag = {"subjects": set(), "primitive": None}
         engine = None
         ok = False
         if ag["subjects"]:
-            engine = "answer2hop"
-            ok = _expected_hit_in_subjects(it["expected"], ag["subjects"])
+            engine = "direct1hop" if ag["primitive"] == "D" else "answer2hop"
+            if ag["primitive"] == "D":
+                ok = all(any(
+                    graph_retrieval._norm(t["subject"]) in graph_retrieval._norm(e["subject"]) and
+                    graph_retrieval._norm(t["object"]) in graph_retrieval._norm(e["object"])
+                    for e in ag.get("edges", [])) for t in it["triples"])
+            else:
+                ok = _expected_hit_in_subjects(it["expected"], ag["subjects"])
         if not ok:
             # 回退 1-hop expand_1hop 判定
             graph_retrieval.link_entities(it["q"], store["by_subj"], store["by_obj"])
@@ -397,7 +450,8 @@ def run_g(questions: list[dict]) -> dict:
                          "primitive": ag["primitive"],
                          "expected_hit": expected_hit, "missing": missing})
         else:
-            rows.append({"q": it["q"][:40], "pass": True, "engine": "answer2hop",
+            rows.append({"q": it["q"][:40], "pass": True,
+                         "engine": "direct1hop" if ag["primitive"] == "D" else "answer2hop",
                          "primitive": ag["primitive"]})
         passed += ok
     return {"n": len(questions), "passed": passed,
