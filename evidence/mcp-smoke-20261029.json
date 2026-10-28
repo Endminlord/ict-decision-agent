@@ -1,0 +1,9 @@
+{
+  "what": "production MCP chain smoke after CUDA-incident recovery + live import storm",
+  "date": "2026-10-29T19:20+08:00",
+  "call": {"tool": "retrieval_cross_doc", "server": "retrieval-mcp (fastmcp 2.14.7) :8793", "query": "生产许可证管理目录决定 cites 什么？", "hops": 2, "top_k": 5},
+  "result": {"insufficient_evidence": false, "graph_rings_added": 1, "graph_err": null, "max_score": 0.85, "fields": ["rings", "grounded_rings", "levels", "date_range", "note"]},
+  "latency_e2e": "~2.3s",
+  "also_checked": ["retrieval-mcp active", "workbench-mcp active", "fullwatch sentinel deployed (5min probe, marker: ~/dsh/research/import-full.marker)"],
+  "verdict": "MCP_SMOKE_OK -- demo-day critical path green"
+}
