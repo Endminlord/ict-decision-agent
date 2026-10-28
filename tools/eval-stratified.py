@@ -235,9 +235,12 @@ def _extract_anchors(q: str) -> list[str]:
     再补充书名号《…》整段。归一化去空白，长度≥2 保留，按长度降序去重。"""
     spans = re.findall(r"[『「“”\"']([^『」“”\"']{2,40})[』」“”\"']", q)
     spans += re.findall(r"《([^》]{2,60})》", q)
+    excluded = {graph_retrieval._norm(x) for x in re.findall(r"不属于《([^》]+)》", q)}
     seen, out = set(), []
     for s in sorted(spans, key=len, reverse=True):
         n = graph_retrieval._norm(s)
+        if n in excluded:
+            continue
         if len(n) >= 2 and n not in seen:
             seen.add(n)
             out.append(n)
@@ -375,7 +378,13 @@ def answer_g(q: str, store: dict) -> dict:
     if len(anchors) == 1:
         a = _subjects_citing(anchors[0], store)
         if a:
-            return {"subjects": a, "primitive": "A"}
+            # 排除"不属于《X》"题面中明确排除的主体
+            norm = graph_retrieval._norm
+            excluded = [norm(x) for x in re.findall(r"不属于《([^》]+)》", q)]
+            if excluded:
+                a = {s for s in a if not any(x in s or s in x for x in excluded)}
+            if a:
+                return {"subjects": a, "primitive": "A"}
     return {"subjects": set(), "primitive": None}
 
 
