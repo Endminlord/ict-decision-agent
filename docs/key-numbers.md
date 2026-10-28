@@ -21,6 +21,13 @@
 ## 本体治理
 - 三层漏斗：strict 21,036 + loose 226,710 → 边 15,870 → **medium 5,269**（review_gate 分级入库）
 
+## GraphRAG 图谱增强（2026-10-28 实测）
+- 图谱：4 源 **2,013 边 / 1,865 实体**，0 坏行（manufacturing-loose 1,226 + finance-loose 555 + yitu-v2-loose 175 + finance-strict 57）
+- 接线：retrieval_cross_doc 内 GRAPH_BOOST——实体链接→1-hop 扩展→graph_ring；失败/零命中静默降级，永不炸链
+- 实测：融合意见 query rings 10→**12**（added=2，via=graph，score 0.698/cap 0.90）；insufficient 与 max_score=0.8982 与注入前逐位一致——**图谱永不影响拒答判定**
+- 可观测：响应新增 graph_rings_added / graph_err 字段；GRAPH_BOOST=off 一键关闭
+- 限制：graph 环 chunk_id 为本体 id，title 在 ES 命中时自动升级为 ES _id 可溯源；语料导入未满（207k/757k）时部分本体文档暂不可反查
+
 ## 工程质量
 - **118/118** 测试（`make test`）· 136 py 静态扫描 0 错 · 密钥扫描 0 命中
 - **四幕仪式 90 秒**全绿零 Traceback（`make ritual`）· 对抗三连 **3/3**（`make adv`）
