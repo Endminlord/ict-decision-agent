@@ -16,7 +16,7 @@
 | 组件 | 方案要求 | 仓库现状 | 落地方式 | 状态 |
 |---|---|---|---|---|
 | verified/observed 隔离 | observed 不判定、不自动调用 | `governance/namespace-contract.json` + `skills/observed/`（现存五技能按迁移验收先例留 verified） | 本次提交；零目录迁移、零链路破坏 | ✅ |
-| 晋升/降级门控 | oracle 配对检验，遗忘同权 | 依赖 D3 脚本 | Wilcoxon n≥15 + C5 冻结集复跑 | ⬜ |
+| 晋升/降级门控 | oracle 配对检验，遗忘同权 | tools/gate-wilcoxon.py（Wilcoxon/McNemar 自动路由）+ docs/RIGOR_MATRIX.md | n≥15 写死+回归守卫（488062f） | ✅ |
 | 技能注册表 | 命名空间可机读 | `governance/skill_registry.json`（五技能 verified 区，附验收出处） | 本次提交 | ✅ |
 
 ## 2. 免疫记录层（决策溯源的下一级）
@@ -47,7 +47,7 @@
 
 | 组件 | 方案要求 | 仓库现状 | 落地方式 | 状态 |
 |---|---|---|---|---|
-| 三面板（溯源/免疫/宪法） | 面板=只读投影 | trust-panel.html 素材已有 | D5-6：数据缺则静态占位；MIT LOGO 红线进施工卡 | ⬜ |
+| 三面板（溯源/免疫/宪法） | 面板=只读投影 | ui/governance-console.html（生成器读真实文件，账本 4 笔+实测 trace） | D5-6 完成（54ac3d1）；MIT LOGO 红线已入页脚 | ✅ |
 
 ## 6. 实验与材料（11 月重心=初赛文档）
 
