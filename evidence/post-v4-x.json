@@ -1,0 +1,166 @@
+{
+ "config": {
+  "seed": 2026,
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "rfc_index": "rfc-1024",
+  "retrieval": "hybrid_search(alpha=0.6)",
+  "chain": "eval-retrieval._cross_doc(hops=2, top_k=5)"
+ },
+ "X": {
+  "n": 25,
+  "refused": 21,
+  "refusal_rate": 0.84,
+  "rows": [
+   {
+    "q": "如何用 Rust 实现一个无锁队列？",
+    "refused": true,
+    "max_score": 0.7333,
+    "grounded": 0
+   },
+   {
+    "q": "红烧肉的家常做法是什么？",
+    "refused": true,
+    "max_score": 0.8523,
+    "grounded": 0
+   },
+   {
+    "q": "量子计算机的超导制冷方案原理",
+    "refused": false,
+    "max_score": 0.7657,
+    "grounded": 2
+   },
+   {
+    "q": "2026 年世界杯小组赛赛程",
+    "refused": true,
+    "max_score": 0.7335,
+    "grounded": 0
+   },
+   {
+    "q": "如何训练一个扩散模型生成猫的图片？",
+    "refused": true,
+    "max_score": 0.7316,
+    "grounded": 0
+   },
+   {
+    "q": "太阳系外行星的凌日观测方法",
+    "refused": true,
+    "max_score": 0.8279,
+    "grounded": 0
+   },
+   {
+    "q": "Python 的 GIL 是什么？",
+    "refused": true,
+    "max_score": 0.7064,
+    "grounded": 0
+   },
+   {
+    "q": "怎么给吉他换弦？",
+    "refused": true,
+    "max_score": 0.9007,
+    "grounded": 0
+   },
+   {
+    "q": "国际象棋的开局原则有哪些？",
+    "refused": true,
+    "max_score": 0.7477,
+    "grounded": 0
+   },
+   {
+    "q": "混凝土抗压强度的测试标准 ASTM C39",
+    "refused": false,
+    "max_score": 0.8252,
+    "grounded": 1
+   },
+   {
+    "q": "如何用 Kubernetes 做金丝雀发布？",
+    "refused": true,
+    "max_score": 0.7457,
+    "grounded": 0
+   },
+   {
+    "q": "咖啡豆的烘焙曲线怎么定？",
+    "refused": false,
+    "max_score": 0.7664,
+    "grounded": 2
+   },
+   {
+    "q": "植物光合作用的卡尔文循环步骤",
+    "refused": true,
+    "max_score": 0.7332,
+    "grounded": 0
+   },
+   {
+    "q": "怎样在 Excel 里做数据透视表？",
+    "refused": true,
+    "max_score": 0.8723,
+    "grounded": 0
+   },
+   {
+    "q": "黑洞的信息悖论是什么？",
+    "refused": true,
+    "max_score": 0.7782,
+    "grounded": 0
+   },
+   {
+    "q": "如何配置 Nginx 的反向代理缓存？",
+    "refused": true,
+    "max_score": 0.9096,
+    "grounded": 0
+   },
+   {
+    "q": "马拉松训练的周跑量怎么安排？",
+    "refused": true,
+    "max_score": 0.7794,
+    "grounded": 0
+   },
+   {
+    "q": "葡萄酒的单宁来自哪里？",
+    "refused": true,
+    "max_score": 0.7388,
+    "grounded": 1
+   },
+   {
+    "q": "如何用 PyTorch 做分布式训练？",
+    "refused": true,
+    "max_score": 0.738,
+    "grounded": 0
+   },
+   {
+    "q": "中国传统建筑中的斗拱结构起什么作用？",
+    "refused": false,
+    "max_score": 0.8807,
+    "grounded": 2
+   },
+   {
+    "q": "怎么做提拉米苏？",
+    "refused": true,
+    "max_score": 0.7433,
+    "grounded": 0
+   },
+   {
+    "q": "2026 年 NBA 总决赛的赛程安排",
+    "refused": true,
+    "max_score": 0.7394,
+    "grounded": 0
+   },
+   {
+    "q": "如何给猫咪剪指甲？",
+    "refused": true,
+    "max_score": 0.7241,
+    "grounded": 0
+   },
+   {
+    "q": "Bellman 方程在强化学习里的推导过程",
+    "refused": true,
+    "max_score": 0.9007,
+    "grounded": 0
+   },
+   {
+    "q": "怎么用 Arduino 点亮一盏 LED？",
+    "refused": true,
+    "max_score": 0.8956,
+    "grounded": 0
+   }
+  ]
+ }
+}

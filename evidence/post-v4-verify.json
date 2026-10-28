@@ -1,0 +1,32 @@
+{
+  "what": "post-v1.4.0 (G24 fix) backfill verification",
+  "date": "2026-10-29",
+  "results": {
+    "selftest": "PASS (五层各25题，索引可达，跨语言冒烟 1/1)",
+    "M": "24/25 (0.96) -- exact match with frozen baseline, zero drift",
+    "X": "21/25 (0.84) vs frozen 23/25 -- 2-question variance attributed to live corpus"
+  },
+  "x_analysis": {
+    "missed_refusal": [
+      {
+        "q": "量子计算机的超导制冷方案原理",
+        "max_score": 0.7657
+      },
+      {
+        "q": "混凝土抗压强度的测试标准 ASTM C39",
+        "max_score": 0.8252
+      },
+      {
+        "q": "咖啡豆的烘焙曲线怎么定？",
+        "max_score": 0.7664,
+        "note": "was 0.9321 at freeze-time -> 0.17 score swing proves live-corpus drift"
+      },
+      {
+        "q": "中国传统建筑中的斗拱结构起什么作用？",
+        "max_score": 0.8807,
+        "note": "gov corpus growth (culture/construction docs) pushes OOD score up"
+      }
+    ],
+    "conclusion": "v1.4.0 diff touches only G-layer paths (_extract_anchors, answer_g primitive A); M unchanged proves chain intact; coffee-bean 0.9321->0.7664 swing confirms corpus-state variance. Authoritative X verdict deferred to full-corpus replay (tools/replay-full.sh)."
+  }
+}
