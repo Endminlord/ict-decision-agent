@@ -127,6 +127,22 @@ def main():
     r3 = s2.add_run("队名：____（待填）　报名编号：____（待填）\n2026 年 11 月"); r3.font.size = Pt(12)
     doc.add_page_break()
 
+    # 目录域（Word 打开后 Ctrl+A F9 或右键"更新域"生成真目录）
+    from docx.oxml.ns import qn as _qn
+    from docx.oxml import OxmlElement as _OE
+    md_heading(doc, 1, "目 录")
+    _p = doc.add_paragraph()
+    _r = _p.add_run()
+    _f1 = _OE("w:fldChar"); _f1.set(_qn("w:fldCharType"), "begin")
+    _it = _OE("w:instrText"); _it.set(_qn("xml:space"), "preserve")
+    _it.text = ' TOC \\o "1-3" \\h \\z \\u '
+    _f2 = _OE("w:fldChar"); _f2.set(_qn("w:fldCharType"), "separate")
+    _t = _OE("w:t"); _t.text = "（在 Word 中右键此处 → 更新域，即可生成目录）"
+    _f3 = _OE("w:fldChar"); _f3.set(_qn("w:fldCharType"), "end")
+    for _e in (_f1, _it, _f2, _t, _f3):
+        _r._r.append(_e)
+    doc.add_page_break()
+
     # 架构一页图
     img = BASE / "docs" / "architecture.png"
     if not img.exists():
@@ -144,10 +160,6 @@ def main():
         rc.font.size = Pt(10); rc.italic = True
         doc.add_page_break()
 
-    # 目录占位
-    md_heading(doc, 1, "目录")
-    doc.add_paragraph("（Word 域目录：提交前 F9 刷新；骨架由 build_docx.py 生成）")
-
     # 1. 主文档全文
     main_md = (BASE / "docs" / "01-开发设计文档.md").read_text(encoding="utf-8")
     doc.add_page_break()
@@ -164,6 +176,40 @@ def main():
     md_heading(doc, 1, "附录 B：工程方法论与工作台数据源")
     apx_md = (BASE / "docs" / "附录-工程方法论与工作台数据源.md").read_text(encoding="utf-8")
     render_md(doc, apx_md)
+
+    # 4. 附录C：治理知识库与答辩速查
+    doc.add_page_break()
+    md_heading(doc, 1, "附录 C：治理知识库与答辩速查")
+    md_heading(doc, 2, "C.1 治理知识库（governance_chain）")
+    for line in [
+        "知识库 knowledge_name = governance_chain，Elasticsearch 索引 3-4c64eca2085942af8fadf6364d947ce0；"
+        "治理六件（宪法 / 门控契约 / 命名空间 / 技能注册 / 对账表 / 免疫记录）按 H2 切片共 42 chunks，"
+        "_bulk 直写 errors=False，词面抽查『宪法 / 门控 / 对账表 / 免疫记录』全部命中。",
+        "评审/答辩时 Agent 可对治理知识库直接问答：治理规则『遗忘了什么』类反问由对账表 22 条款兜底回应。",
+    ]:
+        doc.add_paragraph(line, style="List Bullet")
+    md_heading(doc, 2, "C.2 免疫记录（immunity-log.jsonl）")
+    doc.add_paragraph("治理链免疫记录累计 9 条（含 graph_retrieval v1.1.0/v1.2.0/v1.3.0 三版升级）——"
+                      "每次路由修正 / 排序修复均先记免疫、再改代码、后复核，形成可追溯的治理闭环。")
+    md_heading(doc, 2, "C.3 答辩数字速查卡")
+    tbl = doc.add_table(rows=1, cols=2); tbl.style = "Table Grid"
+    tbl.rows[0].cells[0].paragraphs[0].add_run("问题").bold = True
+    tbl.rows[0].cells[1].paragraphs[0].add_run("数字锚点").bold = True
+    QA = [
+        ("图检索准确率？", "G 层 25 题 v3 = 0.96（24/25，三连跑稳定；v1 0.48 → v2 0.76 → v3 0.96）"),
+        ("语料规模？", "757,810 chunks（Apache-2.0，导入中→满库）；rfc-1024 1,739；治理库 42"),
+        ("检索质量？", "MRR 0.8494；X 层 25/25 零漂移；BGE 判序 0.9965；延迟 p50 0.33s"),
+        ("校准阈值？", "τ=0.8505（域内 92% / 域外 72%）；0.75 档=100%/40%，拍板待定"),
+        ("护栏拒答？", "稠密护栏 0.75 拒答阈 + 词面落地核验；域外即拒；R 层门控 FAIL 如实报（p=0.0625，n=25 功效不足，满库后重裁）"),
+        ("工程测试？", "make test 118/118；分层评测 R/M/X/C/G 五层逐题 rows；check-consistency 10/10（2,013 边 / 1,865 实体）"),
+        ("安全性引用？", "SAGE(2609.36043) 配对 ledger；SkillFlow(2604.17308) 高使用≠高效用；SkillPoison(2610.07645) 95.71% ASR → 只记录不判定"),
+        ("原创性？", "三层治理优化方案与元框架 EL 均为本人设计；EL = 方法论上游 + 数据源，参赛主体为基于 Nexent 的政务决策智能体"),
+    ]
+    for q, a in QA:
+        row = tbl.add_row().cells
+        row[0].paragraphs[0].add_run(q).bold = True
+        row[1].paragraphs[0].add_run(a)
+    doc.add_page_break()
 
     OUT.parent.mkdir(parents=True, exist_ok=True)
     doc.save(OUT)
