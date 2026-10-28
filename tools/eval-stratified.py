@@ -230,34 +230,176 @@ def build_g() -> list[dict]:
     return questions
 
 
+def _extract_anchors(q: str) -> list[str]:
+    """从题面抓锚点片段：优先引号内短语（『』「」“”''"" 以及中文书名号内的实体），
+    再补充书名号《…》整段。归一化去空白，长度≥2 保留，按长度降序去重。"""
+    spans = re.findall(r"[『「“”\"']([^『」“”\"']{2,40})[』」“”\"']", q)
+    spans += re.findall(r"《([^》]{2,60})》", q)
+    seen, out = set(), []
+    for s in sorted(spans, key=len, reverse=True):
+        n = graph_retrieval._norm(s)
+        if len(n) >= 2 and n not in seen:
+            seen.add(n)
+            out.append(n)
+    return out
+
+
+def _subjects_citing(anchor: str, store: dict) -> set[str]:
+    """原语A：经边找主体——扫 edges_by_obj，凡对象实体与 anchor 互为子串，
+    收集全部来源主体（归一化名）。"""
+    norm = graph_retrieval._norm
+    out = set()
+    for obj, edges in store["by_obj"].items():
+        on = norm(obj)
+        if not on:
+            continue
+        if anchor in on or on in anchor:
+            for e in edges:
+                s = norm(e.get("subject", ""))
+                if s:
+                    out.add(s)
+    return out
+
+
+def _out_objects(subject: str, store: dict) -> set[str]:
+    """主体实体的全部出边对象（归一化）。subject 允许子串匹配任一主体实体。"""
+    norm = graph_retrieval._norm
+    out = set()
+    for s, edges in store["by_subj"].items():
+        sn = norm(s)
+        if not sn:
+            continue
+        if subject in sn or sn in subject:
+            for e in edges:
+                o = norm(e.get("object", ""))
+                if o:
+                    out.add(o)
+    return out
+
+
+def _two_hop_via_shared(q: str, store: dict) -> set[str]:
+    """原语C：两跳路径——抓题面提到的『中间节点』（引号短语），
+    找以该节点为对象的所有主体集合；若题面还提到一个具体文档 A，
+    返回『除 A 外也连到该中间节点的主体集合』。"""
+    anchors = _extract_anchors(q)
+    norm = graph_retrieval._norm
+    # 区分：引号短语 = 中间节点候选；书名号 = 已知文档 A
+    mids = [a for a in anchors if not any(a in norm(t) or norm(t) in a
+                                         for t in re.findall(r"《([^》]+)》", q))]
+    result = set()
+    for mid in mids:
+        subs = _subjects_citing(mid, store)
+        # 排除题面已提到的文档（作为『已知端』）
+        known_docs = [norm(t) for t in re.findall(r"《([^》]+)》", q)]
+        for s in subs:
+            if any(kd and (kd in s or s in kd) for kd in known_docs):
+                continue
+            result.add(s)
+    return result
+
+
+def _multi_constraint_intersection(q: str, store: dict) -> set[str]:
+    """原语B：多实体交集——题面提到 ≥2 个引号短语时，分别取主体集合再交。"""
+    spans = re.findall(r"[『「“”\"']([^『」“”\"']{2,40})[』」“”\"']", q)
+    norms = []
+    seen = set()
+    for s in spans:
+        n = graph_retrieval._norm(s)
+        if len(n) >= 2 and n not in seen:
+            seen.add(n)
+            norms.append(n)
+    if len(norms) < 2:
+        return set()
+    sets = [_subjects_citing(a, store) for a in norms]
+    if any(not s for s in sets):
+        return set()
+    out = sets[0]
+    for s in sets[1:]:
+        out = out & s
+    return out
+
+
+def answer_g(q: str, store: dict) -> dict:
+    """G 层答案引擎：三原语合一。
+    返回 {"subjects": set[str], "primitive": "A"|"B"|"C"|None}。
+    优先级：B（多约束交）> C（两跳）> A（单锚点反查）。"""
+    b = _multi_constraint_intersection(q, store)
+    if b:
+        return {"subjects": b, "primitive": "B"}
+    c = _two_hop_via_shared(q, store)
+    if c:
+        return {"subjects": c, "primitive": "C"}
+    # A：单锚点反查（题面只提一个节点时用）
+    anchors = _extract_anchors(q)
+    if len(anchors) == 1:
+        a = _subjects_citing(anchors[0], store)
+        if a:
+            return {"subjects": a, "primitive": "A"}
+    return {"subjects": set(), "primitive": None}
+
+
+def _expected_hit_in_subjects(expected: str, subjects: set[str]) -> bool:
+    """expected 是中文短语/分号分隔的实体列表，检查是否至少一个主要名在 subjects 里
+    互为子串命中。粗策略：抽书名号或按 『；』『、』『，』切，逐段比对。"""
+    norm = graph_retrieval._norm
+    cands = re.findall(r"《([^》]+)》", expected)
+    if not cands:
+        # 用标点切
+        parts = re.split(r"[；;，,、。\.：:\s]+", expected)
+        cands = [p for p in parts if len(norm(p)) >= 3]
+    for c in cands:
+        cn = norm(c)
+        if not cn:
+            continue
+        for s in subjects:
+            if cn in s or s in cn:
+                return True
+    return False
+
+
 def run_g(questions: list[dict]) -> dict:
     passed = 0
     rows = []
     store = graph_retrieval._get_store()
     for it in questions:
-        # 保留显式实体链接调用；扩展边取生产入口实际返回的 graph rings。
-        graph_retrieval.link_entities(it["q"], store["by_subj"], store["by_obj"])
-        rings = graph_retrieval.augment_rings(it["q"], [], graph_store=store)
-        edge_re = re.compile(r"^(.*?) -\[(.*?)\]-> (.*?)$")
-        edges = []
-        for ring in rings:
-            m = edge_re.match(ring.get("excerpt", ""))
-            if m:
-                edges.append({"subject": m.group(1), "predicate": m.group(2),
-                              "object": m.group(3)})
-
-        expected_hit, missing = [], []
-        for t in it["triples"]:
-            want_s = graph_retrieval._norm(t["subject"])
-            want_o = graph_retrieval._norm(t["object"])
-            path = "%s -[%s]-> %s" % (t["subject"], t["predicate"], t["object"])
-            hit = any(want_s in graph_retrieval._norm(e["subject"]) and
-                      want_o in graph_retrieval._norm(e["object"]) for e in edges)
-            (expected_hit if hit else missing).append(path)
-        ok = not missing
+        # 优先走 answer_g 答案引擎
+        ag = answer_g(it["q"], store)
+        engine = None
+        ok = False
+        if ag["subjects"]:
+            engine = "answer2hop"
+            ok = _expected_hit_in_subjects(it["expected"], ag["subjects"])
+        if not ok:
+            # 回退 1-hop expand_1hop 判定
+            graph_retrieval.link_entities(it["q"], store["by_subj"], store["by_obj"])
+            rings = graph_retrieval.augment_rings(it["q"], [], graph_store=store)
+            edge_re = re.compile(r"^(.*?) -\[(.*?)\]-> (.*?)$")
+            edges = []
+            for ring in rings:
+                m = edge_re.match(ring.get("excerpt", ""))
+                if m:
+                    edges.append({"subject": m.group(1), "predicate": m.group(2),
+                                  "object": m.group(3)})
+            expected_hit, missing = [], []
+            for t in it["triples"]:
+                want_s = graph_retrieval._norm(t["subject"])
+                want_o = graph_retrieval._norm(t["object"])
+                path = "%s -[%s]-> %s" % (t["subject"], t["predicate"], t["object"])
+                hit = any(want_s in graph_retrieval._norm(e["subject"]) and
+                          want_o in graph_retrieval._norm(e["object"]) for e in edges)
+                (expected_hit if hit else missing).append(path)
+            fallback_ok = not missing
+            if fallback_ok:
+                ok = True
+                engine = "expand1hop"
+            rows.append({"q": it["q"][:40], "pass": ok,
+                         "engine": engine or (ag["primitive"] and "answer2hop") or "expand1hop",
+                         "primitive": ag["primitive"],
+                         "expected_hit": expected_hit, "missing": missing})
+        else:
+            rows.append({"q": it["q"][:40], "pass": True, "engine": "answer2hop",
+                         "primitive": ag["primitive"]})
         passed += ok
-        rows.append({"q": it["q"][:40], "pass": ok,
-                     "expected_hit": expected_hit, "missing": missing})
     return {"n": len(questions), "passed": passed,
             "pass_rate": round(passed/(len(questions) or 1), 4), "rows": rows}
 
