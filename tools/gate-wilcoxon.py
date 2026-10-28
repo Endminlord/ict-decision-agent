@@ -14,7 +14,7 @@
 
 输入（二选一）：
   --pairs pairs.json        {"pairs":[{"item":..,"base":0.8,"cand":0.9},...]}（或裸数组）
-  --from-reports base.json cand.json --layer M|X   （吃 eval-stratified.py 报告的逐题行）
+  --from-reports base.json cand.json --layer R|M|X|C   （吃 eval-stratified.py 报告的逐题行）
 
 用法：
   python3 tools/gate-wilcoxon.py --pairs p.json --action promote --out gate-result.json
@@ -71,9 +71,9 @@ def _load_pairs(path):
 
 
 def _pairs_from_reports(base_path, cand_path, layer):
-    key = {"M": "pass", "X": "refused"}.get(layer)
+    key = {"R": "hit", "M": "pass", "X": "refused", "C": "hit"}.get(layer)
     if key is None:
-        raise SystemExit("--layer 目前支持 M|X（逐题 0/1 判定行）；R/C 层请先在报告里补 rows 后扩展本适配器")
+        raise SystemExit("--layer 目前支持 R|M|X|C（逐题 0/1 判定行）")
     def rows_of(path):
         d = json.load(open(path, encoding="utf-8"))
         rows = (d.get(layer) or {}).get("rows")
@@ -241,7 +241,7 @@ def main():
     ap = argparse.ArgumentParser(description="D3 统计门控：逐项配对（Wilcoxon/McNemar）+ 回归守卫")
     ap.add_argument("--pairs")
     ap.add_argument("--from-reports", nargs=2, metavar=("BASE", "CAND"))
-    ap.add_argument("--layer", choices=["M", "X"])
+    ap.add_argument("--layer", choices=["R", "M", "X", "C"])
     ap.add_argument("--action", choices=["promote", "demote", "retire"])
     ap.add_argument("--alpha", type=float, default=ALPHA)
     ap.add_argument("--lam", type=float, default=LAM)
@@ -254,7 +254,7 @@ def main():
         return 0
     if a.from_reports:
         if not a.layer:
-            ap.error("--from-reports 需要 --layer M|X")
+            ap.error("--from-reports 需要 --layer R|M|X|C")
         pairs = _pairs_from_reports(a.from_reports[0], a.from_reports[1], a.layer)
     elif a.pairs:
         pairs = _load_pairs(a.pairs)

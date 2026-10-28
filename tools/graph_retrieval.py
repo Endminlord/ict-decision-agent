@@ -12,6 +12,7 @@ import time
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
+_DOC_TITLES = set()  # 语料文档标题集（归一化）：expand 时识别"完整文档实体"
 # 模块可能从 research/tools（BASE=research）或 ict-open-source/tools 加载；
 # 三元组在 <repo>/evidence/ 下，逐根探测。
 _ROOTS = [BASE, BASE / "ict-open-source"]
@@ -61,6 +62,9 @@ def load_edges(sources=None):
                     continue
                 edges_by_subj.setdefault(s, []).append(e)
                 edges_by_obj.setdefault(o, []).append(e)
+                t = _norm((e.get("provenance") or {}).get("title", "") or "")
+                if t:
+                    _DOC_TITLES.add(t)
                 n_ok += 1
             except (KeyError, ValueError):
                 n_bad += 1
@@ -78,10 +82,14 @@ def link_entities(query: str, edges_by_subj, edges_by_obj):
 
 
 def expand_1hop(entities, edges_by_subj, edges_by_obj, max_edges=12):
-    """1-hop 扩展：任一端命中即取边；按（谓词权重×置信权重）降序截断。"""
+    """1-hop 扩展：任一端命中即取边；按（谓词权重×置信权重+对侧完整度奖励）降序截断。
+
+    完整度奖励：非查询侧实体越长越可能是文档级实体（句段碎片通常 <10 字），
+    +0.12 满档（≥24 字），保证 doc-to-doc 边不被同谓词碎片边淹没。"""
     seen, picked = set(), []
     ents = set(entities)
-    for idx in (edges_by_subj, edges_by_obj):
+    for side_idx, idx in enumerate((edges_by_subj, edges_by_obj)):
+        other_key = "object" if side_idx == 0 else "subject"
         for e in ents:
             for edge in idx.get(e, []):
                 k = id(edge)
@@ -89,8 +97,12 @@ def expand_1hop(entities, edges_by_subj, edges_by_obj, max_edges=12):
                     continue
                 seen.add(k)
                 w = PREDICATE_W.get(edge.get("predicate", ""), 0.75)
-                c = CONF_W.get(edge.get("confidence", "low"), 0.60)
-                picked.append((w * c, edge))
+                c = CONF_W.get(edge.get("confidence", ""), 0.60)
+                other = _norm(edge.get(other_key, "") or "")
+                is_doc = bool(other) and len(other) >= 6 and any(
+                    other in t or t in other for t in _DOC_TITLES)
+                bonus = 0.15 if is_doc else 0.05 * min(len(other) / 24.0, 1.0)
+                picked.append((w * c + bonus, edge))
     picked.sort(key=lambda t: t[0], reverse=True)
     return [e for _, e in picked[:max_edges]]
 
