@@ -84,6 +84,19 @@ def api_import():
         pass
     return {"unit": st, "marker_tail": tail, "now": datetime.datetime.now().isoformat(timespec="seconds")}
 
+
+def api_constitution():
+    try:
+        c = json.load(open(f"{ROOT}/governance/constitution.json", encoding="utf-8"))
+        return {"version": c.get("constitution", {}).get("version") if isinstance(c.get("constitution"), dict) else c.get("version"),
+                "frozen_at": c.get("constitution", {}).get("frozen_at") if isinstance(c.get("constitution"), dict) else None,
+                "principle": (c.get("constitution", {}).get("principle") if isinstance(c.get("constitution"), dict) else None),
+                "rules": [{"id": r.get("id"), "text": r.get("text"), "enforcement": r.get("enforcement")}
+                          for r in c.get("constitution", {}).get("rules", [])] if isinstance(c.get("constitution"), dict) else [],
+                "amendment": c.get("constitution", {}).get("amendment_procedure")}
+    except Exception as e:
+        return {"error": str(e)}
+
 PAGE = open("/home/endmin/dsh/research/ict-open-source/ui/governance-console-live.html", encoding="utf-8").read()
 
 class H(BaseHTTPRequestHandler):
@@ -102,6 +115,8 @@ class H(BaseHTTPRequestHandler):
             self._send(200, json.dumps(api_ledger(), ensure_ascii=False).encode(), "application/json")
         elif p == "/api/scores":
             self._send(200, json.dumps(api_scores(), ensure_ascii=False).encode(), "application/json")
+        elif p == "/api/constitution":
+            self._send(200, json.dumps(api_constitution(), ensure_ascii=False).encode(), "application/json")
         elif p == "/api/import":
             self._send(200, json.dumps(api_import(), ensure_ascii=False).encode(), "application/json")
         else:

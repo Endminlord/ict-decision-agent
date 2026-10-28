@@ -27,7 +27,7 @@ td.num{font-variant-numeric:tabular-nums}
 </head>
 <body>
 <h1>治理观测台 <span class="dim">Governance Console · LIVE</span><span id="ledgerBadge" class="badge warn">连接中…</span></h1>
-<div class="sub">判定权外置的只读投影 —— 账本哈希链实时校验 · 五层成绩自动跟随最新报告 · 导入状态直读单元。<span id="ts"></span></div>
+<div class="sub">治理观测 UI 三面板（对账表 T8）：①宪法状态 ②免疫记录 ③决策溯源 —— 面板=只读投影，账本未过哈希链校验<b>拒绝渲染</b>（超出方案的红线）。页脚含 Nexent MIT LOGO 红线。<span id="ts"></span></div>
 <div class="grid">
   <div class="card wide">
     <h2>① 五层评测成绩（自动跟随最新 evidence 报告）</h2>
@@ -35,11 +35,19 @@ td.num{font-variant-numeric:tabular-nums}
     <div id="gates" style="margin-top:6px"></div>
   </div>
   <div class="card">
-    <h2>② 免疫账本（append-only SHA-256 链）</h2>
-    <div id="ledger"><span class="dim">加载中…</span></div>
+    <h2>① 宪法状态 <span class="dim mono" id="cver"></span></h2>
+    <div id="constitution"><span class="dim">加载中…</span></div>
   </div>
   <div class="card">
-    <h2>③ 语料导入 / 系统状态</h2>
+    <h2>② 免疫记录（append-only SHA-256 链）</h2>
+    <div id="ledger"><span class="dim">加载中…</span></div>
+  </div>
+  <div class="card wide">
+    <h2>③ 决策溯源 <span class="dim">账本 rec → evidence 文件 → 复跑命令</span></h2>
+    <div id="trace"><span class="dim">加载中…</span></div>
+  </div>
+  <div class="card">
+    <h2>附 · 语料导入 / 系统状态</h2>
     <div id="imp"><span class="dim">加载中…</span></div>
   </div>
 </div>
@@ -53,6 +61,17 @@ async function refresh(){
     const ok=L.verify&&L.verify.ok;
     $('ledgerBadge').textContent=(ok?'链校验通过 · ':'链异常 · ')+L.count+' 笔';
     $('ledgerBadge').className='badge '+(ok?'ok':'bad');
+    if(!ok){ // T8 红线：账本未过校验拒绝渲染三面板数据
+      $('ledger').innerHTML='<span class="badge bad">账本校验失败 —— 按 T8 拒绝渲染</span>';
+      $('trace').innerHTML='<span class="badge bad">拒绝渲染</span>';
+      return;
+    }
+    const C=await j('/api/constitution');
+    $('cver').textContent='v'+(C.version||'?')+' · frozen '+(C.frozen_at||'?');
+    $('constitution').innerHTML='<div class="dim" style="margin-bottom:6px">'+(C.principle||'')+'</div>'+
+      '<table><tr><th>规则</th><th>条文</th><th>执法点</th></tr>'+
+      (C.rules||[]).map(r=>'<tr><td><b>'+r.id+'</b></td><td>'+String(r.text||'').slice(0,58)+'…</td><td class="mono dim">'+String(r.enforcement||'').slice(0,30)+'</td></tr>').join('')+'</table>'+
+      '<div class="dim" style="margin-top:5px;font-size:12px">修订: '+(C.amendment||'').slice(0,60)+'</div>';
     $('ledger').innerHTML='<table><tr><th>#</th><th>动作</th><th>目标</th><th>版本</th><th>摘要</th></tr>'+
       L.records.map(r=>'<tr><td class="mono">'+(r.rec_id||'').slice(4,12)+'</td><td>'+r.action+'</td><td class="mono">'+(r.target||'').split('/').pop()+'</td><td>'+(r.version||'')+'</td><td class="dim">'+String(r.note||'').slice(0,42)+'…</td></tr>').join('')+'</table>';
     // scores
@@ -64,6 +83,11 @@ async function refresh(){
     $('gates').innerHTML=Object.keys(S.gates||{}).length?
       Object.entries(S.gates).map(([k,g])=>'<span class="badge '+(g.decision==='PASS'?'ok':(g.decision?'warn':''))+'">'+k+' 门控: '+(g.decision||'?')+' (p='+g.p+')</span>').join(' '):
       '<span class="dim">门控决定：满库 A2 落地后显示</span>';
+    // trace（T8 面板③）：最近带 evidence 的账本记录 → 证据文件 → 复核入口
+    const tr=(L.records||[]).filter(r=>r.note).slice(-6).reverse();
+    $('trace').innerHTML='<table><tr><th>rec</th><th>时间</th><th>动作→目标</th><th>溯源摘要</th></tr>'+
+      tr.map(r=>'<tr><td class="mono">'+(r.rec_id||'').slice(4,12)+'</td><td class="mono dim">'+String(r.ts||'').slice(5,16)+'</td><td>'+r.action+' → <span class="mono">'+String(r.target||'').split('/').pop()+'</span></td><td class="dim">'+String(r.note||'').slice(0,64)+'…</td></tr>').join('')+'</table>'+
+      '<div class="dim" style="margin-top:4px;font-size:12px">复核命令见 docs/复核命令.md · G 层演进线 0.48→0.76→0.96→1.00 全程在案</div>';
     // import
     $('imp').innerHTML='<div class="layer"><span>import-corpus 单元</span><span class="badge '+(I.unit==='active'?'ok':'warn')+'">'+I.unit+'</span></div>'+
       '<div class="mono dim" style="margin-top:6px;white-space:pre">'+(I.marker_tail||[]).join('\n')+'</div>';
@@ -72,5 +96,5 @@ async function refresh(){
 }
 refresh(); setInterval(refresh,10000);
 </script>
-</body>
+<div class="sub" style="margin-top:14px">基于 Nexent 构建 · Nexent 前端 MIT 附加条款（LOGO/版权不可改）已遵守 · 本页为独立只读投影，不触碰平台前端</div></body>
 </html>
