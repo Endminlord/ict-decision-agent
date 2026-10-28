@@ -1,0 +1,19 @@
+{
+  "ts": "2026-10-28",
+  "commit": "a15834f",
+  "mcp_tool": "retrieval_cross_doc",
+  "query": "中办国办关于推动科技创新和产业创新深度融合的意见主要讲了什么",
+  "base_rings": 10,
+  "final_rings": 12,
+  "graph_rings_added": 2,
+  "max_score": 0.8982,
+  "insufficient_evidence": false,
+  "graph_samples": [
+    {"score": 0.698, "chunk_id": "mfg-000-0000", "title": "中办国办关于推动科技创新和产业创新深度融合的意见", "hop": 2},
+    {"score": 0.698, "chunk_id": "mfg-000-0004", "title": "中办国办关于推动科技创新和产业创新深度融合的意见", "hop": 2}
+  ],
+  "switches": {
+    "GRAPH_BOOST": "on（生产实测验收：rings 10→12，max_score 逐位不变）",
+    "RERANK": "off（判序已验，待接主链——满库复跑前生效）"
+  }
+}
