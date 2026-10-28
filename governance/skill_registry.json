@@ -1,0 +1,22 @@
+{
+  "registry_version": "1.0.0",
+  "updated_at": "2026-10-28",
+  "namespaces": {
+    "verified": {
+      "dir": "skills/",
+      "basis": "现存五技能均为本项目内建成并纳入 make test（118/118）与四幕仪式守护周期；依宪法 C4 不追溯原则整体划入 verified，不迁移目录。",
+      "skills": [
+        { "name": "citation-verify", "depends": "track2-mcp (verify_quote/lookup_chunk/list_sources)" },
+        { "name": "governance-policy-trace" },
+        { "name": "ontology-migrate", "note": "MIG-002 政务→制造业零改码迁移判据" },
+        { "name": "table-extract" },
+        { "name": "workbench-status-report" }
+      ]
+    },
+    "observed": {
+      "dir": "skills/observed/",
+      "skills": [],
+      "note": "新捕获工作流先落此处（只记录不判定，宪法 C2）；晋升唯一通道=D3 统计门控+C5 回归守卫（C1/C6）；废止/降级同权走门控。"
+    }
+  }
+}

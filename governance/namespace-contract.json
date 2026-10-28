@@ -1,0 +1,15 @@
+{
+  "namespace_contract": {
+    "version": "1.0.0",
+    "frozen_at": "2026-10-28",
+    "verified_dir": "skills/",
+    "observed_dir": "skills/observed/",
+    "semantics": {
+      "verified": "通过 oracle 门控（C1）或迁移验收（MIG-002 类四指标）的技能：可被主链引用、可计入能力声明。现存五技能（citation-verify / governance-policy-trace / ontology-migrate / table-extract / workbench-status-report）按迁移验收先例划入 verified，不迁移目录。",
+      "observed": "只记录不判定（C2）：新捕获的工作流先落 observed，附 source（哪次任务/哪个 trace）、成功次数与失败样本链接。observed 技能不进主链自动调用，不计入任何对外能力数字。"
+    },
+    "promotion_path": "observed → verified 唯一通道 = D3 统计门控（Wilcoxon 逐项配对，n≥15）+ C5 回归守卫复跑通过；晋升动作写入 D2 免疫记录（parent_skill_id 谱系）。",
+    "demotion_path": "verified → observed/废止 同样走门控（C6 遗忘须配对），防止 SAGE 指出的『聚合分数门控的永久回归』。",
+    "note": "『高使用率≠高效用』（SkillFlow 实证：Kimi K2.5 使用率 +0.60pp 而成功率 -9.71pp）是本命名空间的存在理由。"
+  }
+}

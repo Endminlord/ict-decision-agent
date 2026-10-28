@@ -1,0 +1,45 @@
+{
+  "constitution": {
+    "version": "1.0.0",
+    "frozen_at": "2026-10-28",
+    "principle": "判定权外置：宪法层只持规则与门控，不执行、不评分、不记忆。任何组件（含 LLM 与运行时进程）无权在运行中修改本文件。",
+    "rules": [
+      {
+        "id": "C1",
+        "text": "技能晋升 verified 仅经 oracle 门控（逐项配对统计检验），禁止按聚合分数直接晋升。",
+        "enforcement": "governance/skill_registry.json + D3 统计门控脚本"
+      },
+      {
+        "id": "C2",
+        "text": "observed 命名空间只记录不判定：observed 技能不得被主链自动调用，不得计入能力声明。",
+        "enforcement": "skills/observed/ 命名空间隔离"
+      },
+      {
+        "id": "C3",
+        "text": "拒答阈值唯一来源=共形校准器（α=10%，τ=0.8505），禁止在链路上手调阈值。",
+        "enforcement": "evidence/rejection-calibration.md（切换待批准）"
+      },
+      {
+        "id": "C4",
+        "text": "门控不追溯：统计门控只约束新的进化声明，不追溯既有检索/评测数字。",
+        "enforcement": "本文件冻结条款"
+      },
+      {
+        "id": "C5",
+        "text": "回归守卫：冻结集=eval-stratified 固定 R/M/X/C 层（各 25 题）；任何技能晋升/废止前必须复跑冻结集并逐项比对。",
+        "enforcement": "tools/eval-stratified.py + D3 回归守卫"
+      },
+      {
+        "id": "C6",
+        "text": "遗忘须配对：技能废止/降级与晋升走同一 oracle 门控，并写入免疫记录（parent_skill_id 谱系）。",
+        "enforcement": "D2 免疫记录层"
+      },
+      {
+        "id": "C7",
+        "text": "模型后端改动须先留 .bak 备份；语料与判据文件只增不改；RERANK/GraphRAG 等链路开关默认保守（off），显式开启须实测验收。",
+        "enforcement": "运维红线（.bak 纪律）+ MCP GRAPH_BOOST/RERANK 环境守卫"
+      }
+    ],
+    "amendment_procedure": "修改本文件必须：递增版本号 + 附修订记录 + 人工确认提交；禁止运行时进程改写。"
+  }
+}
