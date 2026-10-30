@@ -13,7 +13,7 @@
 | 资产 | 位置 | 规模 | 出处 |
 |---|---|---|---|
 | 三元组边 | merge-triples 产物 | medium 5,269（strict+loose 过滤后） | 每边 subject/predicate/object + chunk_id + evidence |
-| 块索引 | ES 主索引 | 207k→190 万（导入中） | chunk_id ↔ ES _source.id |
+| 块索引 | ES 主索引 | chunks 源 1,864,451 / ES 1,874,596（满库） | chunk_id ↔ ES _source.id |
 | 词面锚 | path_or_url/title | 已在 rings | 实体链接的锚文本源 |
 
 ## 3. 接口设计（retrieve_graph → 合流进 rings）

@@ -82,7 +82,7 @@
 
   <!-- L4 ritual -->
   <rect x="40" y="150" width="1200" height="136" rx="12" fill="#fff" stroke="#d8c9f0" stroke-width="1.5"/>
-  <text x="60" y="178" font-size="14" font-weight="700" fill="#6a3fb5">⑥ 可验证性：verify-ritual 五幕仪式（90 秒 · 全程生产通路 · 无预录）</text>
+  <text x="60" y="178" font-size="14" font-weight="700" fill="#6a3fb5">⑥ 可验证性：verify-ritual 四幕仪式（90 秒）+ 独立对抗三连（全程生产通路 · 无预录）</text>
   <rect x="60" y="192" width="212" height="76" rx="8" fill="#efe8fa" stroke="#d5c2f0"/>
   <text x="76" y="216" font-size="13" fill="#233">第 1 幕 · 提问作答</text>
   <text x="76" y="238" font-size="12" fill="#667">判定 + 引用卡片（带 chunk_id）</text>

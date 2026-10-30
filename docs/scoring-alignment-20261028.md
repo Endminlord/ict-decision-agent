@@ -21,9 +21,9 @@
 ## 二、四维对位：现有资产 × 新方案 → 打法
 
 ### ① 智能体编排与 MCP/Skill 深度集成（初赛 25% / 决赛 15%）
-- 已有：生产 MCP（retrieval_cross_doc 多跳+护栏）、track2-mcp 118 测试、检索-推理双驱动、verify-ritual 五幕；
+- 已有：生产 MCP（retrieval_cross_doc 多跳+护栏）、track2-mcp 118 测试、检索-推理双驱动、verify-ritual 四幕 + 独立对抗三连；
 - 新方案注入：宪法层（Skill 准入写死配置）+ Skill 分层编排（verified/observed 双命名空间）；
-- **打法**：把"五幕仪式"讲成 MCP/Skill 深度集成的活体证明（每幕都在调生产 MCP）。
+- **打法**：把"四幕仪式 + 独立对抗三连"讲成 MCP/Skill 深度集成的活体证明（仪式每幕都在调生产 MCP）。
 
 ### ② 资产激活业务价值（25%/15%）
 - 已有：75.7 万条政务语料激活、跨文档推理、**决策溯源到块级**（rings+chunk_id）、制造业 22 篇真实数据；
