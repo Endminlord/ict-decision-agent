@@ -76,10 +76,11 @@ async function refresh(){
       L.records.map(r=>'<tr><td class="mono">'+(r.rec_id||'').slice(4,12)+'</td><td>'+r.action+'</td><td class="mono">'+(r.target||'').split('/').pop()+'</td><td>'+(r.version||'')+'</td><td class="dim">'+String(r.note||'').slice(0,42)+'…</td></tr>').join('')+'</table>';
     // scores
     const order=['R','M','X','C','G'],name={R:'R 检索',M:'M 多跳',X:'X 拒答',C:'C 跨语言',G:'G 图检索'};
-    const kind={pass_rate:'通过率',chain_pass_rate:'链通过率',refusal_rate:'拒答率'};
+    const kind={pass_rate:'通过率',chain_pass_rate:'链通过率',refusal_rate:'拒答率',hit_rate:'命中率',retrieval:'检索'};
     $('scores').innerHTML=order.map(k=>{const v=S.layers[k]||{};
-      if(v.rate===undefined) return '<div class="layer"><span>'+name[k]+'</span><span class="dim">满库 replay 后点亮</span></div>';
-      return '<div class="layer"><span>'+name[k]+' <span class="dim">'+(v.source||'')+'</span></span><span class="big">'+v.passed+'/'+v.n+' <span class="dim">'+kind[v.kind]+' '+v.rate.toFixed(2)+'</span></span></div>'}).join('');
+      if(v.rate===undefined) return v.kind==='retrieval'
+        ? '<div class="layer"><span>'+name[k]+' <span class="dim">'+(v.source||'')+'</span></span><span class="big">hit@10 '+Math.round((v.rate||0)*100)+'% <span class="dim">MRR '+(v.mrr!=null?v.mrr:'-')+' · n '+v.n+'</span></span></div>'
+        : '<div class="layer"><span>'+name[k]+' <span class="dim">'+(v.source||'')+'</span></span><span class="big">'+(v.passed!=null?v.passed+'/'+v.n:'')+' <span class="dim">'+kind[v.kind]+' '+v.rate.toFixed(2)+'</span></span></div>'}).join('');
     $('gates').innerHTML=Object.keys(S.gates||{}).length?
       Object.entries(S.gates).map(([k,g])=>'<span class="badge '+(g.decision==='PASS'?'ok':(g.decision?'warn':''))+'">'+k+' 门控: '+(g.decision||'?')+' (p='+g.p+')</span>').join(' '):
       '<span class="dim">门控决定：满库 A2 落地后显示</span>';

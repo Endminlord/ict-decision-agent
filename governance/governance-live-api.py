@@ -61,6 +61,13 @@ def api_scores():
                     got = {"rate": v[rk], "passed": v.get(ck), "n": v.get("n"), "kind": rk,
                            "source": src, "file": f.split("/")[-1]}
                     break
+            if got is None and "mrr" in v:
+                got = {"rate": v.get("hit@10"), "passed": None, "n": v.get("n"), "kind": "retrieval",
+                       "mrr": v.get("mrr"), "hit@1": v.get("hit@1"), "hit@3": v.get("hit@3"), "hit@5": v.get("hit@5"),
+                       "source": src, "file": f.split("/")[-1]}
+            if got is None and "hit_rate" in v:
+                got = {"rate": v.get("hit_rate"), "passed": v.get("hit"), "n": v.get("n"), "kind": "hit_rate",
+                       "source": src, "file": f.split("/")[-1]}
         layers[L] = got or {"source": src, "file": (f or "").split("/")[-1], "note": "pending"}
     gate = {}
     for L in "MX":
