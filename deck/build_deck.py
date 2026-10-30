@@ -1,12 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""ICT 参赛 PPT 生成脚本（12 页 · Build Mode）。
+"""ICT 参赛 PPT 生成脚本（13 页 · 纸白杏金 paper 正构版）。
 
-主题来源：ppt_tasks/ict-deck/resolved-theme.json（Theme Lock v1）
+版本脉络（lineage）：
+  v1  12 页蓝底原版（本脚本初版，XML 主题 0A1E3D/1E5AB8）
+  v2  13 页 paper 终版 = v1 产物 + P13 合规页 + P3 editorial + P4 链表纠错，
+      经 PPT XML 色彩映射重打包（0A1E3D→080A08、1E5AB8→9B7247、C77D0A→8A6234、
+      A33A2A→9E4A2B、0096C7→C5A16B、F0F4F8→F7F4EE、DEE5EF→E6DFD4）
+      → 仓库 deck/ict-deck.pptx（md5 0466cdc4，commit a9c8496）＝答辩实物
+  v3  本版：将上述映射内化为原生配色正构，P4/P13 与实物对齐——
+      脚本即正源，重跑不再需要 XML 后处理。
+
+主题来源：ppt_tasks/ict-deck/resolved-theme.json（Theme Lock v1，纸白杏金覆写见下）
 设计记录：brief.md / page-plan.md / visual-direction.md
+数字基准：evidence/key-numbers-20261030.md（CX4 审计 49 条已修，复核 49/49 fixed）
 """
 import json
 import os
+import sys
 
 from pptx_designer import Presentation
 from pptx_designer.renderer.theme_context import resolve_color_context
@@ -19,18 +30,30 @@ from pptx.util import Inches
 
 TASK_DIR = "/home/endmin/dsh/research/ppt_tasks/ict-deck"
 MATERIAL = "/home/endmin/dsh/research/ict-material-20261010"
-OUT = os.path.join(TASK_DIR, "ict-deck.pptx")
+REPO = os.path.dirname(os.path.abspath(__file__))          # .../ict-open-source/deck
+OUT = os.path.join(TASK_DIR, "ict-deck.pptx")              # 构建暂存区；答辩实物在仓库 deck/ict-deck.pptx
 
 theme = json.load(open(os.path.join(TASK_DIR, "resolved-theme.json"), encoding="utf-8"))
 prs = Presentation(theme=theme, strict_theme=True)
 
 # 从当前 resolved theme 派生的语义色（正例/负例/强调），仅用于页级语义区分
 C = dict(resolve_color_context(prs))
-C.update({"pos": "#1F7A5A", "neg": "#A33A2A", "emph": "#C77D0A"})
+# paper 覆写：机械照搬 v2 XML 映射表（0A1E3D→080A08 等 7 组），未在映射表中的语义色保持原值。
+# 映射依据：仓库 deck/ict-deck.pptx（0466cdc4）实物反验；禁止自编色值。
+_PAPER = {
+    "foreground": "#080A08", "ink": "#080A08",
+    "text_body": "#080A08", "text_dark": "#080A08",
+    "primary": "#9B7247",                       # 暖黑底上杏金主色（原 1E5AB8）
+    "accent": "#C5A16B", "success": "#C5A16B",  # 原 0096C7
+    "bg_tint": "#F7F4EE", "card": "#F7F4EE", "card_bg": "#F7F4EE", "surface": "#F7F4EE",
+    "border": "#E6DFD4", "divider": "#E6DFD4",
+}
+C.update(_PAPER)
+C.update({"pos": "#1F7A5A", "neg": "#9E4A2B", "emph": "#8A6234"})
 
 MARGIN_L = 0.65
 BODY_W = 12.03
-TOTAL_PAGES = 12
+TOTAL_PAGES = 13
 
 
 def blank():
@@ -119,9 +142,13 @@ text(s, 0.85, 5.45, 11.6, 1.2,
 footer(s, 2)
 
 # ───────────────────────── 3 答案总览 ─────────────────────────
+# 实物版使用 editorial 重摄图（ppt-p3-callgraph-editorial）；此处优先取 MATERIAL 内 editorial 命名，退回原图。
+_cg = os.path.join(MATERIAL, "figures/nexent-callgraph-editorial.png")
+if not os.path.exists(_cg):
+    _cg = os.path.join(MATERIAL, "figures/nexent-callgraph.png")
 s = blank()
 page_header(s, "我们的答案", "2 套自建 MCP + 2 个自建 Skill + 本体三层", C=C)
-s.shapes.add_picture(os.path.join(MATERIAL, "figures/nexent-callgraph.png"),
+s.shapes.add_picture(_cg,
                      left=Inches(MARGIN_L),
                      top=Inches(1.72),
                      width=Inches(6.6))
@@ -133,15 +160,20 @@ bullets(s, 8.85, 1.85, 3.85, [
 ], font_size=11.5, gap=1.05)
 footer(s, 3)
 
-# ───────────────────────── 4 正例 ─────────────────────────
+# ───────────────────────── 4 正例（链表纠错版） ─────────────────────────
+# CX4 审计纠错：早期页内文号年份有误，改为链表实物图（evidence/09b-ui-qa-chain-table.png，
+# 五环时间链 2017→2023 + 页脚 indexed_docs=5,153 / chunks 1,864,451 / ⏱73.44s）。
+_p4 = os.path.join(REPO, "..", "evidence", "09b-ui-qa-chain-table.png")
+if not os.path.exists(_p4):
+    _p4 = os.path.join(MATERIAL, "evidence/09-ui-qa-cross-doc.png")
 s = blank()
 page_header(s, "它做对了什么：跨层级链条一次答出", "每条依据都带可回查的出处锚", C=C)
-s.shapes.add_picture(os.path.join(MATERIAL, "evidence/09-ui-qa-cross-doc.png"),
+s.shapes.add_picture(_p4,
                      left=Inches(MARGIN_L),
                      top=Inches(1.60),
                      width=Inches(7.5))
 bullets(s, 8.45, 1.80, 4.25, [
-    "链条：河北省条例 2017 → 国办函〔2018〕46 号 → 国办函〔2019〕89 号 → 常州钟楼区人大决定 2020 → 国办发〔2022〕35 号",
+    "五环时间链 2017→2023：省条例 → 国办函 → 国办函 → 区人大决定 → 国办发（逐环见左图链表）",
     "耗时 73.44 s，答案含引用块清单",
     "每条引用均带 chunk_id，可回原文",
     "自述证据边界，不外推",
@@ -308,5 +340,31 @@ text(s, MARGIN_L, 6.18, 12.03, 0.7,
      font_size=12.5, color="text_dark", C=C)
 footer(s, 12)
 
+# ───────────────────────── 13 开源与合规声明（与实物 0466cdc4 P13 逐字对齐） ─────────────────────────
+s = blank()
+page_header(s, "开源与合规声明 / OPEN SOURCE & COMPLIANCE",
+            "全部组件许可可查 · 我方改动可审计 · 品牌标识全部原创重绘", C=C)
+table(s, MARGIN_L, 1.62, 12.03, [
+    ["组件", "许可证", "用途", "我方改动"],
+    ["Nexent 平台", "MIT", "智能体底座（检索/索引/编排）", "治理技能接入、评测门控对接；LOGO 与版权信息原样保留"],
+    ["RhineLabUI", "MIT", "治理档案馆前端骨架", "全量品牌换血（文字/字画/徽记重绘）、数据源接自有服务"],
+    ["语料数据集（757,810 条）", "Apache-2.0", "检索语料库", "清洗、分块、索引；保留来源与许可声明"],
+    ["MiSans 字体", "免费商用许可", "界面正文", "无修改"],
+], col_ratios=[0.24, 0.14, 0.26, 0.36], row_h=0.50, font_size=10)
+text(s, MARGIN_L, 4.30, 12.03, 0.4, "自主贡献（核心资产均为原创）", font_size=13.5,
+     color="text_dark", bold=True, C=C)
+bullets(s, MARGIN_L, 4.78, 12.03, [
+    "五层冻结基准：R/M/X/C/G 五层评测（R hit@10 1.00 · MRR 0.8494 · M 24/25 · C/G 25/25），118/118 测试通过",
+    "治理账本：10 条上链决策记录，配对门控消融（A2）自动裁决：M/X FAIL → 冠军维持 τ=0.8505，不虚报 promote",
+    "满库自洽链：断点续跑导入 → 冷却 → 全量重放（20261030-1118，MRR 0.8494→0.8711）→ 门控落账，无人值守",
+    "档案馆换血工艺：字形级品牌重建（单字母矢量画稿库），零第三方 IP 残留",
+], font_size=10.5, gap=0.40)
+rect(s, MARGIN_L, 6.55, 12.03, 0.02, C["border"], C=C)
+text(s, MARGIN_L, 6.68, 12.03, 0.62,
+     "合规红线：不使用任何第三方未授权美术资产、商标或角色形象 · AGPL 项目仅借鉴交互机制思路，未复制任何源码 · "
+     "Apache-2.0 语料的署名与 NOTICE 义务已履行 · 引用的学术结论均可现场复跑脚本验证",
+     font_size=9.5, color="text_muted", C=C)
+footer(s, 13)
+
 prs.save(OUT)
-print("saved", OUT, "slides =", len(prs.slides.__iter__.__self__._sldIdLst))
+print("saved", OUT, "slides =", len(prs.slides._sldIdLst))
