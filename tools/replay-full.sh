@@ -6,7 +6,7 @@ set -e
 cd /home/endmin/dsh/research/ict-open-source
 TS=$(date +%Y%m%d-%H%M)
 
-COUNT=$(timeout 20 curl -s "localhost:9200/_cat/indices?h=index,docs.count" | awk '{s+=$2} END {print s}')
+COUNT=$(bash tools/es-count.sh)
 echo "[0] ES total docs = ${COUNT:-unknown} (need >= 757810)"
 if [ -z "$COUNT" ] || [ "$COUNT" -lt 757810 ]; then
   echo "!! import not complete -- ABORT (红线：满库前不复跑)"; exit 1
