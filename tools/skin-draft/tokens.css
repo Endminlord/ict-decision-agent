@@ -1,0 +1,13 @@
+:root {
+  --nexent-paper: #eae5e1;
+  --nexent-ink: #080a08;
+  --nexent-accent: #9b7247;
+  --nexent-background: var(--nexent-paper);
+  --nexent-foreground: var(--nexent-ink);
+}
+
+[data-theme="dark"] {
+  --nexent-paper: #11181b;
+  --nexent-ink: #eae5e1;
+  --nexent-accent: #c5a16b;
+}

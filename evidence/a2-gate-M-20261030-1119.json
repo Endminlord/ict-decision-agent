@@ -1,0 +1,23 @@
+{
+ "action": "promote",
+ "n_pairs": 25,
+ "wins": 0,
+ "regressions": 0,
+ "ties": 25,
+ "utility": 0.0,
+ "max_drop": 0.0,
+ "tolerance": 0.05,
+ "alpha": 0.05,
+ "lam": 1.5,
+ "frozen_set": "eval-stratified R/M/X/C seed2026（四层各 25 题冻结集）",
+ "ts": "2026-10-30T11:19:04+08:00",
+ "ref": "evidence/a2-gate-M-20261030-1119.json",
+ "reasons": [
+  "p=1.0000 > α=0.05（不一致对 0/0 偏胜不足）"
+ ],
+ "method": "McNemar exact binomial on discordant pairs (binary 0/1 layer)",
+ "n_discordant": 0,
+ "p_one_sided": 1.0,
+ "decision": "FAIL",
+ "power_note": "功效限制（如实声明）：连续层 n=25 单侧 Wilcoxon（α=0.05）对中低效应量检验力不足（dz≈0.5 约 78%，dz≈0.3 约 39%），阴性结果 ≠ 无差异；二元层走 McNemar 精确检验，不一致对少时必须近乎全胜才显著。样本量下限 15 为宪法值，扩样需修订宪法（版本递增+人工确认）。"
+}

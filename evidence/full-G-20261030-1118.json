@@ -1,0 +1,166 @@
+{
+ "config": {
+  "seed": 2026,
+  "index": "1-43ce427e8b5447ecad015534f953e084",
+  "rfc_index": "rfc-1024",
+  "retrieval": "hybrid_search(alpha=0.6)",
+  "chain": "eval-retrieval._cross_doc(hops=2, top_k=5)"
+ },
+ "G": {
+  "n": 25,
+  "passed": 25,
+  "pass_rate": 1.0,
+  "rows": [
+   {
+    "q": "在 loose 图谱中，《政务数据共享条例》直接 `cites` 哪一份同为完整",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "按 loose 三元组的原始值，《集成电路布图设计保护条例》通过 `issued",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "loose 图中《政务数据共享条例》与哪一个 Organization 节点存在",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "《网络数据安全管理条例》在 loose 图中通过 `issued_by` 直接连",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "哪一份文档通过 `cites` 直接连接到“整合构建标准”这一节点？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "A"
+   },
+   {
+    "q": "loose 图中《中共中央 国务院印发〈国家标准化发展纲要〉》`mentions",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "loose 图中哪一份文档通过 `cites` 指向“行政法规另有规定”，其主体",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "B"
+   },
+   {
+    "q": "《国务院关于深入实施“人工智能+”行动的意见》在国际合作语境下通过 `cites",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "《国务院办公厅关于全面推进基层政务公开标准化规范化工作的指导意见》是否直接 `c",
+    "pass": true,
+    "engine": "direct1hop",
+    "primitive": "D"
+   },
+   {
+    "q": "《新能源汽车产业发展规划》对应的主体文档在 loose 图中通过 `cites`",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "A"
+   },
+   {
+    "q": "沿“文档 A → 共享 cites 节点 ← 文档 B”的两跳路径，哪份文档与《",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "以“适用本条例”为中间节点，能将哪两个文档实体连成两跳共享引用路径？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "《政务数据共享条例》与哪份文档通过“行政法规另有规定”形成两跳共享 `cites",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "以“整合构建标准”为中间节点，哪两份文档可在 loose 图中经两条 `cite",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "A"
+   },
+   {
+    "q": "沿共享节点“违反本条例规定”，哪两份文档形成两跳路径？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "哪两份文档通过共享 `cites` 节点“企事业单位依法”形成两跳连接？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "《中共中央 国务院关于构建数据基础制度更好发挥数据要素作用的意见》经“严格管控未",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "除《中共中央 国务院关于构建数据基础制度更好发挥数据要素作用的意见》外，哪些文档",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "以“技术标准”为中间节点，《国务院关于深入实施“人工智能+”行动的意见》与哪份文",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "哪两份文档可通过共享节点“建立标准”构成两跳路径？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   },
+   {
+    "q": "同时直接 `cites`“企事业单位依法”和“严格管控未依法”的文档有哪些？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "B"
+   },
+   {
+    "q": "在同时 `cites`“加强标准”和“完善标准”的文档中，哪一份不是《国家标准化",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "B"
+   },
+   {
+    "q": "哪些文档同时直接 `cites`“制定本条例”和“适用本条例”？",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "B"
+   },
+   {
+    "q": "在 `cites`“国务院决定”的文档集合中，哪些主体不属于《政务数据共享条例》",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "A"
+   },
+   {
+    "q": "哪些文档既直接 `cites`“整合构建标准”，又与至少另一份文档共享该节点？请",
+    "pass": true,
+    "engine": "answer2hop",
+    "primitive": "C"
+   }
+  ]
+ }
+}
