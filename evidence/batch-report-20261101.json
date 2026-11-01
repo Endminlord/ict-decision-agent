@@ -1,0 +1,12 @@
+{
+ "source": "/home/endmin/ict-review/pending-175829.jsonl",
+ "total": 175829,
+ "rules": {
+  "art_tail": 1080,
+  "art_name": 35,
+  "docish": 52,
+  "civil_strong": 942,
+  "dep_law_auto": 982
+ },
+ "remaining": 172738
+}
