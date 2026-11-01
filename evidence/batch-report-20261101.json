@@ -1,12 +1,13 @@
 {
- "source": "/home/endmin/ict-review/pending-175829.jsonl",
- "total": 175829,
- "rules": {
-  "art_tail": 1080,
-  "art_name": 35,
-  "docish": 52,
-  "civil_strong": 942,
-  "dep_law_auto": 982
- },
- "remaining": 172738
+  "source": "/home/endmin/ict-review/pending-175829.jsonl",
+  "total": 175829,
+  "rules": {"art_tail": 1080, "art_name": 35, "docish": 52, "civil_strong": 942, "dep_law_auto": 982},
+  "remaining": 172738,
+  "v4_decided": 3091,
+  "pass2_rules": {"cb2_inspector": 10, "cb2_study_amends": 4, "cb2_impl_reg": 12, "cb2_art_docish": 5},
+  "pass2_decided": 31,
+  "total_decided": 3122,
+  "total_by_action": {"a": 994, "r": 2128},
+  "final_remaining": 172707,
+  "note": "v2 勘误补充：首版报告误写批量预决 2,202，正确=3,122；本文件 rules/remaining 为 v4 中间账，pass2 终态见 total_decided/final_remaining"
 }
