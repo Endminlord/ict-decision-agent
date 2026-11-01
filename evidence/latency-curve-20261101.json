@@ -1,0 +1,14 @@
+{
+ "batch": "latency-curve-20261101",
+ "corpus": "full 1,864,451 chunks (full since 20261030-1107)",
+ "probe": "core.hybrid_search wall-time, all eval groups",
+ "n_calls": 163,
+ "mean_ms": 210.2,
+ "p50_ms": 164.8,
+ "p95_ms": 441.8,
+ "p99_ms": 621.3,
+ "min_ms": 65.4,
+ "max_ms": 2809.0,
+ "eval_exit": 0,
+ "report_ref": "/tmp/lat-run.json"
+}
